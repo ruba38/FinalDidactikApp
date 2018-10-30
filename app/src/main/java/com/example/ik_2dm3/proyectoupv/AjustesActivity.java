@@ -13,6 +13,7 @@ public class AjustesActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ajustes);
 
+
         //CERRAR       ######################################################
         idBtnAjustesCerrar = (Button) findViewById(R.id.idBtnAjustesCerrar);
         idBtnAjustesCerrar.setOnClickListener(new View.OnClickListener() {
@@ -30,6 +31,15 @@ public class AjustesActivity extends Activity {
                 Intent i = new Intent(getBaseContext(), CreadoresActivity.class);
                 startActivity(i);}
         });
+        //SALIR
+        idBtnAjustesSalir = (Button) findViewById(R.id.idBtnAjustesSalir);
+        idBtnAjustesSalir.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getBaseContext(), Agurra.class);
+                startActivity(i);}
+        });
+
     }
 
 }

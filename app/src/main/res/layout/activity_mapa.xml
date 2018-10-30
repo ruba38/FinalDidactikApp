@@ -8,7 +8,7 @@
     tools:context=".MapaActivity">
 
     <Button
-        android:id="@+id/idBtnMainAjustes2"
+        android:id="@+id/idBtnMapaAjustes"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_marginStart="8dp"

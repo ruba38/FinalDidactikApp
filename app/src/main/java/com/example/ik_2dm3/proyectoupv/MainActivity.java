@@ -17,12 +17,12 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         getSupportActionBar().hide();
 
-        //IR A MAPA        ######################################################
+        //IR A Kaixo        ######################################################
         idBtnMainInicio = (Button) findViewById(R.id.idBtnMainInicio);
         idBtnMainInicio.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(getBaseContext(), MapaActivity.class);
+                Intent i = new Intent(getBaseContext(), Kaixo.class);
                 startActivity(i);}
         });
 

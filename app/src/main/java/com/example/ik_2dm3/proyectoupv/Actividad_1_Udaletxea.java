@@ -17,6 +17,7 @@ public class Actividad_1_Udaletxea extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(layout.activity_actividad_1__udaletxea);
+        getSupportActionBar().hide();
 
         final MediaPlayer oihaltxo = MediaPlayer.create(Actividad_1_Udaletxea.this, raw.klipdontello);
         oihaltxo.start();
