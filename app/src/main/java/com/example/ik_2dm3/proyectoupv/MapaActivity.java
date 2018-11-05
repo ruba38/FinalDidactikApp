@@ -9,7 +9,8 @@ import android.widget.Button;
 
 public class MapaActivity extends Activity {
     Dialog puntoPopup;
-    Button idBtnMapaAjustes;
+    Button idBtnMapaAjustes,idBtnMapaPunto1;
+    Boolean terminado=false;//cuando inicia el punto esta en falso
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,13 +25,17 @@ public class MapaActivity extends Activity {
                 Intent i = new Intent(getBaseContext(), AjustesActivity.class);
                 startActivity(i);}
         });
-
+        idBtnMapaPunto1 = (Button) findViewById(R.id.idBtnMapaPunto1);//declara boton punto1
+        //mirar si el juego esta terminado
+        if(terminado==true){
+            idBtnMapaPunto1.setBackgroundResource(R.drawable.completado);//cambia icono boton de exclamacion a tik
+        }
 
     }
     public void ShowPopup(View v) {
         //DECLARARCIONES
-        Button idBtnPopupCerrar,idBtnMapaPunto1,idBtnPopupJugar;
-        Boolean terminado=false;//cuando inicia el punto esta en falso
+        Button idBtnPopupCerrar,idBtnPopupJugar;
+
         //MOSTRAR POPUP        ######################################################
         puntoPopup.setContentView(R.layout.popup_punto);//abrir layout que contiene el popup
 
@@ -42,6 +47,7 @@ public class MapaActivity extends Activity {
                 puntoPopup.dismiss();//oculta el popup
                 Intent i =new Intent (getBaseContext(),Actividad_1_Udaletxea.class);
                 startActivity(i);
+                
             }
         });
         //CERRAR POPUP
@@ -54,11 +60,8 @@ public class MapaActivity extends Activity {
         });
 
         puntoPopup.show();//mostar popup
-        idBtnMapaPunto1 = (Button) findViewById(R.id.idBtnMapaPunto1);//declara boton punto1
-        //mirar si el juego esta terminado
-        if(terminado==true){
-            idBtnMapaPunto1.setBackgroundResource(R.drawable.completado);//cambia icono boton de exclamacion a tik
-        }
+
+
     }
 
 

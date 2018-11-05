@@ -5,8 +5,7 @@
     <string name="mainBotonCreadores">CREADORES</string>
     <string name="mainTextoVersiones">v0 </string>
     //CREADORES
-    <string name="title_activity_creadores">CreadoresActivity</string>
-    <string name="creadoresTextoTitulo">CREADORES</string>
+    <string name="title_activity_creadores">CreadoresActivity</string>//UPV Leioa<string name="creadoresTextoTitulo">CREADORES</string>
     <string name="creadoresTextoUpv">UPV Leioa Magisterio Primaria</string>
     <string name="creadoresTextoTxurdi">FP Txurdinaga Grado Superior Multiplataformas</string>
         //UPV Leioa
@@ -33,5 +32,8 @@
     //POPUP
     <string name="popupBotonJugar">JUGAR</string>
     <string name="todo">TODO</string>
+
+    <string name="cerrar">cerrar</string>
+    <string name="title_activity_juego_puzzle">JuegoPuzzleActivity</string>
 
 </resources>
