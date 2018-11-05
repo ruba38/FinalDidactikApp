@@ -14,6 +14,7 @@ public class Kaixo extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_kaixo);
+        getSupportActionBar().hide();
 
         final MediaPlayer kaixo = MediaPlayer.create(Kaixo.this, R.raw.kaixo);
         kaixo.start();
@@ -21,7 +22,7 @@ public class Kaixo extends AppCompatActivity {
         idLayoutKaixo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i =new Intent (getBaseContext(),Actividad_1_Udaletxea.class);
+                Intent i =new Intent (getBaseContext(),MapaActivity.class);
                 kaixo.stop();
                 startActivity(i);}
             }
