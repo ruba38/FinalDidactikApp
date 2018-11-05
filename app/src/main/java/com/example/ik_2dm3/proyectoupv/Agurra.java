@@ -13,6 +13,6 @@ public class Agurra extends AppCompatActivity {
 
         MediaPlayer kaixo = MediaPlayer.create(Agurra.this, R.raw.clipagurra);
         kaixo.start();
-int karma = 1;
+
     }
 }
