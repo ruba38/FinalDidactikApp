@@ -18,6 +18,8 @@ public class Agurra extends AppCompatActivity {
         final MediaPlayer kaixo = MediaPlayer.create(Agurra.this, R.raw.clipagurra);
         kaixo.start();
 
+<<<<<<< HEAD
+=======
         idLayoutAgurra = findViewById(R.id.idLayoutAgurra);
         idLayoutAgurra.setOnClickListener(new View.OnClickListener() {
              @Override
@@ -28,5 +30,6 @@ public class Agurra extends AppCompatActivity {
      }
         );
 int karma = 1;
+>>>>>>> 575573f208fca07b9677769aaa7b99a0c0383021
     }
 }
