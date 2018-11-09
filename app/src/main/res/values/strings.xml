@@ -5,21 +5,22 @@
     <string name="mainBotonCreadores">CREADORES</string>
     <string name="mainTextoVersiones">v0 </string>
     //CREADORES
-    <string name="title_activity_creadores">CreadoresActivity</string>//UPV Leioa<string name="creadoresTextoTitulo">CREADORES</string>
+    <string name="title_activity_creadores">CreadoresActivity</string>//UPV Leioa
+    <string name="creadoresTextoTitulo">CREADORES</string>
     <string name="creadoresTextoUpv">UPV Leioa Magisterio Primaria</string>
     <string name="creadoresTextoTxurdi">FP Txurdinaga Grado Superior Multiplataformas</string>
-        //UPV Leioa
-        <string name="nombreUpv1">Aiora Aginaga</string>
-        <string name="nombreUpv2">Irati Etxebarria</string>
-        <string name="nombreUpv3">Amaia Izarzugaza</string>
-        <string name="nombreUpv4">Eider Larrabeitia</string>
-        <string name="nombreUpv5">Ibai Urrutia</string>
-        <string name="nombreUpv6">Lorea Zulaika</string>
-        //FP Txurdinaga
-        <string name="nombreTxurdi1">Beñat Gonzalez</string>
-        <string name="nombreTxurdi2">Ruben Gonzalez</string>
-        <string name="nombreTxurdi3">Urko Martinez</string>
-        <string name="nombreTxurdi4">Marius Aparaschivei</string>
+    //UPV Leioa
+    <string name="nombreUpv1">Aiora Aginaga</string>
+    <string name="nombreUpv2">Irati Etxebarria</string>
+    <string name="nombreUpv3">Amaia Izarzugaza</string>
+    <string name="nombreUpv4">Eider Larrabeitia</string>
+    <string name="nombreUpv5">Ibai Urrutia</string>
+    <string name="nombreUpv6">Lorea Zulaika</string>
+    //FP Txurdinaga
+    <string name="nombreTxurdi1">Beñat Gonzalez</string>
+    <string name="nombreTxurdi2">Ruben Gonzalez</string>
+    <string name="nombreTxurdi3">Urko Martinez</string>
+    <string name="nombreTxurdi4">Marius Aparaschivei</string>
     //AJUSTES
     <string name="title_activity_ajustes">AjustesActivity</string>
     <string name="ajustesTextoTitulo">AJUSTES</string>
@@ -35,5 +36,7 @@
 
     <string name="cerrar">cerrar</string>
     <string name="title_activity_juego_puzzle">JuegoPuzzleActivity</string>
+    <string name="title_activity_fotos">Fotos</string>
+    <string name="title_activity_galeria">Galeria</string>
 
 </resources>

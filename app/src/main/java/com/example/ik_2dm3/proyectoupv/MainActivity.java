@@ -1,16 +1,30 @@
 package com.example.ik_2dm3.proyectoupv;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.hardware.Camera;
+import android.media.Image;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
+import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import java.io.File;
+
 public class MainActivity extends AppCompatActivity {
     public boolean admin=false;
-    private Button idBtnMainInicio,idBtnMainCreadores,idBtnMainAjustes;
+    private Button idBtnMainInicio,idBtnMainCreadores,idBtnMainAjustes, buttonCamara;
     int contador=0;
+    private static final int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 100;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,8 +36,10 @@ public class MainActivity extends AppCompatActivity {
         idBtnMainInicio.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 Intent i = new Intent(getBaseContext(), Kaixo.class);
-                startActivity(i);}
+                startActivity(i);
+            }
         });
 
         //IR A CREADORES        ######################################################
@@ -32,7 +48,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(getBaseContext(), CreadoresActivity.class);
-                startActivity(i);}
+                startActivity(i);
+            }
         });
 
         //IR A AJUSTES        ########################################################
@@ -41,8 +58,31 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(getBaseContext(), AjustesActivity.class);
-                startActivity(i);}
+                startActivity(i);
+            }
         });
+        //IR A Camara        ########################################################
+
+        buttonCamara = (Button) findViewById(R.id.buttonCamara);
+        buttonCamara.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getBaseContext(), Galeria.class);
+                startActivity(i);
+                //CheckCameraHardware();
+                // Intent F = new Intent(getBaseContext(), Fotos.class);
+                // startActivity(F);
+                // File imagesFolder = new File(Environment.getExternalStorageDirectory(), "MyImages");
+                // imagesFolder.mkdirs();
+                //  File image = new File(imagesFolder, "image_001.jpg");
+                // Uri uriSavedImage = Uri.fromFile(image);
+                // i.putExtra(MediaStore.EXTRA_OUTPUT, uriSavedImage);
+                // startActivityForResult(i, CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE);
+                //ChekCameraHardware
+
+                }
+        });
+
     }
     public void QuitarGPS(View v) {
      contador ++;
@@ -59,4 +99,5 @@ public class MainActivity extends AppCompatActivity {
      }
 
     }
+
 }

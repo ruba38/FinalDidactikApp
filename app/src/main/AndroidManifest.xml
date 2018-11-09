@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.ik_2dm3.proyectoupv" >
+    package="com.example.ik_2dm3.proyectoupv">
 
-    <uses-permission android:name="android.permission.CAMERA" />
-
+    <uses-permission android:name="android.permission.CAMERA" ></uses-permission>
+    <user-permission android:name="android.premisiion.WRITE_EXTERNAL_STORAGE"></user-permission>
+    <user-permission android:name="android.hardware.camera2.full" ></user-permission>
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="false" />
     <uses-feature
         android:name="android.hardware.camera"
         android:required="false" />
@@ -14,8 +18,8 @@
         android:label="Titulo"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme" >
-        <activity android:name=".MainActivity" >
+        android:theme="@style/AppTheme">
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -24,31 +28,28 @@
         </activity>
         <activity
             android:name=".Kaixo"
-            android:label="" >
-        </activity>
+            android:label="" />
         <activity
             android:name=".Agurra"
-            android:label="" >
-        </activity>
+            android:label="" />
         <activity
             android:name=".Actividad_1_Udaletxea"
-            android:label="@string/title_activity_creadores" >
-        </activity>
+            android:label="@string/title_activity_creadores" />
         <activity
             android:name=".CreadoresActivity"
             android:label="@string/title_activity_creadores" />
         <activity
             android:name=".AjustesActivity"
-            android:label="@string/title_activity_ajustes" >
-        </activity>
+            android:label="@string/title_activity_ajustes" />
         <activity
             android:name=".MapaActivity"
-            android:label="@string/title_activity_mapa" >
-        </activity>
+            android:label="@string/title_activity_mapa" />
         <activity
             android:name=".JuegoPuzzleActivity"
-            android:label="@string/title_activity_juego_puzzle" >
-        </activity>
+            android:label="@string/title_activity_juego_puzzle" />
+        <activity
+            android:name=".Galeria"
+            android:label="@string/title_activity_galeria"></activity>
     </application>
 
 </manifest>

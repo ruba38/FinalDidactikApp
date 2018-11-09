@@ -72,4 +72,18 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
+    <Button
+        android:id="@+id/buttonCamara"
+        android:layout_width="96dp"
+        android:layout_height="34dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:text="Camara"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/idBtnMainAjustes"
+        app:layout_constraintStart_toStartOf="@+id/idTxtMainVersiones"
+        app:layout_constraintTop_toBottomOf="@+id/idBtnMainCreadores" />
+
 </android.support.constraint.ConstraintLayout>

@@ -11,6 +11,7 @@ public class MapaActivity extends Activity {
     Dialog puntoPopup;
     Button idBtnMapaAjustes,idBtnMapaPunto1;
     Boolean terminado=false;//cuando inicia el punto esta en falso
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
