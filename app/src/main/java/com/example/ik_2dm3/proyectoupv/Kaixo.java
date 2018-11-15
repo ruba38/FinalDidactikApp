@@ -9,15 +9,18 @@ import android.view.View;
 
 public class Kaixo extends AppCompatActivity {
     private ConstraintLayout idLayoutKaixo;
-
+    static MediaPlayer kaixo =null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_kaixo);
         getSupportActionBar().hide();
+        if(kaixo==null){
+            kaixo = MediaPlayer.create(Kaixo.this, R.raw.kaixo);
+            kaixo = MediaPlayer.create(getApplicationContext(), R.raw.kaixo);
+            kaixo.start();
+        }
 
-        final MediaPlayer kaixo = MediaPlayer.create(Kaixo.this, R.raw.kaixo);
-        kaixo.start();
         idLayoutKaixo = findViewById(R.id.idLayoutKaixo);
         idLayoutKaixo.setOnClickListener(new View.OnClickListener() {
             @Override

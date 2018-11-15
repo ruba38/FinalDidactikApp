@@ -9,24 +9,26 @@ import android.view.View;
 
 public class Agurra extends AppCompatActivity {
     private ConstraintLayout idLayoutAgurra;
+    static MediaPlayer agurra=null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_agurra);
         getSupportActionBar().hide();
 
-        final MediaPlayer kaixo = MediaPlayer.create(Agurra.this, R.raw.clipagurra);
-        kaixo.start();
-
+        agurra = MediaPlayer.create(Agurra.this, R.raw.clipagurra);
+        if(agurra==null) {
+            agurra.start();
+            agurra = MediaPlayer.create(getApplicationContext(), R.raw.kaixo);
+        }
         idLayoutAgurra = findViewById(R.id.idLayoutAgurra);
         idLayoutAgurra.setOnClickListener(new View.OnClickListener() {
              @Override
              public void onClick(View v) {
              Intent i =new Intent (getBaseContext(),MainActivity.class);
-             kaixo.stop();
+             agurra.stop();
              startActivity(i);}
      }
         );
-int karma = 1;
     }
 }

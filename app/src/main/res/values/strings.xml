@@ -38,5 +38,13 @@
     <string name="title_activity_juego_puzzle">JuegoPuzzleActivity</string>
     <string name="title_activity_fotos">Fotos</string>
     <string name="title_activity_galeria">Galeria</string>
+    <string name="title_activity_actividad_2__drag">Actividad_2_Drag</string>
+    <string name="title_activity_actividad_3__mercatua">Actividad_3_Mercatua</string>
+    <string name="T301">Ummmmm zelako usain ezberdina! Porruak, azenarioak, tomateak, indabak....INDABAK! Gernikako indabak oso famatuak dira! Ba al dakizue ze osagai behar diren indaba plater goxo bat prestatzeko?  Ez badakizue jende ugari batzen da astelehenero azokan galdetzeko!</string>
+    <string name="T321">Ikertu ze osagai behar diren eta galdetu osagai Azkenean indaba plantera  prestatzeko behar dudan dirua esa beharko didazue ! Joan aurretik, gogoratu zuen argazkiak nahi ditudala!</string>
+    <string name="title_activity_actividad_32__prese_aurkez">Actividad_32_PreseAurkez</string>
+    <string name="TextoToast1">Hau es da behar indabak egiteko</string>
+    <string dec="txorizo">txorizo</string>
+
 
 </resources>
