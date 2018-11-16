@@ -1,4 +1,11 @@
 <resources>
+
+    // Mapa
+    <string name="access_token" translatable="false">pk.eyJ1IjoibWFyaXVzaW5mbyIsImEiOiJjam5vOXllZnAxdTA4M3FsN24zZTB1M21wIn0.07lKjNKqi42V_IczzCmsFw</string>
+    <string name="user_location_permission_explanation">This app needs location permissions in order to show its functionality.</string>
+    <string name="user_location_permission_not_granted">You didn\'t grant location permissions.</string>
+    <string name="coords">Latitud: 00.00 | Longitud: 00.00</string>
+
     //MAIN
     <string name="app_name">ProyectoUPV</string>
     <string name="mainBotonInicio">INICIO</string>
@@ -44,7 +51,8 @@
     <string name="T321">Ikertu ze osagai behar diren eta galdetu osagai Azkenean indaba plantera  prestatzeko behar dudan dirua esa beharko didazue ! Joan aurretik, gogoratu zuen argazkiak nahi ditudala!</string>
     <string name="title_activity_actividad_32__prese_aurkez">Actividad_32_PreseAurkez</string>
     <string name="TextoToast1">Hau es da behar indabak egiteko</string>
-    <string dec="txorizo">txorizo</string>
+    <string name="txorizo">txorizo</string>
+    <string name="title_activity_actividad_32__precios">Actividad_32_Precios</string>
 
 
 </resources>

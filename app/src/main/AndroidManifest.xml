@@ -63,7 +63,7 @@
             android:configChanges="orientation|screenSize" />
         <activity
             android:name=".Actividad_32_Precios"
-            android:label="@string/title_activity_actividad_32__prese_aurkez"></activity>
+            android:label="@string/title_activity_actividad_32__prese_aurkez" />
     </application>
 
 </manifest>
