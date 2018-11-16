@@ -4,6 +4,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.os.Debug;
 import android.util.Log;
 
 import java.io.File;
@@ -140,10 +141,7 @@ public class DatabaseAccess extends SQLiteOpenHelper {
         String myPath = DB_PATH + DB_NAME;
         db = SQLiteDatabase.openDatabase(myPath, null, SQLiteDatabase.OPEN_READWRITE);
         db = this.getWritableDatabase();
-        //Cursor cursor = db.rawQuery("SELECT * FROM puntos", null);
-          int id= x+1;
-          db.execSQL("UPDATE puntos SET visible=1 WHERE idPunto="+id);
-        //cursor.close();
+        db.execSQL("UPDATE puntos SET visible=1 WHERE idPunto="+x);
     }
     public void setTerminado(int x){
         String myPath = DB_PATH + DB_NAME;
@@ -154,6 +152,23 @@ public class DatabaseAccess extends SQLiteOpenHelper {
     //RESETEA LOS PUNTOS A SU ESTADO ORIGINAL
     public void resetApp(){
 
+
+    }
+
+    public boolean getTerminado(int id) {
+
+        if(id == 0) { return true; }
+        String myPath = DB_PATH + DB_NAME;
+        db = SQLiteDatabase.openDatabase(myPath, null, SQLiteDatabase.OPEN_READWRITE);
+        db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT terminado FROM puntos where idPunto="+(id-1), null);
+        cursor.moveToFirst();
+
+        if (cursor.getInt(cursor.getColumnIndex("terminado")) == 1) {
+            return true;
+        } else {
+            return false;
+        }
 
     }
 
@@ -213,5 +228,11 @@ public class DatabaseAccess extends SQLiteOpenHelper {
         cursor.close();
         db.close();
 
+    }
+    public void setRango(double x,int id){
+        String myPath = DB_PATH + DB_NAME;
+        db = SQLiteDatabase.openDatabase(myPath, null, SQLiteDatabase.OPEN_READWRITE);
+        db = this.getWritableDatabase();
+        db.execSQL("UPDATE puntos SET rango="+x+" WHERE idPunto="+id);
     }
 }
