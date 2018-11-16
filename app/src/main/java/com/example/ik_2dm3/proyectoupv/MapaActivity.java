@@ -195,7 +195,7 @@ public class MapaActivity extends AppCompatActivity implements PermissionsListen
 
                     }
                 }
-                //MOSTRAR POPUP        ######################################################
+                //MOSTRAR POPUP
                 //DECLARARCIONES
                 Button idBtnPopupCerrar,idBtnPopupJugar;
                 puntoPopup.setContentView(R.layout.popup_punto);//abrir layout que contiene el popup
@@ -207,27 +207,21 @@ public class MapaActivity extends AppCompatActivity implements PermissionsListen
                     public void onClick(View v) {
                         puntoPopup.dismiss();//oculta el popup
                         Intent i= new Intent(getBaseContext(), MapaActivity.class);
-                        Log.d("mio","juego - "+juego);
-
                         switch (juego) {
                             case "Actividad_1_Udaletxea":
                                 i = new Intent(getBaseContext(), Actividad_1_Udaletxea.class);
-                                Log.d("mio","1");
                                 break;
                             case "Actividad_2_Drag":
                                 i = new Intent(getBaseContext(), Actividad_2_Drag.class);
-                                Log.d("mio","2");
                                 break;
                             case "Actividad_30_PresentecionM":
                                 i = new Intent(getBaseContext(), Actividad_30_PresentecionM.class);
-                                Log.d("mio","3");
                                 break;
                             default:
                                 Log.d("mio","0");
                             break;
                         }
                         startActivity(i);
-
                     }
                 });
                 //CERRAR POPUP
@@ -239,7 +233,6 @@ public class MapaActivity extends AppCompatActivity implements PermissionsListen
                         puntoPopup.dismiss();//oculta el popup
                     }
                 });
-
                 puntoPopup.show();//mostar popup
                 return false;
             }
@@ -363,7 +356,6 @@ public class MapaActivity extends AppCompatActivity implements PermissionsListen
         for(int i = 0; i < PuntosInteres.size(); i++) {
             map.removeMarker(PuntosInteres.get(i).getmO().getMarker());
         }
-
         // Limpiamos el ArrayList para cuando se vuelvan a crear los puntos
         PuntosInteres.clear();
     }
@@ -371,7 +363,6 @@ public class MapaActivity extends AppCompatActivity implements PermissionsListen
     // Metodos necesarios para que el mapa funcione
     @Override
     public void onMapClick(@NonNull LatLng point) {
-
     }
 
     @Override
@@ -420,17 +411,14 @@ public class MapaActivity extends AppCompatActivity implements PermissionsListen
     @SuppressLint("MissingPermission")
     public void onConnected() {
         locationEngine.requestLocationUpdates();
-
     }
 
     @Override
     public void onExplanationNeeded(List<String> permissionsToExplain) {
-
     }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         permissionsManager.onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
-
 }

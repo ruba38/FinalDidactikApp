@@ -20,7 +20,6 @@ public class Kaixo extends AppCompatActivity {
             kaixo = MediaPlayer.create(getApplicationContext(), R.raw.kaixo);
             kaixo.start();
         }
-
         idLayoutKaixo = findViewById(R.id.idLayoutKaixo);
         idLayoutKaixo.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -30,7 +29,6 @@ public class Kaixo extends AppCompatActivity {
                 startActivity(i);}
             }
         );
-
     }
 }
 

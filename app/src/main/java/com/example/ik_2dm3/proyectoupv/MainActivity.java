@@ -20,18 +20,17 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         getSupportActionBar().hide();
 
-        //IR A Kaixo        ######################################################
+        //BOTON Kaixo
         idBtnMainInicio = (Button) findViewById(R.id.idBtnMainInicio);
         idBtnMainInicio.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 Intent i = new Intent(getBaseContext(), Kaixo.class);
                 startActivity(i);
             }
         });
 
-        //IR A CREADORES        ######################################################
+        //BOTON CREADORES
         idBtnMainCreadores = (Button) findViewById(R.id.idBtnMainCreadores);
         idBtnMainCreadores.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -41,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        //IR A AJUSTES        ########################################################
+        //BOTON AJUSTES
         idBtnMainAjustes = (Button) findViewById(R.id.idBtnMainAjustes);
         idBtnMainAjustes.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -50,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(i);
             }
         });
-        //IR A Camara        ########################################################
+        //IR A Camara
 
         buttonCamara = (Button) findViewById(R.id.buttonCamara);
         buttonCamara.setOnClickListener(new View.OnClickListener() {
