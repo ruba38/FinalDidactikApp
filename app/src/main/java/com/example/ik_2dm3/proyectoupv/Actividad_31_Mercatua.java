@@ -33,35 +33,24 @@ public class Actividad_31_Mercatua extends Activity {
         ImageView Zesta = findViewById(R.id.Zesta);
         //Recojer clicl listeners
         kipula.setOnLongClickListener(ClickListener);
-
         uraza.setOnLongClickListener(ClickListener);
-
         koliflora.setOnLongClickListener(ClickListener);
-
         Indabak.setOnLongClickListener(ClickListener);
-
         pipergorria.setOnLongClickListener(ClickListener);
-
         txocolate.setOnLongClickListener(ClickListener);
-
         azenarioa.setOnLongClickListener(ClickListener);
-
         txorizo.setOnLongClickListener(ClickListener);
-
         Tomate.setOnLongClickListener(ClickListener);
-
         Zesta.setOnDragListener(dragListener);
     }
     //LONGCLICK LISTENER
     View.OnLongClickListener ClickListener = new View.OnLongClickListener() {
         @Override
         public boolean onLongClick(View v) {
-            Log.d("l", "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
             ClipData data = ClipData.newPlainText("", "");
             View.DragShadowBuilder myShadowBuilder = new View.DragShadowBuilder(v);
             v.startDrag(data, myShadowBuilder, v, 0);
             return false;
-
         }
     };
     final View.OnDragListener dragListener = new View.OnDragListener() {
@@ -73,9 +62,7 @@ public class Actividad_31_Mercatua extends Activity {
             switch (dragEvent) {
                 case DragEvent.ACTION_DRAG_ENTERED:
                     break;
-
                 case DragEvent.ACTION_DRAG_EXITED:
-
                     break;
                     //ACCION QUE HACE CUANDO TERMINA EL DRAG I LOS SUELTAS EN ALGUNA BIÑETA CON DRAG LSITENER
                 case DragEvent.ACTION_DROP:
@@ -98,40 +85,30 @@ public class Actividad_31_Mercatua extends Activity {
                     if (view.getId() == R.id.kipula) {
                         Varria = findViewById(R.id.kipula);
                         Varria.setVisibility(view.GONE);
-                        Log.d("azenario", "kipula dentro");
                         Cont ++;
-
                     }
                     if (view.getId() == R.id.Indabak) {
                         Varria = findViewById(R.id.Indabak);
                         Varria.setVisibility(view.GONE);
-                        Log.d("azenario", "Indabak dentro");
                         Cont ++;
-
                     }
                     if (view.getId() == R.id.txorizo) {
                         Varria = findViewById(R.id.txorizo);
                         Varria.setVisibility(view.GONE);
-                        Log.d("azenario", "txorizo dentro");
                         Cont ++;
-
                     }
                     if (view.getId() == R.id.azenarioa) {
                         Varria = findViewById(R.id.azenarioa);
                         Varria.setVisibility(view.GONE);
                         Cont ++;
-                        Log.d("azenario", "azenario dentro");
                     }
                     if(Cont ==4){
                         Intent i = new Intent(getBaseContext(),Actividad_32_Precios.class);
                         startActivity(i);
                     }
-
                     break;
-
             }
             return true;
-
         }
     };
 }

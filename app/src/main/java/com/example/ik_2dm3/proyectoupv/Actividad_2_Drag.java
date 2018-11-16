@@ -33,7 +33,6 @@ public class Actividad_2_Drag extends Activity {
                // onDraw();
                 return true;
             }});
-
     }
     protected void onDraw(Canvas canvas){
       //  super.onDraw(canvas);
@@ -44,8 +43,6 @@ public class Actividad_2_Drag extends Activity {
         Paint fondo = new Paint();
         fondo.setColor(Color.BLUE);
         canvas.drawRect(rectangulo,fondo);
-
     }
-
 }
 

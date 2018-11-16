@@ -49,7 +49,6 @@ public class Actividad_30_PresentecionM extends AppCompatActivity {
                                                 public void run() {
                                                     Texto301.setVisibility(View.INVISIBLE);
                                                     Texto321.setVisibility(View.VISIBLE);
-
                                                 }
                                             }, 24000
                         );
@@ -60,10 +59,6 @@ public class Actividad_30_PresentecionM extends AppCompatActivity {
                 }
 
             }
-
-
         });
-
-
     }
 }
