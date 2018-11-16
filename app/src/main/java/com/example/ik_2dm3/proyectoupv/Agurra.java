@@ -28,7 +28,7 @@ public class Agurra extends AppCompatActivity {
              Intent i =new Intent (getBaseContext(),MainActivity.class);
              agurra.stop();
              startActivity(i);}
-     }
+            }
         );
     }
 }

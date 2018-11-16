@@ -12,18 +12,14 @@ public class AjustesActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ajustes);
-
-
-        //CERRAR       ######################################################
+        //CERRAR
         idBtnAjustesCerrar = (Button) findViewById(R.id.idBtnAjustesCerrar);
         idBtnAjustesCerrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();}
-
         });
-
-        //IR A CREADORES        ######################################################
+        //IR A CREADORES
         idBtnAjustesCreadores = (Button) findViewById(R.id.idBtnAjustesCreadores);
         idBtnAjustesCreadores.setOnClickListener(new View.OnClickListener() {
             @Override
