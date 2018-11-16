@@ -44,7 +44,12 @@
     <string name="T321">Ikertu ze osagai behar diren eta galdetu osagai Azkenean indaba plantera  prestatzeko behar dudan dirua esa beharko didazue ! Joan aurretik, gogoratu zuen argazkiak nahi ditudala!</string>
     <string name="title_activity_actividad_32__prese_aurkez">Actividad_32_PreseAurkez</string>
     <string name="TextoToast1">Hau es da behar indabak egiteko</string>
-    <string dec="txorizo">txorizo</string>
+    <string name="txorizo">Txorizo</string>
+    <string name="Indabak">Indabak</string>
+    <string name="Azenarioa">Azenarioa</string>
+    <string name="Kipula">Kipula</string>
+
+
 
 
 </resources>

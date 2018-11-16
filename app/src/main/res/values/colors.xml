@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#008577</color>
-    <color name="colorPrimaryDark">#005ffa</color>
+    <color name="colorPrimary">#35d2c2</color>
+    <color name="colorPrimaryDark">#10ed1f</color>
     <color name="colorAccent">#d81b60</color>
-    <color name="colorBotonJugar">#5882fa</color>
+    <color name="colorBotonJugar">#3564ea</color>
 </resources>

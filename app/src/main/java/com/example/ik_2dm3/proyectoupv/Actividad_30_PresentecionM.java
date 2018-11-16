@@ -7,6 +7,7 @@ import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -16,12 +17,14 @@ public class Actividad_30_PresentecionM extends AppCompatActivity {
     private ImageView Splash;
     private TextView Texto321;
     private int Contador;
+    public Button Botonrepetir;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_actividad_30__presentecion_m);
-        final MediaPlayer oihaltxo = MediaPlayer.create(getApplicationContext(), R.raw.azoka);
-    //declarar Contenido
+        //declarar Contenido
         Fondo301 = findViewById(R.id.Fondo301);
         Texto301 = findViewById(R.id.Texto301);
         Texto321 = findViewById(R.id.T321);
@@ -29,41 +32,61 @@ public class Actividad_30_PresentecionM extends AppCompatActivity {
         Splash.setVisibility(View.INVISIBLE);
         Texto301.setVisibility(View.INVISIBLE);
         Texto321.setVisibility(View.INVISIBLE);
-     // OnClick
+        Botonrepetir= findViewById(R.id.BotonRepetopr30);
+        Botonrepetir.setVisibility(View.INVISIBLE);
+        // OnClick Fondo
         Fondo301.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (Contador >= 1) {
-                    oihaltxo.stop();
-                    Intent i = new Intent(getBaseContext(), Actividad_31_Mercatua.class);
-                    startActivity(i);
-                    Contador = 0;
-                }
-                //Canbiar el texto
-                if (Contador == 0) {
-                    if (oihaltxo.isPlaying() == false) {
-                        oihaltxo.start();
-                        Handler handler = new Handler();
-                        handler.postDelayed(new Runnable(){
-                                                @Override
-                                                public void run() {
-                                                    Texto301.setVisibility(View.INVISIBLE);
-                                                    Texto321.setVisibility(View.VISIBLE);
-
-                                                }
-                                            }, 24000
-                        );
-                    }
-                    Splash.setVisibility(View.VISIBLE);
-                    Texto301.setVisibility(View.VISIBLE);
-                    Contador++;
-                }
-
+            Audio();
             }
-
-
         });
+    }
+    public void Audio(){
+       final  MediaPlayer oihaltxo = MediaPlayer.create(Actividad_30_PresentecionM.this, R.raw.azoka);
 
-
+        Botonrepetir.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Contador=0;
+                Botonrepetir.setVisibility(View.INVISIBLE);
+                Texto301.setVisibility(View.VISIBLE);
+                Texto321.setVisibility(View.INVISIBLE);
+                Audio();
+            }
+        });
+        if (Contador >= 1) {
+            oihaltxo.stop();
+            Intent i = new Intent(getBaseContext(), Actividad_31_Mercatua.class);
+            startActivity(i);
+            Contador = 0;
+        }
+        //Canbiar el texto
+        if (Contador == 0) {
+            if (oihaltxo.isPlaying() == false) {
+                oihaltxo.start();
+                Handler CambiartextO = new Handler();
+                Handler BotonRepetir = new Handler();
+                CambiartextO.postDelayed(new Runnable(){
+                                        @Override
+                                        public void run() {
+                                            Texto301.setVisibility(View.INVISIBLE);
+                                            Texto321.setVisibility(View.VISIBLE);
+                                        }
+                                    }, 24000
+                );
+                BotonRepetir.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        Botonrepetir.setVisibility(View.VISIBLE);
+                    }
+                },41000);
+            }else{
+                oihaltxo.stop();
+            }
+            Splash.setVisibility(View.VISIBLE);
+            Texto301.setVisibility(View.VISIBLE);
+            Contador++;
+        }
     }
 }
