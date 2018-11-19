@@ -50,5 +50,6 @@
     <string name="user_location_permission_explanation">This app needs location permissions in order to show its functionality.</string>
     <string name="user_location_permission_not_granted">You didn\'t grant location permissions.</string>
     <string name="coords">Latitud: 00.00 | Longitud: 00.00</string>
-
+    <string name="astra401">Hara, hara...aurrean duzuen eraikin honek ez du gaur egun armak sortzearen antzik, ezta? Hain koloretsua, hain bizia... gaur egun kulturgune bat da, eta bertan hainbat ekintza egiten dira: kontzertuak, hitzaldiak, tailerrak, etab.</string>
+    <string name="astra402">Aurkitu ahal ditzakezue lehengo eraikinaren eta oingo eraikinaren arteko 5 ezberdintasun? Animo eta gogor ekin eta badakizue, zuen argazkiak mesedez!</string>
 </resources>
