@@ -155,9 +155,8 @@ public class MapaActivity extends AppCompatActivity implements PermissionsListen
                 databaseAccess.setvisible(PuntosInteres.get(i).getID_BD());
                 LimpiarPuntos();
                 CrearPuntos();
+                coordenadas.setText("Dis: "+distancia+" | DB: "+databaseAccess.getTerminado(PuntosInteres.get(i).getID_BD()));
             }
-            coordenadas.setText("Dis: "+distancia+" | DB: "+databaseAccess.getTerminado(PuntosInteres.get(i).getID_BD()));
-
         }
     }
 
