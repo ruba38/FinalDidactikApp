@@ -9,7 +9,7 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
     public boolean admin=false;
-    private Button idBtnMainInicio,idBtnMainCreadores,idBtnMainAjustes, buttonCamara;
+    private Button idBtnMainInicio,idBtnMainCreadores,idBtnMainAjustes, buttonCamara, BotonAstra;
     int contador=0;
     private static final int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 100;
 
@@ -30,6 +30,14 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        BotonAstra = (Button) findViewById(R.id.botonastra);
+        BotonAstra.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getBaseContext(), Actividad_40_Presentacion.class);
+                startActivity(i);
+            }
+        });
         //BOTON CREADORES
         idBtnMainCreadores = (Button) findViewById(R.id.idBtnMainCreadores);
         idBtnMainCreadores.setOnClickListener(new View.OnClickListener() {
