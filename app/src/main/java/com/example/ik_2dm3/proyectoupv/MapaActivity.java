@@ -53,7 +53,7 @@ public class MapaActivity extends AppCompatActivity implements PermissionsListen
     private ArrayList<MarkerPuntos> PuntosInteres = new ArrayList<MarkerPuntos>();
     boolean admin = false;
     int idPunto;
-    String juego;
+    private String juego;
 
     // Objetos/Variables de depuracion
     private TextView coordenadas;
@@ -185,6 +185,10 @@ public class MapaActivity extends AppCompatActivity implements PermissionsListen
         // Creamos los puntos
         CrearPuntos();
 
+        // Establecemos el zoom Maximo y Minimo que puede hacer el usuario en el mapa
+        // TODO: Deshabilitados temporalmente para facilitar el desarollo
+       // map.setMaxZoomPreference(18);
+       // map.setMinZoomPreference(16);
         // TODO: Acabar comentarios, implementar juegos
         mapboxMap.setOnMarkerClickListener(new MapboxMap.OnMarkerClickListener() {
 
@@ -309,7 +313,7 @@ public class MapaActivity extends AppCompatActivity implements PermissionsListen
         locationLayerPlugin.setCameraMode(CameraMode.TRACKING);
 
         // Modo de renderizado, normal
-        locationLayerPlugin.setRenderMode(RenderMode.NORMAL);
+        locationLayerPlugin.setRenderMode(RenderMode.COMPASS);
     }
 
     // TODO: Comentar, implementar juegos
