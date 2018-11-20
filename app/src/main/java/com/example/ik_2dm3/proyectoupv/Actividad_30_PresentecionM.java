@@ -6,6 +6,7 @@ import android.media.MediaPlayer;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -18,7 +19,8 @@ public class Actividad_30_PresentecionM extends AppCompatActivity {
     private TextView Texto321;
     private int Contador;
     public Button Botonrepetir;
-
+    private ImageView BotonAtras;
+    public MediaPlayer Oihaltxo;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -38,13 +40,22 @@ public class Actividad_30_PresentecionM extends AppCompatActivity {
         Fondo301.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-            Audio();
-            }
+                Audio();
+             }
         });
+    //Boton Atras
+    BotonAtras= findViewById(R.id.BotonAtras);
+    BotonAtras.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Oihaltxo.release();
+            finish();
+        }
+    });
     }
+//Metodo responsalbe del audio
     public void Audio(){
-       final  MediaPlayer oihaltxo = MediaPlayer.create(Actividad_30_PresentecionM.this, R.raw.azoka);
-
+         Oihaltxo = MediaPlayer.create(Actividad_30_PresentecionM.this, R.raw.azoka);
         Botonrepetir.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -56,15 +67,15 @@ public class Actividad_30_PresentecionM extends AppCompatActivity {
             }
         });
         if (Contador >= 1) {
-            oihaltxo.stop();
+            Oihaltxo.stop();
             Intent i = new Intent(getBaseContext(), Actividad_31_Mercatua.class);
             startActivity(i);
             Contador = 0;
         }
         //Canbiar el texto
         if (Contador == 0) {
-            if (oihaltxo.isPlaying() == false) {
-                oihaltxo.start();
+            if (Oihaltxo.isPlaying() == false) {
+                Oihaltxo.start();
                 Handler CambiartextO = new Handler();
                 Handler BotonRepetir = new Handler();
                 CambiartextO.postDelayed(new Runnable(){
@@ -82,7 +93,7 @@ public class Actividad_30_PresentecionM extends AppCompatActivity {
                     }
                 },41000);
             }else{
-                oihaltxo.stop();
+                Oihaltxo.stop();
             }
             Splash.setVisibility(View.VISIBLE);
             Texto301.setVisibility(View.VISIBLE);
