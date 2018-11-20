@@ -2,60 +2,61 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/Fondo301"
+    android:id="@+id/Fondo40"
+    android:background="@mipmap/herriafondoageioihaltzoa"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@mipmap/merkatua_fondo"
-    tools:context=".Actividad_30_PresentecionM">
+    tools:context=".Actividad_40_Presentacion">
 
     <ImageView
         android:id="@+id/SplasNaranja"
-        android:layout_width="371dp"
-        android:layout_height="563dp"
+        android:layout_width="385dp"
+        android:layout_height="357dp"
         android:contentDescription="Splas"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
         app:srcCompat="@mipmap/plantillatexto" />
 
     <TextView
-        android:id="@+id/Texto301"
-        android:layout_width="225dp"
-        android:layout_height="278dp"
+        android:id="@+id/Texto401"
+        android:layout_width="213dp"
+        android:layout_height="266dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:fontFamily="casual"
-        android:text="@string/T301"
+        android:text="@string/astra401"
         android:textAlignment="center"
         android:textSize="13sp"
         android:textStyle="normal|bold"
         app:layout_constraintBottom_toBottomOf="@+id/SplasNaranja"
         app:layout_constraintEnd_toEndOf="@+id/SplasNaranja"
-        app:layout_constraintHorizontal_bias="0.615"
+        app:layout_constraintHorizontal_bias="0.526"
         app:layout_constraintStart_toStartOf="@+id/SplasNaranja"
         app:layout_constraintTop_toTopOf="@+id/SplasNaranja"
-        app:layout_constraintVertical_bias="0.722" />
+        app:layout_constraintVertical_bias="1.0" />
 
     <TextView
-        android:id="@+id/T321"
+        android:id="@+id/Texto402"
         android:layout_width="215dp"
         android:layout_height="238dp"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
         android:fontFamily="casual"
-        android:text="@string/T321"
+        android:text="@string/astra402"
         android:textAlignment="center"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/SplasNaranja"
-        app:layout_constraintHorizontal_bias="0.544"
+        app:layout_constraintHorizontal_bias="0.582"
         app:layout_constraintStart_toStartOf="@+id/SplasNaranja"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.645" />
+        app:layout_constraintVertical_bias="0.274" />
 
     <Button
-        android:id="@+id/BotonRepetopr30"
+        android:id="@+id/BotonRepetopr40"
         android:layout_width="47dp"
         android:layout_height="48dp"
         android:layout_marginStart="8dp"
@@ -69,5 +70,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.075" />
+
+
 
 </android.support.constraint.ConstraintLayout>

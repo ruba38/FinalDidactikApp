@@ -36,8 +36,6 @@ public class puntos {
 
     public double getlatitud(){
         return latitud;
-
-
     }
     public double getlongitud(){
         return longitud;
@@ -48,10 +46,12 @@ public class puntos {
     public String gettexto(){
         return texto;
     }
-    public String getaudio(){
+    public String getaudio()
+    {
         return audio;
     }
-    public String getjuego(){
+    public String getjuego()
+    {
         return juego;
     }
     public int getvisible(){
@@ -60,11 +60,9 @@ public class puntos {
     public int getterminado(){
         return terminado;
     }
-
     public long getRango() {
         return rango;
     }
-
     public void setRango(long rango) {
         this.rango = rango;
     }

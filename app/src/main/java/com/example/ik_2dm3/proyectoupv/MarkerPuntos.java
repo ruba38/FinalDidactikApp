@@ -10,7 +10,7 @@ public class MarkerPuntos extends Annotation {
     private long id;
     private String nombre = "";
     private int ID_BD = 0;
-    private long rango = 0;
+    private double rango = 0;
     private String juego = "";
     private boolean terminado = false;
     private boolean visible = false;
@@ -76,11 +76,11 @@ public class MarkerPuntos extends Annotation {
         this.ID_BD = ID_BD;
     }
 
-    public long getRango() {
+    public double getRango() {
         return rango;
     }
 
-    public void setRango(long rango) {
+    public void setRango(double rango) {
         this.rango = rango;
     }
 
@@ -106,6 +106,13 @@ public class MarkerPuntos extends Annotation {
 
     public void setmO(MarkerOptions mO) {
         this.mO = mO;
+    }
+
+    public double getLatitude(){
+        return this.getmO().getPosition().getLatitude();
+    }
+    public double getLongitude(){
+        return this.getmO().getPosition().getLongitude();
     }
 }
 

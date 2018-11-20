@@ -51,6 +51,7 @@ public class MapaActivity extends AppCompatActivity implements PermissionsListen
 
     // Variables de datos
     private ArrayList<MarkerPuntos> PuntosInteres = new ArrayList<MarkerPuntos>();
+    private ArrayList <Location>PuntosLocation = new ArrayList<Location>();
     boolean admin = false;
     int idPunto;
     private String juego;
@@ -84,6 +85,7 @@ public class MapaActivity extends AppCompatActivity implements PermissionsListen
         idBtnMapaAdmin = findViewById(R.id.idBtnMapaAdmin);
         idBtnMapaLimpiar = findViewById(R.id.idBtnMapaLimpiar);
         idBtnMapaAjustes = findViewById(R.id.idBtnMapaAjustes);
+
         // Instanciacion de objetos de la base de datos
         DatabaseAccess databaseAccess = new DatabaseAccess(this);
         databaseAccess.startdb(getBaseContext());
@@ -135,39 +137,27 @@ public class MapaActivity extends AppCompatActivity implements PermissionsListen
     }
 
     // TODO: Pendiente comentar
-    public void ShowPopup(View v) {
-
-
-    }
-
-    // TODO: Pendiente comentar
     @Override
     public void onLocationChanged(Location location) {
+        DatabaseAccess databaseAccess =new DatabaseAccess(this);
 
-        Location loc1 = new Location("");
-        loc1.setLatitude(location.getLatitude());
-        loc1.setLongitude(location.getLongitude());
+        Location ubicacionPunto = new Location("");
+        Location ubicacionUsuario = new Location("");
 
-        Location loc2 = new Location("");
-        loc2.setLatitude(43.257592);
-        loc2.setLongitude(-2.903055);
+        ubicacionUsuario.setLatitude(location.getLatitude());
+        ubicacionUsuario.setLongitude(location.getLongitude());
 
-        float distanceInMeters = loc1.distanceTo(loc2);
-
-        coordenadas.setText("Distancia a punto: "+distanceInMeters);
-
-        if(distanceInMeters < 10.0) {
-
-            Icon icon2 = IconFactory.getInstance(MapaActivity.this).fromResource(R.drawable.completado2);
-            map.addMarker(new MarkerOptions()
-                    .setTitle("FUNCIONA HULIOS")
-                    .setIcon(icon2)
-                    .setPosition(new LatLng(43.257592,  -2.903055)));
-
+        for(int i = 0; i < PuntosInteres.size(); i++) {
+            ubicacionPunto.setLatitude(PuntosInteres.get(i).getLatitude());
+            ubicacionPunto.setLongitude(PuntosInteres.get(i).getLongitude());
+            double distancia = ubicacionUsuario.distanceTo(ubicacionPunto);
+            if(distancia < 10.0 && databaseAccess.getTerminado(PuntosInteres.get(i).getID_BD())){
+                databaseAccess.setvisible(PuntosInteres.get(i).getID_BD());
+                LimpiarPuntos();
+                CrearPuntos();
+                coordenadas.setText("Dis: "+distancia+" | DB: "+databaseAccess.getTerminado(PuntosInteres.get(i).getID_BD()));
+            }
         }
-        //   coordenadas.setText("Latitud: "+location.getLatitude()+" | Longitud: "+location.getLongitude());
-
-
     }
 
     @Override
@@ -208,7 +198,7 @@ public class MapaActivity extends AppCompatActivity implements PermissionsListen
 
                     }
                 }
-                //MOSTRAR POPUP        ######################################################
+                //MOSTRAR POPUP
                 //DECLARARCIONES
                 Button idBtnPopupCerrar,idBtnPopupJugar;
                 puntoPopup.setContentView(R.layout.popup_punto);//abrir layout que contiene el popup
@@ -220,27 +210,21 @@ public class MapaActivity extends AppCompatActivity implements PermissionsListen
                     public void onClick(View v) {
                         puntoPopup.dismiss();//oculta el popup
                         Intent i= new Intent(getBaseContext(), MapaActivity.class);
-                        Log.d("mio","juego - "+juego);
-
                         switch (juego) {
                             case "Actividad_1_Udaletxea":
                                 i = new Intent(getBaseContext(), Actividad_1_Udaletxea.class);
-                                Log.d("mio","1");
                                 break;
                             case "Actividad_2_Drag":
                                 i = new Intent(getBaseContext(), Actividad_2_Drag.class);
-                                Log.d("mio","2");
                                 break;
                             case "Actividad_30_PresentecionM":
                                 i = new Intent(getBaseContext(), Actividad_30_PresentecionM.class);
-                                Log.d("mio","3");
                                 break;
                             default:
                                 Log.d("mio","0");
                             break;
                         }
                         startActivity(i);
-
                     }
                 });
                 //CERRAR POPUP
@@ -252,7 +236,6 @@ public class MapaActivity extends AppCompatActivity implements PermissionsListen
                         puntoPopup.dismiss();//oculta el popup
                     }
                 });
-
                 puntoPopup.show();//mostar popup
                 return false;
             }
@@ -319,15 +302,15 @@ public class MapaActivity extends AppCompatActivity implements PermissionsListen
     // TODO: Comentar, implementar juegos
     private void PuntoTerminado(int idPunto){
         DatabaseAccess databaseAccess =new DatabaseAccess(this);
-        databaseAccess.setvisible(idPunto);
-        databaseAccess.setTerminado(idPunto);
+    /*   databaseAccess.setvisible(idPunto);*/
+     databaseAccess.setTerminado(idPunto);
         LimpiarPuntos();
         CrearPuntos();
-
     }
 
     private void CrearPuntos() {
 
+        if(!PuntosInteres.isEmpty()) { PuntosInteres.clear(); }
         // Creamos los iconos
         Icon icon1 = IconFactory.getInstance(MapaActivity.this).fromResource(R.drawable.exclamatin2);
         Icon icon2 = IconFactory.getInstance(MapaActivity.this).fromResource(R.drawable.completado2);
@@ -342,30 +325,32 @@ public class MapaActivity extends AppCompatActivity implements PermissionsListen
 
         for (int i = 0; i < arrayPuntos.size(); i++) {
 
-            if (arrayPuntos.get(i).getvisible() == 1) {
-
-                // Instanciamos el objeto para cada uno de los puntos y le pasamos los datos de la base de datos
-                marca = new MarkerPuntos();
-                marca.getmO().setPosition(new LatLng(arrayPuntos.get(i).getlatitud(), arrayPuntos.get(i).getlongitud()));
-                marca.setID_BD(arrayPuntos.get(i).getlugarid());
-                marca.setRango(arrayPuntos.get(i).getRango());
-                marca.setJuego(arrayPuntos.get(i).getjuego());
-
-                // Si el punto en concreto esta terminado, cargamos uno u otro icono
-                if (arrayPuntos.get(i).getterminado() == 1) {
-                    marca.getmO().setIcon(icon2);
-                } else {
-                    marca.getmO().setIcon(icon1);
-                }
-
-                // Añadimos los puntos a un ArrayList
-                PuntosInteres.add(marca);
+            // Instanciamos el objeto para cada uno de los puntos y le pasamos los datos de la base de datos
+            marca = new MarkerPuntos();
+            marca.getmO().setPosition(new LatLng(arrayPuntos.get(i).getlatitud(), arrayPuntos.get(i).getlongitud()));
+            marca.setID_BD(arrayPuntos.get(i).getlugarid());
+            marca.setRango(arrayPuntos.get(i).getRango());
+            marca.setJuego(arrayPuntos.get(i).getjuego());
+            if(arrayPuntos.get(i).getvisible() == 0) {
+                marca.setVisible(false);
+            } else {
+                marca.setVisible(true);
             }
-        }
 
-        // Una vez cargados todos los objetos en  el ArrayList los añadimos al mapa
-        for (int i = 0; i < PuntosInteres.size(); i++) {
-            map.addMarker(PuntosInteres.get(i).getmO());
+            // Si el punto en concreto esta terminado, cargamos uno u otro icono
+            if (arrayPuntos.get(i).getterminado() == 1) {
+                marca.getmO().setIcon(icon2);
+            } else {
+                marca.getmO().setIcon(icon1);
+            }
+
+            // Añadimos los puntos a un ArrayList
+            PuntosInteres.add(marca);
+
+            if (PuntosInteres.get(i).isVisible() == true) {
+                // Una vez cargados todos los objetos en  el ArrayList los añadimos al mapa
+                map.addMarker(PuntosInteres.get(i).getmO());
+            }
         }
     }
 
@@ -374,7 +359,6 @@ public class MapaActivity extends AppCompatActivity implements PermissionsListen
         for(int i = 0; i < PuntosInteres.size(); i++) {
             map.removeMarker(PuntosInteres.get(i).getmO().getMarker());
         }
-
         // Limpiamos el ArrayList para cuando se vuelvan a crear los puntos
         PuntosInteres.clear();
     }
@@ -382,7 +366,6 @@ public class MapaActivity extends AppCompatActivity implements PermissionsListen
     // Metodos necesarios para que el mapa funcione
     @Override
     public void onMapClick(@NonNull LatLng point) {
-
     }
 
     @Override
@@ -431,17 +414,14 @@ public class MapaActivity extends AppCompatActivity implements PermissionsListen
     @SuppressLint("MissingPermission")
     public void onConnected() {
         locationEngine.requestLocationUpdates();
-
     }
 
     @Override
     public void onExplanationNeeded(List<String> permissionsToExplain) {
-
     }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         permissionsManager.onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
-
 }

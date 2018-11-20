@@ -9,7 +9,7 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
     public boolean admin=false;
-    private Button idBtnMainInicio,idBtnMainCreadores,idBtnMainAjustes, buttonCamara;
+    private Button idBtnMainInicio,idBtnMainCreadores,idBtnMainAjustes, buttonCamara, BotonAstra;
     int contador=0;
     private static final int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 100;
 
@@ -20,18 +20,25 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         getSupportActionBar().hide();
 
-        //IR A Kaixo        ######################################################
+        //BOTON Kaixo
         idBtnMainInicio = (Button) findViewById(R.id.idBtnMainInicio);
         idBtnMainInicio.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 Intent i = new Intent(getBaseContext(), Kaixo.class);
                 startActivity(i);
             }
         });
 
-        //IR A CREADORES        ######################################################
+        BotonAstra = (Button) findViewById(R.id.botonastra);
+        BotonAstra.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getBaseContext(), Actividad_40_Presentacion.class);
+                startActivity(i);
+            }
+        });
+        //BOTON CREADORES
         idBtnMainCreadores = (Button) findViewById(R.id.idBtnMainCreadores);
         idBtnMainCreadores.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -41,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        //IR A AJUSTES        ########################################################
+        //BOTON AJUSTES
         idBtnMainAjustes = (Button) findViewById(R.id.idBtnMainAjustes);
         idBtnMainAjustes.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -50,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(i);
             }
         });
-        //IR A Camara        ########################################################
+        //IR A Camara
 
         buttonCamara = (Button) findViewById(R.id.buttonCamara);
         buttonCamara.setOnClickListener(new View.OnClickListener() {

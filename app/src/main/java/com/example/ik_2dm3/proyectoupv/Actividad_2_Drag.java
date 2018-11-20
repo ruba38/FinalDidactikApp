@@ -30,7 +30,7 @@ public class Actividad_2_Drag extends Activity {
             public boolean onTouch(View v, MotionEvent event) {
                 Prueba.setText("Touch coordinates : " +
                         String.valueOf(event.getX()) + "x" + String.valueOf(event.getY()));
-               // onDraw();
+
                 return true;
             }});
 

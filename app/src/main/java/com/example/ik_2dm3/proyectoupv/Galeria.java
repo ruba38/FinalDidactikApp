@@ -24,16 +24,12 @@ import java.io.IOException;
 public class Galeria extends AppCompatActivity {
     //Button btnHome;
     private ListView paradasView;
-
-    //BD
     //private MyOpenHelper db;
-
     private Button btnCamara;
 
     static final int REQ_BTN = 0;
     ImageView imgTakenPic;
     private static final int CAM_REQUEST=1313;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,28 +37,20 @@ public class Galeria extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_galeria);
         Camera.open();
-
-        //Log.d("mytag",lista_paradas.get(0).getImagen().toString());
-        //Log.d("mytag", "ARRAY DE BYTE IMAGEN:"+data);
         //btnHome = (Button) findViewById(R.id.btnHome);
         btnCamara = (Button) findViewById(R.id.Camara);
         imgTakenPic = (ImageView) findViewById(R.id.imageView);
         /*try{
            toImg(data);
         }catch (IOException e){
-
         }*/
-
         btnCamara.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-
                 Intent i = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
                 //i.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(image));
                 //i.putExtra("return-data", true);
                 startActivityForResult(i, CAM_REQUEST);
-
             }
         });
     }
@@ -88,9 +76,7 @@ public class Galeria extends AppCompatActivity {
         FileOutputStream fos = null;
         try{
             fos = new FileOutputStream(myPath);
-            //imagen.getRowBytes();
             imagen.compress(Bitmap.CompressFormat.JPEG, 100, fos);
-            //imagen.compress(Bitmap.CompressFormat.JPEG, 100, fos);
             fos.flush();
         }catch (FileNotFoundException ex){
             ex.printStackTrace();
@@ -115,10 +101,8 @@ public class Galeria extends AppCompatActivity {
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0) {
-// Esto es lo que hace mi botón al pulsar ir a atrás
             Toast.makeText(getApplicationContext(), "Voy hacia atrás!!",
                     Toast.LENGTH_SHORT).show();
-            //return true;
         }
         return super.onKeyDown(keyCode, event);
     }

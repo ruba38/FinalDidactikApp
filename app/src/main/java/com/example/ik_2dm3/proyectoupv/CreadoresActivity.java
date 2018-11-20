@@ -12,13 +12,12 @@ public class CreadoresActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_creadores);
 
-
         idBtnCreadoresCerrar = (Button) findViewById(R.id.idBtnCreadoresCerrar);
         idBtnCreadoresCerrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();}
-
+                finish();
+            }
         });
     }
 
