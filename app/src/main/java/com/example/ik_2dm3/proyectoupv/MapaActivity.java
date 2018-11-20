@@ -4,10 +4,14 @@ package com.example.ik_2dm3.proyectoupv;
 import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.location.Location;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
+import android.text.SpannableString;
+import android.text.style.StyleSpan;
+import android.text.style.UnderlineSpan;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -57,7 +61,7 @@ public class MapaActivity extends AppCompatActivity implements PermissionsListen
     String juego;
 
     // Objetos/Variables de depuracion
-    private TextView coordenadas;
+    private TextView coordenadas,idTextViewMapaProgresoPuntos;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,10 +82,13 @@ public class MapaActivity extends AppCompatActivity implements PermissionsListen
         mapView.getMapAsync(this);
 
         // Cargamos el estilo personalizado
-        mapView.setStyleUrl("mapbox://styles/mariusinfo/cjo6xk4xo1y0b2sqo4phdlczq");
+        mapView.setStyleUrl("mapbox://styles/mariusinfo/cjopg4cmz0joe2smr2z4rry4a");
+
+
 
         // Asignacion de objetos
         coordenadas = findViewById(R.id.coords);
+        idTextViewMapaProgresoPuntos = findViewById(R.id.idTextViewMapaProgresoPuntos);
         idBtnMapaAdmin = findViewById(R.id.idBtnMapaAdmin);
         idBtnMapaLimpiar = findViewById(R.id.idBtnMapaLimpiar);
         idBtnMapaAjustes = findViewById(R.id.idBtnMapaAjustes);
@@ -139,24 +146,53 @@ public class MapaActivity extends AppCompatActivity implements PermissionsListen
     // TODO: Pendiente comentar
     @Override
     public void onLocationChanged(Location location) {
+        int contPuntos=-1;
+        double distancia2=0.0;
         DatabaseAccess databaseAccess =new DatabaseAccess(this);
 
         Location ubicacionPunto = new Location("");
         Location ubicacionUsuario = new Location("");
+        Location ubicacionPunto2 = new Location("");
+
 
         ubicacionUsuario.setLatitude(location.getLatitude());
         ubicacionUsuario.setLongitude(location.getLongitude());
 
         for(int i = 0; i < PuntosInteres.size(); i++) {
+            int id_bd=PuntosInteres.get(i).getID_BD();
             ubicacionPunto.setLatitude(PuntosInteres.get(i).getLatitude());
             ubicacionPunto.setLongitude(PuntosInteres.get(i).getLongitude());
+
+            if(databaseAccess.getTerminadoAnterior(id_bd)){
+                ubicacionPunto2.setLatitude(PuntosInteres.get(i).getLatitude());
+                ubicacionPunto2.setLongitude(PuntosInteres.get(i).getLongitude());
+
+                distancia2 = ubicacionUsuario.distanceTo(ubicacionPunto);
+                contPuntos=contPuntos+1;
+            }
             double distancia = ubicacionUsuario.distanceTo(ubicacionPunto);
-            if(distancia < 10.0 && databaseAccess.getTerminado(PuntosInteres.get(i).getID_BD())){
-                databaseAccess.setvisible(PuntosInteres.get(i).getID_BD());
+
+            if(distancia < 10.0 && databaseAccess.getTerminadoAnterior(id_bd)){
+                databaseAccess.setVisible(id_bd);
                 LimpiarPuntos();
                 CrearPuntos();
-                coordenadas.setText("Dis: "+distancia+" | DB: "+databaseAccess.getTerminado(PuntosInteres.get(i).getID_BD()));
+
             }
+            String tempString=getResources().getText(R.string.PunosDistancia)+""+String.format("%.2f", distancia2)+"m \nDB: "+databaseAccess.getTerminadoAnterior(id_bd)+" \n"+getResources().getText(R.string.PuntoProgreso)+""+contPuntos+"/"+PuntosInteres.size();
+            String tituloDistancia= getResources().getText(R.string.PunosDistancia)+"";
+            String Distancia=String.format("%.2f", distancia2)+"m";
+            String tituloDB=" DB: "+databaseAccess.getTerminadoAnterior(id_bd)+" ";
+            String tituloProgreso= getResources().getText(R.string.PuntoProgreso)+"";
+            String progreso=""+contPuntos+"/"+PuntosInteres.size();
+
+            SpannableString texto = new SpannableString(tempString);
+            texto.setSpan(new StyleSpan(Typeface.BOLD), 0, tituloDistancia.length(), 0);
+            texto.setSpan(new StyleSpan(Typeface.NORMAL), tituloDistancia.length(),tituloDistancia.length()+Distancia.length(), 0);
+            texto.setSpan(new StyleSpan(Typeface.NORMAL), tituloDistancia.length()+Distancia.length(), tituloDistancia.length()+Distancia.length()+tituloDB.length(), 0);
+            texto.setSpan(new StyleSpan(Typeface.BOLD), tituloDistancia.length()+Distancia.length()+tituloDB.length(), tituloDistancia.length()+Distancia.length()+tituloDB.length()+tituloProgreso.length(), 0);
+            texto.setSpan(new StyleSpan(Typeface.NORMAL), tituloDistancia.length()+Distancia.length()+tituloDB.length()+tituloProgreso.length(), tituloDistancia.length()+Distancia.length()+tituloDB.length()+tituloProgreso.length()+progreso.length(), 0);
+
+            coordenadas.setText(texto);
         }
     }
 
@@ -205,21 +241,13 @@ public class MapaActivity extends AppCompatActivity implements PermissionsListen
                     @Override
                     public void onClick(View v) {
                         puntoPopup.dismiss();//oculta el popup
-                        Intent i= new Intent(getBaseContext(), MapaActivity.class);
-                        switch (juego) {
-                            case "Actividad_1_Udaletxea":
-                                i = new Intent(getBaseContext(), Actividad_1_Udaletxea.class);
-                                break;
-                            case "Actividad_2_Drag":
-                                i = new Intent(getBaseContext(), Actividad_2_Drag.class);
-                                break;
-                            case "Actividad_30_PresentecionM":
-                                i = new Intent(getBaseContext(), Actividad_30_PresentecionM.class);
-                                break;
-                            default:
-                                Log.d("mio","0");
-                            break;
-                        }
+                        String nombreJuego="com.example.ik_2dm3.proyectoupv."+juego;
+                        nombreJuego=nombreJuego.replace(" ","");
+                        Intent i= null;
+                        try{
+                            i = new Intent(getBaseContext(), Class.forName(nombreJuego));
+                        }catch (ClassNotFoundException e){e.printStackTrace();}
+
                         startActivity(i);
                     }
                 });

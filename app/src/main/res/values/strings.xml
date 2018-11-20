@@ -30,6 +30,8 @@
     <string name="ajustesBotonCerrarApp">Salir de la APP</string>
     //MAPA
     <string name="title_activity_mapa">MapaActivity</string>
+    <string name="PunosDistancia"><b>PROXIMO PUNTO A :</b></string>
+    <string name="PuntoProgreso"><b>PROGRESO COMPLETADO :</b></string>
     //POPUP
     <string name="popupBotonJugar">JUGAR</string>
     <string name="todo">TODO</string>

@@ -136,8 +136,8 @@ public class DatabaseAccess extends SQLiteOpenHelper {
         cursor.close();
         return datoslista;
     }
-    //VUELVE VISIBLE EL SIGIENTE PUNTO Y MARCA COMO TERMINADO EL ACTUAL******CORREGIR
-    public void setvisible(int x){
+    //VUELVE VISIBLE EL SIGIENTE PUNTO Y MARCA COMO TERMINADO EL ACTUAL
+    public void setVisible(int x){
         String myPath = DB_PATH + DB_NAME;
         db = SQLiteDatabase.openDatabase(myPath, null, SQLiteDatabase.OPEN_READWRITE);
         db = this.getWritableDatabase();
@@ -149,13 +149,30 @@ public class DatabaseAccess extends SQLiteOpenHelper {
         db = this.getWritableDatabase();
         db.execSQL("UPDATE puntos SET terminado=1 WHERE idPunto="+x);
     }
+    public int getVisible(int x){
+        String myPath = DB_PATH + DB_NAME;
+        db = SQLiteDatabase.openDatabase(myPath, null, SQLiteDatabase.OPEN_READWRITE);
+        db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery("SELECT visible FROM puntos where idPunto="+x, null);
+        cursor.moveToFirst();
+        return cursor.getInt(cursor.getColumnIndex("visible"));
+    }
+    public int getTerminado(int x){
+        String myPath = DB_PATH + DB_NAME;
+        db = SQLiteDatabase.openDatabase(myPath, null, SQLiteDatabase.OPEN_READWRITE);
+        db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery("SELECT terminado FROM puntos where idPunto="+x, null);
+        cursor.moveToFirst();
+        return cursor.getInt(cursor.getColumnIndex("terminado"));
+
+    }
     //RESETEA LOS PUNTOS A SU ESTADO ORIGINAL
     public void resetApp(){
 
 
     }
 
-    public boolean getTerminado(int id) {
+    public boolean getTerminadoAnterior(int id) {
 
         if(id == 0) { return true; }
         String myPath = DB_PATH + DB_NAME;
