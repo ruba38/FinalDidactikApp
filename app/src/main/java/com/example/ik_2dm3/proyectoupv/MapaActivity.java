@@ -33,7 +33,9 @@ import com.mapbox.mapboxsdk.annotations.Icon;
 import com.mapbox.mapboxsdk.annotations.IconFactory;
 import com.mapbox.mapboxsdk.annotations.Marker;
 import com.mapbox.mapboxsdk.annotations.MarkerOptions;
+import com.mapbox.mapboxsdk.camera.CameraUpdateFactory;
 import com.mapbox.mapboxsdk.geometry.LatLng;
+import com.mapbox.mapboxsdk.geometry.LatLngBounds;
 import com.mapbox.mapboxsdk.location.modes.RenderMode;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
@@ -61,14 +63,20 @@ public class MapaActivity extends AppCompatActivity implements PermissionsListen
     // Variables de datos
     private ArrayList<MarkerPuntos> PuntosInteres = new ArrayList<MarkerPuntos>();
     private ArrayList <Location>PuntosLocation = new ArrayList<Location>();
-    boolean admin = false;
-    int idPunto;
-    String juego,titulo;
-    double latitud,longitud;
-    double RangoGeneral=10.0;
+    private boolean admin = false;
+    private int idPunto;
+    private String juego,titulo;
+    private double latitud,longitud;
+    private double RangoGeneral=10.0;
 
     // Objetos/Variables de depuracion
     private TextView coordenadas,idTextViewMapaProgresoPuntos;
+
+    // Limite de la camara de la zona sleccionada
+    private static final LatLngBounds coordsLimite = new LatLngBounds.Builder()
+            .include(new LatLng(43.258316, -2.903066))
+            .include(new LatLng(43.256749, -2.908320))
+            .build();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,7 +98,6 @@ public class MapaActivity extends AppCompatActivity implements PermissionsListen
 
         // Cargamos el estilo personalizado
         mapView.setStyleUrl("mapbox://styles/mariusinfo/cjopg4cmz0joe2smr2z4rry4a");
-
 
 
         // Asignacion de objetos
@@ -230,6 +237,11 @@ public class MapaActivity extends AppCompatActivity implements PermissionsListen
 
         // Habilitamos la localizacion del usuario
         enableLocation();
+
+        // Zoom min y Max del mapa
+        map.setMinZoomPreference(16);
+        map.setMaxZoomPreference(17.5);
+        mapboxMap.setLatLngBoundsForCameraTarget(coordsLimite);
 
         // Creamos los puntos
         CrearPuntos();
@@ -391,7 +403,7 @@ Log.d("titulo","titulo=>"+titulo);
 
         // Cargamos los puntos de la base de datos en un array
         DatabaseAccess databaseAccess = new DatabaseAccess(getBaseContext());
-        List<puntos> arrayPuntos = (List<puntos>) databaseAccess.getLugares();
+        List<puntos> arrayPuntos = (List<puntos>) databaseAccess.getPuntos();
 
         databaseAccess.close();
         // Creamos el objeto del punto
