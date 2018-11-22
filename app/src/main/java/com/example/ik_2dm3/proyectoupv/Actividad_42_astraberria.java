@@ -1,17 +1,13 @@
 package com.example.ik_2dm3.proyectoupv;
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.drawable.BitmapDrawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-public class Actividad_41_astrazaharra extends AppCompatActivity {
+public class Actividad_42_astraberria extends AppCompatActivity {
     public View fondo41;
     public ImageView ast, sir1, sir2, sir3, sir4, sir5;
     public TextView pr;
@@ -19,7 +15,7 @@ public class Actividad_41_astrazaharra extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_actividad_41_astrazaharra);
+        setContentView(R.layout.activity_actividad_42_astraberria);
         getSupportActionBar().hide();
         ast= findViewById(R.id.astrazar);
         sir1= findViewById(R.id.sir1);
@@ -33,8 +29,6 @@ public class Actividad_41_astrazaharra extends AppCompatActivity {
         sir3.setVisibility(View.INVISIBLE);
         sir4.setVisibility(View.INVISIBLE);
         sir5.setVisibility(View.INVISIBLE);
-
-
         ast.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -69,8 +63,6 @@ public class Actividad_41_astrazaharra extends AppCompatActivity {
                 }
                 return true;
             }});
+
     }
-
-
-
 }
