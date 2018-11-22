@@ -3,15 +3,24 @@ package com.example.ik_2dm3.proyectoupv;
 
 import android.annotation.SuppressLint;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.Typeface;
+import android.graphics.drawable.ClipDrawable;
+import android.graphics.drawable.ColorDrawable;
 import android.location.Location;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
+import android.text.SpannableString;
+import android.text.style.StyleSpan;
+import android.text.style.UnderlineSpan;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.mapbox.android.core.location.LocationEngine;
 import com.mapbox.android.core.location.LocationEngineListener;
@@ -24,7 +33,9 @@ import com.mapbox.mapboxsdk.annotations.Icon;
 import com.mapbox.mapboxsdk.annotations.IconFactory;
 import com.mapbox.mapboxsdk.annotations.Marker;
 import com.mapbox.mapboxsdk.annotations.MarkerOptions;
+import com.mapbox.mapboxsdk.camera.CameraUpdateFactory;
 import com.mapbox.mapboxsdk.geometry.LatLng;
+import com.mapbox.mapboxsdk.geometry.LatLngBounds;
 import com.mapbox.mapboxsdk.location.modes.RenderMode;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
@@ -52,12 +63,20 @@ public class MapaActivity extends AppCompatActivity implements PermissionsListen
     // Variables de datos
     private ArrayList<MarkerPuntos> PuntosInteres = new ArrayList<MarkerPuntos>();
     private ArrayList <Location>PuntosLocation = new ArrayList<Location>();
-    boolean admin = false;
-    int idPunto;
-    String juego;
+    private boolean admin = false;
+    private int idPunto;
+    private String juego,titulo;
+    private double latitud,longitud;
+    private double RangoGeneral=10.0;
 
     // Objetos/Variables de depuracion
-    private TextView coordenadas;
+    private TextView coordenadas,idTextViewMapaProgresoPuntos;
+
+    // Limite de la camara de la zona sleccionada
+    private static final LatLngBounds coordsLimite = new LatLngBounds.Builder()
+            .include(new LatLng(43.258316, -2.903066))
+            .include(new LatLng(43.256749, -2.908320))
+            .build();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,10 +97,12 @@ public class MapaActivity extends AppCompatActivity implements PermissionsListen
         mapView.getMapAsync(this);
 
         // Cargamos el estilo personalizado
-        mapView.setStyleUrl("mapbox://styles/mariusinfo/cjo6xk4xo1y0b2sqo4phdlczq");
+        mapView.setStyleUrl("mapbox://styles/mariusinfo/cjopg4cmz0joe2smr2z4rry4a");
+
 
         // Asignacion de objetos
         coordenadas = findViewById(R.id.coords);
+        idTextViewMapaProgresoPuntos = findViewById(R.id.idTextViewMapaProgresoPuntos);
         idBtnMapaAdmin = findViewById(R.id.idBtnMapaAdmin);
         idBtnMapaLimpiar = findViewById(R.id.idBtnMapaLimpiar);
         idBtnMapaAjustes = findViewById(R.id.idBtnMapaAjustes);
@@ -139,24 +160,69 @@ public class MapaActivity extends AppCompatActivity implements PermissionsListen
     // TODO: Pendiente comentar
     @Override
     public void onLocationChanged(Location location) {
+        int contPuntos=0;
+        double distancia2=0.0;
         DatabaseAccess databaseAccess =new DatabaseAccess(this);
 
         Location ubicacionPunto = new Location("");
         Location ubicacionUsuario = new Location("");
+        Location ubicacionPunto2 = new Location("");
+
 
         ubicacionUsuario.setLatitude(location.getLatitude());
         ubicacionUsuario.setLongitude(location.getLongitude());
 
         for(int i = 0; i < PuntosInteres.size(); i++) {
+            int id_bd=PuntosInteres.get(i).getID_BD();
             ubicacionPunto.setLatitude(PuntosInteres.get(i).getLatitude());
             ubicacionPunto.setLongitude(PuntosInteres.get(i).getLongitude());
+
+            if(databaseAccess.getTerminadoAnterior(id_bd)){
+                ubicacionPunto2.setLatitude(PuntosInteres.get(i).getLatitude());
+                ubicacionPunto2.setLongitude(PuntosInteres.get(i).getLongitude());
+
+                distancia2 = ubicacionUsuario.distanceTo(ubicacionPunto);
+                contPuntos=contPuntos+1;
+            }
             double distancia = ubicacionUsuario.distanceTo(ubicacionPunto);
-            if(distancia < 10.0 && databaseAccess.getTerminado(PuntosInteres.get(i).getID_BD())){
-                databaseAccess.setvisible(PuntosInteres.get(i).getID_BD());
+
+            if(distancia2 < RangoGeneral && databaseAccess.getTerminadoAnterior(id_bd)){
+                databaseAccess.setVisible(id_bd);
                 LimpiarPuntos();
                 CrearPuntos();
-                coordenadas.setText("Dis: "+distancia+" | DB: "+databaseAccess.getTerminado(PuntosInteres.get(i).getID_BD()));
+
             }
+            String tempString=getResources().getText(R.string.PunosDistancia)+""+String.format("%.2f", distancia2)+"m \nDB: "+databaseAccess.getTerminadoAnterior(id_bd)+" \n"+getResources().getText(R.string.PuntoProgreso)+""+contPuntos+"/"+PuntosInteres.size();
+            String tituloDistancia= getResources().getText(R.string.PunosDistancia)+"";
+            String Distancia=String.format("%.2f", distancia2)+"m";
+            String tituloDB=" DB: "+databaseAccess.getTerminadoAnterior(id_bd)+" ";
+            String tituloProgreso= getResources().getText(R.string.PuntoProgreso)+"";
+            String progreso=""+contPuntos+"/"+PuntosInteres.size();
+
+            SpannableString texto = new SpannableString(tempString);
+            texto.setSpan(new StyleSpan(Typeface.BOLD), 0, tituloDistancia.length(), 0);
+            texto.setSpan(new StyleSpan(Typeface.NORMAL), tituloDistancia.length(),tituloDistancia.length()+Distancia.length(), 0);
+            texto.setSpan(new StyleSpan(Typeface.NORMAL), tituloDistancia.length()+Distancia.length(), tituloDistancia.length()+Distancia.length()+tituloDB.length(), 0);
+            texto.setSpan(new StyleSpan(Typeface.BOLD), tituloDistancia.length()+Distancia.length()+tituloDB.length(), tituloDistancia.length()+Distancia.length()+tituloDB.length()+tituloProgreso.length(), 0);
+            texto.setSpan(new StyleSpan(Typeface.NORMAL), tituloDistancia.length()+Distancia.length()+tituloDB.length()+tituloProgreso.length(), tituloDistancia.length()+Distancia.length()+tituloDB.length()+tituloProgreso.length()+progreso.length(), 0);
+
+            coordenadas.setText(texto);
+        }
+    }
+    //comprobar si el punto esta en rango
+    public boolean enRango(double latitud,double longitud) {
+        Location ubicacionPunto = new Location("");
+        @SuppressLint("MissingPermission") Location ubicacionUsuario = locationEngine.getLastLocation();
+
+        //UBICACION DEL PUNTO
+        ubicacionPunto.setLatitude(latitud);
+        ubicacionPunto.setLongitude(longitud);
+        //mirar si esta en rango
+        double distancia = ubicacionUsuario.distanceTo(ubicacionPunto);
+        if(distancia<RangoGeneral){
+            return true;
+        }else{
+            return false;
         }
     }
 
@@ -171,6 +237,11 @@ public class MapaActivity extends AppCompatActivity implements PermissionsListen
 
         // Habilitamos la localizacion del usuario
         enableLocation();
+
+        // Zoom min y Max del mapa
+        map.setMinZoomPreference(16);
+        map.setMaxZoomPreference(17.5);
+        mapboxMap.setLatLngBoundsForCameraTarget(coordsLimite);
 
         // Creamos los puntos
         CrearPuntos();
@@ -189,6 +260,10 @@ public class MapaActivity extends AppCompatActivity implements PermissionsListen
                         MarkerPuntos mp = new MarkerPuntos(PuntosInteres.get(i));
                         idPunto=mp.getID_BD();
                         juego=mp.getJuego();
+                        titulo=mp.getNombre();
+                        latitud=mp.getLatitude();
+                        longitud=mp.getLongitude();
+Log.d("titulo","titulo=>"+titulo);
 
                         break;
 
@@ -197,32 +272,45 @@ public class MapaActivity extends AppCompatActivity implements PermissionsListen
                 //MOSTRAR POPUP
                 //DECLARARCIONES
                 Button idBtnPopupCerrar,idBtnPopupJugar;
-                puntoPopup.setContentView(R.layout.popup_punto);//abrir layout que contiene el popup
+                TextView idTextViewPopupTitulo;
 
-                //JUGAR POPUP
-                idBtnPopupJugar = (Button) puntoPopup.findViewById(R.id.idBtnPopupJugar);
-                idBtnPopupJugar.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        puntoPopup.dismiss();//oculta el popup
-                        Intent i= new Intent(getBaseContext(), MapaActivity.class);
-                        switch (juego) {
-                            case "Actividad_1_Udaletxea":
-                                i = new Intent(getBaseContext(), Actividad_1_Udaletxea.class);
-                                break;
-                            case "Actividad_2_Drag":
-                                i = new Intent(getBaseContext(), Actividad_2_Drag.class);
-                                break;
-                            case "Actividad_30_PresentecionM":
-                                i = new Intent(getBaseContext(), Actividad_30_PresentecionM.class);
-                                break;
-                            default:
-                                Log.d("mio","0");
-                            break;
+                puntoPopup.setContentView(R.layout.popup_punto);//abrir layout que contiene el popup
+                    //TITULO
+                    idTextViewPopupTitulo = puntoPopup.findViewById(R.id.idTextViewPopupTitulo);
+                    idTextViewPopupTitulo.setText(titulo);
+
+                    //JUGAR POPUP
+                    idBtnPopupJugar = (Button) puntoPopup.findViewById(R.id.idBtnPopupJugar);
+                        if(enRango(latitud,longitud)==false) {
+                            idBtnPopupJugar.setBackgroundColor(getColor(R.color.Desabilitado));
                         }
-                        startActivity(i);
-                    }
-                });
+                    idBtnPopupJugar.setOnClickListener(new View.OnClickListener() {
+
+                        @Override
+                        public void onClick(View v) {
+                            if(enRango(latitud,longitud)) {
+                                puntoPopup.dismiss();//oculta el popup
+                                String nombreJuego = "com.example.ik_2dm3.proyectoupv." + juego;
+                                nombreJuego = nombreJuego.replace(" ", "");
+                                Intent i = null;
+                                try {
+                                    i = new Intent(getBaseContext(), Class.forName(nombreJuego));
+                                } catch (ClassNotFoundException e) {
+                                    e.printStackTrace();
+                                }
+
+                                startActivity(i);
+                            }else{
+                                Context context = getApplicationContext();
+                                CharSequence text = "NO ESTAS EN RANGO";
+                                int duration = Toast.LENGTH_LONG;
+
+                                Toast toastRango = Toast.makeText(context, text, duration);
+                                toastRango.show();
+                            }
+                        }
+                    });
+
                 //CERRAR POPUP
                 idBtnPopupCerrar = (Button) puntoPopup.findViewById(R.id.idBtnPopupCerrar);//declarar boton cerrar del popup
                 idBtnPopupCerrar.setOnClickListener(new View.OnClickListener() {//al dar click se ejecuta esta funcion
@@ -232,6 +320,8 @@ public class MapaActivity extends AppCompatActivity implements PermissionsListen
                         puntoPopup.dismiss();//oculta el popup
                     }
                 });
+                puntoPopup.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                puntoPopup.setCanceledOnTouchOutside(false);
                 puntoPopup.show();//mostar popup
                 return false;
             }
@@ -313,7 +403,7 @@ public class MapaActivity extends AppCompatActivity implements PermissionsListen
 
         // Cargamos los puntos de la base de datos en un array
         DatabaseAccess databaseAccess = new DatabaseAccess(getBaseContext());
-        List<puntos> arrayPuntos = (List<puntos>) databaseAccess.getLugares();
+        List<puntos> arrayPuntos = (List<puntos>) databaseAccess.getPuntos();
 
         databaseAccess.close();
         // Creamos el objeto del punto
@@ -327,6 +417,7 @@ public class MapaActivity extends AppCompatActivity implements PermissionsListen
             marca.setID_BD(arrayPuntos.get(i).getlugarid());
             marca.setRango(arrayPuntos.get(i).getRango());
             marca.setJuego(arrayPuntos.get(i).getjuego());
+            marca.setNombre(arrayPuntos.get(i).getnombre());
             if(arrayPuntos.get(i).getvisible() == 0) {
                 marca.setVisible(false);
             } else {
