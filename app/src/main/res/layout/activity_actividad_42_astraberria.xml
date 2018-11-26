@@ -5,13 +5,96 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/Fondo42"
+    android:background="@mipmap/herriafondoa"
     tools:context=".Actividad_42_astraberria">
 
     <ImageView
-        android:id="@+id/imageView9"
-        android:layout_width="176dp"
-        android:layout_height="132dp"
-        tools:layout_editor_absoluteX="140dp"
-        tools:layout_editor_absoluteY="203dp"
-        tools:srcCompat="@drawable/astbe" />
+        android:id="@+id/astraber"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
+        android:scaleType="fitCenter"
+        android:src="@drawable/astraberriaezberdintasunak2"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:layout_editor_absoluteX="40dp" />
+
+    <TextView
+        android:id="@+id/prueba"
+        android:layout_width="127dp"
+        android:layout_height="25dp"
+        app:layout_constraintBottom_toTopOf="@+id/astraber"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <ImageView
+        android:id="@+id/sir1"
+        android:layout_width="46dp"
+        android:layout_height="48dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:src="@drawable/sirculo"
+        app:layout_constraintBottom_toBottomOf="@+id/astraber"
+        app:layout_constraintEnd_toEndOf="@+id/astraber"
+        app:layout_constraintHorizontal_bias="0.945"
+        app:layout_constraintStart_toStartOf="@+id/astraber"
+        app:layout_constraintTop_toTopOf="@+id/astraber"
+        app:layout_constraintVertical_bias="0.564" />
+
+    <ImageView
+        android:id="@+id/sir2"
+        android:layout_width="61dp"
+        android:layout_height="58dp"
+        android:layout_marginEnd="8dp"
+        android:src="@drawable/sirculo"
+        app:layout_constraintBottom_toBottomOf="@+id/astraber"
+        app:layout_constraintEnd_toEndOf="@+id/astraber"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/astraber"
+        app:layout_constraintTop_toTopOf="@+id/astraber"
+        app:layout_constraintVertical_bias="0.696" />
+
+    <ImageView
+        android:id="@+id/sir3"
+        android:layout_width="28dp"
+        android:layout_height="36dp"
+        android:layout_marginEnd="8dp"
+        android:src="@drawable/sirculo"
+        app:layout_constraintBottom_toBottomOf="@+id/astraber"
+        app:layout_constraintEnd_toEndOf="@+id/astraber"
+        app:layout_constraintHorizontal_bias="0.74"
+        app:layout_constraintStart_toStartOf="@+id/astraber"
+        app:layout_constraintTop_toTopOf="@+id/astraber"
+        app:layout_constraintVertical_bias="0.72" />
+
+    <ImageView
+        android:id="@+id/sir4"
+        android:layout_width="79dp"
+        android:layout_height="75dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:src="@drawable/sirculo"
+        app:layout_constraintBottom_toBottomOf="@+id/astraber"
+        app:layout_constraintEnd_toEndOf="@+id/astraber"
+        app:layout_constraintHorizontal_bias="0.367"
+        app:layout_constraintStart_toStartOf="@+id/astraber"
+        app:layout_constraintTop_toTopOf="@+id/astraber"
+        app:layout_constraintVertical_bias="0.616" />
+
+    <ImageView
+        android:id="@+id/sir5"
+        android:layout_width="59dp"
+        android:layout_height="35dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:src="@drawable/sirculo"
+        app:layout_constraintBottom_toBottomOf="@+id/astraber"
+        app:layout_constraintEnd_toEndOf="@+id/astraber"
+        app:layout_constraintHorizontal_bias="0.182"
+        app:layout_constraintStart_toStartOf="@+id/astraber"
+        app:layout_constraintTop_toTopOf="@+id/astraber"
+        app:layout_constraintVertical_bias="0.99" />
+
 </android.support.constraint.ConstraintLayout>

@@ -46,8 +46,8 @@
             android:label="@string/title_activity_ajustes" />
         <activity
             android:name=".MapaActivity"
-            android:configChanges="orientation|screenSize"
             android:label="@string/title_activity_mapa"
+            android:configChanges="orientation|screenSize"
             android:screenOrientation="portrait" />
         <activity
             android:name=".JuegoPuzzleActivity"
@@ -69,9 +69,6 @@
             android:label="@string/title_activity_actividad_32__prese_aurkez" />
         <activity android:name=".Actividad_40_Presentacion" />
         <activity android:name=".Actividad_41_astrazaharra" />
-        <activity
-            android:name=".horidata"
-            android:label="@string/title_activity_horidata"></activity>
 
     </application>
 
