@@ -30,14 +30,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        BotonAstra = (Button) findViewById(R.id.botonastra);
-        BotonAstra.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(getBaseContext(), Actividad_40_Presentacion.class);
-                startActivity(i);
-            }
-        });
         //BOTON CREADORES
         idBtnMainCreadores = (Button) findViewById(R.id.idBtnMainCreadores);
         idBtnMainCreadores.setOnClickListener(new View.OnClickListener() {

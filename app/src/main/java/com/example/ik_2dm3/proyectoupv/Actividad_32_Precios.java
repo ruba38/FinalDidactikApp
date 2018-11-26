@@ -1,13 +1,17 @@
 package com.example.ik_2dm3.proyectoupv;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.app.Activity;
+import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import java.io.File;
 
 public class Actividad_32_Precios extends Activity {
     //Definiciones
@@ -22,6 +26,7 @@ public class Actividad_32_Precios extends Activity {
     public static double AzenarioN;
     public static double IndabakN;
     public static double TxorizoN;
+    public String imagePath;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,6 +48,7 @@ public class Actividad_32_Precios extends Activity {
             @Override
             public void onClick(View v) {
                 Intent SacarFonto= new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                //Camara
                 startActivityForResult(SacarFonto, 21);
 
             }
@@ -63,6 +69,7 @@ public class Actividad_32_Precios extends Activity {
         Total.setText("Precio Total "+String.format("%d", 2).valueOf(TotalN)
         );
     }
+
     protected void onActivityResult(int requestCode,
                                     int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);

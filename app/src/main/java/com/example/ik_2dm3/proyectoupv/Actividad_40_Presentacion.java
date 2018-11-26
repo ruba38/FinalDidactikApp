@@ -61,7 +61,7 @@ public class Actividad_40_Presentacion extends AppCompatActivity {
             oihaltxo.stop();
             Intent i = new Intent(getBaseContext(), Actividad_41_astrazaharra.class);
             startActivity(i);
-            Contador = 0;
+
         }
         //Canbiar el texto
         if (Contador == 0) {

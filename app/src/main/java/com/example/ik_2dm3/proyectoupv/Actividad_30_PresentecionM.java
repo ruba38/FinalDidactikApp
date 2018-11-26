@@ -26,7 +26,7 @@ public class Actividad_30_PresentecionM extends AppCompatActivity {
     public Button Botonrepetir;
     private ImageView BotonAtras;
     public MediaPlayer Oihaltxo;
-    public String imagePath;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,21 +73,17 @@ public class Actividad_30_PresentecionM extends AppCompatActivity {
                 Audio();
             }
         });
-        if (Contador >=0) {
+        if (Contador >=1) {
             Oihaltxo.stop();
-            //Camara
-            imagePath = Environment.getExternalStorageState() + "/images/myimage.jpg";
-            File file = new File( imagePath );
-            Uri outputFileUri = Uri.fromFile( file );
+            Oihaltxo.pause();
+            Oihaltxo.release();
             Intent i = new Intent(getBaseContext(), Actividad_31_Mercatua.class);
-            i.putExtra( MediaStore.EXTRA_OUTPUT, outputFileUri );
-
             startActivityForResult(i, 10);
             finish();
         }
         //Canbiar el texto
         if (Contador == 0) {
-            if (Oihaltxo.isPlaying() == false) {
+            if (Oihaltxo.isPlaying() == false){
                 Oihaltxo.start();
                 Handler CambiartextO = new Handler();
                 Handler BotonRepetir = new Handler();
