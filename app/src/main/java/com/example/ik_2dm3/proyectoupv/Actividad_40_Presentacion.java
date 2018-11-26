@@ -82,7 +82,7 @@ public class Actividad_40_Presentacion extends AppCompatActivity {
                     public void run() {
                         Botonrepetir.setVisibility(View.VISIBLE);
                     }
-                }, 41000);
+                }, 1000);
             } else {
                 oihaltxo.stop();
             }
