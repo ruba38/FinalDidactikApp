@@ -3,7 +3,10 @@ package com.example.ik_2dm3.proyectoupv;
 import android.content.Intent;
 import android.media.Image;
 import android.media.MediaPlayer;
+import android.net.Uri;
+import android.os.Environment;
 import android.os.Handler;
+import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -11,6 +14,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import java.io.File;
 
 public class Actividad_30_PresentecionM extends AppCompatActivity {
     private View Fondo301;
@@ -21,6 +26,8 @@ public class Actividad_30_PresentecionM extends AppCompatActivity {
     public Button Botonrepetir;
     private ImageView BotonAtras;
     public MediaPlayer Oihaltxo;
+    public String imagePath;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -68,7 +75,13 @@ public class Actividad_30_PresentecionM extends AppCompatActivity {
         });
         if (Contador >=0) {
             Oihaltxo.stop();
+            //Camara
+            imagePath = Environment.getExternalStorageState() + "/images/myimage.jpg";
+            File file = new File( imagePath );
+            Uri outputFileUri = Uri.fromFile( file );
             Intent i = new Intent(getBaseContext(), Actividad_31_Mercatua.class);
+            i.putExtra( MediaStore.EXTRA_OUTPUT, outputFileUri );
+
             startActivityForResult(i, 10);
             finish();
         }

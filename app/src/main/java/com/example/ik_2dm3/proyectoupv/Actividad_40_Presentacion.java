@@ -57,7 +57,7 @@ public class Actividad_40_Presentacion extends AppCompatActivity {
                 Audio();
             }
         });
-        if (Contador >= 1) {
+        if (Contador >= 0) {
             oihaltxo.stop();
             Intent i = new Intent(getBaseContext(), Actividad_41_astrazaharra.class);
             startActivity(i);
