@@ -66,11 +66,11 @@ public class Actividad_30_PresentecionM extends AppCompatActivity {
                 Audio();
             }
         });
-        if (Contador >= 1) {
+        if (Contador >=0) {
             Oihaltxo.stop();
             Intent i = new Intent(getBaseContext(), Actividad_31_Mercatua.class);
-            startActivity(i);
-            Contador = 0;
+            startActivityForResult(i, 10);
+            finish();
         }
         //Canbiar el texto
         if (Contador == 0) {
@@ -98,6 +98,14 @@ public class Actividad_30_PresentecionM extends AppCompatActivity {
             Splash.setVisibility(View.VISIBLE);
             Texto301.setVisibility(View.VISIBLE);
             Contador++;
+        }
+    }   protected void onActivityResult(int requestCode,
+                                        int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 10){
+            if (resultCode==RESULT_OK){
+                Actividad_30_PresentecionM.this.finish();
+           }
         }
     }
 }

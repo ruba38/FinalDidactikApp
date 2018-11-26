@@ -104,13 +104,23 @@ public class Actividad_31_Mercatua extends Activity {
                     }
                     if(Cont ==4){
                         Intent i = new Intent(getBaseContext(),Actividad_32_Precios.class);
-                        startActivity(i);
+                        startActivityForResult(i, 22);
+                        finish();
+
                     }
                     break;
             }
             return true;
         }
     };
+    protected void onActivityResult(int requestCode,
+                                    int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 22) {
+            if (resultCode==RESULT_OK){
+        }
+    }
+    }
 }
 
 
