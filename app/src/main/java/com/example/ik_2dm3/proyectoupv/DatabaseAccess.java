@@ -109,8 +109,8 @@ public class DatabaseAccess extends SQLiteOpenHelper {
         /*Static.getSharedPreference(context).edit()
                 .putInt("DB_VERSION", DB_VERSION).commit();*/
     }
-    public Object getLugares(){
-        //CARGA TODOS LOS DATOS DE LA TABLA LUGARES EN UN ARRAYLIST
+    public Object getPuntos(){
+        //CARGA TODOS LOS DATOS DE LA TABLA PUNTOS EN UN ARRAYLIST
         ArrayList <puntos>datoslista = new ArrayList<puntos>();
         String myPath = DB_PATH + DB_NAME;
         db = SQLiteDatabase.openDatabase(myPath, null, SQLiteDatabase.OPEN_READWRITE);
