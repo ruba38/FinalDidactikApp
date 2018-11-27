@@ -57,11 +57,11 @@ public class Actividad_40_Presentacion extends AppCompatActivity {
                 Audio();
             }
         });
-        if (Contador >= 1) {
+        if (Contador >= 0) {
             oihaltxo.stop();
             Intent i = new Intent(getBaseContext(), Actividad_41_astrazaharra.class);
             startActivity(i);
-            Contador = 0;
+
         }
         //Canbiar el texto
         if (Contador == 0) {
@@ -82,7 +82,7 @@ public class Actividad_40_Presentacion extends AppCompatActivity {
                     public void run() {
                         Botonrepetir.setVisibility(View.VISIBLE);
                     }
-                }, 41000);
+                }, 1000);
             } else {
                 oihaltxo.stop();
             }

@@ -29,6 +29,7 @@ public class Agurra extends AppCompatActivity {
              agurra.stop();
              startActivity(i);}
             }
+
         );
     }
 }

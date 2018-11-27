@@ -30,14 +30,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        BotonAstra = (Button) findViewById(R.id.botonastra);
-        BotonAstra.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(getBaseContext(), Actividad_40_Presentacion.class);
-                startActivity(i);
-            }
-        });
         //BOTON CREADORES
         idBtnMainCreadores = (Button) findViewById(R.id.idBtnMainCreadores);
         idBtnMainCreadores.setOnClickListener(new View.OnClickListener() {
@@ -63,8 +55,8 @@ public class MainActivity extends AppCompatActivity {
         buttonCamara.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(getBaseContext(), Actividad_30_PresentecionM.class);
-                startActivity(i);
+                Intent i = new Intent(getBaseContext(),Actividad_30_PresentecionM.class);
+                startActivityForResult(i,101);
                 //CheckCameraHardware();
                 // Intent F = new Intent(getBaseContext(), Fotos.class);
                 // startActivity(F);
@@ -81,19 +73,25 @@ public class MainActivity extends AppCompatActivity {
 
     }
     public void QuitarGPS(View v) {
-     contador ++;
-     if(contador==6){
-         if(admin==false){
-             admin=true;
-             contador=0;
-             Toast.makeText(getBaseContext(),"Admin = True", Toast.LENGTH_SHORT).show();
-         }else{
-             admin=false;
-             contador=0;
-             Toast.makeText(getBaseContext(),"Admin = False", Toast.LENGTH_SHORT).show();
-         }
-     }
-
+        contador++;
+        if (contador == 6) {
+            if (admin == false) {
+                admin = true;
+                contador = 0;
+                Toast.makeText(getBaseContext(), "Admin = True", Toast.LENGTH_SHORT).show();
+            } else {
+                admin = false;
+                contador = 0;
+                Toast.makeText(getBaseContext(), "Admin = False", Toast.LENGTH_SHORT).show();
+            }
+        }
     }
+        protected void onActivityResult(int requestCode,
+        int resultCode, Intent data) {
+            super.onActivityResult(requestCode, resultCode, data);
+            if (resultCode == 101) {
+                String mywebsite = (String) data.getExtras().get("result");
 
+            }
+    }
 }

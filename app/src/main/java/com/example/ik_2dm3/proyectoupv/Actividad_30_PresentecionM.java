@@ -3,7 +3,10 @@ package com.example.ik_2dm3.proyectoupv;
 import android.content.Intent;
 import android.media.Image;
 import android.media.MediaPlayer;
+import android.net.Uri;
+import android.os.Environment;
 import android.os.Handler;
+import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -11,6 +14,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import java.io.File;
 
 public class Actividad_30_PresentecionM extends AppCompatActivity {
     private View Fondo301;
@@ -21,6 +26,8 @@ public class Actividad_30_PresentecionM extends AppCompatActivity {
     public Button Botonrepetir;
     private ImageView BotonAtras;
     public MediaPlayer Oihaltxo;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -44,14 +51,14 @@ public class Actividad_30_PresentecionM extends AppCompatActivity {
              }
         });
     //Boton Atras
-    //BotonAtras= findViewById(R.id.BotonAtras);
-    BotonAtras.setOnClickListener(new View.OnClickListener() {
+    /*BotonAtras= findViewById(R.id.BotonAtras);*/
+    /*BotonAtras.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             Oihaltxo.release();
             finish();
         }
-    });
+    });*/
     }
 //Metodo responsalbe del audio
     public void Audio(){
@@ -66,15 +73,17 @@ public class Actividad_30_PresentecionM extends AppCompatActivity {
                 Audio();
             }
         });
-        if (Contador >= 1) {
+        if (Contador >=1) {
             Oihaltxo.stop();
+            Oihaltxo.pause();
+            Oihaltxo.release();
             Intent i = new Intent(getBaseContext(), Actividad_31_Mercatua.class);
-            startActivity(i);
-            Contador = 0;
+            startActivityForResult(i, 10);
+            finish();
         }
         //Canbiar el texto
         if (Contador == 0) {
-            if (Oihaltxo.isPlaying() == false) {
+            if (Oihaltxo.isPlaying() == false){
                 Oihaltxo.start();
                 Handler CambiartextO = new Handler();
                 Handler BotonRepetir = new Handler();
@@ -98,6 +107,14 @@ public class Actividad_30_PresentecionM extends AppCompatActivity {
             Splash.setVisibility(View.VISIBLE);
             Texto301.setVisibility(View.VISIBLE);
             Contador++;
+        }
+    }   protected void onActivityResult(int requestCode,
+                                        int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 10){
+            if (resultCode==RESULT_OK){
+                Actividad_30_PresentecionM.this.finish();
+           }
         }
     }
 }

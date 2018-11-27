@@ -21,7 +21,7 @@ public class Actividad_2_Drag extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_actividad_2__drag);
-        final ImageView ImagenDibujar = findViewById(R.id.ImagenDibujar);
+      /*  final ImageView ImagenDibujar = findViewById(R.id.ImagenDibujar);
        final TextView Prueba = findViewById(R.id.Prueba);
        Canvas bit = new Canvas();
 
@@ -33,7 +33,7 @@ public class Actividad_2_Drag extends Activity {
 
                 return true;
             }});
-
+*/
     }
     protected void onDraw(Canvas canvas){
       //  super.onDraw(canvas);
