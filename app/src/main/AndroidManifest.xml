@@ -18,7 +18,7 @@
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
-        android:label="Titulo"
+        android:label="DidaktikApp"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
@@ -69,6 +69,10 @@
             android:label="@string/title_activity_actividad_32__prese_aurkez" />
         <activity android:name=".Actividad_40_Presentacion" />
         <activity android:name=".Actividad_41_astrazaharra" />
+
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
 
     </application>
 

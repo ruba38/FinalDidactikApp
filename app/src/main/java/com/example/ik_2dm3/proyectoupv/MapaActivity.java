@@ -5,10 +5,14 @@ import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ClipDrawable;
 import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.location.Location;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -16,9 +20,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.text.SpannableString;
 import android.text.style.StyleSpan;
 import android.text.style.UnderlineSpan;
+import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -43,6 +49,7 @@ import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 import com.mapbox.mapboxsdk.plugins.locationlayer.LocationLayerPlugin;
 import com.mapbox.mapboxsdk.plugins.locationlayer.modes.CameraMode;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -59,18 +66,33 @@ public class MapaActivity extends AppCompatActivity implements PermissionsListen
     // Creacion de objetos
     private Button idBtnMapaAdmin, idBtnMapaLimpiar, idBtnMapaAjustes;
     private Dialog puntoPopup;
+    //creacion de imagen
+    private byte[] decodedString;
+    private Bitmap decodedByte;
 
+    private Drawable drawable;
     // Variables de datos
     private ArrayList<MarkerPuntos> PuntosInteres = new ArrayList<MarkerPuntos>();
     private ArrayList <Location>PuntosLocation = new ArrayList<Location>();
     private boolean admin = false;
-    private int idPunto;
-    private String juego,titulo;
+    private int idPunto,secuencia;
+    private String juego,titulo,imagen;
     private double latitud,longitud;
     private double RangoGeneral=10.0;
-
+    private int Lugar=2;
     // Objetos/Variables de depuracion
-    private TextView coordenadas,idTextViewMapaProgresoPuntos;
+    private TextView coordenadas,idTextViewDistancia,idTextViewProgreso,idTextViewMapaProgresoPuntos;
+    int contPuntos=0;
+    double distancia2=0.0;
+    int id_bd;
+    int secuencia2;
+
+
+
+
+
+
+
 
     // Limite de la camara de la zona sleccionada
     private static final LatLngBounds coordsLimite = new LatLngBounds.Builder()
@@ -85,7 +107,11 @@ public class MapaActivity extends AppCompatActivity implements PermissionsListen
         //Quitar titulo
         getSupportActionBar().hide();
         // Se crea la instancia del mapa con la clave de acceso
+        Log.d("descarga", "punto 1");
         Mapbox.getInstance(this, getString(R.string.access_token));
+
+        Log.d("descarga", "Conectado: "+Mapbox.isConnected());
+
         setContentView(R.layout.activity_mapa);
 
         // Instancia el objeto Popup
@@ -96,13 +122,18 @@ public class MapaActivity extends AppCompatActivity implements PermissionsListen
         mapView.onCreate(savedInstanceState);
         mapView.getMapAsync(this);
 
+        Log.d("descarga", "LiveRegion: "+mapView.getWindowToken());
+
         // Cargamos el estilo personalizado
-        mapView.setStyleUrl("mapbox://styles/mariusinfo/cjopg4cmz0joe2smr2z4rry4a");
+        mapView.setStyleUrl("mapbox://styles/mariusinfo/cjoshzhqg3sb22sme5eyoogt4");
 
 
         // Asignacion de objetos
+
         coordenadas = findViewById(R.id.coords);
-        idTextViewMapaProgresoPuntos = findViewById(R.id.idTextViewMapaProgresoPuntos);
+        idTextViewDistancia = findViewById(R.id.idTextViewDistancia);
+        idTextViewProgreso = findViewById(R.id.idTextViewProgreso);
+        //idTextViewMapaProgresoPuntos = findViewById(R.id.idTextViewMapaProgresoPuntos);
         idBtnMapaAdmin = findViewById(R.id.idBtnMapaAdmin);
         idBtnMapaLimpiar = findViewById(R.id.idBtnMapaLimpiar);
         idBtnMapaAjustes = findViewById(R.id.idBtnMapaAjustes);
@@ -160,8 +191,7 @@ public class MapaActivity extends AppCompatActivity implements PermissionsListen
     // TODO: Pendiente comentar
     @Override
     public void onLocationChanged(Location location) {
-        int contPuntos=0;
-        double distancia2=0.0;
+
         DatabaseAccess databaseAccess =new DatabaseAccess(this);
 
         Location ubicacionPunto = new Location("");
@@ -173,11 +203,12 @@ public class MapaActivity extends AppCompatActivity implements PermissionsListen
         ubicacionUsuario.setLongitude(location.getLongitude());
 
         for(int i = 0; i < PuntosInteres.size(); i++) {
-            int id_bd=PuntosInteres.get(i).getID_BD();
+            id_bd=PuntosInteres.get(i).getID_BD();
+            secuencia2=PuntosInteres.get(i).getSecuencia();
             ubicacionPunto.setLatitude(PuntosInteres.get(i).getLatitude());
             ubicacionPunto.setLongitude(PuntosInteres.get(i).getLongitude());
 
-            if(databaseAccess.getTerminadoAnterior(id_bd)){
+            if(databaseAccess.getTerminadoAnterior(secuencia2,Lugar)){
                 ubicacionPunto2.setLatitude(PuntosInteres.get(i).getLatitude());
                 ubicacionPunto2.setLongitude(PuntosInteres.get(i).getLongitude());
 
@@ -186,29 +217,42 @@ public class MapaActivity extends AppCompatActivity implements PermissionsListen
             }
             double distancia = ubicacionUsuario.distanceTo(ubicacionPunto);
 
-            if(distancia2 < RangoGeneral && databaseAccess.getTerminadoAnterior(id_bd)){
+            if(distancia2 < RangoGeneral && databaseAccess.getTerminadoAnterior(secuencia2,Lugar)){
                 databaseAccess.setVisible(id_bd);
                 LimpiarPuntos();
                 CrearPuntos();
 
             }
-            String tempString=getResources().getText(R.string.PunosDistancia)+""+String.format("%.2f", distancia2)+"m \nDB: "+databaseAccess.getTerminadoAnterior(id_bd)+" \n"+getResources().getText(R.string.PuntoProgreso)+""+contPuntos+"/"+PuntosInteres.size();
+            String metrica;
+            double textoDistancia;
+            if(distancia2>1000){
+                metrica="Km";
+                textoDistancia=distancia2/1000;
+            }else{
+                metrica="m";
+                textoDistancia=distancia2;
+            }
+            String tempString=getResources().getText(R.string.PunosDistancia)+""+String.format("%.2f",textoDistancia)+""+metrica+" "+getResources().getText(R.string.PuntoProgreso)+""+contPuntos+"/"+PuntosInteres.size()+" ";
             String tituloDistancia= getResources().getText(R.string.PunosDistancia)+"";
-            String Distancia=String.format("%.2f", distancia2)+"m";
-            String tituloDB=" DB: "+databaseAccess.getTerminadoAnterior(id_bd)+" ";
+            String Distancia=String.format("%.2f", textoDistancia)+""+metrica+" ";
             String tituloProgreso= getResources().getText(R.string.PuntoProgreso)+"";
             String progreso=""+contPuntos+"/"+PuntosInteres.size();
 
             SpannableString texto = new SpannableString(tempString);
             texto.setSpan(new StyleSpan(Typeface.BOLD), 0, tituloDistancia.length(), 0);
             texto.setSpan(new StyleSpan(Typeface.NORMAL), tituloDistancia.length(),tituloDistancia.length()+Distancia.length(), 0);
-            texto.setSpan(new StyleSpan(Typeface.NORMAL), tituloDistancia.length()+Distancia.length(), tituloDistancia.length()+Distancia.length()+tituloDB.length(), 0);
-            texto.setSpan(new StyleSpan(Typeface.BOLD), tituloDistancia.length()+Distancia.length()+tituloDB.length(), tituloDistancia.length()+Distancia.length()+tituloDB.length()+tituloProgreso.length(), 0);
-            texto.setSpan(new StyleSpan(Typeface.NORMAL), tituloDistancia.length()+Distancia.length()+tituloDB.length()+tituloProgreso.length(), tituloDistancia.length()+Distancia.length()+tituloDB.length()+tituloProgreso.length()+progreso.length(), 0);
+            texto.setSpan(new StyleSpan(Typeface.NORMAL), tituloDistancia.length()+Distancia.length(), tituloDistancia.length()+Distancia.length(), 0);
+            texto.setSpan(new StyleSpan(Typeface.BOLD), tituloDistancia.length()+Distancia.length(), tituloDistancia.length()+Distancia.length()+tituloProgreso.length(), 0);
+            texto.setSpan(new StyleSpan(Typeface.NORMAL), tituloDistancia.length()+Distancia.length()+tituloProgreso.length(), tituloDistancia.length()+Distancia.length()+tituloProgreso.length()+progreso.length(), 0);
 
-            coordenadas.setText(texto);
+            //coordenadas.setText(texto);
+            idTextViewDistancia.setText(String.format("%.2f",textoDistancia)+""+metrica);
+            idTextViewProgreso.setText(contPuntos+"/"+PuntosInteres.size());
         }
+
     }
+
+
     //comprobar si el punto esta en rango
     public boolean enRango(double latitud,double longitud) {
         Location ubicacionPunto = new Location("");
@@ -226,9 +270,20 @@ public class MapaActivity extends AppCompatActivity implements PermissionsListen
         }
     }
 
+    public void toImg(String byteArray){
+
+        decodedString = Base64.decode(byteArray, Base64.DEFAULT);
+        decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+
+        //Convert bitmap to drawable
+        drawable = new BitmapDrawable(getResources(), decodedByte);
+        Log.d("mitag","toImg drawable =>"+drawable);
+    }
+
     @Override
     public void onMapReady(MapboxMap mapboxMap) {
 
+        Log.d("descarga", "punto 2");
         // Asignamos el objeto a la instancia actual
         MapaActivity.this.map = mapboxMap;
 
@@ -239,9 +294,9 @@ public class MapaActivity extends AppCompatActivity implements PermissionsListen
         enableLocation();
 
         // Zoom min y Max del mapa
-        map.setMinZoomPreference(16);
+       /* map.setMinZoomPreference(16);
         map.setMaxZoomPreference(17.5);
-        mapboxMap.setLatLngBoundsForCameraTarget(coordsLimite);
+        mapboxMap.setLatLngBoundsForCameraTarget(coordsLimite);*/
 
         // Creamos los puntos
         CrearPuntos();
@@ -263,8 +318,8 @@ public class MapaActivity extends AppCompatActivity implements PermissionsListen
                         titulo=mp.getNombre();
                         latitud=mp.getLatitude();
                         longitud=mp.getLongitude();
-Log.d("titulo","titulo=>"+titulo);
-
+                        secuencia=mp.getSecuencia();
+                        imagen=mp.getImagen();
                         break;
 
                     }
@@ -273,12 +328,15 @@ Log.d("titulo","titulo=>"+titulo);
                 //DECLARARCIONES
                 Button idBtnPopupCerrar,idBtnPopupJugar;
                 TextView idTextViewPopupTitulo;
-
+                ImageView imagenPopup;
                 puntoPopup.setContentView(R.layout.popup_punto);//abrir layout que contiene el popup
                     //TITULO
                     idTextViewPopupTitulo = puntoPopup.findViewById(R.id.idTextViewPopupTitulo);
                     idTextViewPopupTitulo.setText(titulo);
-
+                    //IMAGEN
+                    imagenPopup=puntoPopup.findViewById(R.id.imagenPopup);
+                    toImg(imagen);
+                    imagenPopup.setBackground(drawable);
                     //JUGAR POPUP
                     idBtnPopupJugar = (Button) puntoPopup.findViewById(R.id.idBtnPopupJugar);
                         if(enRango(latitud,longitud)==false) {
@@ -403,7 +461,7 @@ Log.d("titulo","titulo=>"+titulo);
 
         // Cargamos los puntos de la base de datos en un array
         DatabaseAccess databaseAccess = new DatabaseAccess(getBaseContext());
-        List<puntos> arrayPuntos = (List<puntos>) databaseAccess.getPuntos();
+        List<puntos> arrayPuntos = (List<puntos>) databaseAccess.getPuntos(Lugar);
 
         databaseAccess.close();
         // Creamos el objeto del punto
@@ -414,10 +472,10 @@ Log.d("titulo","titulo=>"+titulo);
             // Instanciamos el objeto para cada uno de los puntos y le pasamos los datos de la base de datos
             marca = new MarkerPuntos();
             marca.getmO().setPosition(new LatLng(arrayPuntos.get(i).getlatitud(), arrayPuntos.get(i).getlongitud()));
-            marca.setID_BD(arrayPuntos.get(i).getlugarid());
-            marca.setRango(arrayPuntos.get(i).getRango());
+            marca.setID_BD(arrayPuntos.get(i).getidPunto());
             marca.setJuego(arrayPuntos.get(i).getjuego());
             marca.setNombre(arrayPuntos.get(i).getnombre());
+            marca.setSecuencia(arrayPuntos.get(i).getSecuencia());
             if(arrayPuntos.get(i).getvisible() == 0) {
                 marca.setVisible(false);
             } else {
