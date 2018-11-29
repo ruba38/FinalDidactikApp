@@ -23,7 +23,7 @@ public class DatabaseAccess extends SQLiteOpenHelper {
     // LLAMAMOS A LA FUNCION QUE CREA LA BASE DE DATOS
     public DatabaseAccess(Context context) {
         super(context, DB_NAME, null, DB_VERSION);
-
+        startdb(context);
     }
     public void startdb(Context context){
         try{
@@ -56,23 +56,24 @@ public class DatabaseAccess extends SQLiteOpenHelper {
             Log.e("mytag","pre file");
             File dbFile = new File(DB_PATH + DB_NAME);
             Log.e("mytag","post file");
-            if (dbFile.exists()){
+            /*if (dbFile.exists()){
                 Log.e("mytag","entra borrar");
                 dbFile.delete();
-            }
+            }*/
         }
         else {
             Log.e("mytag","entra else");
             db_Read = this.getReadableDatabase();
             db_Read.close();
             Log.e("mytag","final else");
+
+
+            try{
+                copyDataBase(context);
+            }catch (IOException e){
+                throw new Error ("Error copiando BD");
+            }
         }
-        try{
-            copyDataBase(context);
-        }catch (IOException e){
-            throw new Error ("Error copiando BD");
-        }
-        // }
 
     }
     //DEBUELVE TRUE SI LA BASE DE DATOS EXISTE
@@ -109,27 +110,27 @@ public class DatabaseAccess extends SQLiteOpenHelper {
         /*Static.getSharedPreference(context).edit()
                 .putInt("DB_VERSION", DB_VERSION).commit();*/
     }
-    public Object getPuntos(){
-        //CARGA TODOS LOS DATOS DE LA TABLA PUNTOS EN UN ARRAYLIST
+    //############################################################################################## TABLA PUNTOS
+    public Object getPuntos(int Lugar){
+        //CARGA TODOS LOS DATOS DE LA TABLA LUGARES EN UN ARRAYLIST
         ArrayList <puntos>datoslista = new ArrayList<puntos>();
         String myPath = DB_PATH + DB_NAME;
         db = SQLiteDatabase.openDatabase(myPath, null, SQLiteDatabase.OPEN_READWRITE);
         db = this.getWritableDatabase();
-        Cursor cursor = db.rawQuery("SELECT * FROM puntos", null);
+        Cursor cursor = db.rawQuery("SELECT * FROM puntos where idLugar="+Lugar+" ORDER BY idLugar", null);
         cursor.moveToFirst();
         for(int i=0;!cursor.isAfterLast();i++) {
-            int lugarid= cursor.getInt(cursor.getColumnIndex("idPunto"));
+            int idPunto= cursor.getInt(cursor.getColumnIndex("idPunto"));
             String nombre= cursor.getString(cursor.getColumnIndex("nombre"));
             double latitud= cursor.getDouble(cursor.getColumnIndex("latitud"));
             double longitud= cursor.getDouble(cursor.getColumnIndex("longitud"));
             String imagen= cursor.getString(cursor.getColumnIndex("imagen"));
-            String texto= cursor.getString(cursor.getColumnIndex("texto"));
-            String audio= cursor.getString(cursor.getColumnIndex("audio"));
             String juego= cursor.getString(cursor.getColumnIndex("juego"));
+            int idLugar= cursor.getInt(cursor.getColumnIndex("idLugar"));
             int visible= cursor.getInt(cursor.getColumnIndex("visible"));
             int terminado= cursor.getInt(cursor.getColumnIndex("terminado"));
-            long rango = cursor.getLong((cursor.getColumnIndex("rango")));
-            puntos d = new puntos(lugarid, nombre, latitud, longitud, imagen, texto, audio, juego, rango, visible,terminado);
+            int secuencia= cursor.getInt(cursor.getColumnIndex("secuencia"));
+            puntos d = new puntos(idPunto, nombre, latitud, longitud, imagen,juego,idLugar,visible,terminado,secuencia);
             datoslista.add(d);
             cursor.moveToNext();
         }
@@ -167,18 +168,28 @@ public class DatabaseAccess extends SQLiteOpenHelper {
 
     }
     //RESETEA LOS PUNTOS A SU ESTADO ORIGINAL
-    public void resetApp(){
+    public void resetApp(int x){
+        String myPath = DB_PATH + DB_NAME;
+        db = SQLiteDatabase.openDatabase(myPath, null, SQLiteDatabase.OPEN_READWRITE);
+        db = this.getWritableDatabase();
+        db.execSQL("UPDATE puntos SET visible=0,terminado=0 WHERE idLugar="+x);
 
+    }
+    public void iniciarApp(int x){
+        String myPath = DB_PATH + DB_NAME;
+        db = SQLiteDatabase.openDatabase(myPath, null, SQLiteDatabase.OPEN_READWRITE);
+        db = this.getWritableDatabase();
+        db.execSQL("UPDATE puntos SET visible=1 WHERE idLugar="+x+" AND secuencia=1");
 
     }
 
-    public boolean getTerminadoAnterior(int id) {
+    public boolean getTerminadoAnterior(int secuencia,int id) {
 
-        if(id == 0) { return true; }
+        if(secuencia == 1) { return true; }
         String myPath = DB_PATH + DB_NAME;
         db = SQLiteDatabase.openDatabase(myPath, null, SQLiteDatabase.OPEN_READWRITE);
         db = this.getReadableDatabase();
-        Cursor cursor = db.rawQuery("SELECT terminado FROM puntos where idPunto="+(id-1), null);
+        Cursor cursor = db.rawQuery("SELECT terminado FROM puntos where secuencia="+(secuencia-1)+" And idLugar="+id, null);
         cursor.moveToFirst();
 
         if (cursor.getInt(cursor.getColumnIndex("terminado")) == 1) {
@@ -187,28 +198,29 @@ public class DatabaseAccess extends SQLiteOpenHelper {
             return false;
         }
 
+
     }
 
     //PONE TODOS LOS PUNTOS EN VISIBLE
-    public void setAllVisible(){
+    public void setAllVisible(int x){
         Log.d("mytag", "entra setallvisible");
 
         String myPath = DB_PATH + DB_NAME;
         db = SQLiteDatabase.openDatabase(myPath, null, SQLiteDatabase.OPEN_READWRITE);
         db = this.getWritableDatabase();
-        db.execSQL("UPDATE puntos SET visible=1");
+        db.execSQL("UPDATE puntos SET visible=1 Where idLugar="+x);
         Log.d("mytag", "termina setallvisible");
         db.close();
     }
 
     //DEVUELVE TODOS LOS PUNTO A SU ESTADO ANTERIOR***
-    public void reverseAllVisible(){
+    public void reverseAllVisible(int x){
         Log.d("mytag", "termina reverse");
 
         String myPath = DB_PATH + DB_NAME;
         db = SQLiteDatabase.openDatabase(myPath, null, SQLiteDatabase.OPEN_READWRITE);
         db = this.getWritableDatabase();
-        Cursor cursor = db.rawQuery("SELECT * FROM puntos", null);
+        Cursor cursor = db.rawQuery("SELECT * FROM puntos where idLugar="+x, null);
         Log.d("mytag", "pre do recerse");
         cursor.moveToFirst();
         do{
@@ -251,5 +263,30 @@ public class DatabaseAccess extends SQLiteOpenHelper {
         db = SQLiteDatabase.openDatabase(myPath, null, SQLiteDatabase.OPEN_READWRITE);
         db = this.getWritableDatabase();
         db.execSQL("UPDATE puntos SET rango="+x+" WHERE idPunto="+id);
+    }
+    //############################################################################################## TABLA LUGARES
+    public Object getLugares(){
+
+        //CARGA TODOS LOS DATOS DE LA TABLA LUGARES EN UN ARRAYLIST
+        ArrayList <lugares>datosLugares = new ArrayList<lugares>();
+        String myPath = DB_PATH + DB_NAME;
+          db = SQLiteDatabase.openDatabase(myPath, null, SQLiteDatabase.OPEN_READWRITE);
+        db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM lugares ORDER BY idLugar", null);
+        cursor.moveToFirst();
+        for(int i=0;!cursor.isAfterLast();i++) {
+            int idLugar= cursor.getInt(cursor.getColumnIndex("idLugar"));
+            String nombre= cursor.getString(cursor.getColumnIndex("nombre"));
+            double coordenadaLimite1Lat= cursor.getDouble(cursor.getColumnIndex("coordenadaLimite1Lat"));
+            double coordenadaLimite1Lon= cursor.getDouble(cursor.getColumnIndex("coordenadaLimite1Lon"));
+            double coordenadaLimite2Lat= cursor.getDouble(cursor.getColumnIndex("coordenadaLimite2Lat"));
+            double coordenadaLimite2Lon= cursor.getDouble(cursor.getColumnIndex("coordenadaLimite2Lon"));
+
+            lugares d = new lugares(idLugar, nombre, coordenadaLimite1Lat, coordenadaLimite1Lon, coordenadaLimite2Lon,coordenadaLimite2Lat);
+            datosLugares.add(d);
+            cursor.moveToNext();
+        }
+        cursor.close();
+        return datosLugares;
     }
 }

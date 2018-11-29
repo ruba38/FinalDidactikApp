@@ -5,19 +5,6 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent">
 
-    <TextView
-        android:id="@+id/idTextViewMapaProgresoPuntos"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/idBtnMapaAjustes"
-        android:layout_alignStart="@+id/mapView"
-        android:layout_alignEnd="@+id/mapView"
-        android:layout_alignBottom="@+id/mapView"
-        android:layout_marginStart="163dp"
-        android:layout_marginEnd="163dp"
-        android:layout_marginBottom="20dp"
-        android:text="TextView" />
-
     <com.mapbox.mapboxsdk.maps.MapView
         android:id="@+id/mapView"
         android:layout_width="match_parent"
@@ -28,17 +15,37 @@
         android:layout_marginTop="0dp"
         mapbox:mapbox_cameraTargetLat="43.315770"
         mapbox:mapbox_cameraTargetLng="-2.679092"
-        mapbox:mapbox_cameraZoom="19" />
+        mapbox:mapbox_cameraZoom="19">
+
+    </com.mapbox.mapboxsdk.maps.MapView>
 
     <TextView
         android:id="@+id/coords"
-        android:layout_width="319dp"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/mapView"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="11dp"
-        android:layout_marginBottom="58dp"
-        android:text="@string/coords" />
+        android:layout_width="175dp"
+        android:layout_height="22dp"
+        android:layout_alignStart="@+id/btnPista"
+        android:layout_alignTop="@+id/btnPista"
+        android:layout_alignEnd="@+id/btnPista"
+        android:layout_alignBottom="@+id/btnPista"
+        android:layout_marginStart="2dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginEnd="2dp"
+        android:layout_marginBottom="1dp"
+        android:background="@drawable/rectangulo_redondeado"
+        android:gravity="center_vertical"
+        />
+
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="18dp"
+        android:layout_height="18dp"
+        android:layout_alignTop="@+id/coords"
+        android:layout_alignBottom="@+id/coords"
+        android:layout_marginTop="1dp"
+        android:layout_marginEnd="0dp"
+        android:layout_marginBottom="1dp"
+        android:layout_toStartOf="@+id/idTextViewProgreso"
+        mapbox:srcCompat="@drawable/exclamatin2" />
 
     <Button
         android:id="@+id/idBtnMapaAdmin"
@@ -46,28 +53,67 @@
         android:layout_height="39dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="0dp"
-        android:layout_marginTop="0dp"
+        android:layout_marginStart="71dp"
+        android:layout_marginTop="8dp"
         android:text="A" />
 
-    <Button
-        android:id="@+id/idBtnMapaLimpiar"
-        android:layout_width="39dp"
-        android:layout_height="39dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="11dp"
-        android:layout_marginBottom="12dp"
-        android:text="L" />
 
     <Button
         android:id="@+id/idBtnMapaAjustes"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:layout_alignEnd="@+id/mapView"
-        android:layout_alignBottom="@+id/mapView"
-        android:layout_marginEnd="9dp"
-        android:layout_marginBottom="10dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="7dp"
+        android:layout_marginTop="8dp"
         android:background="@drawable/toolbox" />
+
+    <TextView
+        android:id="@+id/idTextViewDistancia"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/coords"
+        android:layout_alignBottom="@+id/coords"
+        android:layout_marginStart="2dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginBottom="1dp"
+        android:layout_toEndOf="@+id/imageView9"
+        android:text="19.25Km"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/idTextViewProgreso"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/coords"
+        android:layout_alignEnd="@+id/coords"
+        android:layout_alignBottom="@+id/coords"
+        android:layout_marginTop="2dp"
+        android:layout_marginEnd="17dp"
+        android:layout_marginBottom="1dp"
+        android:text="7/7"
+        android:textStyle="bold" />
+
+    <ImageView
+        android:id="@+id/imageView9"
+        android:layout_width="18dp"
+        android:layout_height="18dp"
+        android:layout_alignStart="@+id/coords"
+        android:layout_alignTop="@+id/coords"
+        android:layout_alignBottom="@+id/coords"
+        android:layout_marginStart="18dp"
+        android:layout_marginTop="1dp"
+        android:layout_marginBottom="1dp"
+        mapbox:srcCompat="@drawable/flechaup" />
+
+    <ImageView
+        android:id="@+id/btnPista"
+        android:layout_width="179dp"
+        android:layout_height="25dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="15dp"
+        android:layout_marginBottom="25dp"
+        android:onClick="mostrarPista" />
 
 </RelativeLayout>

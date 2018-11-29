@@ -5,10 +5,14 @@ import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ClipDrawable;
 import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.location.Location;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -16,9 +20,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.text.SpannableString;
 import android.text.style.StyleSpan;
 import android.text.style.UnderlineSpan;
+import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -43,6 +49,7 @@ import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 import com.mapbox.mapboxsdk.plugins.locationlayer.LocationLayerPlugin;
 import com.mapbox.mapboxsdk.plugins.locationlayer.modes.CameraMode;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -57,204 +64,258 @@ public class MapaActivity extends AppCompatActivity implements PermissionsListen
     private Location originLocation;
 
     // Creacion de objetos
-    private Button idBtnMapaAdmin, idBtnMapaLimpiar, idBtnMapaAjustes;
-    private Dialog puntoPopup;
+    private Button idBtnMapaAdmin,idBtnMapaAjustes;
+    private Dialog puntoPopup,pistaPopup;
+    //creacion de imagen
+    private byte[] decodedString;
+    private Bitmap decodedByte;
 
+    private Drawable drawable;
     // Variables de datos
     private ArrayList<MarkerPuntos> PuntosInteres = new ArrayList<MarkerPuntos>();
-    private ArrayList <Location>PuntosLocation = new ArrayList<Location>();
+
     private boolean admin = false;
-    private int idPunto;
-    private String juego,titulo;
+    private int idPunto,secuencia;
+    private String juego,titulo,imagen;
     private double latitud,longitud;
     private double RangoGeneral=10.0;
-
+    private int Lugar=1;
     // Objetos/Variables de depuracion
-    private TextView coordenadas,idTextViewMapaProgresoPuntos;
+    private TextView coordenadas,idTextViewDistancia,idTextViewProgreso,idTextViewMapaProgresoPuntos;
+    private int contPuntos=0;
+    private double distancia2=0.0;
+    private int id_bd;
+    private int secuencia2;
+    private String metrica;
+    private double textoDistancia;
+    //DECLARARCIONES
+    private Button idBtnPopupCerrar,idBtnPopupJugar;
+    private TextView idTextViewPopupTitulo;
+    private ImageView imagenPopup;
+
+    private TextView idTextViewPista;
+    private Button idBtnCerrarPista;
+
+
+
 
     // Limite de la camara de la zona sleccionada
     private static final LatLngBounds coordsLimite = new LatLngBounds.Builder()
             .include(new LatLng(43.258316, -2.903066))
             .include(new LatLng(43.256749, -2.908320))
             .build();
-
+    //SE EJECUTA NADA MAS ABRIRSE EL MAPA
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        //Quitar titulo
+        //QUITAR TITULO DEL LAYOUT
         getSupportActionBar().hide();
-        // Se crea la instancia del mapa con la clave de acceso
+        // SE CREA LA INSTANCIA DEL MAPA CON LA CLAVE DE ACCESO
+        Log.d("descarga", "punto 1");
         Mapbox.getInstance(this, getString(R.string.access_token));
+
+        Log.d("descarga", "Conectado: "+Mapbox.isConnected());
+
         setContentView(R.layout.activity_mapa);
+        //RECOJE EL ID DEL LUGAR SELECIONADO AL PRINCIPIO DE LA APP (MAIN)
+        Lugar=getIntent().getIntExtra("idLugarKaixo",0);
 
-        // Instancia el objeto Popup
+        // INSTANCIA EL OBJETO POPUP
         puntoPopup = new Dialog(this);
+        pistaPopup = new Dialog(this);
 
-        // Instanciacion de los objetos del mapa
+        // INSTANCIA LOS OBJETOS DEL MAPA
         mapView = findViewById(R.id.mapView);
         mapView.onCreate(savedInstanceState);
         mapView.getMapAsync(this);
 
-        // Cargamos el estilo personalizado
-        mapView.setStyleUrl("mapbox://styles/mariusinfo/cjopg4cmz0joe2smr2z4rry4a");
+        Log.d("descarga", "LiveRegion: "+mapView.getWindowToken());
+
+        //CARGA LOS ESTILOS PERSONALIZADOS
+        mapView.setStyleUrl("mapbox://styles/mariusinfo/cjoshzhqg3sb22sme5eyoogt4");
 
 
-        // Asignacion de objetos
+        // ASIGNACION DE OBJETOS
+        // BOTONES
         coordenadas = findViewById(R.id.coords);
-        idTextViewMapaProgresoPuntos = findViewById(R.id.idTextViewMapaProgresoPuntos);
+        idTextViewDistancia = findViewById(R.id.idTextViewDistancia);
+        idTextViewProgreso = findViewById(R.id.idTextViewProgreso);
+        //TEXT VIEW
         idBtnMapaAdmin = findViewById(R.id.idBtnMapaAdmin);
-        idBtnMapaLimpiar = findViewById(R.id.idBtnMapaLimpiar);
         idBtnMapaAjustes = findViewById(R.id.idBtnMapaAjustes);
 
-        // Instanciacion de objetos de la base de datos
-        DatabaseAccess databaseAccess = new DatabaseAccess(this);
-        databaseAccess.startdb(getBaseContext());
 
-        // Botones para administración
+        // INSTANCIAR OBJETOS DE BASE DE DATOS
+        DatabaseAccess databaseAccess = new DatabaseAccess(this);
+        // COMPRUEBA SE LA BASE DE DATOS EXISTSTE EN EL DISPOSITIBO , CREA UNA COPIA EN EL DISPOSITIBO
+        databaseAccess.startdb(getBaseContext());
+        //CON EL LUGAR INDICADO MIRAMOS SI HAY ALGUN PUNTO VISIBLE SI NO LO HAY PONE EL PRIMERO VISIBLE
+        databaseAccess.iniciarApp(Lugar);
+
+
+        // BOTON MODO ADMINISTRADOR
         idBtnMapaAdmin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //SI ESTA DESACTIVADO SE ACTIVA Y MUESTRA TODOS LOS PUNTOS RESPECTO AL LUGAR SELECIONADO
                 if (admin==false) {
                     // Cambia a Visible = true, todos los puntos
-                    databaseAccess.setAllVisible();
+                    databaseAccess.setAllVisible(Lugar);
                     admin=true;
-                }else{
-                    // Cambia a Visible = false, excepto los que esten terminados y el siguiente
-                    databaseAccess.reverseAllVisible();
+                }
+                //SI ESTA ACTIVADO SE DESACTIVA Y OCULTA TODOS LOS PUNTOS MENOS LOS TERMINADOS SI NO HAY TERMINADOS MUESTRA SOLO EL PRIMERO
+                else{
+                    databaseAccess.reverseAllVisible(Lugar);
                     admin=false;
                 }
 
-                // Limpiamos los puntos
+                // VACIA EL ARRAYLIST QUE CONTIENE LOS DATOS DE LOS PUNTOS
                 LimpiarPuntos();
 
-                // Los volvemos a crear
+                // RELLENA EL ARRAYLIST CON LOS DATOS DE LOS PUNTOS
                 CrearPuntos();
             }
         });
 
-        idBtnMapaLimpiar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Carga de nuevo la base de datos
-                DatabaseAccess databaseAccess = new DatabaseAccess(getBaseContext());
-                databaseAccess.startdb(getBaseContext());
 
-                // Limpia los objetos actuales
-                LimpiarPuntos();
-
-                // Crea de nuevo los objetos originales
-                CrearPuntos();
-            }
-
-        });
-
+        //BOTON AJUSTES
         idBtnMapaAjustes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //ABRE LA VENTANA DE AJUSTES
                 Intent i = new Intent(getBaseContext(), AjustesActivity.class);
                 startActivity(i);}
         });
     }
+    //*****************************FUNCIONES INDIBIDUALES*******************************************
 
-    // TODO: Pendiente comentar
+    //SE EJECUTA CUANDO EL DISPOSITIVO DETECTA QUE AS CAMBIADO TU LOCALIZAZION
     @Override
     public void onLocationChanged(Location location) {
-        int contPuntos=0;
-        double distancia2=0.0;
-        DatabaseAccess databaseAccess =new DatabaseAccess(this);
 
+        localizarDistancia(location);
+    }
+    public void localizarDistancia (Location location) {
+        // ACCEDE A LA BASE DE DATOS
+        DatabaseAccess databaseAccess =new DatabaseAccess(this);
+        // INSTANCIA LOS OBJETOS DE LOCALIZAZION
         Location ubicacionPunto = new Location("");
         Location ubicacionUsuario = new Location("");
         Location ubicacionPunto2 = new Location("");
 
-
+        //RECOJE LA LATITUD Y LA LONGITUD DE TU UBICACION
         ubicacionUsuario.setLatitude(location.getLatitude());
         ubicacionUsuario.setLongitude(location.getLongitude());
-
+        contPuntos = 0;
+        //RECOREMOS EL ARRAY DE PUNTOS ,RECOJIENDO DATOS COMO LA SECUENCIA Y SU LOCALIZAZION
         for(int i = 0; i < PuntosInteres.size(); i++) {
-            int id_bd=PuntosInteres.get(i).getID_BD();
+            id_bd = PuntosInteres.get(i).getID_BD();
+            secuencia2 = PuntosInteres.get(i).getSecuencia();
             ubicacionPunto.setLatitude(PuntosInteres.get(i).getLatitude());
             ubicacionPunto.setLongitude(PuntosInteres.get(i).getLongitude());
 
-            if(databaseAccess.getTerminadoAnterior(id_bd)){
-                ubicacionPunto2.setLatitude(PuntosInteres.get(i).getLatitude());
-                ubicacionPunto2.setLongitude(PuntosInteres.get(i).getLongitude());
+            if (PuntosInteres.get(i).isVisible() == true) {
 
-                distancia2 = ubicacionUsuario.distanceTo(ubicacionPunto);
-                contPuntos=contPuntos+1;
+                contPuntos = contPuntos + 1;
             }
-            double distancia = ubicacionUsuario.distanceTo(ubicacionPunto);
-
-            if(distancia2 < RangoGeneral && databaseAccess.getTerminadoAnterior(id_bd)){
+            //SACA LA DIFERENCIA DE DISTANCIA EN METROS ENTRE TU UBICACION Y LA DEL PROXIMO PUNTO
+            //PARA ELLO MIRAMOS SI EL ANTERIOR ESTA TERMINADO
+            if(databaseAccess.getTerminadoAnterior(secuencia2,Lugar)) {
+                distancia2 = ubicacionUsuario.distanceTo(ubicacionPunto);
+            }
+            //COMPROBAMOS SI AL CAMBIAR DE UBICACION ENTRAS EN RANGO DE ALGUN PUNTO Y SI EL ANTERIOR ESTA TERMINADO LO MOSTRARIA
+            if(distancia2 < RangoGeneral && databaseAccess.getTerminadoAnterior(secuencia2,Lugar)){
                 databaseAccess.setVisible(id_bd);
+                // VACIA EL ARRAYLIST QUE CONTIENE LOS DATOS DE LOS PUNTOS
                 LimpiarPuntos();
+                // RELLENA EL ARRAYLIST CON LOS DATOS DE LOS PUNTOS
                 CrearPuntos();
 
             }
-            String tempString=getResources().getText(R.string.PunosDistancia)+""+String.format("%.2f", distancia2)+"m \nDB: "+databaseAccess.getTerminadoAnterior(id_bd)+" \n"+getResources().getText(R.string.PuntoProgreso)+""+contPuntos+"/"+PuntosInteres.size();
-            String tituloDistancia= getResources().getText(R.string.PunosDistancia)+"";
-            String Distancia=String.format("%.2f", distancia2)+"m";
-            String tituloDB=" DB: "+databaseAccess.getTerminadoAnterior(id_bd)+" ";
-            String tituloProgreso= getResources().getText(R.string.PuntoProgreso)+"";
-            String progreso=""+contPuntos+"/"+PuntosInteres.size();
-
-            SpannableString texto = new SpannableString(tempString);
-            texto.setSpan(new StyleSpan(Typeface.BOLD), 0, tituloDistancia.length(), 0);
-            texto.setSpan(new StyleSpan(Typeface.NORMAL), tituloDistancia.length(),tituloDistancia.length()+Distancia.length(), 0);
-            texto.setSpan(new StyleSpan(Typeface.NORMAL), tituloDistancia.length()+Distancia.length(), tituloDistancia.length()+Distancia.length()+tituloDB.length(), 0);
-            texto.setSpan(new StyleSpan(Typeface.BOLD), tituloDistancia.length()+Distancia.length()+tituloDB.length(), tituloDistancia.length()+Distancia.length()+tituloDB.length()+tituloProgreso.length(), 0);
-            texto.setSpan(new StyleSpan(Typeface.NORMAL), tituloDistancia.length()+Distancia.length()+tituloDB.length()+tituloProgreso.length(), tituloDistancia.length()+Distancia.length()+tituloDB.length()+tituloProgreso.length()+progreso.length(), 0);
-
-            coordenadas.setText(texto);
+            //MOSTRAS PROGRESO Y LA DISTANCIA EL PROXIMO PUNTO
+            //SI ESTAS A MAS DE 1000 METROS DEL SIGUIENTE PUNTO TE PONE LA DISTANCIA EN KILOMETROS
+            if(distancia2>1000){
+                metrica="Km";
+                textoDistancia=distancia2/1000;
+            }
+            //SI ESTAS A MENOS DE 1000 METROS DEL SIGUIENTE PUNTO TE PONE LA DISTANCIA EN METROS
+            else{
+                metrica="m";
+                textoDistancia=distancia2;
+            }
+            //PINTAS LA DISTANCIA CON 2 DECIMALES
+            idTextViewDistancia.setText(String.format("%.2f",textoDistancia)+""+metrica);
+            //PINTAS EL PROGRESO DE LOS PUNTOS ENCONTRADOS
+            idTextViewProgreso.setText(contPuntos+"/"+PuntosInteres.size());
         }
     }
-    //comprobar si el punto esta en rango
+
+    //COMO HAY QUE ESTAR CERCA DEL PUNTO PARA JUGAR ESTA COMPRUEBA SI EL PUNTO ESTA DENTRO DEL RANGO INDICADO
     public boolean enRango(double latitud,double longitud) {
+        //INSTANCIA EL OBJETIO PARA TU UBICACION
         Location ubicacionPunto = new Location("");
+        // RECOJE LOS DATOS DE TU UBICACION
         @SuppressLint("MissingPermission") Location ubicacionUsuario = locationEngine.getLastLocation();
 
-        //UBICACION DEL PUNTO
+        //RECOJE LOS DATOS DE LA UBICACION DEL PUNTO
         ubicacionPunto.setLatitude(latitud);
         ubicacionPunto.setLongitude(longitud);
-        //mirar si esta en rango
+        //MIRA A CUANTA DISTANCIA ESTA DE TU UBICACION
         double distancia = ubicacionUsuario.distanceTo(ubicacionPunto);
+        //SI ESTA EN EL RANGO INDICADO TE DEBUELBE UN TRUE PARA INDICAR QUE SI
         if(distancia<RangoGeneral){
             return true;
-        }else{
+        }
+        //SI NO ESTA EN EL RANGO INDICADO TE DEBUELBE UN FALSE PARA INDICAR QUE NO
+        else{
             return false;
         }
     }
+    //TODO: IMG ....
+    public void toImg(String byteArray){
 
+        decodedString = Base64.decode(byteArray, Base64.DEFAULT);
+        decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+
+        //Convert bitmap to drawable
+        drawable = new BitmapDrawable(getResources(), decodedByte);
+        Log.d("mitag","toImg drawable =>"+drawable);
+    }
+
+
+    //CARGAR MAPA
     @Override
     public void onMapReady(MapboxMap mapboxMap) {
 
-        // Asignamos el objeto a la instancia actual
+
+        // ASIGNAR OBJETO A LA INSTANCIA MAPA
         MapaActivity.this.map = mapboxMap;
 
-        // Añadimos el Listener del mapa
+        // AÑADIMOS EL LISTENER DEL MAPA
         mapboxMap.addOnMapClickListener(this);
 
-        // Habilitamos la localizacion del usuario
+        // HABILITAMOS LA LOCALIZAZION DEL USUARIO
         enableLocation();
 
-        // Zoom min y Max del mapa
-        map.setMinZoomPreference(16);
+        // ZOOM MAXIMO Y MINIMO DEL MAPA Y DELIMITAR MAPA
+        //TODO :DESCOMENTAR EN UN FUTURO
+       /* map.setMinZoomPreference(16);
         map.setMaxZoomPreference(17.5);
-        mapboxMap.setLatLngBoundsForCameraTarget(coordsLimite);
+        mapboxMap.setLatLngBoundsForCameraTarget(coordsLimite);*/
 
-        // Creamos los puntos
+        // RELLENA EL ARRAYLIST CON LOS DATOS DE LOS PUNTOS
         CrearPuntos();
 
-        // TODO: Acabar comentarios, implementar juegos
+        //CLICKAR SOBRE UNO DE LOS PUNTOS
         mapboxMap.setOnMarkerClickListener(new MapboxMap.OnMarkerClickListener() {
 
             @Override
             public boolean onMarkerClick(@NonNull Marker marker) {
 
-                // Recorremos el array que contiene los marcadores
+                // RECORREMOS EL ARRAY DE MARCADORES
                 for(int i = 0; i < PuntosInteres.size(); i++) {
-                    // Comprueba si la posicion del marcador clickado coincide con algun punto
+                    // COMPARAMOS LA POSICION DEL MARCADOR CLICKADO CON LAS DEL ARRAY Y SI CONINCIDE RECOJEMOS LOS DATOS DE ESE PUNTO
                     if(marker.getPosition() == PuntosInteres.get(i).getmO().getPosition()) {
 
                         MarkerPuntos mp = new MarkerPuntos(PuntosInteres.get(i));
@@ -263,33 +324,38 @@ public class MapaActivity extends AppCompatActivity implements PermissionsListen
                         titulo=mp.getNombre();
                         latitud=mp.getLatitude();
                         longitud=mp.getLongitude();
-Log.d("titulo","titulo=>"+titulo);
-
+                        secuencia=mp.getSecuencia();
+                        imagen=mp.getImagen();
                         break;
 
                     }
                 }
-                //MOSTRAR POPUP
-                //DECLARARCIONES
-                Button idBtnPopupCerrar,idBtnPopupJugar;
-                TextView idTextViewPopupTitulo;
+                //AL CLICKAR SOBRE EL PUNTO SE ABRIRA EL POPUP DEL PUNTO
 
                 puntoPopup.setContentView(R.layout.popup_punto);//abrir layout que contiene el popup
-                    //TITULO
+                    //INTRODUCIMOS TITULO
                     idTextViewPopupTitulo = puntoPopup.findViewById(R.id.idTextViewPopupTitulo);
                     idTextViewPopupTitulo.setText(titulo);
-
-                    //JUGAR POPUP
+                    //INTRODUCIMOS IMAGEN
+                    imagenPopup=puntoPopup.findViewById(R.id.imagenPopup);
+                    toImg(imagen);
+                    imagenPopup.setBackground(drawable);
+                    //ENLAZAMOS EL JUEGO AL BOTON JUGAR
                     idBtnPopupJugar = (Button) puntoPopup.findViewById(R.id.idBtnPopupJugar);
+                        //COMPROBAR SI ESTA EN RANGO, SI NO LO ESTA CAMBIA COLOR DEL BOTON JUGAR Y EL TEXTO DEL MISMO
                         if(enRango(latitud,longitud)==false) {
                             idBtnPopupJugar.setBackgroundColor(getColor(R.color.Desabilitado));
                         }
+                    //AL CLICKAR SOBRE EL BOTON JUGAR
                     idBtnPopupJugar.setOnClickListener(new View.OnClickListener() {
 
                         @Override
                         public void onClick(View v) {
+                            //SI ESTA EN RANGO
                             if(enRango(latitud,longitud)) {
-                                puntoPopup.dismiss();//oculta el popup
+                                //OCULTAR EL POPUP
+                                puntoPopup.dismiss();
+                                //COJER EL NOMBRE DEL JUEGO Y COMBERTIRLO EN LA CLASE DEL JUEGO Q NECESITAMOS ABRIR
                                 String nombreJuego = "com.example.ik_2dm3.proyectoupv." + juego;
                                 nombreJuego = nombreJuego.replace(" ", "");
                                 Intent i = null;
@@ -298,9 +364,11 @@ Log.d("titulo","titulo=>"+titulo);
                                 } catch (ClassNotFoundException e) {
                                     e.printStackTrace();
                                 }
-
+                                //ABRIR JUEGO
                                 startActivity(i);
-                            }else{
+                            }
+                            //SI NO ESTAS EN RFANGO TE MUESTRA UN TOAST INDICANDO QUE NO ESTAS EN RANGO
+                            else{
                                 Context context = getApplicationContext();
                                 CharSequence text = "NO ESTAS EN RANGO";
                                 int duration = Toast.LENGTH_LONG;
@@ -311,26 +379,30 @@ Log.d("titulo","titulo=>"+titulo);
                         }
                     });
 
-                //CERRAR POPUP
-                idBtnPopupCerrar = (Button) puntoPopup.findViewById(R.id.idBtnPopupCerrar);//declarar boton cerrar del popup
-                idBtnPopupCerrar.setOnClickListener(new View.OnClickListener() {//al dar click se ejecuta esta funcion
+                //CERRAR POPUP AL DAR A LA X
+                idBtnPopupCerrar = (Button) puntoPopup.findViewById(R.id.idBtnPopupCerrar);
+                idBtnPopupCerrar.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        //AL CERRARLO PONDRA EL PUNTO COMO FINALIZADO
                         PuntoTerminado(idPunto);
-                        puntoPopup.dismiss();//oculta el popup
+                        //OCULTAR POPUP
+                        puntoPopup.dismiss();
                     }
                 });
+                //PONER EL FONDO DEL POPUP TRASPARENTE
                 puntoPopup.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                //NO PERMITIR QUE AL TOCAR FUERA DEL MISMO SE CIERRE
                 puntoPopup.setCanceledOnTouchOutside(false);
-                puntoPopup.show();//mostar popup
+                //MOSTRAR POPUP
+                puntoPopup.show();
                 return false;
             }
         });
 
     }
-
+    //COMPROBAR SI LA APLICACION TIENE PERMISOS PARA UBICACION ,SI NO LOS TIENE LOS PIDE
     private void enableLocation() {
-        // Comprueba si la aplicacion tiene permisos para ubicar el dispositivo, si no tiene los pide
         if(PermissionsManager.areLocationPermissionsGranted(this)) {
             initializeLocationEngine();
             initializeLocationLayer();
@@ -339,15 +411,15 @@ Log.d("titulo","titulo=>"+titulo);
             permissionsManager.requestLocationPermissions(this);
         }
     }
-
+    //SI EL USUARIO ACEPTA DAR PERMISOS DE UBICACION
     @Override
     public void onPermissionResult(boolean granted) {
-        // Si el usuario acepta dar permiso para utilizar el gps
         if(granted) {
+            //COMPRUEBA SI LOS TIENE
             enableLocation();
         }
     }
-
+    //LOCALIZARNOS A NOSOTROS MISMOS
     @SuppressLint("MissingPermission")
     private void initializeLocationEngine() {
         // Creamos el objeto que nos ubicara
@@ -369,7 +441,7 @@ Log.d("titulo","titulo=>"+titulo);
             locationEngine.addLocationEngineListener(this);
         }
     }
-
+    //ESTILOS DE NUSTRA PROPIA LOCALIZAZION
     @SuppressLint("WrongConstant")
     private void initializeLocationLayer() {
         // Creamos el objeto del estilo
@@ -384,16 +456,22 @@ Log.d("titulo","titulo=>"+titulo);
         // Modo de renderizado, normal
         locationLayerPlugin.setRenderMode(RenderMode.NORMAL);
     }
-
-    // TODO: Comentar, implementar juegos
+//todo:3
+   //CUANDO SE TERMINA UN PUNTO
     private void PuntoTerminado(int idPunto){
+        //CONECTAMOS CON LA BASE DE DATOS
         DatabaseAccess databaseAccess =new DatabaseAccess(this);
-    /*   databaseAccess.setvisible(idPunto);*/
-     databaseAccess.setTerminado(idPunto);
+        // CAMBIAMOS AL PUNTO ESE LA OPCION COMO TERMINADO
+        databaseAccess.setTerminado(idPunto);
+        // VACIA EL ARRAYLIST QUE CONTIENE LOS DATOS DE LOS PUNTOS
         LimpiarPuntos();
-        CrearPuntos();
-    }
 
+        // RELLENA EL ARRAYLIST CON LOS DATOS DE LOS PUNTOS
+        CrearPuntos();
+        @SuppressLint("MissingPermission") Location ubicacionUsuario = locationEngine.getLastLocation();
+        localizarDistancia(ubicacionUsuario);
+    }
+//todo:1
     private void CrearPuntos() {
 
         if(!PuntosInteres.isEmpty()) { PuntosInteres.clear(); }
@@ -403,7 +481,7 @@ Log.d("titulo","titulo=>"+titulo);
 
         // Cargamos los puntos de la base de datos en un array
         DatabaseAccess databaseAccess = new DatabaseAccess(getBaseContext());
-        List<puntos> arrayPuntos = (List<puntos>) databaseAccess.getPuntos();
+        List<puntos> arrayPuntos = (List<puntos>) databaseAccess.getPuntos(Lugar);
 
         databaseAccess.close();
         // Creamos el objeto del punto
@@ -414,10 +492,10 @@ Log.d("titulo","titulo=>"+titulo);
             // Instanciamos el objeto para cada uno de los puntos y le pasamos los datos de la base de datos
             marca = new MarkerPuntos();
             marca.getmO().setPosition(new LatLng(arrayPuntos.get(i).getlatitud(), arrayPuntos.get(i).getlongitud()));
-            marca.setID_BD(arrayPuntos.get(i).getlugarid());
-            marca.setRango(arrayPuntos.get(i).getRango());
+            marca.setID_BD(arrayPuntos.get(i).getidPunto());
             marca.setJuego(arrayPuntos.get(i).getjuego());
             marca.setNombre(arrayPuntos.get(i).getnombre());
+            marca.setSecuencia(arrayPuntos.get(i).getSecuencia());
             if(arrayPuntos.get(i).getvisible() == 0) {
                 marca.setVisible(false);
             } else {
@@ -450,7 +528,30 @@ Log.d("titulo","titulo=>"+titulo);
         PuntosInteres.clear();
     }
 
-    // Metodos necesarios para que el mapa funcione
+    //TODO:mostrarPista...
+    public void mostrarPista(View v){
+        String textoPista="ESTA ES UNA PISTA DE PRUEBA , DIRIJETE A LA TORRE MAS ALTA DONDE CADA HORA SUENA LA CAMPANA";
+        pistaPopup.setContentView(R.layout.popup_pista);//abrir layout que contiene el popup
+        //INTRODUCIMOS TEXTO
+        idTextViewPista = pistaPopup.findViewById(R.id.idTextViewPista);
+        idTextViewPista.setText(textoPista);
+        //CERRAR POPUP AL DAR A LA X
+        idBtnCerrarPista = (Button) pistaPopup.findViewById(R.id.idBtnCerrarPista);
+        idBtnCerrarPista.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //OCULTAR POPUP
+                pistaPopup.dismiss();
+            }
+        });
+        //PONER EL FONDO DEL POPUP TRASPARENTE
+        pistaPopup.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        //NO PERMITIR QUE AL TOCAR FUERA DEL MISMO SE CIERRE
+        pistaPopup.setCanceledOnTouchOutside(false);
+        pistaPopup.show();
+    }
+
+    //METODOS NO UTILIZADOS PERO NECESARIOS PARA EL FUNCIONAMIENTO CORECTO DE LA APLICACION
     @Override
     public void onMapClick(@NonNull LatLng point) {
     }

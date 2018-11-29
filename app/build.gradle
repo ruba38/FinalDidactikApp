@@ -5,7 +5,7 @@ android {
     defaultConfig {
         applicationId "com.example.ik_2dm3.proyectoupv"
         minSdkVersion 23
-        targetSdkVersion 28
+        targetSdkVersion 27
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"

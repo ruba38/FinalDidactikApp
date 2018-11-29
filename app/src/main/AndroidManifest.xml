@@ -69,6 +69,10 @@
 
             android:name=".SacarFotos"
             android:label="@string/title_activity_sacar_fotos"></activity>
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
+
     </application>
 
     <uses-permission android:name="android.permission.CAMERA" />

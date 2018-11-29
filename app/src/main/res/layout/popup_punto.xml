@@ -22,16 +22,16 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <ImageView
-        android:id="@+id/imageView4"
+        android:id="@+id/imagenPopup"
         android:layout_width="345dp"
         android:layout_height="295dp"
-        android:layout_marginTop="56dp"
+        android:layout_marginTop="8dp"
         android:background="@mipmap/prueba"
         android:contentDescription="@string/todo"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.6"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/idTextViewPopupTitulo" />
 
     <Button
         android:id="@+id/idBtnPopupJugar"
@@ -41,24 +41,29 @@
         android:layout_marginTop="264dp"
         android:layout_marginEnd="8dp"
         android:background="@color/colorBotonJugar"
+        android:fontFamily="@font/coming_soon"
+        android:singleLine="false"
         android:text="@string/popupBotonJugar"
         android:textSize="40sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/imageView4" />
+        app:layout_constraintTop_toTopOf="@+id/imagenPopup" />
 
     <TextView
         android:id="@+id/idTextViewPopupTitulo"
-        android:layout_width="wrap_content"
+        android:layout_width="345dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
-        android:text="TextView"
+        android:background="@color/colorBotonJugar"
+        android:fontFamily="@font/coming_soon"
+        android:text="En un pais multicolor vivia una abeja bajo el sol"
         android:textAlignment="center"
-        android:textColor="@color/mapbox_blue"
+        android:textColor="@color/common_google_signin_btn_text_dark_default"
         android:textSize="25sp"
-        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.454"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 </android.support.constraint.ConstraintLayout>
