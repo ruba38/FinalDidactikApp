@@ -1,12 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.example.ik_2dm3.proyectoupv">
 
-    <!--
-    <uses-permission android:name="android.permission.CAMERA" ></uses-permission>
-    <user-permission android:name="android.premisiion.WRITE_EXTERNAL_STORAGE"></user-permission>
-    <user-permission android:name="android.hardware.camera2.full" ></user-permission>
-    -->
 
     <uses-feature
         android:name="android.hardware.camera"
@@ -46,8 +42,8 @@
             android:label="@string/title_activity_ajustes" />
         <activity
             android:name=".MapaActivity"
-            android:label="@string/title_activity_mapa"
             android:configChanges="orientation|screenSize"
+            android:label="@string/title_activity_mapa"
             android:screenOrientation="portrait" />
         <activity
             android:name=".JuegoPuzzleActivity"
@@ -69,7 +65,14 @@
             android:label="@string/title_activity_actividad_32__prese_aurkez" />
         <activity android:name=".Actividad_40_Presentacion" />
         <activity android:name=".Actividad_41_astrazaharra" />
+        <activity
 
+            android:name=".SacarFotos"
+            android:label="@string/title_activity_sacar_fotos"></activity>
     </application>
+
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
 
 </manifest>

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/c1"
+    android:background="@color/VerdeChungo"
     tools:context=".MainActivity">
 
     <TextView
@@ -29,7 +29,7 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="32dp"
-        android:background="@color/c5"
+        android:background="@color/MarronCaca"
         android:radius="10dp"
         android:text="@string/mainBotonCreadores"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -45,7 +45,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="372dp"
         android:layout_marginEnd="8dp"
-        android:background="@color/c5"
+        android:background="@color/MarronCaca"
         android:padding="5px"
         android:paddingLeft="20px"
         android:text="@string/mainBotonInicio"
@@ -96,5 +96,7 @@
         app:layout_constraintStart_toStartOf="@+id/idTxtMainVersiones"
         app:layout_constraintTop_toBottomOf="@+id/idBtnMainCreadores"
         app:layout_constraintVertical_bias="1.0" />
+
+
 
 </android.support.constraint.ConstraintLayout>

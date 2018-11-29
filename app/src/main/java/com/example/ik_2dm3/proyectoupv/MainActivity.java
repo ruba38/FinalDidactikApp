@@ -55,7 +55,8 @@ public class MainActivity extends AppCompatActivity {
         buttonCamara.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(getBaseContext(),Actividad_30_PresentecionM.class);
+                Intent i = new Intent(getBaseContext(),SacarFotos.class);
+
                 startActivityForResult(i,101);
                 //CheckCameraHardware();
                 // Intent F = new Intent(getBaseContext(), Fotos.class);
