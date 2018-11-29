@@ -10,11 +10,13 @@ import android.view.View;
 public class Kaixo extends AppCompatActivity {
     private ConstraintLayout idLayoutKaixo;
     static MediaPlayer kaixo =null;
+    private int Lugar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_kaixo);
         getSupportActionBar().hide();
+        Lugar=getIntent().getIntExtra("idLugarMain",0);
         if(kaixo==null){
             kaixo = MediaPlayer.create(Kaixo.this, R.raw.kaixo);
             kaixo = MediaPlayer.create(getApplicationContext(), R.raw.kaixo);
@@ -25,6 +27,7 @@ public class Kaixo extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent i =new Intent (getBaseContext(),MapaActivity.class);
+                i.putExtra("idLugarKaixo",Lugar);
                 kaixo.stop();
                 startActivity(i);}
             }

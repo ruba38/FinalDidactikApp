@@ -2,26 +2,40 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="350dp"
-    android:layout_height="500dp"
+    android:id="@+id/popupPista"
+    android:layout_width="300dp"
+    android:layout_height="400dp"
     android:layout_gravity="center"
-    android:background="@android:color/transparent"
+    android:background="@drawable/pergaminoa"
     android:padding="5dp"
     tools:layout_editor_absoluteX="17dp"
     tools:layout_editor_absoluteY="59dp">
 
 
-    <ImageView
-        android:id="@+id/imageView10"
-        android:layout_width="334dp"
-        android:layout_height="484dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+    <TextView
+        android:id="@+id/idTextViewPista"
+        android:layout_width="231dp"
+        android:layout_height="262dp"
+        android:layout_marginTop="52dp"
+        android:fontFamily="@font/coming_soon"
+        android:gravity="center_vertical"
+        android:text="Proxima pisrta"
+        android:textAlignment="center"
+        android:textSize="18sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@android:color/holo_orange_dark" />
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/idBtnCerrarPista"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="28dp"
+        android:background="@drawable/xxxxxxxxxxx"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 </android.support.constraint.ConstraintLayout>

@@ -23,13 +23,17 @@
         android:id="@+id/coords"
         android:layout_width="175dp"
         android:layout_height="22dp"
-        android:layout_alignBottom="@+id/mapView"
-        android:layout_alignParentEnd="true"
-        android:layout_marginEnd="17dp"
-        android:layout_marginBottom="24dp"
+        android:layout_alignStart="@+id/btnPista"
+        android:layout_alignTop="@+id/btnPista"
+        android:layout_alignEnd="@+id/btnPista"
+        android:layout_alignBottom="@+id/btnPista"
+        android:layout_marginStart="2dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginEnd="2dp"
+        android:layout_marginBottom="1dp"
         android:background="@drawable/rectangulo_redondeado"
         android:gravity="center_vertical"
-        android:textAlignment="viewEnd" />
+        />
 
     <ImageView
         android:id="@+id/imageView4"
@@ -53,15 +57,6 @@
         android:layout_marginTop="8dp"
         android:text="A" />
 
-    <Button
-        android:id="@+id/idBtnMapaLimpiar"
-        android:layout_width="39dp"
-        android:layout_height="39dp"
-        android:layout_alignTop="@+id/mapView"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="122dp"
-        android:layout_marginTop="7dp"
-        android:text="L" />
 
     <Button
         android:id="@+id/idBtnMapaAjustes"
@@ -110,5 +105,15 @@
         android:layout_marginTop="1dp"
         android:layout_marginBottom="1dp"
         mapbox:srcCompat="@drawable/flechaup" />
+
+    <ImageView
+        android:id="@+id/btnPista"
+        android:layout_width="179dp"
+        android:layout_height="25dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="15dp"
+        android:layout_marginBottom="25dp"
+        android:onClick="mostrarPista" />
 
 </RelativeLayout>

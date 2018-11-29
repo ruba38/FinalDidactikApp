@@ -8,7 +8,8 @@
     <color name="c1">#93a6c6</color>
     <color name="c4">#172D50</color>
     <color name="c5">#ffc300</color>
-    <color name="c2">#354D78</color>
+    <color name="c2">#354d78</color>
     <color name="c3">#5882fa</color>
     <color name="Desabilitado">#A399A6</color>
+    <color name="fondoAjustes">#e0e0d1</color>
 </resources>

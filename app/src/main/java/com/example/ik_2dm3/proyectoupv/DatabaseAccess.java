@@ -23,7 +23,7 @@ public class DatabaseAccess extends SQLiteOpenHelper {
     // LLAMAMOS A LA FUNCION QUE CREA LA BASE DE DATOS
     public DatabaseAccess(Context context) {
         super(context, DB_NAME, null, DB_VERSION);
-
+        startdb(context);
     }
     public void startdb(Context context){
         try{
@@ -56,23 +56,24 @@ public class DatabaseAccess extends SQLiteOpenHelper {
             Log.e("mytag","pre file");
             File dbFile = new File(DB_PATH + DB_NAME);
             Log.e("mytag","post file");
-            if (dbFile.exists()){
+            /*if (dbFile.exists()){
                 Log.e("mytag","entra borrar");
                 dbFile.delete();
-            }
+            }*/
         }
         else {
             Log.e("mytag","entra else");
             db_Read = this.getReadableDatabase();
             db_Read.close();
             Log.e("mytag","final else");
+
+
+            try{
+                copyDataBase(context);
+            }catch (IOException e){
+                throw new Error ("Error copiando BD");
+            }
         }
-        try{
-            copyDataBase(context);
-        }catch (IOException e){
-            throw new Error ("Error copiando BD");
-        }
-        // }
 
     }
     //DEBUELVE TRUE SI LA BASE DE DATOS EXISTE
@@ -167,8 +168,18 @@ public class DatabaseAccess extends SQLiteOpenHelper {
 
     }
     //RESETEA LOS PUNTOS A SU ESTADO ORIGINAL
-    public void resetApp(){
+    public void resetApp(int x){
+        String myPath = DB_PATH + DB_NAME;
+        db = SQLiteDatabase.openDatabase(myPath, null, SQLiteDatabase.OPEN_READWRITE);
+        db = this.getWritableDatabase();
+        db.execSQL("UPDATE puntos SET visible=0,terminado=0 WHERE idLugar="+x);
 
+    }
+    public void iniciarApp(int x){
+        String myPath = DB_PATH + DB_NAME;
+        db = SQLiteDatabase.openDatabase(myPath, null, SQLiteDatabase.OPEN_READWRITE);
+        db = this.getWritableDatabase();
+        db.execSQL("UPDATE puntos SET visible=1 WHERE idLugar="+x+" AND secuencia=1");
 
     }
 
@@ -191,25 +202,25 @@ public class DatabaseAccess extends SQLiteOpenHelper {
     }
 
     //PONE TODOS LOS PUNTOS EN VISIBLE
-    public void setAllVisible(){
+    public void setAllVisible(int x){
         Log.d("mytag", "entra setallvisible");
 
         String myPath = DB_PATH + DB_NAME;
         db = SQLiteDatabase.openDatabase(myPath, null, SQLiteDatabase.OPEN_READWRITE);
         db = this.getWritableDatabase();
-        db.execSQL("UPDATE puntos SET visible=1");
+        db.execSQL("UPDATE puntos SET visible=1 Where idLugar="+x);
         Log.d("mytag", "termina setallvisible");
         db.close();
     }
 
     //DEVUELVE TODOS LOS PUNTO A SU ESTADO ANTERIOR***
-    public void reverseAllVisible(){
+    public void reverseAllVisible(int x){
         Log.d("mytag", "termina reverse");
 
         String myPath = DB_PATH + DB_NAME;
         db = SQLiteDatabase.openDatabase(myPath, null, SQLiteDatabase.OPEN_READWRITE);
         db = this.getWritableDatabase();
-        Cursor cursor = db.rawQuery("SELECT * FROM puntos", null);
+        Cursor cursor = db.rawQuery("SELECT * FROM puntos where idLugar="+x, null);
         Log.d("mytag", "pre do recerse");
         cursor.moveToFirst();
         do{
@@ -255,12 +266,13 @@ public class DatabaseAccess extends SQLiteOpenHelper {
     }
     //############################################################################################## TABLA LUGARES
     public Object getLugares(){
+
         //CARGA TODOS LOS DATOS DE LA TABLA LUGARES EN UN ARRAYLIST
         ArrayList <lugares>datosLugares = new ArrayList<lugares>();
         String myPath = DB_PATH + DB_NAME;
-        db = SQLiteDatabase.openDatabase(myPath, null, SQLiteDatabase.OPEN_READWRITE);
+          db = SQLiteDatabase.openDatabase(myPath, null, SQLiteDatabase.OPEN_READWRITE);
         db = this.getWritableDatabase();
-        Cursor cursor = db.rawQuery("SELECT * FROM lugares ORDER BY nombre", null);
+        Cursor cursor = db.rawQuery("SELECT * FROM lugares ORDER BY idLugar", null);
         cursor.moveToFirst();
         for(int i=0;!cursor.isAfterLast();i++) {
             int idLugar= cursor.getInt(cursor.getColumnIndex("idLugar"));
