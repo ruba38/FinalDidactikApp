@@ -117,4 +117,8 @@ public class Actividad_30_PresentecionM extends AppCompatActivity {
            }
         }
     }
+    protected void OnDestroy(){
+        super.onDestroy();
+        Oihaltxo.release();
+    }
 }

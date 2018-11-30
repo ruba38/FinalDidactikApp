@@ -81,6 +81,6 @@ public class Actividad_32_Precios extends Activity {
                 String mywebsite = (String) data.getExtras().get("result");
             }
         }
-    }
+}
 }
 
