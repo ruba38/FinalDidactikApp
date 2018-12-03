@@ -48,7 +48,7 @@ public class Actividad_32_Precios extends Activity {
         BotonCamara.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent SacarFonto= new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                Intent SacarFonto= new Intent(getBaseContext(), SacarFotos.class);
                 //Camara
                 startActivityForResult(SacarFonto, 21);
 
@@ -67,7 +67,7 @@ public class Actividad_32_Precios extends Activity {
         }catch (Exception e){
             Log.d("Error","Error");
         }
-        Total.setText("Precio Total "+String.format("%d", 2).valueOf(TotalN)
+        Total.setText("Prezio Totala:"+String.format("%d", 2).valueOf(TotalN)
         );
     }
 
