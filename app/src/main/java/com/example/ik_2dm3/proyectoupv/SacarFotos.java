@@ -2,11 +2,14 @@ package com.example.ik_2dm3.proyectoupv;
 
 import android.Manifest;
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.media.Image;
 import android.net.Uri;
 import android.os.Build;
@@ -40,6 +43,8 @@ public class SacarFotos extends Activity {
     public Uri image_uri;
     private ContentValues ContentValues;
     public static final int PERMISSION_CODE=1000;
+    private Dialog pistaPopup;
+
     public int IMAGE_CAPTURE_CODE;
     public static final int MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE = 123;
 
@@ -99,8 +104,20 @@ public class SacarFotos extends Activity {
             }
 
         }
-        if(requestCode==120){
-        }
+            if(requestCode==120){
+                int cat=getIntent().getIntExtra("idLugarMain",0);
+                if(cat==32){
+
+
+                }
+                pistaPopup = new Dialog(this);
+                pistaPopup.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                //NO PERMITIR QUE AL TOCAR FUERA DEL MISMO SE CIERRE
+                pistaPopup.setCanceledOnTouchOutside(false);
+        pistaPopup.show();        }
+    }
+    protected void OnRequestCode() {
+
     }
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
