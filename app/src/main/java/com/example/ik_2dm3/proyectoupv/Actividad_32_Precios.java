@@ -15,6 +15,7 @@ import java.io.File;
 
 public class Actividad_32_Precios extends Activity {
     //Definiciones
+    private ImageView Repetir;
     public static TextView KipulaZelda;
     public static TextView AzenarioZelda;
     public static TextView IndabaZelda;
