@@ -57,5 +57,7 @@
     <string name="title_activity_horidata">Horidata</string>
     <string name="title_activity_sacar_fotos">SacarFotos</string>
 
+    <string name="P1sta1">Zuengandik hurbil, herriko eraikin altuenetarikoa /n dago. Kanpai hotsa entzun dezakegu.</string>
+
     <string name="mensajePopup">YA HAY UNA PARTIDA INICIADA EN TXURDINAGA, QUIERES CONTINUAR?</string>
 </resources>

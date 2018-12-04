@@ -6,6 +6,7 @@ import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 
 public class Kaixo extends AppCompatActivity {
     private ConstraintLayout idLayoutKaixo;
@@ -29,9 +30,20 @@ public class Kaixo extends AppCompatActivity {
                 Intent i =new Intent (getBaseContext(),MapaActivity.class);
                 i.putExtra("idLugarKaixo",Lugar);
                 kaixo.stop();
-                startActivity(i);}
-            }
-        );
+                startActivityForResult(i,103);}
+
+                }
+            );
+        }
+    protected void onActivityResult(int requestCode,
+                                    int resultCode, Intent data) {
+        if(requestCode==103){
+            finish();
+
+        }
+        if (requestCode==104);
+        finish();
     }
+
 }
 

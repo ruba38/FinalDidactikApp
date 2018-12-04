@@ -22,7 +22,7 @@ public class Actividad_30_PresentecionM extends AppCompatActivity {
     private TextView Texto301;
     private ImageView Splash;
     private TextView Texto321;
-    private int Contador;
+    private int Contador =0;
     public Button Botonrepetir;
     private ImageView BotonAtras;
     public MediaPlayer Oihaltxo;
@@ -33,6 +33,7 @@ public class Actividad_30_PresentecionM extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_actividad_30__presentecion_m);
+        Oihaltxo = MediaPlayer.create(Actividad_30_PresentecionM.this, R.raw.azoka);
         //declarar Contenido
         Fondo301 = findViewById(R.id.Fondo301);
         Texto301 = findViewById(R.id.Texto301);
@@ -46,23 +47,12 @@ public class Actividad_30_PresentecionM extends AppCompatActivity {
         // OnClick Fondo
         Fondo301.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                Audio();
+            public void onClick(View v) { Audio();
              }
         });
-    //Boton Atras
-    BotonAtras= findViewById(R.id.BotonAtras);
-    BotonAtras.setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            Oihaltxo.release();
-            finish();
-        }
-    });
     }
 //Metodo responsalbe del audio
     public void Audio(){
-         Oihaltxo = MediaPlayer.create(Actividad_30_PresentecionM.this, R.raw.azoka);
         Botonrepetir.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -74,8 +64,6 @@ public class Actividad_30_PresentecionM extends AppCompatActivity {
             }
         });
         if (Contador >=1) {
-            Oihaltxo.stop();
-            Oihaltxo.pause();
             Oihaltxo.release();
             Intent i = new Intent(getBaseContext(), Actividad_31_Mercatua.class);
             startActivityForResult(i, 10);

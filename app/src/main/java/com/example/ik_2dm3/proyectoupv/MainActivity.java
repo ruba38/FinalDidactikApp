@@ -141,7 +141,7 @@ public class MainActivity extends AppCompatActivity {
                 btnPopupInicioContinuar.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent i = new Intent(getBaseContext(), Kaixo.class);
+                        Intent i = new Intent(getBaseContext(), Actividad_30_PresentecionM.class);
                         i.putExtra("idLugarMain",Lugar);
                         startActivity(i);
                         inicioPopup.dismiss();
