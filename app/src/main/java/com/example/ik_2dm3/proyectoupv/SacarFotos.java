@@ -27,6 +27,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Switch;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.File;
@@ -44,7 +45,8 @@ public class SacarFotos extends Activity {
     private ContentValues ContentValues;
     public static final int PERMISSION_CODE=1000;
     private Dialog pistaPopup;
-
+    private TextView idTextViewPista;
+    private Button idBtnCerrarPista;
     public int IMAGE_CAPTURE_CODE;
     public static final int MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE = 123;
 
@@ -110,11 +112,8 @@ public class SacarFotos extends Activity {
 
 
                 }
-                pistaPopup = new Dialog(this);
-                pistaPopup.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-                //NO PERMITIR QUE AL TOCAR FUERA DEL MISMO SE CIERRE
-                pistaPopup.setCanceledOnTouchOutside(false);
-        pistaPopup.show();        }
+
+                }
     }
     protected void OnRequestCode() {
 
@@ -127,13 +126,13 @@ public class SacarFotos extends Activity {
                 if(grantResults.length > 0 && grantResults[0]==
                     PackageManager.PERMISSION_GRANTED){
                 takePicture();
+
             }
                 else {
                     Toast.makeText(this, "Sin Permisso", Toast.LENGTH_LONG);
                 }
             }
         }
-
 }
 public String Comgerfecha() {
     Date c = Calendar.getInstance().getTime();
@@ -143,5 +142,6 @@ public String Comgerfecha() {
     String formattedDate = df.format(c);
     return formattedDate;
     }
+    }
 
-}
+

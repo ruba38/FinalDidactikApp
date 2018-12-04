@@ -21,7 +21,7 @@ public class Actividad_32_Precios extends Activity {
     public static TextView IndabaZelda;
     public static TextView TxorizoZelda;
     public static TextView Total;
-    public ImageView BotonCamara;
+    public static ImageView BotonCamara;
     public static double TotalN;
     public static double KipulaN;
     public static double AzenarioN;
@@ -44,14 +44,19 @@ public class Actividad_32_Precios extends Activity {
         AzenarioZelda.addTextChangedListener(new TextWatcherUsoMercado(AzenarioZelda));
         IndabaZelda.addTextChangedListener(new TextWatcherUsoMercado(IndabaZelda));
         TxorizoZelda.addTextChangedListener(new TextWatcherUsoMercado(TxorizoZelda));
-        //Boton Camara
-        BotonCamara = findViewById(R.id.BottonCamaraPrecios);
+
+            //Boton Camara
+
+            BotonCamara = findViewById(R.id.BottonCamaraPrecios);
+        BotonCamara.setVisibility(View.INVISIBLE);
+
         BotonCamara.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent SacarFonto= new Intent(getBaseContext(), SacarFotos.class);
                 //Camara
                 startActivityForResult(SacarFonto, 21);
+                finish();
 
 
             }
@@ -69,8 +74,9 @@ public class Actividad_32_Precios extends Activity {
         }catch (Exception e){
             Log.d("Error","Error");
         }
-        Total.setText("Prezio Totala:"+String.format("%d", 2).valueOf(TotalN)
-        );
+        Total.setText("Prezio Totala:"+String.format("%d", 2).valueOf(TotalN));
+                BotonCamara.setVisibility(View.VISIBLE);
+
     }
 
     protected void onActivityResult(int requestCode,

@@ -39,7 +39,7 @@
             android:label="@string/title_activity_creadores" />
         <activity
             android:name=".AjustesActivity"
-            android:label="@string/title_activity_ajustes" />
+            android:label="@string/ajustesTextoTituloE" />
         <activity
             android:name=".MapaActivity"
             android:configChanges="orientation|screenSize"

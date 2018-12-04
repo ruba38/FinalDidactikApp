@@ -2,7 +2,9 @@
     //MAIN
     <string name="app_name">ProyectoUPV</string>
     <string name="mainBotonInicio">INICIO</string>
+    <string name="mainBotonInicioE">HASIERA</string>
     <string name="mainBotonCreadores">CREADORES</string>
+    <string name="mainBotonCreadoresE">EGILEAK</string>
     <string name="mainTextoVersiones">v0 </string>
     //CREADORES
     <string name="title_activity_creadores">CreadoresActivity</string>//UPV Leioa
@@ -22,16 +24,21 @@
     <string name="nombreTxurdi3">Urko Martinez</string>
     <string name="nombreTxurdi4">Marius Aparaschivei</string>
     //AJUSTES
-    <string name="title_activity_ajustes">AjustesActivity</string>
+    <string name="title_activity_ajuempezarstes">AjustesActivity</string>
     <string name="ajustesTextoTitulo">AJUSTES</string>
+    <string name="ajustesTextoTituloE">EZARPENAK</string>
     <string name="ajustesTextoOpcionSonido">Musica</string>
+    <string name="ajustesTextoOpcionSonidoE">Musika</string>
     <string name="ajustesTextoOpcionIdioma">Idioma</string>
+    <string name="ajustesTextoOpcionIdiomaE">hizkuntza</string>
     <string name="ajustesTextoTitulo2">OPCIONES</string>
     <string name="ajustesBotonCerrarApp">Salir de la APP</string>
+    <string name="ajustesBotonCerrarAppE">IRTEN</string>
     //MAPA
     <string name="title_activity_mapa">MapaActivity</string>
     <string name="PunosDistancia"><b>Proximo :</b></string>
     <string name="PuntoProgreso"><b>Descubierto :</b></string>
+    <string name="ajustesTextoTitulo2E">AUKERAK</string>
     //POPUP
     <string name="popupBotonJugar">JUGAR</string>
     <string name="todo">TODO</string>

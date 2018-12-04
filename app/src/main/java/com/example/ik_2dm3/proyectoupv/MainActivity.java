@@ -112,9 +112,6 @@ public class MainActivity extends AppCompatActivity {
             }
 
         });
-
-
-
         //BOTON INICIAR
 
         idBtnInicio.setOnClickListener(new View.OnClickListener() {
@@ -141,7 +138,7 @@ public class MainActivity extends AppCompatActivity {
                 btnPopupInicioContinuar.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent i = new Intent(getBaseContext(), Actividad_30_PresentecionM.class);
+                        Intent i = new Intent(getBaseContext(), MapaActivity.class);
                         i.putExtra("idLugarMain",Lugar);
                         startActivity(i);
                         inicioPopup.dismiss();
@@ -167,7 +164,6 @@ public class MainActivity extends AppCompatActivity {
                         i.putExtra("idLugarMain",Lugar);
                         startActivity(i);
                         inicioPopup.dismiss();
-
                     }
                 });
                 //NO
@@ -203,16 +199,6 @@ public class MainActivity extends AppCompatActivity {
             idBtnIzquierda.setVisibility(View.GONE);
             idBtnDerecha.setVisibility(View.GONE);
         }
-
-
-
-
-
-
-
-
-
-
 
         //IR A Camara
 /*
