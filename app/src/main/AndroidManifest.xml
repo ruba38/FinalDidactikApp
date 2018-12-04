@@ -65,8 +65,8 @@
             android:label="@string/title_activity_actividad_32__prese_aurkez" />
         <activity android:name=".Actividad_40_Presentacion" />
         <activity android:name=".Actividad_41_astrazaharra" />
+        <activity android:name=".Actividad_42_astraberria" />
         <activity android:name=".horidata" />
-
         <activity
 
             android:name=".SacarFotos"

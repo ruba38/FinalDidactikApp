@@ -18,7 +18,7 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     public boolean admin = false;
-    private Button  idBtnMainAjustes, idBtnIzquierda, idBtnDerecha, idBtnContinuar, idBtnInicio, idBtnReiniciar;
+    private Button  idBtnMainAjustes,idBtnIzquierda, idBtnDerecha, idBtnContinuar, idBtnInicio, idBtnReiniciar;
     private Button btnPopupInicioSi,btnPopupInicioNo,btnPopupInicioContinuar,btnPopupInicioReiniciar;
     private TextView idTextViewLugar, idTextViewProgreso,idTextViewInicioMensaje;
     private int posicionArray=0;
@@ -40,9 +40,7 @@ public class MainActivity extends AppCompatActivity {
 
         idBtnMainAjustes = (Button) findViewById(R.id.idBtnMainAjustes);
         idBtnDerecha = (Button) findViewById(R.id.idBtnDerecha);
-
         idBtnInicio = (Button) findViewById(R.id.idBtnInicio);
-
 
 
 
