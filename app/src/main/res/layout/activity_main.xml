@@ -100,5 +100,4 @@
         app:layout_constraintTop_toBottomOf="@+id/idTextViewLugar" />
 
 
-
 </android.support.constraint.ConstraintLayout>

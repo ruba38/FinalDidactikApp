@@ -529,8 +529,8 @@ public class MapaActivity extends AppCompatActivity implements PermissionsListen
     }
 
     //TODO:mostrarPista...
-    public void mostrarPista(View v,String pista){
-        String textoPista=getIntent().getStringExtra("pista");
+    public void mostrarPista(View v){
+        String textoPista=getResources().getString(R.string.P1sta1);
         pistaPopup.setContentView(R.layout.popup_pista);//abrir layout que contiene el popup
         //INTRODUCIMOS TEXTO
         idTextViewPista = pistaPopup.findViewById(R.id.idTextViewPista);

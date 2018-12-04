@@ -39,6 +39,7 @@ import static android.os.Environment.getExternalStorageDirectory;
 
 public class SacarFotos extends Activity {
     public ImageView bottonCamara;
+    public Button bottonOk;
     public ImageView Imagenes;
     public Uri image_uri;
     private ContentValues ContentValues;
@@ -57,7 +58,8 @@ public class SacarFotos extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sacar_fotos);
         Imagenes = findViewById(R.id.Imajenes);
-
+        bottonOk = findViewById(R.id.buttonOk);
+        bottonOk.setVisibility(View.VISIBLE);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (checkSelfPermission(Manifest.permission.CAMERA) ==
                     PackageManager.PERMISSION_DENIED ||
@@ -80,6 +82,15 @@ public class SacarFotos extends Activity {
                 takePicture();
             }
         });
+        bottonOk.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent Z= new Intent(getBaseContext(),horidata.class);
+                startActivityForResult(Z, 120);
+
+            }
+        });
 
     }
 
@@ -96,25 +107,17 @@ public class SacarFotos extends Activity {
     }
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == 100) {
-            if (resultCode == RESULT_OK) {
-                Imagenes.setImageURI(image_uri);
-                Intent Z= new Intent(getBaseContext(),horidata.class);
-                startActivityForResult(Z, 120);
-            }
+        if(requestCode==100){
+            Imagenes.setImageURI(image_uri);
+        }
+        if(requestCode==120){
+            Intent Mapa = new Intent(getBaseContext(),MapaActivity.class);
+            startActivity(Mapa);
+            int cat=getIntent().getIntExtra("idLugarMain",0);
+            finish();
+
 
         }
-            if(requestCode==120){
-                int cat=getIntent().getIntExtra("idLugarMain",0);
-                if(cat==32){
-
-
-                }
-                pistaPopup = new Dialog(this);
-                pistaPopup.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-                //NO PERMITIR QUE AL TOCAR FUERA DEL MISMO SE CIERRE
-                pistaPopup.setCanceledOnTouchOutside(false);
-        pistaPopup.show();        }
     }
     protected void OnRequestCode() {
 

@@ -71,7 +71,7 @@ public class Actividad_42_astraberria extends AppCompatActivity {
                     c1=0;c2=0;c3=0;c4=0;c5=0;
                     DatabaseAccess databaseAccess = new DatabaseAccess(getBaseContext());
                     databaseAccess.setTerminado(3);
-                    Intent i = new Intent(getBaseContext(), horidata.class);
+                    Intent i = new Intent(getBaseContext(), SacarFotos.class);
                     startActivityForResult(i,10);
 
                 }
