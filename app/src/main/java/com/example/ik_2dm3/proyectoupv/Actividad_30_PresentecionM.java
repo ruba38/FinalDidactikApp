@@ -51,14 +51,14 @@ public class Actividad_30_PresentecionM extends AppCompatActivity {
              }
         });
     //Boton Atras
-    /*BotonAtras= findViewById(R.id.BotonAtras);*/
-    /*BotonAtras.setOnClickListener(new View.OnClickListener() {
+    BotonAtras= findViewById(R.id.BotonAtras);
+    BotonAtras.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             Oihaltxo.release();
             finish();
         }
-    });*/
+    });
     }
 //Metodo responsalbe del audio
     public void Audio(){
