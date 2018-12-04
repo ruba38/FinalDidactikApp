@@ -45,8 +45,8 @@ public class Actividad_42_astraberria extends AppCompatActivity {
                 /*;*/
                 he=astraber.getHeight();
                 wi=astraber.getWidth();
-                pr.setText("Touch coordinates : " +
-                        String.valueOf(event.getX()) + "x" + String.valueOf(event.getY())+"tamaño:"+wi+"/"+he);
+                /*pr.setText("Touch coordinates : " +
+                        String.valueOf(event.getX()) + "x" + String.valueOf(event.getY())+"tamaño:"+wi+"/"+he);*/
                 if(event.getX()>(wi*(c1x1/100))&&event.getX()<(wi*(c1x2/100))&&event.getY()>(he*(c1y1/100))&&event.getY()<(he*(c1y2/100))){
                     sir1.setVisibility(View.VISIBLE);
                     c1=1;
@@ -68,11 +68,12 @@ public class Actividad_42_astraberria extends AppCompatActivity {
                     c5=1;
                 }
                 if(c1==1&&c2==1&&c3==1&&c4==1&&c5==1){
+                    c1=0;c2=0;c3=0;c4=0;c5=0;
                     DatabaseAccess databaseAccess = new DatabaseAccess(getBaseContext());
                     databaseAccess.setTerminado(3);
                     Intent i = new Intent(getBaseContext(), horidata.class);
                     startActivityForResult(i,10);
-                    c1=0;c2=0;c3=0;c4=0;c5=0;
+
                 }
                 return true;
             }});
@@ -81,10 +82,7 @@ public class Actividad_42_astraberria extends AppCompatActivity {
     protected void onActivityResult(int requestCode,
                                     int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
-
+            if(requestCode==10)
                 Actividad_42_astraberria.this.finish();
-
-
     }
 }

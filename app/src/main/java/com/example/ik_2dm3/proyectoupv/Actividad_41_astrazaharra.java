@@ -70,6 +70,7 @@ public class Actividad_41_astrazaharra extends AppCompatActivity {
                     c5=1;
                 }
                 if(c1==1&&c2==1&&c3==1&&c4==1&&c5==1) {
+                    c1=0;c2=0;c3=0;c4=0;c5=0;
                     Intent i = new Intent(getBaseContext(), Actividad_42_astraberria.class);
                     startActivityForResult(i,10);
                 }
