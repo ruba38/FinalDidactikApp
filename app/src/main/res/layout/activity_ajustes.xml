@@ -19,24 +19,27 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <Switch
-        android:id="@+id/idSchAjustesSonido"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="112dp"
-        android:layout_marginEnd="100dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <TextView
         android:id="@+id/textView7"
         android:layout_width="55dp"
-        android:layout_height="25dp"
+        android:layout_height="30dp"
         android:layout_marginStart="100dp"
         android:layout_marginTop="112dp"
-        android:text="@string/ajustesTextoOpcionSonido"
+        android:gravity="center_vertical"
+        android:text="Audio"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="55dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="100dp"
+        android:layout_marginTop="22dp"
+        android:gravity="center_vertical"
+        android:text="Sonido"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView7" />
 
     <TextView
         android:id="@+id/textView8"
@@ -46,17 +49,17 @@
         android:layout_marginTop="22dp"
         android:text="@string/ajustesTextoOpcionIdioma"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView7" />
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
 
     <Button
         android:id="@+id/button"
-        android:layout_width="35dp"
+        android:layout_width="34dp"
         android:layout_height="24dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="100dp"
+        android:layout_marginTop="22dp"
+        android:layout_marginEnd="98dp"
         android:background="@drawable/eus"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/idSchAjustesSonido" />
+        app:layout_constraintTop_toBottomOf="@+id/checkBoxSonido" />
 
     <TextView
         android:id="@+id/textView9"
@@ -66,6 +69,8 @@
         android:layout_marginTop="48dp"
         android:layout_marginEnd="8dp"
         android:text="@string/ajustesTextoTitulo"
+        android:textSize="18sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -75,9 +80,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="260dp"
+        android:layout_marginTop="280dp"
         android:layout_marginEnd="8dp"
         android:text="@string/ajustesTextoTitulo2"
+        android:textSize="18sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -115,5 +122,23 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.46" />
+
+    <CheckBox
+        android:id="@+id/checkBoxAudio"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:layout_marginTop="112dp"
+        android:layout_marginEnd="100dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <CheckBox
+        android:id="@+id/checkBoxSonido"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:layout_marginTop="22dp"
+        android:layout_marginEnd="100dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/checkBoxAudio" />
 
 </android.support.constraint.ConstraintLayout>

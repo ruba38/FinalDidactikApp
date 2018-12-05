@@ -16,6 +16,7 @@ public class MarkerPuntos extends Annotation {
     private boolean visible = false;
     private MarkerOptions mO;
     private String imagen="";
+    private String pista="";
 
     // Constructor
     public MarkerPuntos() {
@@ -27,6 +28,7 @@ public class MarkerPuntos extends Annotation {
         this.visible = false;
         this.secuencia = 0;
         this.imagen="";
+        this.pista="";
         this.mO = new MarkerOptions();
     }
 
@@ -40,6 +42,7 @@ public class MarkerPuntos extends Annotation {
         this.visible = mp.visible;
         this.secuencia = mp.secuencia;
         this.imagen=mp.imagen;
+        this.pista=mp.pista;
         this.mO = new MarkerOptions();
         //this.mO.getMarker().setId(mp.getmO().getMarker().getId());
         this.mO.setPosition(mp.getmO().getPosition());
@@ -117,5 +120,13 @@ public class MarkerPuntos extends Annotation {
     public String getImagen() {return imagen;}
 
     public void setImagen(String imagen) {this.imagen = imagen;}
+
+    public String getPista() {
+        return pista;
+    }
+
+    public void setPista(String pista) {
+        this.pista = pista;
+    }
 }
 

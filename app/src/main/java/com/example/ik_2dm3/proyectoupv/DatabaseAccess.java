@@ -130,7 +130,8 @@ public class DatabaseAccess extends SQLiteOpenHelper {
             int visible= cursor.getInt(cursor.getColumnIndex("visible"));
             int terminado= cursor.getInt(cursor.getColumnIndex("terminado"));
             int secuencia= cursor.getInt(cursor.getColumnIndex("secuencia"));
-            puntos d = new puntos(idPunto, nombre, latitud, longitud, imagen,juego,idLugar,visible,terminado,secuencia);
+            String pista=cursor.getString(cursor.getColumnIndex("pista"));
+            puntos d = new puntos(idPunto, nombre, latitud, longitud, imagen,juego,idLugar,visible,terminado,secuencia,pista);
             datoslista.add(d);
             cursor.moveToNext();
         }
@@ -149,6 +150,7 @@ public class DatabaseAccess extends SQLiteOpenHelper {
         db = SQLiteDatabase.openDatabase(myPath, null, SQLiteDatabase.OPEN_READWRITE);
         db = this.getWritableDatabase();
         db.execSQL("UPDATE puntos SET terminado=1 WHERE idPunto="+x);
+
     }
     public int getVisible(int x){
         String myPath = DB_PATH + DB_NAME;
@@ -199,6 +201,14 @@ public class DatabaseAccess extends SQLiteOpenHelper {
         }
 
 
+    }
+    public String getPista(int idL,int secuencia){
+        String myPath = DB_PATH + DB_NAME;
+        db = SQLiteDatabase.openDatabase(myPath, null, SQLiteDatabase.OPEN_READWRITE);
+        db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT pista FROM puntos where secuencia="+secuencia+" And idLugar="+idL, null);
+        cursor.moveToFirst();
+        return cursor.getString(cursor.getColumnIndex("pista"));
     }
 
     //PONE TODOS LOS PUNTOS EN VISIBLE
@@ -288,5 +298,54 @@ public class DatabaseAccess extends SQLiteOpenHelper {
         }
         cursor.close();
         return datosLugares;
+    }
+
+    public String getmierda() {
+        return "no";
+    }
+    //############################################################################################## TABLA AJUSTES
+    public String getAjustes(String opcion){
+        int idAjuste=1;
+        int sonido=0;
+        int musica=0;
+        int mapa=0;
+        String idioma="";
+        //CARGA TODOS LOS DATOS DE LA TABLA LUGARES EN UN ARRAYLIST
+        ArrayList <ajustes>datosAjustes = new ArrayList<ajustes>();
+        String myPath = DB_PATH + DB_NAME;
+        db = SQLiteDatabase.openDatabase(myPath, null, SQLiteDatabase.OPEN_READWRITE);
+        db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM ajustes where idAjuste=1", null);
+        cursor.moveToFirst();
+        for(int i=0;!cursor.isAfterLast();i++) {
+            idAjuste= cursor.getInt(cursor.getColumnIndex("idAjuste"));
+            sonido = cursor.getInt(cursor.getColumnIndex("sonido"));
+            musica= cursor.getInt(cursor.getColumnIndex("musica"));
+            mapa= cursor.getInt(cursor.getColumnIndex("mapa"));
+            idioma= cursor.getString(cursor.getColumnIndex("idioma"));
+
+
+
+            cursor.moveToNext();
+        }
+        cursor.close();
+        //return datosAjustes;
+
+        switch (opcion) {
+            case "idAjuste" :
+
+                return String.valueOf(idAjuste);
+            case "sonido" :
+                return String.valueOf(sonido);
+            case "musica" :
+                return String.valueOf(musica);
+            case "mapa" :
+                return String.valueOf(mapa);
+            case "idioma" :
+                return idioma;
+            default:
+                return String.valueOf(0);
+
+        }
     }
 }

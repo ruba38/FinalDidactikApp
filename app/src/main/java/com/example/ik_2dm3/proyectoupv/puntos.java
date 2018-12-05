@@ -11,11 +11,11 @@ public class puntos {
     private int visible;
     private int terminado;
     private int secuencia;
+    private String pista;
 
 
 
-
-    public puntos(int idPunto, String nombre, double latitud, double longitud,String imagen,String juego,int idLugar,int visible, int terminado,int secuencia){
+    public puntos(int idPunto, String nombre, double latitud, double longitud,String imagen,String juego,int idLugar,int visible, int terminado,int secuencia,String pista){
         this.idPunto =idPunto;
         this.nombre=nombre;
         this.longitud=longitud;
@@ -26,7 +26,7 @@ public class puntos {
         this.visible=visible;
         this.terminado=terminado;
         this.secuencia=secuencia;
-
+        this.pista=pista;
     }
     public int getidPunto(){
         return idPunto;
@@ -58,5 +58,9 @@ public class puntos {
     public int getterminado(){
         return terminado;
     }
+    public String getpista(){
+        return pista;
+    }
+
 
 }
