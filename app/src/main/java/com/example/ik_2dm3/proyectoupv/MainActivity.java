@@ -18,7 +18,7 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     public boolean admin = false;
-    private Button  idBtnMainAjustes, idBtnIzquierda, idBtnDerecha, idBtnContinuar, idBtnInicio, idBtnReiniciar;
+    private Button  idBtnMainAjustes,idBtnIzquierda, idBtnDerecha, idBtnContinuar, idBtnInicio, idBtnReiniciar;
     private Button btnPopupInicioSi,btnPopupInicioNo,btnPopupInicioContinuar,btnPopupInicioReiniciar;
     private TextView idTextViewLugar, idTextViewProgreso,idTextViewInicioMensaje;
     private int posicionArray=0;
@@ -43,9 +43,7 @@ public class MainActivity extends AppCompatActivity {
         Log.d("ajustes","sonido= "+objetoAjustes.sonido+" // musica= "+objetoAjustes.musica+" // mapa="+objetoAjustes.mapa+" // idioma="+objetoAjustes.idioma);
         idBtnMainAjustes = (Button) findViewById(R.id.idBtnMainAjustes);
         idBtnDerecha = (Button) findViewById(R.id.idBtnDerecha);
-
         idBtnInicio = (Button) findViewById(R.id.idBtnInicio);
-
 
 
 
@@ -115,9 +113,6 @@ public class MainActivity extends AppCompatActivity {
             }
 
         });
-
-
-
         //BOTON INICIAR
 
         idBtnInicio.setOnClickListener(new View.OnClickListener() {
@@ -144,7 +139,7 @@ public class MainActivity extends AppCompatActivity {
                 btnPopupInicioContinuar.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent i = new Intent(getBaseContext(), Kaixo.class);
+                        Intent i = new Intent(getBaseContext(), MapaActivity.class);
                         i.putExtra("idLugarMain",Lugar);
                         startActivity(i);
                         inicioPopup.dismiss();
@@ -170,7 +165,6 @@ public class MainActivity extends AppCompatActivity {
                         i.putExtra("idLugarMain",Lugar);
                         startActivity(i);
                         inicioPopup.dismiss();
-
                     }
                 });
                 //NO
@@ -206,16 +200,6 @@ public class MainActivity extends AppCompatActivity {
             idBtnIzquierda.setVisibility(View.GONE);
             idBtnDerecha.setVisibility(View.GONE);
         }
-
-
-
-
-
-
-
-
-
-
 
         //IR A Camara
 /*

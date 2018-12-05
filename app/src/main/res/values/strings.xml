@@ -2,7 +2,9 @@
     //MAIN
     <string name="app_name">ProyectoUPV</string>
     <string name="mainBotonInicio">INICIO</string>
+    <string name="mainBotonInicioE">HASIERA</string>
     <string name="mainBotonCreadores">CREADORES</string>
+    <string name="mainBotonCreadoresE">EGILEAK</string>
     <string name="mainTextoVersiones">v0 </string>
     //CREADORES
     <string name="title_activity_creadores">CreadoresActivity</string>//UPV Leioa
@@ -22,16 +24,21 @@
     <string name="nombreTxurdi3">Urko Martinez</string>
     <string name="nombreTxurdi4">Marius Aparaschivei</string>
     //AJUSTES
-    <string name="title_activity_ajustes">AjustesActivity</string>
+    <string name="title_activity_ajuempezarstes">AjustesActivity</string>
     <string name="ajustesTextoTitulo">AJUSTES</string>
+    <string name="ajustesTextoTituloE">EZARPENAK</string>
     <string name="ajustesTextoOpcionSonido">Musica</string>
+    <string name="ajustesTextoOpcionSonidoE">Musika</string>
     <string name="ajustesTextoOpcionIdioma">Idioma</string>
+    <string name="ajustesTextoOpcionIdiomaE">hizkuntza</string>
     <string name="ajustesTextoTitulo2">OPCIONES</string>
     <string name="ajustesBotonCerrarApp">Salir de la APP</string>
+    <string name="ajustesBotonCerrarAppE">IRTEN</string>
     //MAPA
     <string name="title_activity_mapa">MapaActivity</string>
     <string name="PunosDistancia"><b>Proximo :</b></string>
     <string name="PuntoProgreso"><b>Descubierto :</b></string>
+    <string name="ajustesTextoTitulo2E">AUKERAK</string>
     //POPUP
     <string name="popupBotonJugar">JUGAR</string>
     <string name="todo">TODO</string>
@@ -56,6 +63,8 @@
     <string name="astra402">Aurkitu ahal ditzakezue lehengo eraikinaren eta oingo eraikinaren arteko 5 ezberdintasun? Animo eta gogor ekin eta badakizue, zuen argazkiak mesedez!</string>
     <string name="title_activity_horidata">Horidata</string>
     <string name="title_activity_sacar_fotos">SacarFotos</string>
+
+    <string name="P1sta1">Zuengandik hurbil, herriko eraikin altuenetarikoa /n dago. Kanpai hotsa entzun dezakegu.</string>
 
     <string name="mensajePopup">YA HAY UNA PARTIDA INICIADA EN TXURDINAGA, QUIERES CONTINUAR?</string>
 

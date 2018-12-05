@@ -13,7 +13,8 @@ public class Actividad_42_astraberria extends AppCompatActivity {
     public View fondo42;
     public ImageView astraber, sir1, sir2, sir3, sir4, sir5;
     public TextView pr;
-    public int c1,c2,c3,c4,c5;
+    public int c1=0,c2=0,c3=0,c4=0,c5=0,he,wi;
+    public double c1x1,c1x2,c1y1,c1y2,c2x1,c2x2,c2y1,c2y2,c3x1,c3x2,c3y1,c3y2,c4x1,c4x2,c4y1,c4y2,c5x1,c5x2,c5y1,c5y2;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,38 +32,57 @@ public class Actividad_42_astraberria extends AppCompatActivity {
         sir3.setVisibility(View.INVISIBLE);
         sir4.setVisibility(View.INVISIBLE);
         sir5.setVisibility(View.INVISIBLE);
+        he=astraber.getWidth();
+        wi=astraber.getHeight();
+        c1x1=79.9;c1x2=93;c1y1=51.6;c1y2=62.1;
+        c2x1=83.1;c2x2=97.8;c2y1=64.7;c2y2=75.4;
+        c3x1=69;c3x2=73;c3y1=69.4;c3y2=74.9;
+        c4x1=32.8;c4x2=45.6;c4y1=58.7;c4y2=68.4;
+        c5x1=17.5;c5x2=28;c5y1=93.7;c5y2=98.5;
         astraber.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
+                /*;*/
+                he=astraber.getHeight();
+                wi=astraber.getWidth();
                 /*pr.setText("Touch coordinates : " +
-                        String.valueOf(event.getX()) + "x" + String.valueOf(event.getY()));*/
-                if(event.getX()>863.0000&&event.getX()<999.0000&&event.getY()>792.0000&&event.getY()<952.0000){
+                        String.valueOf(event.getX()) + "x" + String.valueOf(event.getY())+"tamaño:"+wi+"/"+he);*/
+                if(event.getX()>(wi*(c1x1/100))&&event.getX()<(wi*(c1x2/100))&&event.getY()>(he*(c1y1/100))&&event.getY()<(he*(c1y2/100))){
                     sir1.setVisibility(View.VISIBLE);
                     c1=1;
-                    Log.e("mytag","en5tra");
                 }
-                if(event.getX()>898.0000&&event.getX()<1056.0000&&event.getY()>993.0000&&event.getY()<1156.0000){
+                if(event.getX()>(wi*(c2x1/100))&&event.getX()<(wi*(c2x2/100))&&event.getY()>(he*(c2y1/100))&&event.getY()<(he*(c2y2/100))){
                     sir2.setVisibility(View.VISIBLE);
                     c2=1;
                 }
-                if(event.getX()>745.0000&&event.getX()<788.0000&&event.getY()>1065.0000&&event.getY()<1149.0000){
+                if(event.getX()>(wi*(c3x1/100))&&event.getX()<(wi*(c3x2/100))&&event.getY()>(he*(c3y1/100))&&event.getY()<(he*(c3y2/100))){
                     sir3.setVisibility(View.VISIBLE);
                     c3=1;
                 }
-                if(event.getX()>354.0000&&event.getX()<493.0000&&event.getY()>901.0000&&event.getY()<1049.0000){
+                if(event.getX()>(wi*(c4x1/100))&&event.getX()<(wi*(c4x2/100))&&event.getY()>(he*(c4y1/100))&&event.getY()<(he*(c4y2/100))){
                     sir4.setVisibility(View.VISIBLE);
                     c4=1;
                 }
-                if(event.getX()>189.0000&&event.getX()<302.0000&&event.getY()>1437.0000&&event.getY()<1511.0000){
+                if(event.getX()>(wi*(c5x1/100))&&event.getX()<(wi*(c5x2/100))&&event.getY()>(he*(c5y1/100))&&event.getY()<(he*(c5y2/100))){
                     sir5.setVisibility(View.VISIBLE);
                     c5=1;
                 }
                 if(c1==1&&c2==1&&c3==1&&c4==1&&c5==1){
-                    Intent i = new Intent(getBaseContext(), Agurra.class);
-                    startActivity(i);
+                    c1=0;c2=0;c3=0;c4=0;c5=0;
+                    DatabaseAccess databaseAccess = new DatabaseAccess(getBaseContext());
+                    databaseAccess.setTerminado(3);
+                    Intent i = new Intent(getBaseContext(), SacarFotos.class);
+                    startActivityForResult(i,10);
+
                 }
                 return true;
             }});
 
+    }
+    protected void onActivityResult(int requestCode,
+                                    int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+            if(requestCode==10)
+                Actividad_42_astraberria.this.finish();
     }
 }
