@@ -29,10 +29,13 @@ public class Actividad_32_Precios extends Activity {
     public static double TxorizoN;
     public String imagePath;
     public int FotoCatch;
+    int idPuntoJuego;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_actividad_32__precio);
+        idPuntoJuego=getIntent().getIntExtra("idPuntoJuego",0);
         KipulaZelda = findViewById(R.id.KipulapPrezio);
         AzenarioZelda = findViewById(R.id.AzenarioPrezio);
         IndabaZelda = findViewById(R.id.IndabakPrezio);
@@ -54,6 +57,7 @@ public class Actividad_32_Precios extends Activity {
             @Override
             public void onClick(View v) {
                 Intent SacarFonto= new Intent(getBaseContext(), SacarFotos.class);
+                SacarFonto.putExtra("idPuntoJuego",idPuntoJuego);
                 //Camara
                 startActivityForResult(SacarFonto, 21);
                 finish();
@@ -74,7 +78,7 @@ public class Actividad_32_Precios extends Activity {
         }catch (Exception e){
             Log.d("Error","Error");
         }
-        Total.setText("Prezio Totala:"+String.format("%d", 2).valueOf(TotalN));
+        Total.setText("Prezio Totala:"+String.format("%.2f",TotalN));
                 BotonCamara.setVisibility(View.VISIBLE);
 
     }
@@ -90,10 +94,6 @@ public class Actividad_32_Precios extends Activity {
             }
         }
         if(requestCode==22){
-            Intent mapa = new Intent(getBaseContext(), MapaActivity.class);
-            String pista= getString(R.string.P1sta1);
-            mapa.putExtra("pista",pista);
-            startActivity(mapa);
             finish();
         }
 }

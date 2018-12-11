@@ -21,11 +21,12 @@ public class Actividad_40_Presentacion extends AppCompatActivity {
     private int Contador;
     public Button Botonrepetir;
     public MediaPlayer oihaltxo;
-
+    int idPuntoJuego;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_actividad_40__presentacion);
+          idPuntoJuego=getIntent().getIntExtra("idPuntoJuego",0);
         //declarar Contenido
         getSupportActionBar().hide();
         Fondo40 = findViewById(R.id.Fondo40);
@@ -74,6 +75,7 @@ public class Actividad_40_Presentacion extends AppCompatActivity {
            /* oihaltxo.pause();
             oihaltxo.release();*/
             Intent i = new Intent(getBaseContext(), Actividad_41_astrazaharra.class);
+            i.putExtra("idPuntoJuego",idPuntoJuego);
             startActivityForResult(i, 10);
             finish();
 

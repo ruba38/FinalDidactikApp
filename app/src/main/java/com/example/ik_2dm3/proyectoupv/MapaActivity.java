@@ -119,7 +119,7 @@ public class MapaActivity extends AppCompatActivity implements PermissionsListen
 
         setContentView(R.layout.activity_mapa);
         //RECOJE EL ID DEL LUGAR SELECIONADO AL PRINCIPIO DE LA APP (MAIN)
-        Lugar=getIntent().getIntExtra("idLugarKaixo",0);
+        Lugar=getIntent().getIntExtra("idLugar",0);
 
         // INSTANCIA EL OBJETO POPUP
         puntoPopup = new Dialog(this);
@@ -411,11 +411,12 @@ public class MapaActivity extends AppCompatActivity implements PermissionsListen
                                 Intent i = null;
                                 try {
                                     i = new Intent(getBaseContext(), Class.forName(nombreJuego));
+                                    i.putExtra("idPuntoJuego",idPunto);
                                 } catch (ClassNotFoundException e) {
                                     e.printStackTrace();
                                 }
                                 //ABRIR JUEGO
-                                startActivity(i);
+                                startActivityForResult(i,666);
                             }
                             //SI NO ESTAS EN RFANGO TE MUESTRA UN TOAST INDICANDO QUE NO ESTAS EN RANGO
                             else{
@@ -435,7 +436,7 @@ public class MapaActivity extends AppCompatActivity implements PermissionsListen
                     @Override
                     public void onClick(View v) {
                         //AL CERRARLO PONDRA EL PUNTO COMO FINALIZADO
-                        PuntoTerminado(idPunto);
+                        //PuntoTerminado(idPunto);
                         //OCULTAR POPUP
                         puntoPopup.dismiss();
                     }
@@ -597,11 +598,11 @@ public class MapaActivity extends AppCompatActivity implements PermissionsListen
                Log.d("pista","entrea if terminado=>"+cont);
            }
         }
-if(cont!=PuntosInteres.size()) {
-    textoPista = databaseAccess.getPista(Lugar, cont);
-}else{
-    textoPista ="Amaituta";
-}
+        if(cont!=PuntosInteres.size()) {
+            textoPista = databaseAccess.getPista(Lugar, cont);
+        }else{
+            textoPista ="Amaituta";
+        }
 
         pistaPopup.setContentView(R.layout.popup_pista);//abrir layout que contiene el popup
         //INTRODUCIMOS TEXTO
@@ -621,6 +622,16 @@ if(cont!=PuntosInteres.size()) {
         //NO PERMITIR QUE AL TOCAR FUERA DEL MISMO SE CIERRE
         pistaPopup.setCanceledOnTouchOutside(false);
         pistaPopup.show();
+    }
+    protected void onActivityResult(int requestCode,
+                                    int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 666){
+        Log.d("Mapa","result");
+        LimpiarPuntos();
+        CrearPuntos();
+
+        }
     }
 
     //METODOS NO UTILIZADOS PERO NECESARIOS PARA EL FUNCIONAMIENTO CORECTO DE LA APLICACION

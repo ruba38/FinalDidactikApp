@@ -8,12 +8,16 @@ import android.view.View;
 
 public class horidata extends Activity {
     private MediaPlayer oihaltxo;
-
+    int idPuntoJuego;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_horidata);
 
+        idPuntoJuego=getIntent().getIntExtra("idPuntoJuego",0);
+
+        DatabaseAccess databaseAccess=new DatabaseAccess(getBaseContext());
+        databaseAccess.setTerminado(idPuntoJuego);
         oihaltxo = MediaPlayer.create(getBaseContext(), R.raw.horidata);
         oihaltxo.start();
 

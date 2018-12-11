@@ -32,7 +32,7 @@
         android:layout_marginBottom="8dp"
         android:background="@android:color/transparent"
         android:fontFamily="@font/coming_soon"
-        android:text="REINICIAR"
+        android:text="BERRABIARAZI"
         android:textColor="@android:color/darker_gray"
 
         android:textSize="20sp"
@@ -51,7 +51,7 @@
         android:layout_marginBottom="8dp"
         android:background="@android:color/transparent"
         android:fontFamily="@font/coming_soon"
-        android:text="NO"
+        android:text="EZ"
         android:textColor="@android:color/darker_gray"
 
         android:textSize="20sp"
@@ -71,7 +71,7 @@
         android:background="@android:color/transparent"
         android:fontFamily="@font/coming_soon"
 
-        android:text="CONTINUAR"
+        android:text="JARRAITU"
         android:textColor="@android:color/darker_gray"
         android:textSize="20sp"
         android:textStyle="bold"
@@ -90,7 +90,7 @@
         android:background="@android:color/transparent"
         android:fontFamily="@font/coming_soon"
 
-        android:text="SI"
+        android:text="BAI"
         android:textColor="@android:color/darker_gray"
         android:textSize="20sp"
         android:textStyle="bold"

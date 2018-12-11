@@ -50,7 +50,7 @@ public class SacarFotos extends Activity {
     private Button idBtnCerrarPista;
     public int IMAGE_CAPTURE_CODE;
     public static final int MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE = 123;
-
+    int idPuntoJuego;
     //DATAS
     Date d = new Date();
     CharSequence s  = DateFormat.format("MMMM d, yyyy ", d.getTime());
@@ -59,6 +59,7 @@ public class SacarFotos extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sacar_fotos);
+        idPuntoJuego=getIntent().getIntExtra("idPuntoJuego",0);
         Imagenes = findViewById(R.id.Imajenes);
         bottonOk = findViewById(R.id.buttonOk);
         bottonOk.setVisibility(View.VISIBLE);
@@ -89,6 +90,7 @@ public class SacarFotos extends Activity {
             public void onClick(View v) {
 
                 Intent Z= new Intent(getBaseContext(),horidata.class);
+                Z.putExtra("idPuntoJuego",idPuntoJuego);
                 startActivityForResult(Z, 120);
 
             }
@@ -113,9 +115,7 @@ public class SacarFotos extends Activity {
             Imagenes.setImageURI(image_uri);
         }
         if(requestCode==120){
-            Intent Mapa = new Intent(getBaseContext(),MapaActivity.class);
-            startActivity(Mapa);
-            int cat=getIntent().getIntExtra("idLugarMain",0);
+
             finish();
 
 
@@ -123,7 +123,7 @@ public class SacarFotos extends Activity {
 
             }
     
-    }
+
     protected void OnRequestCode() {
 
     }

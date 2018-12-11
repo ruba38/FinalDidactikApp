@@ -18,11 +18,13 @@ public class Actividad_41_astrazaharra extends AppCompatActivity {
     public TextView pr;
     public int c1=0,c2=0,c3=0,c4=0,c5=0,he,wi;
     public double c1x1,c1x2,c1y1,c1y2,c2x1,c2x2,c2y1,c2y2,c3x1,c3x2,c3y1,c3y2,c4x1,c4x2,c4y1,c4y2,c5x1,c5x2,c5y1,c5y2;
+    int idPuntoJuego;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_actividad_41_astrazaharra);
         getSupportActionBar().hide();
+        idPuntoJuego=getIntent().getIntExtra("idPuntoJuego",0);
         ast= findViewById(R.id.astrazar);
         sir1= findViewById(R.id.sir1);
         sir2= findViewById(R.id.sir2);
@@ -72,6 +74,7 @@ public class Actividad_41_astrazaharra extends AppCompatActivity {
                 if(c1==1&&c2==1&&c3==1&&c4==1&&c5==1) {
                     c1=0;c2=0;c3=0;c4=0;c5=0;
                     Intent i = new Intent(getBaseContext(), Actividad_42_astraberria.class);
+                    i.putExtra("idPuntoJuego",idPuntoJuego);
                     startActivityForResult(i,10);
                 }
                 return true;

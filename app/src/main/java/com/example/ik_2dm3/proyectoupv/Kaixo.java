@@ -17,7 +17,7 @@ public class Kaixo extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_kaixo);
         getSupportActionBar().hide();
-        Lugar=getIntent().getIntExtra("idLugarMain",0);
+        Lugar=getIntent().getIntExtra("idLugar",0);
         if(kaixo==null){
             kaixo = MediaPlayer.create(Kaixo.this, R.raw.kaixo);
             kaixo = MediaPlayer.create(getApplicationContext(), R.raw.kaixo);
@@ -28,7 +28,7 @@ public class Kaixo extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent i =new Intent (getBaseContext(),MapaActivity.class);
-                i.putExtra("idLugarKaixo",Lugar);
+                i.putExtra("idLugar",Lugar);
                 kaixo.stop();
                 startActivityForResult(i,103);}
 

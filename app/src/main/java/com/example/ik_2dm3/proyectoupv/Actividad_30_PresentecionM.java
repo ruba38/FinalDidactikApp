@@ -26,6 +26,7 @@ public class Actividad_30_PresentecionM extends AppCompatActivity {
     public Button Botonrepetir;
     private ImageView BotonAtras;
     public MediaPlayer Oihaltxo;
+    int idPuntoJuego;
 
 
     @Override
@@ -34,6 +35,8 @@ public class Actividad_30_PresentecionM extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_actividad_30__presentecion_m);
         Oihaltxo = MediaPlayer.create(Actividad_30_PresentecionM.this, R.raw.azoka);
+        idPuntoJuego=getIntent().getIntExtra("idPuntoJuego",0);
+
         //declarar Contenido
         Fondo301 = findViewById(R.id.Fondo301);
         Texto301 = findViewById(R.id.Texto301);
@@ -66,6 +69,7 @@ public class Actividad_30_PresentecionM extends AppCompatActivity {
         if (Contador >=1) {
             Oihaltxo.release();
             Intent i = new Intent(getBaseContext(), Actividad_31_Mercatua.class);
+            i.putExtra("idPuntoJuego",idPuntoJuego);
             startActivityForResult(i, 10);
             finish();
         }

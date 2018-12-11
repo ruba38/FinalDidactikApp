@@ -13,6 +13,8 @@ import android.widget.Toast;
 public class Actividad_31_Mercatua extends Activity {
     ImageView Varria;
     int Cont=0;
+    int idPuntoJuego;
+
     //kipula.setOnlongClickListener(dragListener);
     @Override
 
@@ -21,6 +23,7 @@ public class Actividad_31_Mercatua extends Activity {
 
         //DEFINIR IMAJENES
         setContentView(R.layout.activity_actividad_3__mercatua);
+        idPuntoJuego=getIntent().getIntExtra("idPuntoJuego",0);
         ImageView kipula = findViewById(R.id.kipula);//
         ImageView uraza = findViewById(R.id.uraza);//
         ImageView koliflora = findViewById(R.id.koliflora);
@@ -104,6 +107,7 @@ public class Actividad_31_Mercatua extends Activity {
                     }
                     if(Cont ==4){
                         Intent i = new Intent(getBaseContext(),Actividad_32_Precios.class);
+                        i.putExtra("idPuntoJuego",idPuntoJuego);
                         startActivityForResult(i, 22);
                         finish();
 
@@ -118,6 +122,7 @@ public class Actividad_31_Mercatua extends Activity {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 22) {
             if (resultCode==RESULT_OK){
+                finish();
         }
     }
     }

@@ -26,7 +26,7 @@
         android:layout_marginStart="100dp"
         android:layout_marginTop="112dp"
         android:gravity="center_vertical"
-        android:text="Audio"
+        android:text="Audioa"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -37,13 +37,13 @@
         android:layout_marginStart="100dp"
         android:layout_marginTop="22dp"
         android:gravity="center_vertical"
-        android:text="Sonido"
+        android:text="Soinua"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView7" />
 
     <TextView
         android:id="@+id/textView8"
-        android:layout_width="54dp"
+        android:layout_width="72dp"
         android:layout_height="24dp"
         android:layout_marginStart="100dp"
         android:layout_marginTop="22dp"

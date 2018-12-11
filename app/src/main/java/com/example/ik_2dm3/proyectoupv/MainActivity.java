@@ -120,8 +120,8 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String NombreLugar=arrayLugares.get(posicionArray).getNombre();
                 //AL CLICKAR SOBRE EL PUNTO SE ABRIRA EL POPUP DEL PUNTO
-                String mensajeContinuar="YA HAY UNA PARTIDA INICIADA EN "+NombreLugar.toUpperCase()+", QUIERES CONTINUAR?";
-                String mensajeReiniciar="ESTAS SEGURO DE QUE QUIERES ELIMINAR EL PROGRESO DE "+NombreLugar.toUpperCase()+"?";
+                String mensajeContinuar="PARTIDA BAT DAGO HASITA "+NombreLugar.toUpperCase()+"N, JARRAITU NAHI DUZU?";
+                String mensajeReiniciar="ZEGURU ZAUDE BERRABIARAZI NAHI DUZULA?";
                 inicioPopup.setContentView(R.layout.popup_inicio);//abrir layout que contiene el popup
 
                 btnPopupInicioSi = (Button) inicioPopup.findViewById(R.id.btnPopupInicioSi);
@@ -140,7 +140,7 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
                         Intent i = new Intent(getBaseContext(), MapaActivity.class);
-                        i.putExtra("idLugarMain",Lugar);
+                        i.putExtra("idLugar",Lugar);
                         startActivity(i);
                         inicioPopup.dismiss();
                     }
@@ -162,7 +162,7 @@ public class MainActivity extends AppCompatActivity {
                     public void onClick(View v) {
                         databaseAccess.resetApp(Lugar);
                         Intent i = new Intent(getBaseContext(), Kaixo.class);
-                        i.putExtra("idLugarMain",Lugar);
+                        i.putExtra("idLugar",Lugar);
                         startActivity(i);
                         inicioPopup.dismiss();
                     }
@@ -188,7 +188,7 @@ public class MainActivity extends AppCompatActivity {
                     inicioPopup.show();
                 }else{
                     Intent i = new Intent(getBaseContext(), Kaixo.class);
-                    i.putExtra("idLugarMain",Lugar);
+                    i.putExtra("idLugar",Lugar);
                     startActivity(i);
                 }
             }
