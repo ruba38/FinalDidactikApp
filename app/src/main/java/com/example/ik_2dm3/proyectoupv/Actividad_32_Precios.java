@@ -59,7 +59,7 @@ public class Actividad_32_Precios extends Activity {
                 Intent SacarFonto= new Intent(getBaseContext(), SacarFotos.class);
                 SacarFonto.putExtra("idPuntoJuego",idPuntoJuego);
                 //Camara
-                startActivityForResult(SacarFonto, 21);
+                startActivityForResult(SacarFonto, 31);
                 finish();
 
 
@@ -86,14 +86,14 @@ public class Actividad_32_Precios extends Activity {
     protected void onActivityResult(int requestCode,
                                     int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 21) {
+        if (requestCode == 31) {
             if (resultCode==RESULT_OK) {
                 Intent hori = new Intent(getBaseContext(), horidata.class);
-                startActivityForResult(hori,22);
+                startActivityForResult(hori,32);
                 String mywebsite = (String) data.getExtras().get("result");
             }
         }
-        if(requestCode==22){
+        if(requestCode==32){
             finish();
         }
 }
