@@ -121,9 +121,8 @@ public class Actividad_31_Mercatua extends Activity {
                                     int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 22) {
-            if (resultCode==RESULT_OK){
                 finish();
-        }
+
     }
     }
 }

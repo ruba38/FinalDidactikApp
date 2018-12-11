@@ -27,6 +27,7 @@ public class Actividad_30_PresentecionM extends AppCompatActivity {
     private ImageView BotonAtras;
     public MediaPlayer Oihaltxo;
     int idPuntoJuego;
+    public boolean Bug =false;
 
 
     @Override
@@ -66,12 +67,18 @@ public class Actividad_30_PresentecionM extends AppCompatActivity {
                 Audio();
             }
         });
-        if (Contador >=1) {
-            Oihaltxo.release();
-            Intent i = new Intent(getBaseContext(), Actividad_31_Mercatua.class);
-            i.putExtra("idPuntoJuego",idPuntoJuego);
-            startActivityForResult(i, 10);
-            finish();
+        if (Contador ==1) {
+            Log.d("31", "ERRORE MALO");
+            if(Bug==false) {
+                Bug=
+                        true;
+                Oihaltxo.release();
+                Log.d("31", "ERRORE buen");
+                Intent i = new Intent(getBaseContext(), Actividad_31_Mercatua.class);
+                i.putExtra("idPuntoJuego", idPuntoJuego);
+                startActivityForResult(i, 10);
+                finish();
+            }
         }
         //Canbiar el texto
         if (Contador == 0) {
@@ -104,9 +111,8 @@ public class Actividad_30_PresentecionM extends AppCompatActivity {
                                         int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 10){
-            if (resultCode==RESULT_OK){
                 Actividad_30_PresentecionM.this.finish();
-           }
+
         }
     }
     protected void OnDestroy(){
