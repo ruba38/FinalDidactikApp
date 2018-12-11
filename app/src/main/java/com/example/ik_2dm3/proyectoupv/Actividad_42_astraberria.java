@@ -40,7 +40,7 @@ public class Actividad_42_astraberria extends AppCompatActivity {
         c2x1=83.1;c2x2=97.8;c2y1=64.7;c2y2=75.4;
         c3x1=69;c3x2=73;c3y1=69.4;c3y2=74.9;
         c4x1=32.8;c4x2=45.6;c4y1=58.7;c4y2=68.4;
-        c5x1=17.5;c5x2=28;c5y1=93.7;c5y2=98.5;
+        c5x1=17.5;c5x2=28;c5y1=93.6;c5y2=98.6;
         astraber.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {

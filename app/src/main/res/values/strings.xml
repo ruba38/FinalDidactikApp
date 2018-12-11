@@ -3,8 +3,8 @@
     <string name="app_name">ProyectoUPV</string>
     <string name="mainBotonInicio">HASIERA</string>
     <string name="mainBotonInicioE">HASIERA</string>
-    <string name="mainBotonCreadores">ZORTZAILEAK</string>
-    <string name="mainBotonCreadoresE">ZORTZAILEAK</string>
+    <string name="mainBotonCreadores">SORTZAILEAK</string>
+    <string name="mainBotonCreadoresE">SORTZAILEAK</string>
     <string name="mainTextoVersiones">v0.1</string>
     //CREADORES
     <string name="title_activity_creadores">CreadoresActivity</string>//UPV Leioa

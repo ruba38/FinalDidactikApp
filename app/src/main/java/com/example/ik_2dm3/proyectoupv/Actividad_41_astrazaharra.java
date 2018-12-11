@@ -24,13 +24,13 @@ public class Actividad_41_astrazaharra extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_actividad_41_astrazaharra);
         getSupportActionBar().hide();
-        idPuntoJuego=getIntent().getIntExtra("idPuntoJuego",0);
-        ast= findViewById(R.id.astrazar);
-        sir1= findViewById(R.id.sir1);
-        sir2= findViewById(R.id.sir2);
-        sir3= findViewById(R.id.sir3);
-        sir4= findViewById(R.id.sir4);
-        sir5= findViewById(R.id.sir5);
+        idPuntoJuego = getIntent().getIntExtra("idPuntoJuego", 0);
+        ast = findViewById(R.id.astrazar);
+        sir1 = findViewById(R.id.sir1);
+        sir2 = findViewById(R.id.sir2);
+        sir3 = findViewById(R.id.sir3);
+        sir4 = findViewById(R.id.sir4);
+        sir5 = findViewById(R.id.sir5);
         pr = findViewById(R.id.prueba);
         sir1.setVisibility(View.INVISIBLE);
         sir2.setVisibility(View.INVISIBLE);
@@ -39,11 +39,29 @@ public class Actividad_41_astrazaharra extends AppCompatActivity {
         sir5.setVisibility(View.INVISIBLE);
 
 
-        c1x1=40.5;c1x2=48.4;c1y1=67.6;c1y2=76.1;
-        c2x1=80.5;c2x2=83.3;c2y1=80.1;c2y2=85;
-        c3x1=87.8;c3x2=97.5;c3y1=53.2;c3y2=61.1;
-        c4x1=62;c4x2=68.9;c4y1=66.2;c4y2=72.3;
-        c5x1=58.7;c5x2=64;c5y1=88.8;c5y2=94.1;
+        c1x1 = 40.5;
+        c1x2 = 48.4;
+        c1y1 = 67.6;
+        c1y2 = 76.1;
+        c2x1 = 79.4;
+        c2x2 = 84.4;
+        c2y1 = 80;
+        c2y2 = 85.1;
+        c3x1 = 87.8;
+        c3x2 = 97.5;
+        c3y1 = 53.2;
+        c3y2 = 61.1;
+        c4x1 = 62;
+        c4x2 = 68.9;
+        c4y1 = 66.2;
+        c4y2 = 72.3;
+        c5x1 = 58.7;
+        c5x2 = 64;
+        c5y1 = 88.8;
+        c5y2 = 94.1;
+    }
+    protected void onStart(){
+        super.onStart();
         ast.setOnTouchListener(new View.OnTouchListener() {
 
             @Override

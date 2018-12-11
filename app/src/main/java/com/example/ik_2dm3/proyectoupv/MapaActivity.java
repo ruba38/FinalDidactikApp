@@ -415,8 +415,18 @@ public class MapaActivity extends AppCompatActivity implements PermissionsListen
                                 } catch (ClassNotFoundException e) {
                                     e.printStackTrace();
                                 }
+                                final Intent j=i;
+                                final
                                 //ABRIR JUEGO
-                                startActivityForResult(i,666);
+                                Thread thread = new Thread() {
+                                    @Override
+                                    public void run() {
+                                        startActivityForResult(j,666);
+                                    }
+                                };
+
+                                thread.start();
+                                //startActivityForResult(i,666);
                             }
                             //SI NO ESTAS EN RFANGO TE MUESTRA UN TOAST INDICANDO QUE NO ESTAS EN RANGO
                             else{
