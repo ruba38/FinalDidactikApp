@@ -57,7 +57,6 @@ public class MainActivity extends AppCompatActivity {
 
         idTextViewLugar.setText(arrayLugares.get(posicionArray).getNombre());
         Lugar = arrayLugares.get(posicionArray).getIdLugar();
-        Log.d("MIlUGAR", "Lugar2="+Lugar);
         mostrarProgreso(Lugar);
 
 
@@ -262,6 +261,7 @@ public class MainActivity extends AppCompatActivity {
         idTextViewProgreso.setText(ContVisibles+" / "+(arrayPuntos.size()));
 
     }
+
     private int getProgreso(int x){
         ContVisibles=0;
         DatabaseAccess databaseAccess = new DatabaseAccess(getBaseContext());
