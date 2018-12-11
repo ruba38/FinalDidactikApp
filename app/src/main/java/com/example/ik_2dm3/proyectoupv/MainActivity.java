@@ -68,6 +68,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(getBaseContext(), AjustesActivity.class);
+                finish();
                 startActivity(i);
             }
         });
@@ -141,8 +142,8 @@ public class MainActivity extends AppCompatActivity {
                     public void onClick(View v) {
                         Intent i = new Intent(getBaseContext(), MapaActivity.class);
                         i.putExtra("idLugar",Lugar);
-                        startActivity(i);
                         inicioPopup.dismiss();
+                        startActivityForResult(i,1);
                     }
                 });
                 //REINICIAR
@@ -163,8 +164,9 @@ public class MainActivity extends AppCompatActivity {
                         databaseAccess.resetApp(Lugar);
                         Intent i = new Intent(getBaseContext(), Kaixo.class);
                         i.putExtra("idLugar",Lugar);
-                        startActivity(i);
                         inicioPopup.dismiss();
+                        startActivityForResult(i,2);
+
                     }
                 });
                 //NO
@@ -189,7 +191,7 @@ public class MainActivity extends AppCompatActivity {
                 }else{
                     Intent i = new Intent(getBaseContext(), Kaixo.class);
                     i.putExtra("idLugar",Lugar);
-                    startActivity(i);
+                    startActivityForResult(i,3);
                 }
             }
         });
@@ -270,11 +272,17 @@ public class MainActivity extends AppCompatActivity {
                 ContVisibles = ContVisibles + 1;
             }
         }
+
         return ContVisibles;
 
     }
+    protected void onActivityResult(int requestCode,
+                                    int resultCode, Intent data) {
+        if (requestCode == 1 || requestCode == 2 || requestCode == 3) {
+            if (resultCode == RESULT_OK) {
+                finish();
+            }
 
-
-
-
+        }
+    }
 }
