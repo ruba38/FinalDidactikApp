@@ -57,7 +57,6 @@ public class MainActivity extends AppCompatActivity {
 
         idTextViewLugar.setText(arrayLugares.get(posicionArray).getNombre());
         Lugar = arrayLugares.get(posicionArray).getIdLugar();
-        Log.d("MIlUGAR", "Lugar2="+Lugar);
         mostrarProgreso(Lugar);
 
 
@@ -141,6 +140,7 @@ public class MainActivity extends AppCompatActivity {
                     public void onClick(View v) {
                         Intent i = new Intent(getBaseContext(), MapaActivity.class);
                         i.putExtra("idLugar",Lugar);
+                        finish();
                         startActivity(i);
                         inicioPopup.dismiss();
                     }
@@ -163,6 +163,7 @@ public class MainActivity extends AppCompatActivity {
                         databaseAccess.resetApp(Lugar);
                         Intent i = new Intent(getBaseContext(), Kaixo.class);
                         i.putExtra("idLugar",Lugar);
+                        finish();
                         startActivity(i);
                         inicioPopup.dismiss();
                     }
@@ -189,6 +190,7 @@ public class MainActivity extends AppCompatActivity {
                 }else{
                     Intent i = new Intent(getBaseContext(), Kaixo.class);
                     i.putExtra("idLugar",Lugar);
+                    finish();
                     startActivity(i);
                 }
             }
@@ -260,6 +262,7 @@ public class MainActivity extends AppCompatActivity {
         idTextViewProgreso.setText(ContVisibles+" / "+(arrayPuntos.size()));
 
     }
+
     private int getProgreso(int x){
         ContVisibles=0;
         DatabaseAccess databaseAccess = new DatabaseAccess(getBaseContext());

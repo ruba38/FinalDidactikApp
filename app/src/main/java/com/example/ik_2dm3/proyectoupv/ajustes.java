@@ -1,7 +1,6 @@
 package com.example.ik_2dm3.proyectoupv;
 
 import android.content.Context;
-import android.util.Log;
 
 public class ajustes extends DatabaseAccess {
     int idAjustes;
@@ -14,15 +13,6 @@ public class ajustes extends DatabaseAccess {
         super(cosa);
         DatabaseAccess databaseAccess = new DatabaseAccess(cosa);
         this.idAjustes = 1;
-        Log.d("ajustes","SIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII"+databaseAccess.getmierda());
-        /*this.sonido =1;
-        this.musica =1;
-        this.mapa =1;
-        this.idioma ="hola";
-         this.sonido =Integer.parseInt(databaseAccess.getAjustes("sonido"));
-       this.musica =Integer.parseInt(databaseAccess.getAjustes("musica"));
-        this.mapa =Integer.parseInt(databaseAccess.getAjustes("mapa"));
-        this.idioma = (String) databaseAccess.getAjustes("imagen");*/
     }
 
 
