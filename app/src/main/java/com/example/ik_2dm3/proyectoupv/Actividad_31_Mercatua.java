@@ -116,6 +116,7 @@ public class Actividad_31_Mercatua extends Activity {
                         Cont ++;
                     }
                     if(Cont ==4){
+                        Log.d("mapa", "Paso 7");
                         Intent i = new Intent(getBaseContext(),Actividad_32_Precios.class);
                         i.putExtra("idPuntoJuego",idPuntoJuego);
                         startActivityForResult(i, 22);

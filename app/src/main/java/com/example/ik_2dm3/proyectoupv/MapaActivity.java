@@ -95,7 +95,7 @@ public class MapaActivity extends AppCompatActivity implements PermissionsListen
 
     private TextView idTextViewPista;
     private Button idBtnCerrarPista;
-
+    private Thread hiloJuego;
 
 
 
@@ -422,10 +422,10 @@ public class MapaActivity extends AppCompatActivity implements PermissionsListen
                                 } catch (ClassNotFoundException e) {
                                     e.printStackTrace();
                                 }
-                                final Intent j=i;
-                                final
+                                Intent j=i;
+
                                 //ABRIR JUEGO
-                                Thread thread = new Thread() {
+                                hiloJuego = new Thread() {
                                     @Override
                                     public void run() {
                                         Log.d("mapa", "Punto 5");
@@ -435,7 +435,7 @@ public class MapaActivity extends AppCompatActivity implements PermissionsListen
                                 };
 
                                 Log.d("mapa", "Paso 6");
-                                thread.start();
+                                hiloJuego.start();
                                 //startActivityForResult(i,666);
                             }
                             //SI NO ESTAS EN RFANGO TE MUESTRA UN TOAST INDICANDO QUE NO ESTAS EN RANGO
@@ -646,14 +646,15 @@ public class MapaActivity extends AppCompatActivity implements PermissionsListen
         pistaPopup.setCanceledOnTouchOutside(false);
         pistaPopup.show();
     }
+
     protected void onActivityResult(int requestCode,
                                     int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 666){
-        Log.d("Mapa","result");
-        LimpiarPuntos();
-        CrearPuntos();
-
+            hiloJuego.interrupt();
+            Log.d("Mapa","result");
+            LimpiarPuntos();
+            CrearPuntos();
         }
     }
 
@@ -718,4 +719,5 @@ public class MapaActivity extends AppCompatActivity implements PermissionsListen
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         permissionsManager.onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
+
 }
