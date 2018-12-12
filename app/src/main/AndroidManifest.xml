@@ -35,10 +35,13 @@
             android:label="" />
         <activity
             android:name=".Actividad_1_Udaletxea"
-            android:label="@string/title_activity_creadores" />
+            android:label="@string/title_activity_creadores"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".CreadoresActivity"
-            android:label="@string/title_activity_creadores" />
+            android:label="@string/title_activity_creadores"
+            android:screenOrientation="portrait" />
+
         <activity
             android:name=".AjustesActivity"
             android:label="@string/ajustesTextoTituloE" />
@@ -58,13 +61,19 @@
             android:label="@string/title_activity_actividad_2__drag" />
         <activity
             android:name=".Actividad_31_Mercatua"
-            android:label="@string/title_activity_actividad_3__mercatua" />
+            android:label="@string/title_activity_actividad_3__mercatua"
+            android:screenOrientation="portrait" />
+
         <activity
             android:name=".Actividad_30_PresentecionM"
-            android:configChanges="orientation|screenSize" />
+            android:configChanges="orientation|screenSize"
+            android:screenOrientation="portrait" />
+
         <activity
             android:name=".Actividad_32_Precios"
-            android:label="@string/title_activity_actividad_32__prese_aurkez" />
+            android:label="@string/title_activity_actividad_32__prese_aurkez"
+            android:screenOrientation="portrait" />
+
         <activity android:name=".Actividad_40_Presentacion" />
         <activity android:name=".Actividad_41_astrazaharra" />
         <activity android:name=".Actividad_42_astraberria" />
@@ -72,7 +81,9 @@
         <activity
 
             android:name=".SacarFotos"
-            android:label="@string/title_activity_sacar_fotos"></activity>
+            android:label="@string/title_activity_sacar_fotos"
+            android:screenOrientation="portrait" />
+
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
