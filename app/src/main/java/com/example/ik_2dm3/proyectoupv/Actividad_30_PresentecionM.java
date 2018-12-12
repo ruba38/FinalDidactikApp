@@ -70,8 +70,7 @@ public class Actividad_30_PresentecionM extends AppCompatActivity {
         if (Contador ==1) {
             Log.d("31", "ERRORE MALO");
             if(Bug==false) {
-                Bug=
-                        true;
+                Bug= true;
                 Oihaltxo.release();
                 Log.d("31", "ERRORE buen");
                 Intent i = new Intent(getBaseContext(), Actividad_31_Mercatua.class);
