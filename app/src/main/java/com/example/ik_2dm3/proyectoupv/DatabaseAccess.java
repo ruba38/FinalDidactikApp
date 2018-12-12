@@ -53,19 +53,19 @@ public class DatabaseAccess extends SQLiteOpenHelper {
         if (dbExist){
             //la bd ya existe
            //context.deleteDatabase("bdeprueba.bd");
-            Log.e("mytag","pre file");
+            // // Log.e("mytag","pre file");
             File dbFile = new File(DB_PATH + DB_NAME);
-            Log.e("mytag","post file");
+            // // Log.e("mytag","post file");
             /*if (dbFile.exists()){
-                Log.e("mytag","entra borrar");
+                // // Log.e("mytag","entra borrar");
                 dbFile.delete();
             }*/
         }
         else {
-            Log.e("mytag","entra else");
+            // // Log.e("mytag","entra else");
             db_Read = this.getReadableDatabase();
             db_Read.close();
-            Log.e("mytag","final else");
+            // // Log.e("mytag","final else");
 
 
             try{

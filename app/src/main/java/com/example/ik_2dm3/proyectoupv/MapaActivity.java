@@ -109,13 +109,13 @@ public class MapaActivity extends AppCompatActivity implements PermissionsListen
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+
+        Log.d("mapa", "Punto 0");
+
         //QUITAR TITULO DEL LAYOUT
         getSupportActionBar().hide();
         // SE CREA LA INSTANCIA DEL MAPA CON LA CLAVE DE ACCESO
-        Log.d("descarga", "punto 1");
         Mapbox.getInstance(this, getString(R.string.access_token));
-
-        Log.d("descarga", "Conectado: "+Mapbox.isConnected());
 
         setContentView(R.layout.activity_mapa);
         //RECOJE EL ID DEL LUGAR SELECIONADO AL PRINCIPIO DE LA APP (MAIN)
@@ -129,8 +129,6 @@ public class MapaActivity extends AppCompatActivity implements PermissionsListen
         mapView = findViewById(R.id.mapView);
         mapView.onCreate(savedInstanceState);
         mapView.getMapAsync(this);
-
-        Log.d("descarga", "LiveRegion: "+mapView.getWindowToken());
 
         //CARGA LOS ESTILOS PERSONALIZADOS
         mapView.setStyleUrl("mapbox://styles/mariusinfo/cjoshzhqg3sb22sme5eyoogt4");
@@ -299,6 +297,8 @@ public class MapaActivity extends AppCompatActivity implements PermissionsListen
     public void onMapReady(MapboxMap mapboxMap) {
 
 
+        Log.d("mapa", "Punto 1");
+
         // ASIGNAR OBJETO A LA INSTANCIA MAPA
         MapaActivity.this.map = mapboxMap;
 
@@ -322,6 +322,8 @@ public class MapaActivity extends AppCompatActivity implements PermissionsListen
 
             @Override
             public boolean onMarkerClick(@NonNull Marker marker) {
+
+                Log.d("mapa", "Punto 2");
 
                 // RECORREMOS EL ARRAY DE MARCADORES
                 for(int i = 0; i < PuntosInteres.size(); i++) {
@@ -401,6 +403,9 @@ public class MapaActivity extends AppCompatActivity implements PermissionsListen
 
                         @Override
                         public void onClick(View v) {
+
+                            Log.d("mapa", "Punto 3");
+
                             //SI ESTA EN RANGO
                             if(enRango(latitud,longitud)) {
                                 //OCULTAR EL POPUP
@@ -412,6 +417,8 @@ public class MapaActivity extends AppCompatActivity implements PermissionsListen
                                 try {
                                     i = new Intent(getBaseContext(), Class.forName(nombreJuego));
                                     i.putExtra("idPuntoJuego",idPunto);
+                                    Log.d("mapa", "Punto 4");
+
                                 } catch (ClassNotFoundException e) {
                                     e.printStackTrace();
                                 }
@@ -421,10 +428,13 @@ public class MapaActivity extends AppCompatActivity implements PermissionsListen
                                 Thread thread = new Thread() {
                                     @Override
                                     public void run() {
+                                        Log.d("mapa", "Punto 5");
+
                                         startActivityForResult(j,666);
                                     }
                                 };
 
+                                Log.d("mapa", "Paso 6");
                                 thread.start();
                                 //startActivityForResult(i,666);
                             }
@@ -437,7 +447,9 @@ public class MapaActivity extends AppCompatActivity implements PermissionsListen
                                 Toast toastRango = Toast.makeText(context, text, duration);
                                 toastRango.show();
                             }
+
                         }
+
                     });
 
                 //CERRAR POPUP AL DAR A LA X
@@ -462,6 +474,7 @@ public class MapaActivity extends AppCompatActivity implements PermissionsListen
         });
 
     }
+
     //COMPROBAR SI LA APLICACION TIENE PERMISOS PARA UBICACION ,SI NO LOS TIENE LOS PIDE
     private void enableLocation() {
         if(PermissionsManager.areLocationPermissionsGranted(this)) {

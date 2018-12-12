@@ -21,6 +21,8 @@ public class Actividad_31_Mercatua extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        Log.d("mapa", "Juego 0");
+
         //DEFINIR IMAJENES
         setContentView(R.layout.activity_actividad_3__mercatua);
         idPuntoJuego=getIntent().getIntExtra("idPuntoJuego",0);
@@ -47,21 +49,29 @@ public class Actividad_31_Mercatua extends Activity {
         Zesta.setOnDragListener(dragListener);
     }
     //LONGCLICK LISTENER
+
     View.OnLongClickListener ClickListener = new View.OnLongClickListener() {
         @Override
         public boolean onLongClick(View v) {
             ClipData data = ClipData.newPlainText("", "");
             View.DragShadowBuilder myShadowBuilder = new View.DragShadowBuilder(v);
             v.startDrag(data, myShadowBuilder, v, 0);
+
+            Log.d("mapa", "Juego 1");
+
             return false;
         }
     };
+
     final View.OnDragListener dragListener = new View.OnDragListener() {
         //ACCIONES QUE HACE DESPUES DEL LONGCLICK
         @Override
         public boolean onDrag(View v, DragEvent event) {
             final View view = (View) event.getLocalState();
             int dragEvent = event.getAction();
+
+            Log.d("mapa", "Juego 2");
+
             switch (dragEvent) {
                 case DragEvent.ACTION_DRAG_ENTERED:
                     break;
@@ -117,8 +127,13 @@ public class Actividad_31_Mercatua extends Activity {
             return true;
         }
     };
-    protected void onActivityResult(int requestCode,
-                                    int resultCode, Intent data) {
+
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+
+        Log.d("mapa", "Juego 3");
+
+
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 22) {
             if (resultCode==RESULT_OK){
