@@ -23,8 +23,8 @@
 
     <ImageView
         android:id="@+id/FotoInicio"
-        android:layout_width="344dp"
-        android:layout_height="381dp"
+        android:layout_width="290dp"
+        android:layout_height="348dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="4dp"
         android:layout_marginEnd="8dp"
@@ -32,6 +32,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0"
         app:srcCompat="@drawable/oihaltzoaiconver2" />
 
     <Button
@@ -99,6 +100,19 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/idTextViewLugar" />
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="323dp"
+        android:layout_height="68dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/FotoInicio"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/titulo" />
 
 
 </android.support.constraint.ConstraintLayout>

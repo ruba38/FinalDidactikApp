@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:mapbox="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent">
@@ -49,13 +50,13 @@
 
     <Button
         android:id="@+id/idBtnMapaAdmin"
-        android:layout_width="wrap_content"
-        android:layout_height="39dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="71dp"
-        android:layout_marginTop="8dp"
-        android:text="Admin False" />
+        android:layout_width="35dp"
+        android:layout_height="34dp"
+        android:layout_alignTop="@+id/mapView"
+        android:layout_marginStart="21dp"
+        android:layout_marginTop="9dp"
+        android:layout_toEndOf="@+id/idBtnMapaAjustes"
+        android:background="@drawable/adminrojo" />
 
 
     <Button
