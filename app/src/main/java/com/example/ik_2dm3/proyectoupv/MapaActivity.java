@@ -5,22 +5,13 @@ import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Color;
-import android.graphics.Typeface;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.ClipDrawable;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.location.Location;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.text.SpannableString;
-import android.text.style.StyleSpan;
-import android.text.style.UnderlineSpan;
-import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -38,8 +29,6 @@ import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.annotations.Icon;
 import com.mapbox.mapboxsdk.annotations.IconFactory;
 import com.mapbox.mapboxsdk.annotations.Marker;
-import com.mapbox.mapboxsdk.annotations.MarkerOptions;
-import com.mapbox.mapboxsdk.camera.CameraUpdateFactory;
 import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.geometry.LatLngBounds;
 import com.mapbox.mapboxsdk.location.modes.RenderMode;
@@ -49,7 +38,6 @@ import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 import com.mapbox.mapboxsdk.plugins.locationlayer.LocationLayerPlugin;
 import com.mapbox.mapboxsdk.plugins.locationlayer.modes.CameraMode;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -131,7 +119,7 @@ public class MapaActivity extends AppCompatActivity implements PermissionsListen
         mapView.getMapAsync(this);
 
         //CARGA LOS ESTILOS PERSONALIZADOS
-        mapView.setStyleUrl("mapbox://styles/mariusinfo/cjoshzhqg3sb22sme5eyoogt4");
+        mapView.setStyleUrl("mapbox://styles/mariusinfo/cjosikqh33suu2smegbr6z3gv");
 
 
         // ASIGNACION DE OBJETOS
@@ -158,16 +146,18 @@ public class MapaActivity extends AppCompatActivity implements PermissionsListen
             public void onClick(View v) {
                 //SI ESTA DESACTIVADO SE ACTIVA Y MUESTRA TODOS LOS PUNTOS RESPECTO AL LUGAR SELECIONADO
                 if (admin==false) {
-                    idBtnMapaAdmin.setText("Admin True");
+
                     // Cambia a Visible = true, todos los puntos
                     databaseAccess.setAllVisible(Lugar);
                     admin=true;
+                    idBtnMapaAdmin.setBackground(getDrawable(R.drawable.adminverde));
                 }
                 //SI ESTA ACTIVADO SE DESACTIVA Y OCULTA TODOS LOS PUNTOS MENOS LOS TERMINADOS SI NO HAY TERMINADOS MUESTRA SOLO EL PRIMERO
                 else{
-                    idBtnMapaAdmin.setText("Admin False");
+
                     databaseAccess.reverseAllVisible(Lugar);
                     admin=false;
+                    idBtnMapaAdmin.setBackground(getDrawable(R.drawable.adminrojo));
                 }
 
                 // VACIA EL ARRAYLIST QUE CONTIENE LOS DATOS DE LOS PUNTOS
