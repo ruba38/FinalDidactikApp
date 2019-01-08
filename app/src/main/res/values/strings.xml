@@ -61,12 +61,21 @@
     <string name="coords">Latitud: 00.00 | Longitud: 00.00</string>
     <string name="astra401">Hara, hara...aurrean duzuen eraikin honek ez du gaur egun armak sortzearen antzik, ezta? Hain koloretsua, hain bizia... gaur egun kulturgune bat da, eta bertan hainbat ekintza egiten dira: kontzertuak, hitzaldiak, tailerrak, etab.</string>
     <string name="astra402">Aurkitu ahal ditzakezue lehengo eraikinaren eta oingo eraikinaren arteko 5 ezberdintasun? Animo eta gogor ekin eta badakizue, zuen argazkiak mesedez!</string>
+    <string name="T201">Hara! Heldu zarete Andra Mari elizara. Ikus dezakezuenez erdigunetik oso gertu dago! Erreparatu zein handia den eleiza! 100 urte baino gehiago behar izan zituzten eraikin hau osorik bukatzeko!</string>
+    <string name="T202"> Topatu ahal dezakezue gure inguruko herrietan non dauden eleizak? Mapan aurkituz gero borobildu itzazue! Eta ez ahaztu, bukatutakoan argazkia ateratzea!</string>
+    <string name="Markina_aurkitu">Aurkitu mapan markinaren elisa</string>
     <string name="title_activity_horidata">Horidata</string>
     <string name="title_activity_sacar_fotos">ArgazkiAtera</string>
-
     <string name="P1sta1">Zuengandik hurbil, herriko eraikin altuenetarikoa /n dago. Kanpai hotsa entzun dezakegu.</string>
-
     <string name="mensajePopup">YA HAY UNA PARTIDA INICIADA EN TXURDINAGA, QUIERES CONTINUAR?</string>
+    <string name="title_activity_actividad_20__presentacion_andra_mari">Actividad_20_PresentacionAndraMari</string>
+    <string name="title_activity_actividad_21__encontrar_iglesia">Actividad_21_EncontrarIglesia</string>
+    <string name="a50">Juntetxea Gernikan oso garrantzi handiko tokia izan da beti, izan ere, Mendeetan zehar Gernika izan da Bizkaiko herriak batzartzeko tokia eta bertan Euskal Herriko historian eragin izan duten erabaki asko hartu dira bozkaketa bidez.</string>
+    <string name="b50">guk gaur ere bozkaketa garrantzitsu bat egingo dugu! Eseri zaitezte borobil erdi horretan ikusten dituzuen eserlekuetan. Honi, hemizikloa deritzo. Bakoitzak, aplikazioa erabiliz zuen gelako asteko ordezkaria aukeratuko duzue.</string>
+    <string name="c50">Gogoratu, bozkaketak isilpekoak dira, bakoitzak zuen botoa eman eta ez duzue zertan albokoari erakutsi. Hemizikloa ezagutzeko argazkia atera eta erakutsi iezadazue, mesedez.</string>
+    <string name="title_activity_actividad_5__presentacion_botaketa">
+        Actividad_5_PresentacionBotaketa
+    </string>
 
 
 </resources>
