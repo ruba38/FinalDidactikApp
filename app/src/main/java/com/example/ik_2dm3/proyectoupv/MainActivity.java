@@ -1,7 +1,6 @@
 package com.example.ik_2dm3.proyectoupv;
 
 import android.app.Dialog;
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -11,7 +10,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,7 +19,7 @@ public class MainActivity extends AppCompatActivity {
     public Button pruebas;
     public boolean admin = false;
     private Button  idBtnMainAjustes,idBtnIzquierda, idBtnDerecha, idBtnContinuar, idBtnInicio, idBtnReiniciar;
-    private Button btnPopupInicioSi,btnPopupInicioNo,btnPopupInicioContinuar,btnPopupInicioReiniciar;
+    private Button btnPopupInicioSi,btnPopupInicioNo,btnPopupInicioContinuar,btnPopupInicioReiniciar ,pruebas;
     private TextView idTextViewLugar, idTextViewProgreso,idTextViewInicioMensaje;
     private int posicionArray=0;
     private int Lugar;
@@ -32,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
     private int ContVisibles = 0;
     private Dialog inicioPopup;
     private ajustes objetoAjustes;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
         idBtnMainAjustes = (Button) findViewById(R.id.idBtnMainAjustes);
         idBtnDerecha = (Button) findViewById(R.id.idBtnDerecha);
         idBtnInicio = (Button) findViewById(R.id.idBtnInicio);
-
+        pruebas =findViewById(R.id.PRUEBAS);
 
 
         DatabaseAccess databaseAccess = new DatabaseAccess(getBaseContext());
@@ -73,7 +72,14 @@ public class MainActivity extends AppCompatActivity {
         Lugar = arrayLugares.get(posicionArray).getIdLugar();
         mostrarProgreso(Lugar);
 
-
+        //Boton Pruebas
+        pruebas.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getBaseContext(), Actividad_50_PresentacionBotaketa.class);
+                startActivityForResult(i,4);
+            }
+        });
 
         //BOTON AJUSTES
 
