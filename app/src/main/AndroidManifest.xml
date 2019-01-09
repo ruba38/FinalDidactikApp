@@ -3,20 +3,23 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.ik_2dm3.proyectoupv">
 
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="false" />
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="false" />
 
-    <uses-feature
-        android:name="android.hardware.camera"
-        android:required="false" />
-    <uses-feature
-        android:name="android.hardware.camera"
-        android:required="false" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
         android:hardwareAccelerated="false"
-        android:largeHeap="true"
         android:icon="@mipmap/oihaltzo"
         android:label="Didaktikapp"
+        android:largeHeap="true"
         android:roundIcon="@mipmap/oihaltzo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
@@ -41,7 +44,6 @@
             android:name=".CreadoresActivity"
             android:label="@string/title_activity_creadores"
             android:screenOrientation="portrait" />
-
         <activity
             android:name=".AjustesActivity"
             android:label="@string/ajustesTextoTituloE" />
@@ -63,23 +65,19 @@
             android:name=".Actividad_31_Mercatua"
             android:label="@string/title_activity_actividad_3__mercatua"
             android:screenOrientation="portrait" />
-
         <activity
             android:name=".Actividad_30_PresentecionM"
             android:configChanges="orientation|screenSize"
             android:screenOrientation="portrait" />
-
         <activity
             android:name=".Actividad_32_Precios"
             android:label="@string/title_activity_actividad_32__prese_aurkez"
             android:screenOrientation="portrait" />
-
         <activity android:name=".Actividad_40_Presentacion" />
         <activity android:name=".Actividad_41_astrazaharra" />
         <activity android:name=".Actividad_42_astraberria" />
         <activity android:name=".horidata" />
         <activity
-
             android:name=".SacarFotos"
             android:label="@string/title_activity_sacar_fotos"
             android:screenOrientation="portrait" />
@@ -88,10 +86,10 @@
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
 
+        <activity
+            android:name=".Actividad_71_Puzzle"
+            android:screenOrientation="portrait"></activity>
+        <activity android:name=".Actividad_70_Puzzle"></activity>
     </application>
-
-    <uses-permission android:name="android.permission.CAMERA" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
 
 </manifest>

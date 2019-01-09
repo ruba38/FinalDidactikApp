@@ -64,6 +64,16 @@
     <string name="title_activity_horidata">Horidata</string>
     <string name="title_activity_sacar_fotos">ArgazkiAtera</string>
 
+    <string name="title_activity_actividad_71_puzzle">
+        Jakina da, Gernikako bonbardaketa Euskal Herriko historiaren gertakari garrantzitsuenetarikoa dela. Bonbardaketak, ustekabean Gernikako biztanle guztiak harrapatu zituen azoka egun batean. Lehenbiziko bonbak erori zirenean jendeak bere ustez lekurik seguruenetara jo zuen edota, hurbilen zeuzkaten babeslekuetara.
+
+    </string>
+
+    <string name="title_activity_actividad_72_puzzle">
+        Bonbardaketaren bizipena ikaragarria izan zen denentzat; beldurra, estutasuna, larrialdia, segurtasunik eza, zalantza eta babesik eza. Gernika guztiz suntsituta gelditu zen! Begira itzazue argazkiak!
+
+    </string>
+
     <string name="P1sta1">Zuengandik hurbil, herriko eraikin altuenetarikoa /n dago. Kanpai hotsa entzun dezakegu.</string>
 
     <string name="mensajePopup">YA HAY UNA PARTIDA INICIADA EN TXURDINAGA, QUIERES CONTINUAR?</string>
