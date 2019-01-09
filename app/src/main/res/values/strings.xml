@@ -76,6 +76,29 @@
     <string name="title_activity_actividad_5__presentacion_botaketa">
         Actividad_5_PresentacionBotaketa
     </string>
-
+    <string name="title_activity_actividad_51__botaketa">Actividad_51_Botaketa</string>
+    <string name="Asier">Asier</string>
+    <string name="Maialen">Maialen</string>
+    <string name="Jon">Jon</string>
+    <string name="Garikoitz">Garikoitz</string>
+    <string name="Miren">Miren</string>
+    <string name="Ander">Ander</string>
+    <string name="Ekaitz1">Ekaitz</string>
+    <string name="Nahia">Nahia</string>
+    <string name="Eneko">Eneko</string>
+    <string name="Unai">Unai</string>
+    <string name="Markel">Markel</string>
+    <string name="Ane">Ane</string>
+    <string name="Mikel">Mikel</string>
+    <string name="Aitor">Aitor</string>
+    <string name="Irati">Irati</string>
+    <string name="Mikela">Mikela</string>
+    <string name="Ekaitz2">Ekaitz</string>
+    <string name="Itxaro">Itxaro</string>
+    <string name="Naroa">Naroa</string>
+    <string name="Xabi">Xabi</string>
+    <string name="Maider">Maider</string>
+    <string name="Geanina">Geanina</string>
+    <string name="OrdescariarenIzena">Ordescariaren Izena</string>
 
 </resources>
