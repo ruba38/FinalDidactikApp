@@ -28,7 +28,7 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:fontFamily="casual"
-        android:text="@string/title_activity_actividad_72_puzzle"
+        //android:text="@string/title_activity_actividad_72_puzzle"
         android:textAlignment="center"
         android:textSize="13sp"
         android:textStyle="normal|bold"
