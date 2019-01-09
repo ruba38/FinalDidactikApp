@@ -29,14 +29,14 @@ private TextView text1, texto2;
                 public void run() {
                     text1.setVisibility(View.INVISIBLE);
                     texto2.setVisibility(View.VISIBLE);
-            }
-        }, 17500);
+                }
+                }, 17500);
 
-        text1.postDelayed(new Runnable() {
-            public void run() {
-              finish();
-            }
+                text1.postDelayed(new Runnable() {
+public void run() {
+        finish();
+        }
         }, 33000);
-    }
-}
+        }
+        }
 
