@@ -45,6 +45,7 @@ public class Actividad_50_PresentacionBotaketa extends AppCompatActivity {
             public void run() {
                 Tb5.setVisibility(View.INVISIBLE);
                 Tc5.setVisibility(View.VISIBLE);
+
             }
         }, 38000);
     }
