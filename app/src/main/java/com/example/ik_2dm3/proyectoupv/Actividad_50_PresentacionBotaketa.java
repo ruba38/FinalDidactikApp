@@ -1,5 +1,6 @@
 package com.example.ik_2dm3.proyectoupv;
 
+import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.app.Activity;
@@ -12,7 +13,7 @@ import android.widget.TextView;
 import org.w3c.dom.Text;
 
 public class Actividad_50_PresentacionBotaketa extends AppCompatActivity {
-    private TextView Ta5,Tb5,Tc5;
+    private TextView Ta5;
     private MediaPlayer Oihaltxo;
 
     @Override
@@ -28,26 +29,28 @@ public class Actividad_50_PresentacionBotaketa extends AppCompatActivity {
 
 
         Ta5 = findViewById(R.id.a5);
-        Tb5 = findViewById(R.id.b5);
-        Tc5 = findViewById(R.id.c5);
-
-        Tb5.setVisibility(View.INVISIBLE);
-        Tc5.setVisibility(View.INVISIBLE);
 
         Ta5.postDelayed(new Runnable() {
             public void run() {
-                Ta5.setVisibility(View.INVISIBLE);
-                Tb5.setVisibility(View.VISIBLE);
+            Ta5.setText(getString(R.string.Texto502));
             }
         }, 20000);
 
-        Tb5.postDelayed(new Runnable() {
+        Ta5.postDelayed(new Runnable() {
             public void run() {
-                Tb5.setVisibility(View.INVISIBLE);
-                Tc5.setVisibility(View.VISIBLE);
 
+                Ta5.setText(getString(R.string.Texto503));
             }
         }, 38000);
+
+        Ta5.postDelayed(new Runnable() {
+            public void run() {
+                Intent intent= new Intent(getApplicationContext(),Actividad_70_Puzzle.class);
+                startActivityForResult(intent,2000);
+
+            }
+        }, 25500);
+
     }
 }
 

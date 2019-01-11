@@ -37,7 +37,7 @@
             android:name=".Agurra"
             android:label="" />
         <activity
-            android:name=".Actividad_1_Udaletxea"
+            android:name=".Actividad_10_Udaletxea"
             android:label="@string/title_activity_creadores"
             android:screenOrientation="portrait" />
         <activity
@@ -59,8 +59,9 @@
             android:name=".Galeria"
             android:label="@string/title_activity_galeria" />
         <activity
-            android:name=".Actividad_2_Drag"
-            android:label="@string/title_activity_actividad_2__drag" />
+            android:name=".Actividad_20_PresentacionAndraMari"
+            android:label="Andramari"
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name=".Actividad_31_Mercatua"
             android:label="@string/title_activity_actividad_3__mercatua"
@@ -92,9 +93,13 @@
         <activity
             android:name=".Actividad_51_Botaketa"
             android:label="@string/title_activity_actividad_51__botaketa"></activity>
+        <activity
             android:name=".Actividad_71_Puzzle"
-            android:screenOrientation="portrait"></activity>
-        <activity android:name=".Actividad_70_Puzzle"></activity>
+            android:screenOrientation="portrait" />
+        <activity android:name=".Actividad_70_Puzzle" />
+        <activity
+            android:name=".Presentaciones"
+            android:label="@string/title_activity_presentaciones"></activity>
     </application>
 
 </manifest>

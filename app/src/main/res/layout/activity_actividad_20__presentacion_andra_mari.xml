@@ -8,7 +8,7 @@
     tools:context=".Actividad_20_PresentacionAndraMari">
 
     <ImageView
-        android:id="@+id/imageView10"
+        android:id="@+id/Tocable"
         android:layout_width="373dp"
         android:layout_height="552dp"
         android:layout_marginStart="52dp"
@@ -18,38 +18,72 @@
         android:src="@mipmap/plantillatexto"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.938"
+        app:layout_constraintHorizontal_bias="0.734"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0" />
 
     <TextView
-        android:id="@+id/Texto1"
-        android:layout_width="205dp"
-        android:layout_height="153dp"
+        android:id="@+id/Texto200"
+        android:layout_width="204dp"
+        android:layout_height="191dp"
         android:layout_marginEnd="8dp"
-        android:text="@string/T201"
+        android:text="@string/Texto201"
         android:textAlignment="center"
         android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView10"
-        app:layout_constraintEnd_toEndOf="@+id/imageView10"
-        app:layout_constraintHorizontal_bias="0.606"
-        app:layout_constraintStart_toStartOf="@+id/imageView10"
-        app:layout_constraintTop_toTopOf="@+id/imageView10"
-        app:layout_constraintVertical_bias="0.476" />
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/Tocable"
+        app:layout_constraintEnd_toEndOf="@+id/Tocable"
+        app:layout_constraintHorizontal_bias="0.521"
+        app:layout_constraintStart_toStartOf="@+id/Tocable"
+        app:layout_constraintTop_toTopOf="@+id/Tocable"
+        app:layout_constraintVertical_bias="0.501" />
 
-    <TextView
-        android:id="@+id/texto2"
-        android:layout_width="230dp"
-        android:layout_height="154dp"
+    <ImageView
+        android:id="@+id/BottonAtras2"
+        android:layout_width="34dp"
+        android:layout_height="54dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:text="@string/T202"
-        android:textAlignment="center"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView10"
-        app:layout_constraintEnd_toEndOf="@+id/imageView10"
-        app:layout_constraintHorizontal_bias="0.629"
-        app:layout_constraintStart_toStartOf="@+id/imageView10"
-        app:layout_constraintTop_toTopOf="@+id/imageView10"
-        app:layout_constraintVertical_bias="0.53" />
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.886"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.084"
+        app:srcCompat="@drawable/atras" />
+
+    <ImageView
+        android:id="@+id/Botonrepetir2"
+        android:layout_width="77dp"
+        android:layout_height="67dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="48dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.096"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/repetir" />
+
+    <Button
+        android:id="@+id/Aurrrera2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:text="Aurrera"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.894" />
+
 </android.support.constraint.ConstraintLayout>

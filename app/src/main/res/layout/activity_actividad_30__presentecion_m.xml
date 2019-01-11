@@ -10,15 +10,14 @@
 
     <ImageView
         android:id="@+id/SplasNaranja"
-        android:layout_width="371dp"
-        android:layout_height="563dp"
+        android:layout_width="398dp"
+        android:layout_height="575dp"
         android:contentDescription="Splas"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
+        app:layout_constraintVertical_bias="1.0"
         app:srcCompat="@mipmap/plantillatexto" />
 
     <TextView
@@ -27,33 +26,16 @@
         android:layout_height="278dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:fontFamily="casual"
-        android:text="@string/T301"
+        android:fontFamily="sans-serif"
         android:textAlignment="center"
-        android:textSize="13sp"
+        android:textSize="18sp"
         android:textStyle="normal|bold"
         app:layout_constraintBottom_toBottomOf="@+id/SplasNaranja"
         app:layout_constraintEnd_toEndOf="@+id/SplasNaranja"
-        app:layout_constraintHorizontal_bias="0.615"
+        app:layout_constraintHorizontal_bias="0.606"
         app:layout_constraintStart_toStartOf="@+id/SplasNaranja"
         app:layout_constraintTop_toTopOf="@+id/SplasNaranja"
-        app:layout_constraintVertical_bias="0.722" />
-
-    <TextView
-        android:id="@+id/T321"
-        android:layout_width="215dp"
-        android:layout_height="238dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
-        android:fontFamily="casual"
-        android:text="@string/T321"
-        android:textAlignment="center"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/SplasNaranja"
-        app:layout_constraintHorizontal_bias="0.544"
-        app:layout_constraintStart_toStartOf="@+id/SplasNaranja"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.638" />
+        app:layout_constraintVertical_bias="0.588" />
 
     <Button
         android:id="@+id/BotonRepetopr30"
@@ -86,5 +68,13 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.074"
         app:srcCompat="@drawable/atras" />
+
+    <Button
+        android:id="@+id/Aurrera3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Aurrera"
+        tools:layout_editor_absoluteX="158dp"
+        tools:layout_editor_absoluteY="456dp" />
 
 </android.support.constraint.ConstraintLayout>

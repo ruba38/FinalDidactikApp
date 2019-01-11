@@ -49,8 +49,7 @@
     <string name="title_activity_galeria">Galeria</string>
     <string name="title_activity_actividad_2__drag">Actividad_2_Drag</string>
     <string name="title_activity_actividad_3__mercatua">Actividad_3_Mercatua</string>
-    <string name="T301">Ummmmm zelako usain ezberdina! Porruak, azenarioak, tomateak, indabak....INDABAK! Gernikako indabak oso famatuak dira! Ba al dakizue ze osagai behar diren indaba plater goxo bat prestatzeko?  Ez badakizue jende ugari batzen da astelehenero azokan galdetzeko!</string>
-    <string name="T321">Ikertu ze osagai behar diren eta galdetu osagai Azkenean indaba plantera  prestatzeko behar dudan dirua esa beharko didazue ! Joan aurretik, gogoratu zuen argazkiak nahi ditudala!</string>
+
     <string name="title_activity_actividad_32__prese_aurkez">Actividad_32_PreseAurkez</string>
     <string name="TextoToast1">Hau es da behar indabak egiteko</string>
     <string name="txorizo">txorizo</string>
@@ -59,10 +58,36 @@
     <string name="user_location_permission_explanation">This app needs location permissions in order to show its functionality.</string>
     <string name="user_location_permission_not_granted">You didn\'t grant location permissions.</string>
     <string name="coords">Latitud: 00.00 | Longitud: 00.00</string>
-    <string name="astra401">Hara, hara...aurrean duzuen eraikin honek ez du gaur egun armak sortzearen antzik, ezta? Hain koloretsua, hain bizia... gaur egun kulturgune bat da, eta bertan hainbat ekintza egiten dira: kontzertuak, hitzaldiak, tailerrak, etab.</string>
-    <string name="astra402">Aurkitu ahal ditzakezue lehengo eraikinaren eta oingo eraikinaren arteko 5 ezberdintasun? Animo eta gogor ekin eta badakizue, zuen argazkiak mesedez!</string>
-    <string name="T201">Hara! Heldu zarete Andra Mari elizara. Ikus dezakezuenez erdigunetik oso gertu dago! Erreparatu zein handia den eleiza! 100 urte baino gehiago behar izan zituzten eraikin hau osorik bukatzeko!</string>
-    <string name="T202"> Topatu ahal dezakezue gure inguruko herrietan non dauden eleizak? Mapan aurkituz gero borobildu itzazue! Eta ez ahaztu, bukatutakoan argazkia ateratzea!</string>
+    <!--Textp Intro ariketa 1-->
+    <string name="Texto101">Orain dela 650 urte gutxi gora behera, Don Tello izeneko kondeak Gernikako hiribildua sortu zuen. Zuen aurrean duzuen gizona da Don Tello. Hiribildua sortzeko “herriaren gutuna”</string>>
+    <string name="Texto102">idatzi behar izan zuen. Ikus al dezakezue non daukan herriaren gutuna? Horrela bada, atera ezazue selfie bat Don Tello egiten ari den keinua imitatuz paper eta guzti.</string>
+    <!--texto Intro ariketa 2-->
+    <string name="Texto201">Hara! Heldu zarete Andra Mari elizara. Ikus dezakezuenez erdigunetik oso gertu dago! Erreparatu zein handia den eleiza! 100 urte baino gehiago behar izan zituzten eraikin hau </string>
+    <string name="Texto202">osorik bukatzeko! Topatu ahal dezakezue gure inguruko herrietan non dauden eleizak? Mapan aurkituz gero borobildu itzazue! Eta ez ahaztu, bukatutakoan argazkia ateratzea!</string>
+
+    <!--texto Intro ariketa 3-->
+    <string name="Texto301">Ummmmm zelako usain ezberdina! Porruak, azenarioak, tomateak, indabak....INDABAK! Gernikako indabak oso famatuak dira! Ba al dakizue ze osagai behar diren indaba plater goxo bat prestatzeko?  Ez badakizue jende ugari batzen da </string>
+    <string name="Texto302">astelehenero azokan galdetzeko! Ikertu ze osagai behar diren eta galdetu osagai Azkenean indaba plantera  prestatzeko behar dudan dirua esa beharko didazue ! Joan aurretik, gogoratu zuen argazkiak nahi ditudala!</string>
+
+    <!--texto Intro ariketa 4-->
+    <string name="Texto401">Hara, hara...aurrean duzuen eraikin honek ez du gaur egun armak sortzearen antzik, ezta? Hain koloretsua, hain bizia... gaur egun kulturgune bat da, eta bertan hainbat ekintza egiten dira: kontzertuak, </string>
+    <string name="Texto402">hitzaldiak, tailerrak, etab. Aurkitu ahal ditzakezue lehengo eraikinaren eta oingo eraikinaren arteko 5 ezberdintasun? Animo eta gogor ekin eta badakizue, zuen argazkiak mesedez!</string>
+    <!--texto Intro ariketa 5-->
+    <string name="Texto501">Juntetxea Gernikan oso garrantzi handiko tokia izan da beti, izan ere, Mendeetan zehar Gernika izan da Bizkaiko herriak batzartzeko tokia eta bertan Euskal Herriko historian eragin izan duten erabaki asko hartu dira bozkaketa bidez.</string>
+    <string name="Texto502">guk gaur ere bozkaketa garrantzitsu bat egingo dugu! Eseri zaitezte borobil erdi horretan ikusten dituzuen eserlekuetan. Honi, hemizikloa deritzo. Bakoitzak, aplikazioa erabiliz zuen gelako asteko ordezkaria aukeratuko duzue.</string>
+    <string name="Texto503">Gogoratu, bozkaketak isilpekoak dira, bakoitzak zuen botoa eman eta ez duzue zertan albokoari erakutsi. Hemizikloa ezagutzeko argazkia atera eta erakutsi iezadazue, mesedez.</string>
+    <!--texto Intro ariketa 6-->
+    <string name="Texto601">Nahiz eta gaur egungoa Gernikako Arbolaren hereniloba izan, Gernikako Arbola ezbairik gabe Euskal Herriko ikur izan da. Alde batetik, bonbardaketaren ondoren zutik dirau zuelako, </string>
+    <string name="Texto602">bestetik oraindik gaur egun ere, Lehendakariak bere kargua arbola azpian zin egiten duelako.Baina, ze arbola-mota da Gernikakoa? Hemen dituzue hosto ezberdinak, ondo behatu eta asmatuko duzue!</string>
+    <!--texto Intro ariketa 7-->
+    <string name="Texto701"> bonbardaketa Euskal Herriko historiaren gertakari garrantzitsuenetarikoa dela. Bonbardaketak,Jakina da, Gernikako ustekabean Gernikako biztanle guztiak harrapatu </string>
+    <string name="Texto702">  zituen azoka egun batean. Lehenbiziko bonbak erori zirenean jendeak bere ustez lekurik seguruenetara jo zuen edota, hurbilen zeuzkaten babeslekuetara. Bonbardaketaren bizipena </string>
+    <string name="Texto703">ikaragarria izan zen denentzat; beldurra, estutasuna, larrialdia, segurtasunik eza, zalantza eta babesik eza. Gernika guztiz suntsituta gelditu zen! Begira itzazue argazkiak!</string>
+    <string name="Texto704">Oso garai gogorrak izan ziren, eta Gernikaz gain beste hainbat leku ere bonbardeatu zituzten. Baina Gernikakoa oso ezaguna da mundu-mailan, margolari ezagun batek "Guernica" </string>
+    <string name="Texto705">deitzen zen margolana margoztu zuelako, besteak beste. Artista horren izena, ezagutu nahi baduzue, margolanaren puzzlea ostu beharko duzue! Amaitutakoan atera ezazue azken selfia, mesedez!</string>
+    <string name="Texto706">Ba al dakizue, aurrean duzuen margolana ez dela benetazkoa? Benetazkoa Madrilera eraman zuten! Ez al duzue uste hemen egon beharko litzatekeela? Pentsatu ezazue eta gelan esango didazue!</string>
+
+
     <string name="Markina_aurkitu">Aurkitu mapan markinaren elisa</string>
     <string name="title_activity_horidata">Horidata</string>
     <string name="title_activity_sacar_fotos">ArgazkiAtera</string>
@@ -70,9 +95,7 @@
     <string name="mensajePopup">YA HAY UNA PARTIDA INICIADA EN TXURDINAGA, QUIERES CONTINUAR?</string>
     <string name="title_activity_actividad_20__presentacion_andra_mari">Actividad_20_PresentacionAndraMari</string>
     <string name="title_activity_actividad_21__encontrar_iglesia">Actividad_21_EncontrarIglesia</string>
-    <string name="a50">Juntetxea Gernikan oso garrantzi handiko tokia izan da beti, izan ere, Mendeetan zehar Gernika izan da Bizkaiko herriak batzartzeko tokia eta bertan Euskal Herriko historian eragin izan duten erabaki asko hartu dira bozkaketa bidez.</string>
-    <string name="b50">guk gaur ere bozkaketa garrantzitsu bat egingo dugu! Eseri zaitezte borobil erdi horretan ikusten dituzuen eserlekuetan. Honi, hemizikloa deritzo. Bakoitzak, aplikazioa erabiliz zuen gelako asteko ordezkaria aukeratuko duzue.</string>
-    <string name="c50">Gogoratu, bozkaketak isilpekoak dira, bakoitzak zuen botoa eman eta ez duzue zertan albokoari erakutsi. Hemizikloa ezagutzeko argazkia atera eta erakutsi iezadazue, mesedez.</string>
+
     <string name="title_activity_actividad_5__presentacion_botaketa">
         Actividad_5_PresentacionBotaketa
     </string>
@@ -100,5 +123,5 @@
     <string name="Maider">Maider</string>
     <string name="Geanina">Geanina</string>
     <string name="OrdescariarenIzena">Ordescariaren Izena</string>
-
+   <string name="title_activity_presentaciones">Presentaciones</string>
 </resources>

@@ -41,11 +41,7 @@ public class Actividad_30_PresentecionM extends AppCompatActivity {
         //declarar Contenido
         Fondo301 = findViewById(R.id.Fondo301);
         Texto301 = findViewById(R.id.Texto301);
-        Texto321 = findViewById(R.id.T321);
         Splash = findViewById(R.id.SplasNaranja);
-        Splash.setVisibility(View.INVISIBLE);
-        Texto301.setVisibility(View.INVISIBLE);
-        Texto321.setVisibility(View.INVISIBLE);
         Botonrepetir= findViewById(R.id.BotonRepetopr30);
         Botonrepetir.setVisibility(View.INVISIBLE);
         // OnClick Fondo
@@ -63,7 +59,7 @@ public class Actividad_30_PresentecionM extends AppCompatActivity {
                 Contador=0;
                 Botonrepetir.setVisibility(View.INVISIBLE);
                 Texto301.setVisibility(View.VISIBLE);
-                Texto321.setVisibility(View.INVISIBLE);
+
                 Audio();
             }
         });
@@ -73,7 +69,7 @@ public class Actividad_30_PresentecionM extends AppCompatActivity {
                 Bug= true;
                 Oihaltxo.release();
                 Log.d("31", "ERRORE buen");
-                Intent i = new Intent(getBaseContext(), Actividad_31_Mercatua.class);
+                Intent i = new Intent(getBaseContext(), Actividad_40_Presentacion.class);
                 i.putExtra("idPuntoJuego", idPuntoJuego);
                 startActivityForResult(i, 10);
                 finish();
@@ -88,14 +84,14 @@ public class Actividad_30_PresentecionM extends AppCompatActivity {
                 CambiartextO.postDelayed(new Runnable(){
                                         @Override
                                         public void run() {
-                                            Texto301.setVisibility(View.INVISIBLE);
-                                            Texto321.setVisibility(View.VISIBLE);
+                                          // Texto301.setText(getString(R.string.T321));
                                         }
-                                    }, 24000
+                                    }, 21500
                 );
                 BotonRepetir.postDelayed(new Runnable() {
                     @Override
                     public void run() {
+
                         Botonrepetir.setVisibility(View.VISIBLE);
                     }
                 },41000);
