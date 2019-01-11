@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@mipmap/udaletxea_fond"
-    tools:context=".Actividad_1_Udaletxea">
+    tools:context=".Actividad_10_Udaletxea">
 
     <Button
         android:id="@+id/idBottonRepetir_A1_udaletxea"
@@ -50,10 +50,10 @@
         android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.461"
+        app:layout_constraintHorizontal_bias="0.459"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.824"
-        app:srcCompat="@drawable/imajencamera" />
+        app:layout_constraintVertical_bias="0.895"
+        app:srcCompat="@drawable/camaraverdepnj" />
 
 </android.support.constraint.ConstraintLayout>

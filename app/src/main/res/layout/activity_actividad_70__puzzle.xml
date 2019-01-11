@@ -6,10 +6,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@mipmap/merkatua_fondo"
-    tools:context=".Actividad_30_PresentecionM">
+    tools:context=".Actividad_70_Puzzle">
 
     <ImageView
-        android:id="@+id/SplasNaranja"
+        android:id="@+id/Puzzle"
         android:layout_width="371dp"
         android:layout_height="563dp"
         android:contentDescription="Splas"
@@ -22,13 +22,13 @@
         app:srcCompat="@mipmap/plantillatexto" />
 
     <TextView
-        android:id="@+id/Texto301"
+        android:id="@+id/Texto701"
         android:layout_width="225dp"
         android:layout_height="278dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:fontFamily="casual"
-        android:text="@string/T301"
+        //android:text="@string/title_activity_actividad_72_puzzle"
         android:textAlignment="center"
         android:textSize="13sp"
         android:textStyle="normal|bold"
@@ -46,14 +46,14 @@
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
         android:fontFamily="casual"
-        android:text="@string/T321"
+        android:text="@string/title_activity_actividad_71_puzzle"
         android:textAlignment="center"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/SplasNaranja"
         app:layout_constraintHorizontal_bias="0.544"
         app:layout_constraintStart_toStartOf="@+id/SplasNaranja"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.638" />
+        app:layout_constraintVertical_bias="0.645" />
 
     <Button
         android:id="@+id/BotonRepetopr30"

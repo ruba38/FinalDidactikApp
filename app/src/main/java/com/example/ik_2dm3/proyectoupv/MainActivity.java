@@ -1,7 +1,6 @@
 package com.example.ik_2dm3.proyectoupv;
 
 import android.app.Dialog;
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -11,12 +10,13 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
+
+    public Button pruebas;
     public boolean admin = false;
     private Button  idBtnMainAjustes,idBtnIzquierda, idBtnDerecha, idBtnContinuar, idBtnInicio, idBtnReiniciar;
     private Button btnPopupInicioSi,btnPopupInicioNo,btnPopupInicioContinuar,btnPopupInicioReiniciar;
@@ -31,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
     private Dialog inicioPopup;
     private ajustes objetoAjustes;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,12 +40,24 @@ public class MainActivity extends AppCompatActivity {
         getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_HIDE_NAVIGATION);
         inicioPopup = new Dialog(this);
 
+        // borrar
+        pruebas = (Button) findViewById(R.id.button2);
+        pruebas.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getBaseContext(), Actividad_70_Puzzle.class);
+                finish();
+                startActivity(i);
+            }
+        });
+
+
         objetoAjustes = new ajustes(getBaseContext());
         Log.d("ajustes","sonido= "+objetoAjustes.sonido+" // musica= "+objetoAjustes.musica+" // mapa="+objetoAjustes.mapa+" // idioma="+objetoAjustes.idioma);
         idBtnMainAjustes = (Button) findViewById(R.id.idBtnMainAjustes);
         idBtnDerecha = (Button) findViewById(R.id.idBtnDerecha);
         idBtnInicio = (Button) findViewById(R.id.idBtnInicio);
-
+        pruebas =findViewById(R.id.PRUEBAS);
 
 
         DatabaseAccess databaseAccess = new DatabaseAccess(getBaseContext());
@@ -59,6 +72,18 @@ public class MainActivity extends AppCompatActivity {
         Lugar = arrayLugares.get(posicionArray).getIdLugar();
         mostrarProgreso(Lugar);
 
+<<<<<<< HEAD
+=======
+        //Boton Pruebas
+        pruebas.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getBaseContext(), Actividad_51_Botaketa.class);
+                startActivityForResult(i,4);
+            }
+        });
+
+>>>>>>> e233cb53a26e8cee6fa94e6896a089f28ef4e607
         //BOTON AJUSTES
 
         idBtnMainAjustes.setOnClickListener(new View.OnClickListener() {

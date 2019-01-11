@@ -37,9 +37,17 @@
             android:name=".Agurra"
             android:label="" />
         <activity
-            android:name=".Actividad_1_Udaletxea"
+            android:name=".Actividad_10_Udaletxea"
             android:label="@string/title_activity_creadores"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".Actividad_20_PresentacionAndraMari"
+            android:label="Andramari_elisa"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Actividad_21_EncontrarIglesia"
+            android:label="Andramari_elisa"
+            android:screenOrientation="landscape" />
         <activity
             android:name=".CreadoresActivity"
             android:label="@string/title_activity_creadores"
@@ -58,9 +66,6 @@
         <activity
             android:name=".Galeria"
             android:label="@string/title_activity_galeria" />
-        <activity
-            android:name=".Actividad_2_Drag"
-            android:label="@string/title_activity_actividad_2__drag" />
         <activity
             android:name=".Actividad_31_Mercatua"
             android:label="@string/title_activity_actividad_3__mercatua"
@@ -86,8 +91,23 @@
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
 
+<<<<<<< HEAD
         <activity android:name=".Actividad_60_Presentacion" />
         <activity android:name=".Actividad_61_GernikaArbola"></activity>
+=======
+        <activity
+            android:name=".Actividad_50_PresentacionBotaketa"
+            android:label="@string/title_activity_actividad_5__presentacion_botaketa" />
+        <activity
+            android:name=".Actividad_51_Botaketa"
+            android:label="@string/title_activity_actividad_51__botaketa"></activity>
+            android:name=".Actividad_71_Puzzle"
+            android:screenOrientation="portrait"></activity>
+        <activity android:name=".Actividad_70_Puzzle"></activity>
+        <activity
+            android:name=".Actividad_50_PresentacionBotaketa"
+            android:label="@string/title_activity_actividad_5__presentacion_botaketa"></activity>
+>>>>>>> e233cb53a26e8cee6fa94e6896a089f28ef4e607
     </application>
 
 </manifest>
