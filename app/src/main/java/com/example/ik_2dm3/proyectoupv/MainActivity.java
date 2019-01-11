@@ -19,7 +19,7 @@ public class MainActivity extends AppCompatActivity {
     public Button pruebas;
     public boolean admin = false;
     private Button  idBtnMainAjustes,idBtnIzquierda, idBtnDerecha, idBtnContinuar, idBtnInicio, idBtnReiniciar;
-    private Button btnPopupInicioSi,btnPopupInicioNo,btnPopupInicioContinuar,btnPopupInicioReiniciar ;
+    private Button btnPopupInicioSi,btnPopupInicioNo,btnPopupInicioContinuar,btnPopupInicioReiniciar;
     private TextView idTextViewLugar, idTextViewProgreso,idTextViewInicioMensaje;
     private int posicionArray=0;
     private int Lugar;

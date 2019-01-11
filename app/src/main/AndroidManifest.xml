@@ -41,6 +41,14 @@
             android:label="@string/title_activity_creadores"
             android:screenOrientation="portrait" />
         <activity
+            android:name=".Actividad_20_PresentacionAndraMari"
+            android:label="Andramari_elisa"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Actividad_21_EncontrarIglesia"
+            android:label="Andramari_elisa"
+            android:screenOrientation="landscape" />
+        <activity
             android:name=".CreadoresActivity"
             android:label="@string/title_activity_creadores"
             android:screenOrientation="portrait" />
@@ -58,10 +66,6 @@
         <activity
             android:name=".Galeria"
             android:label="@string/title_activity_galeria" />
-        <activity
-            android:name=".Actividad_20_PresentacionAndraMari"
-            android:label="Andramari"
-            android:screenOrientation="portrait"></activity>
         <activity
             android:name=".Actividad_31_Mercatua"
             android:label="@string/title_activity_actividad_3__mercatua"
@@ -87,6 +91,8 @@
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
 
+        <activity android:name=".Actividad_60_Presentacion" />
+        <activity android:name=".Actividad_61_GernikaArbola"></activity>
         <activity
             android:name=".Actividad_50_PresentacionBotaketa"
             android:label="@string/title_activity_actividad_5__presentacion_botaketa" />
@@ -100,6 +106,12 @@
         <activity
             android:name=".Presentaciones"
             android:label="@string/title_activity_presentaciones"></activity>
+            android:screenOrientation="portrait"></activity>
+        <activity android:name=".Actividad_70_Puzzle"></activity>
+        <activity
+            android:name=".Actividad_50_PresentacionBotaketa"
+            android:label="@string/title_activity_actividad_5__presentacion_botaketa"></activity>
+
     </application>
 
 </manifest>
