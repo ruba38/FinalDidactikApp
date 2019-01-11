@@ -61,6 +61,8 @@
     <string name="coords">Latitud: 00.00 | Longitud: 00.00</string>
     <string name="astra401">Hara, hara...aurrean duzuen eraikin honek ez du gaur egun armak sortzearen antzik, ezta? Hain koloretsua, hain bizia... gaur egun kulturgune bat da, eta bertan hainbat ekintza egiten dira: kontzertuak, hitzaldiak, tailerrak, etab.</string>
     <string name="astra402">Aurkitu ahal ditzakezue lehengo eraikinaren eta oingo eraikinaren arteko 5 ezberdintasun? Animo eta gogor ekin eta badakizue, zuen argazkiak mesedez!</string>
+    <string name="arbola601">Nahiz eta gaur egungoa Gernikako Arbolaren hereniloba izan, Gernikako Arbola ezbairik gabe Euskal Herriko ikur izan da. Alde batetik, bonbardaketaren ondoren zutik dirau zuelako, bestetik oraindik gaur egun ere, Lehendakariak bere kargua arbola azpian zin egiten duelako.</string>
+    <string name="arbola602">Baina, ze arbola-mota da Gernikakoa? Hemen dituzue hosto ezberdinak, ondo behatu eta asmatuko duzue!</string>
     <string name="title_activity_horidata">Horidata</string>
     <string name="title_activity_sacar_fotos">ArgazkiAtera</string>
 

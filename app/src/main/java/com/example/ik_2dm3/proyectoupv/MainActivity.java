@@ -59,8 +59,6 @@ public class MainActivity extends AppCompatActivity {
         Lugar = arrayLugares.get(posicionArray).getIdLugar();
         mostrarProgreso(Lugar);
 
-
-
         //BOTON AJUSTES
 
         idBtnMainAjustes.setOnClickListener(new View.OnClickListener() {
