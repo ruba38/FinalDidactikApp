@@ -29,7 +29,7 @@ public class Actividad_20_PresentacionAndraMari extends AppCompatActivity {
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         Texto2 = findViewById(R.id.Texto200);
-        idPuntoJuego=getIntent().getIntExtra("idPuntoJuego",0);
+            idPuntoJuego=getIntent().getIntExtra("idPuntoJuego",0);
         botonrepetir = findViewById(R.id.Botonrepetir2);
         botonatras = findViewById(R.id.BottonAtras2);
         botonrepetir.setVisibility(View.INVISIBLE);

@@ -404,14 +404,19 @@ public class MapaActivity extends AppCompatActivity implements PermissionsListen
                                 String nombreJuego = "com.example.ik_2dm3.proyectoupv." + juego;
                                 nombreJuego = nombreJuego.replace(" ", "");
                                 Intent i = null;
-                                try {
-                                    i = new Intent(getBaseContext(), Class.forName(nombreJuego));
-                                    i.putExtra("idPuntoJuego",idPunto);
-                                    Log.d("mapa", "Punto 4");
+                                //7try {
+                                   // i = new Intent(getBaseContext(), Class.forName(nombreJuego));
+                                    i = new Intent(getBaseContext(), Presentaciones.class);
 
-                                } catch (ClassNotFoundException e) {
-                                    e.printStackTrace();
-                                }
+                                    i.putExtra("idPuntoJuego",idPunto);
+                                    i.putExtra("NombreJuego",nombreJuego);
+                                Log.d("Juego", nombreJuego);
+
+                                Log.d("mapa", "Punto 4");
+
+                                //} catch (ClassNotFoundException e) {
+                                 //   e.printStackTrace();
+                               // }
                                 Intent j=i;
 
                                 //ABRIR JUEGO

@@ -28,7 +28,7 @@ public class Actividad_70_Puzzle extends AppCompatActivity {
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         Oihaltxo = MediaPlayer.create(Actividad_70_Puzzle.this, R.raw.picasso);
         Oihaltxo.start();
-        Texto700 = findViewById(R.id.Texto70);
+       // Texto700 = findViewById(R.id.Texto70);
         Texto700.postDelayed(new Runnable() {
             public void run() {
                 Texto700.setText(getString(R.string.Texto702));
