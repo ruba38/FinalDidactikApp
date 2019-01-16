@@ -61,14 +61,15 @@
     <string name="coords">Latitud: 00.00 | Longitud: 00.00</string>
     <string name="astra401">Hara, hara...aurrean duzuen eraikin honek ez du gaur egun armak sortzearen antzik, ezta? Hain koloretsua, hain bizia... gaur egun kulturgune bat da, eta bertan hainbat ekintza egiten dira: kontzertuak, hitzaldiak, tailerrak, etab.</string>
     <string name="astra402">Aurkitu ahal ditzakezue lehengo eraikinaren eta oingo eraikinaren arteko 5 ezberdintasun? Animo eta gogor ekin eta badakizue, zuen argazkiak mesedez!</string>
-<<<<<<< HEAD
+    <string name="galdera1">Zein da margolan honen autorea?</string>
+    <string name="galdera2">Bereizten al duzue animaliarik? Eta pertsonarik? Zer uste duzue esan nahiko duela?</string>
+    <string name="osoondo">Oso ondo!</string>
+    <string name="jarraitu">Jarraitu</string>
     <string name="arbola601">Nahiz eta gaur egungoa Gernikako Arbolaren hereniloba izan, Gernikako Arbola ezbairik gabe Euskal Herriko ikur izan da. Alde batetik, bonbardaketaren ondoren zutik dirau zuelako, bestetik oraindik gaur egun ere, Lehendakariak bere kargua arbola azpian zin egiten duelako.</string>
     <string name="arbola602">Baina, ze arbola-mota da Gernikakoa? Hemen dituzue hosto ezberdinak, ondo behatu eta asmatuko duzue!</string>
-=======
     <string name="T201">Hara! Heldu zarete Andra Mari elizara. Ikus dezakezuenez erdigunetik oso gertu dago! Erreparatu zein handia den eleiza! 100 urte baino gehiago behar izan zituzten eraikin hau osorik bukatzeko!</string>
     <string name="T202"> Topatu ahal dezakezue gure inguruko herrietan non dauden eleizak? Mapan aurkituz gero borobildu itzazue! Eta ez ahaztu, bukatutakoan argazkia ateratzea!</string>
     <string name="Markina_aurkitu">Aurkitu mapan markinaren elisa</string>
->>>>>>> e233cb53a26e8cee6fa94e6896a089f28ef4e607
     <string name="title_activity_horidata">Horidata</string>
     <string name="title_activity_sacar_fotos">ArgazkiAtera</string>
     <string name="P1sta1">Zuengandik hurbil, herriko eraikin altuenetarikoa /n dago. Kanpai hotsa entzun dezakegu.</string>

@@ -91,23 +91,22 @@
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
 
-<<<<<<< HEAD
         <activity android:name=".Actividad_60_Presentacion" />
-        <activity android:name=".Actividad_61_GernikaArbola"></activity>
-=======
+        <activity android:name=".Actividad_61_GernikaArbola" />
         <activity
             android:name=".Actividad_50_PresentacionBotaketa"
             android:label="@string/title_activity_actividad_5__presentacion_botaketa" />
         <activity
             android:name=".Actividad_51_Botaketa"
-            android:label="@string/title_activity_actividad_51__botaketa"></activity>
+            android:label="@string/title_activity_actividad_51__botaketa" />
+        <activity
             android:name=".Actividad_71_Puzzle"
-            android:screenOrientation="portrait"></activity>
-        <activity android:name=".Actividad_70_Puzzle"></activity>
+            android:screenOrientation="portrait" />
+        <activity android:name=".Actividad_70_Puzzle" />
         <activity
             android:name=".Actividad_50_PresentacionBotaketa"
-            android:label="@string/title_activity_actividad_5__presentacion_botaketa"></activity>
->>>>>>> e233cb53a26e8cee6fa94e6896a089f28ef4e607
+            android:label="@string/title_activity_actividad_5__presentacion_botaketa" />
+        <activity android:name=".Actividad_72_galderak"></activity>
     </application>
 
 </manifest>

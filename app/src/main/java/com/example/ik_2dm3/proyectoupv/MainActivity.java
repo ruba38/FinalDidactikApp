@@ -45,8 +45,7 @@ public class MainActivity extends AppCompatActivity {
         pruebas.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(getBaseContext(), Actividad_70_Puzzle.class);
-                finish();
+                Intent i = new Intent(getBaseContext(), Actividad_71_Puzzle.class);
                 startActivity(i);
             }
         });
@@ -72,18 +71,7 @@ public class MainActivity extends AppCompatActivity {
         Lugar = arrayLugares.get(posicionArray).getIdLugar();
         mostrarProgreso(Lugar);
 
-<<<<<<< HEAD
-=======
-        //Boton Pruebas
-        pruebas.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(getBaseContext(), Actividad_51_Botaketa.class);
-                startActivityForResult(i,4);
-            }
-        });
 
->>>>>>> e233cb53a26e8cee6fa94e6896a089f28ef4e607
         //BOTON AJUSTES
 
         idBtnMainAjustes.setOnClickListener(new View.OnClickListener() {

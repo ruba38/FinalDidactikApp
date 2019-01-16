@@ -32,8 +32,8 @@ public class Actividad_61_GernikaArbola extends AppCompatActivity {
         popuparbolb.setContentView(R.layout.popup_arbolb);
         popuparbolm.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         popuparbolb.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        popupfondob = (ImageView) popuparbolb.findViewById(R.id.popupfondob);
-        popupfondom = (ImageView) popuparbolm.findViewById(R.id.popupfondob);
+        popupfondob = (ImageView) popuparbolb.findViewById(R.id.fondoback);
+        popupfondom = (ImageView) popuparbolm.findViewById(R.id.fondoback);
     }
     protected void onStart(){
         super.onStart();
@@ -71,13 +71,13 @@ public class Actividad_61_GernikaArbola extends AppCompatActivity {
         popupfondom.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                popuparbolm.dismiss();
                 return false;
             }
         });
         popupfondob.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
+                popuparbolm.dismiss();
                 Intent i = new Intent(getBaseContext(), SacarFotos.class);
                 i.putExtra("idPuntoJuego",idPuntoJuego);
                 startActivityForResult(i, 10);

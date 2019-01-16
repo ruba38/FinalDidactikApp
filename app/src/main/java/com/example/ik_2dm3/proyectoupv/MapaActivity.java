@@ -41,7 +41,8 @@ import com.mapbox.mapboxsdk.plugins.locationlayer.modes.CameraMode;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MapaActivity extends AppCompatActivity implements PermissionsListener, OnMapReadyCallback, LocationEngineListener, MapboxMap.OnMapClickListener {
+public class
+MapaActivity extends AppCompatActivity implements PermissionsListener, OnMapReadyCallback, LocationEngineListener, MapboxMap.OnMapClickListener {
 
     // Variables para el mapa
     private MapView mapView;
