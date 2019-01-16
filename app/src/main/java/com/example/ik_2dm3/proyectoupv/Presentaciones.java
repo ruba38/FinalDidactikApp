@@ -10,6 +10,7 @@ import android.text.Layout;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -17,7 +18,8 @@ import java.util.ArrayList;
 
 public class Presentaciones extends AppCompatActivity {
     private MediaPlayer Sonido;
-    private ImageView FondoTexto, BotonRepetir, BotonAtras, BotonaAlante ,Fondo;
+    private ImageView FondoTexto, BotonRepetir, BotonAtras ,Fondo;
+    private Button BotonaAlante;
     private TextView Textos;
     private int IdMusica, idPuntoJuego,Contador;
     private String idJuego;
@@ -185,7 +187,6 @@ public class Presentaciones extends AppCompatActivity {
                     Sonido = MediaPlayer.create(getApplicationContext(), R.raw.klipdontello);
 
                     //Actividad
-                    //Actividad = Class.forName("class.cPresentaciones");
                     //Textos
 
                     T1 = getString(R.string.Texto101);
@@ -234,7 +235,8 @@ public class Presentaciones extends AppCompatActivity {
                   } catch (ClassNotFoundException e) {
                     e.printStackTrace();
                       }
-                startActivityForResult(i,1);
+                      Sonido.stop();
+                  startActivityForResult(i,1);
             }
         });
         if (!Sonido.isPlaying()) {
@@ -248,10 +250,12 @@ public class Presentaciones extends AppCompatActivity {
 
                 public void run() {
                     Textos.setText(TodoText.get(Contador-1));
+
                     if(Contador==Tiempos.size()){
                        AbilitaraBotones.postDelayed(new Runnable() {
                            @Override
                            public void run() {
+
                                BotonRepetir.setVisibility(View.VISIBLE);
                                BotonaAlante.setVisibility(View.VISIBLE);
 

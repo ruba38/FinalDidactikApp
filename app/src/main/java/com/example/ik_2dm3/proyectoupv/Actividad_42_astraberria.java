@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -20,7 +21,12 @@ public class Actividad_42_astraberria extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_actividad_42_astraberria);
+
+        //ocultar barras extras
         getSupportActionBar().hide();
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
         idPuntoJuego=getIntent().getIntExtra("idPuntoJuego",0);
         astraber= findViewById(R.id.astraber);
         sir1= findViewById(R.id.sir1);

@@ -3,15 +3,23 @@ package com.example.ik_2dm3.proyectoupv;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 
-public class AjustesActivity extends Activity {
+public class AjustesActivity extends AppCompatActivity {
     private Button idBtnAjustesCerrar,idBtnAjustesCreadores,idBtnAjustesSalir;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ajustes);
+
+        //ocultar barras extras
+        getSupportActionBar().hide();
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
         //CERRAR
         idBtnAjustesCerrar = (Button) findViewById(R.id.idBtnAjustesCerrar);
         idBtnAjustesCerrar.setOnClickListener(new View.OnClickListener() {

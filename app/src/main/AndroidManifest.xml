@@ -101,7 +101,9 @@
         <activity android:name=".Actividad_70_Puzzle" />
         <activity
             android:name=".Presentaciones"
-            android:label="@string/title_activity_presentaciones"></activity>
+            android:label="@string/title_activity_presentaciones"
+            android:screenOrientation="portrait"></activity>
+        
     </application>
 
 </manifest>

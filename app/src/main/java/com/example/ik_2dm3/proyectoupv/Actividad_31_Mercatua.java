@@ -4,13 +4,15 @@ import android.content.ClipData;
 import android.content.Intent;
 import android.os.Bundle;
 import android.app.Activity;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.DragEvent;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-public class Actividad_31_Mercatua extends Activity {
+public class Actividad_31_Mercatua extends AppCompatActivity {
     ImageView Varria;
     int Cont=0;
     int idPuntoJuego;
@@ -21,7 +23,10 @@ public class Actividad_31_Mercatua extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        Log.d("mapa", "Juego 0");
+        //ocultar barras extras
+        getSupportActionBar().hide();
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         //DEFINIR IMAJENES
         setContentView(R.layout.activity_actividad_3__mercatua);
