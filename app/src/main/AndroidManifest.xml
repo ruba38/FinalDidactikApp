@@ -71,10 +71,6 @@
             android:label="@string/title_activity_actividad_3__mercatua"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".Actividad_30_PresentecionM"
-            android:configChanges="orientation|screenSize"
-            android:screenOrientation="portrait" />
-        <activity
             android:name=".Actividad_32_Precios"
             android:label="@string/title_activity_actividad_32__prese_aurkez"
             android:screenOrientation="portrait" />

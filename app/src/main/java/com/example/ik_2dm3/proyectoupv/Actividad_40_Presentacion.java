@@ -31,11 +31,7 @@ public class Actividad_40_Presentacion extends AppCompatActivity {
         getSupportActionBar().hide();
         Fondo40 = findViewById(R.id.Fondo40);
         Texto401 = findViewById(R.id.Texto401);
-        Texto402 = findViewById(R.id.Texto402);
         Splash = findViewById(R.id.SplasNaranja);
-        Splash.setVisibility(View.INVISIBLE);
-        Texto401.setVisibility(View.INVISIBLE);
-        Texto402.setVisibility(View.INVISIBLE);
         Botonrepetir= findViewById(R.id.BotonRepetopr40);
         Botonrepetir.setVisibility(View.INVISIBLE);
         oihaltxo = MediaPlayer.create(Actividad_40_Presentacion.this, R.raw.klipastra);
@@ -74,7 +70,7 @@ public class Actividad_40_Presentacion extends AppCompatActivity {
             oihaltxo.stop();
            /* oihaltxo.pause();
             oihaltxo.release();*/
-            Intent i = new Intent(getBaseContext(), Actividad_41_astrazaharra.class);
+            Intent i = new Intent(getBaseContext(), Actividad_50_PresentacionBotaketa.class);
             i.putExtra("idPuntoJuego",idPuntoJuego);
             startActivityForResult(i, 10);
             finish();
@@ -89,10 +85,9 @@ public class Actividad_40_Presentacion extends AppCompatActivity {
             CambiartextO.postDelayed(new Runnable() {
                                          @Override
                                          public void run() {
-                                             Texto401.setVisibility(View.INVISIBLE);
-                                             Texto402.setVisibility(View.VISIBLE);
+                                    //        Texto401.setText(getString(R.string.astra402));
                                          }
-                                     }, 19500
+                                     }, 17000
             );
             BotonRepetir.postDelayed(new Runnable() {
                 @Override
