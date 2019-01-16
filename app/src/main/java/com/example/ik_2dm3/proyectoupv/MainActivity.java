@@ -40,6 +40,16 @@ public class MainActivity extends AppCompatActivity {
         getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_HIDE_NAVIGATION);
         inicioPopup = new Dialog(this);
 
+        // borrar
+        pruebas = (Button) findViewById(R.id.button2);
+        pruebas.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getBaseContext(), Actividad_71_Puzzle.class);
+                startActivity(i);
+            }
+        });
+
 
         objetoAjustes = new ajustes(getBaseContext());
         Log.d("ajustes","sonido= "+objetoAjustes.sonido+" // musica= "+objetoAjustes.musica+" // mapa="+objetoAjustes.mapa+" // idioma="+objetoAjustes.idioma);
@@ -59,6 +69,7 @@ public class MainActivity extends AppCompatActivity {
         idTextViewLugar.setText(arrayLugares.get(posicionArray).getNombre());
         Lugar = arrayLugares.get(posicionArray).getIdLugar();
         mostrarProgreso(Lugar);
+
 
         //BOTON AJUSTES
 

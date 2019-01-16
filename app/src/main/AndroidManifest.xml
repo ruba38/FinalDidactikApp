@@ -88,13 +88,13 @@
             android:resource="@array/preloaded_fonts" />
 
         <activity android:name=".Actividad_60_Presentacion" />
-        <activity android:name=".Actividad_61_GernikaArbola"></activity>
+        <activity android:name=".Actividad_61_GernikaArbola" />
         <activity
             android:name=".Actividad_50_PresentacionBotaketa"
             android:label="@string/title_activity_actividad_5__presentacion_botaketa" />
         <activity
             android:name=".Actividad_51_Botaketa"
-            android:label="@string/title_activity_actividad_51__botaketa"></activity>
+            android:label="@string/title_activity_actividad_51__botaketa" />
         <activity
             android:name=".Actividad_71_Puzzle"
             android:screenOrientation="portrait" />

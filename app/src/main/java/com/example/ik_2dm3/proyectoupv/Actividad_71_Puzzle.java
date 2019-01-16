@@ -1,19 +1,26 @@
 package com.example.ik_2dm3.proyectoupv;
 
+import android.app.Activity;
+import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
 import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
@@ -26,14 +33,41 @@ import static java.lang.Math.abs;
 
 public class Actividad_71_Puzzle extends AppCompatActivity {
     ArrayList<PuzzlePiece> pieces;
-
+    int idPuntoJuego;
+    private Dialog back;
+    private Button atras, salir;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_actividad_71__puzzle);
-
+        idPuntoJuego = getIntent().getIntExtra("idPuntoJuego", 0);
         getSupportActionBar().hide();
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
+        /*boton back
+         private Dialog back;
+          private Button atras, cancelar, salir;
+         */
+        back = new Dialog(this);
+        back.setContentView(R.layout.atras);
+        back.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        atras= (Button) back.findViewById(R.id.botreniciar);
+        salir= (Button) back.findViewById(R.id.botsalir);
+        atras.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                back.dismiss();
+                finish();
+            }
+        });
+        salir.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+            back.dismiss();
+            finish();
+            }
+        });
+        //boton back
 
         final RelativeLayout layout = findViewById(R.id.layout);
         final ImageView imageView = findViewById(R.id.imageView2);
@@ -240,12 +274,10 @@ public class Actividad_71_Puzzle extends AppCompatActivity {
 
     public void checkGameOver() {
         if (isGameOver()) {
-            Context context = getApplicationContext();
-            CharSequence text = "FAQ OFF!";
-            int duration = Toast.LENGTH_SHORT;
-
-            Toast toast = Toast.makeText(context, text, duration);
-            toast.show();
+            Intent i = new Intent(getBaseContext(), Actividad_72_galderak.class);
+            i.putExtra("idPuntoJuego",idPuntoJuego);
+            startActivityForResult(i, 10);
+            finish();
         }
     }
 
@@ -258,5 +290,11 @@ public class Actividad_71_Puzzle extends AppCompatActivity {
 
         return true;
     }
+    @Override
+    public void onBackPressed() {
+        //your code when back button pressed
+        back.show();
+    }
+
 
 }

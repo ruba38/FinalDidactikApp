@@ -51,6 +51,8 @@ public class TouchListener implements View.OnTouchListener {
                     piece.canMove = false;
                     sendViewToBack(piece);
                     activity.checkGameOver();
+
+
                 }
                 break;
         }
