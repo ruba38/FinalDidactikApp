@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 
@@ -13,7 +14,6 @@ import static com.example.ik_2dm3.proyectoupv.R.*;
 
 public class Actividad_10_Udaletxea extends AppCompatActivity {
     private Button idBottonRepetir_A1_udaletxea;
-    private Button idBottonRepetirAudio_A1_udaletxea;
     private ImageView botoncamara;
     int idPuntoJuego;
 
@@ -22,7 +22,12 @@ public class Actividad_10_Udaletxea extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(layout.activity_actividad_1__udaletxea);
         getSupportActionBar().hide();
-        idPuntoJuego=getIntent().getIntExtra("idPuntoJuego",0);
+        //ocultar barras extras
+        getSupportActionBar().hide();
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
+        idPuntoJuego = getIntent().getIntExtra("idPuntoJuego", 0);
         //Audio
         final MediaPlayer oihaltxo = MediaPlayer.create(Actividad_10_Udaletxea.this, raw.klipdontello);
         oihaltxo.start();
@@ -31,8 +36,8 @@ public class Actividad_10_Udaletxea extends AppCompatActivity {
         botoncamara.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent SacarFonto= new Intent(getBaseContext(), SacarFotos.class);
-                SacarFonto.putExtra("idPuntoJuego",idPuntoJuego);
+                Intent SacarFonto = new Intent(getBaseContext(), SacarFotos.class);
+                SacarFonto.putExtra("idPuntoJuego", idPuntoJuego);
                 //Camara
                 startActivityForResult(SacarFonto, 31);
                 finish();
@@ -41,27 +46,6 @@ public class Actividad_10_Udaletxea extends AppCompatActivity {
             }
         });
 
-        //Boton repetir
-        idBottonRepetir_A1_udaletxea = (Button) findViewById(R.id.idBottonRepetir_A1_udaletxea);
-        idBottonRepetir_A1_udaletxea.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v) {
-                oihaltxo.release();
-                finish();
-            }
-        });
-        //boton Repetir audio
-        idBottonRepetirAudio_A1_udaletxea = (Button) findViewById(R.id.idBottonRepetirAudio_A1_udaletxea);
-        idBottonRepetirAudio_A1_udaletxea.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                oihaltxo.seekTo(0);
-                Log.d("sdad", String.valueOf(oihaltxo.isPlaying()));
-                if(oihaltxo.isPlaying()==false){
-                    oihaltxo.start();
-                }
-            }
-        });
     }
     @Override
     protected void onActivityResult(int requestCode,

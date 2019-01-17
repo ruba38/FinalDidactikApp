@@ -5,13 +5,13 @@
     android:id="@+id/layoutlayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@mipmap/herriafondoa"
+    android:background="@mipmap/herriafondoageioihaltzoa"
     tools:context=".Actividad_10_Udaletxea">
 
     <Button
         android:id="@+id/idBottonRepetir_A1_udaletxea"
-        android:layout_width="36dp"
-        android:layout_height="28dp"
+        android:layout_width="48dp"
+        android:layout_height="32dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
@@ -19,26 +19,10 @@
         android:background="@mipmap/rewind2"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.975"
+        app:layout_constraintHorizontal_bias="0.903"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.015" />
-
-    <Button
-        android:id="@+id/idBottonRepetirAudio_A1_udaletxea"
-        android:layout_width="44dp"
-        android:layout_height="42dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        android:background="@mipmap/repeat2"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.026"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.016" />
+        app:layout_constraintVertical_bias="0.053" />
 
     <ImageView
         android:id="@+id/Botoncamara"
@@ -52,7 +36,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.539"
+        app:layout_constraintVertical_bias="0.28"
         app:srcCompat="@drawable/camaraverdepnj" />
 
 </android.support.constraint.ConstraintLayout>

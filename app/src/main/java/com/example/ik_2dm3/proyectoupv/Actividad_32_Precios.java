@@ -6,14 +6,16 @@ import android.os.Bundle;
 import android.app.Activity;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.io.File;
 
-public class Actividad_32_Precios extends Activity {
+public class Actividad_32_Precios extends AppCompatActivity {
     //Definiciones
     private ImageView Repetir;
     public static TextView KipulaZelda;
@@ -35,6 +37,12 @@ public class Actividad_32_Precios extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_actividad_32__precio);
+
+        //ocultar barras extras
+        getSupportActionBar().hide();
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
         idPuntoJuego=getIntent().getIntExtra("idPuntoJuego",0);
         KipulaZelda = findViewById(R.id.KipulapPrezio);
         AzenarioZelda = findViewById(R.id.AzenarioPrezio);
