@@ -114,7 +114,7 @@ MapaActivity extends AppCompatActivity implements PermissionsListener, OnMapRead
         //RECOJE EL ID DEL LUGAR SELECIONADO AL PRINCIPIO DE LA APP (MAIN)
         Lugar=getIntent().getIntExtra("idLugar",0);
 
-        if(Lugar == 1) {
+        /*if(Lugar == 1) {
             coordsLimite = new LatLngBounds.Builder()
                     .include(new LatLng(43.258316, -2.903066))
                     .include(new LatLng(43.256749, -2.908320))
@@ -125,7 +125,7 @@ MapaActivity extends AppCompatActivity implements PermissionsListener, OnMapRead
                     .include(new LatLng(43.256749, -2.908320))
                     .build();
         }
-
+*/
 
 
         // INSTANCIA EL OBJETO POPUP
