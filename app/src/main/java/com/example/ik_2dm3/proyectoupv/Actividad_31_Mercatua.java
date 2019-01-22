@@ -1,7 +1,10 @@
 package com.example.ik_2dm3.proyectoupv;
 
+import android.app.Dialog;
 import android.content.ClipData;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.app.Activity;
 import android.support.v7.app.AppCompatActivity;
@@ -9,12 +12,16 @@ import android.util.Log;
 import android.view.DragEvent;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
 public class Actividad_31_Mercatua extends AppCompatActivity {
     ImageView Varria;
     int Cont=0;
+    private Dialog back;
+    private Button atras, salir;
+
     int idPuntoJuego;
 
     //kipula.setOnlongClickListener(dragListener);
@@ -52,7 +59,31 @@ public class Actividad_31_Mercatua extends AppCompatActivity {
         txorizo.setOnLongClickListener(ClickListener);
         Tomate.setOnLongClickListener(ClickListener);
         Zesta.setOnDragListener(dragListener);
+        back = new Dialog(this);
+        back.setContentView(R.layout.atras);
+        back.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        atras= (Button) back.findViewById(R.id.botreniciar);
+        salir= (Button) back.findViewById(R.id.botsalir);
+        atras.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                back.dismiss();
+                Intent i = new Intent(getBaseContext(), Presentaciones.class );
+                i.putExtra("idPuntoJuego",idPuntoJuego);
+                startActivityForResult(i, 10);
+                finish();
+            }
+        });
+        salir.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                back.dismiss();
+
+                finish();
+            }
+        });
     }
+
     //LONGCLICK LISTENER
 
     View.OnLongClickListener ClickListener = new View.OnLongClickListener() {
@@ -145,6 +176,11 @@ public class Actividad_31_Mercatua extends AppCompatActivity {
                 finish();
 
     }
+    }
+    @Override
+    public void onBackPressed() {
+        //your code when back button pressed
+        back.show();
     }
 }
 

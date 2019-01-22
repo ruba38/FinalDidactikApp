@@ -136,6 +136,7 @@ public class DatabaseAccess extends SQLiteOpenHelper {
             cursor.moveToNext();
         }
         cursor.close();
+        db.close();
         return datoslista;
     }
     //VUELVE VISIBLE EL SIGIENTE PUNTO Y MARCA COMO TERMINADO EL ACTUAL
@@ -144,12 +145,14 @@ public class DatabaseAccess extends SQLiteOpenHelper {
         db = SQLiteDatabase.openDatabase(myPath, null, SQLiteDatabase.OPEN_READWRITE);
         db = this.getWritableDatabase();
         db.execSQL("UPDATE puntos SET visible=1 WHERE idPunto="+x);
+        db.close();
     }
     public void setTerminado(int x){
         String myPath = DB_PATH + DB_NAME;
         db = SQLiteDatabase.openDatabase(myPath, null, SQLiteDatabase.OPEN_READWRITE);
         db = this.getWritableDatabase();
         db.execSQL("UPDATE puntos SET terminado=1 WHERE idPunto="+x);
+        db.close();
 
     }
     public int getVisible(int x){
@@ -158,6 +161,8 @@ public class DatabaseAccess extends SQLiteOpenHelper {
         db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery("SELECT visible FROM puntos where idPunto="+x, null);
         cursor.moveToFirst();
+        cursor.close();
+        db.close();
         return cursor.getInt(cursor.getColumnIndex("visible"));
     }
     public int getTerminado(int x){
@@ -166,6 +171,8 @@ public class DatabaseAccess extends SQLiteOpenHelper {
         db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery("SELECT terminado FROM puntos where idPunto="+x, null);
         cursor.moveToFirst();
+        cursor.close();
+        db.close();
         return cursor.getInt(cursor.getColumnIndex("terminado"));
 
     }
@@ -175,6 +182,7 @@ public class DatabaseAccess extends SQLiteOpenHelper {
         db = SQLiteDatabase.openDatabase(myPath, null, SQLiteDatabase.OPEN_READWRITE);
         db = this.getWritableDatabase();
         db.execSQL("UPDATE puntos SET visible=0,terminado=0 WHERE idLugar="+x);
+        db.close();
 
     }
     public void iniciarApp(int x){
@@ -182,6 +190,7 @@ public class DatabaseAccess extends SQLiteOpenHelper {
         db = SQLiteDatabase.openDatabase(myPath, null, SQLiteDatabase.OPEN_READWRITE);
         db = this.getWritableDatabase();
         db.execSQL("UPDATE puntos SET visible=1 WHERE idLugar="+x+" AND secuencia=1");
+        db.close();
 
     }
 
@@ -195,19 +204,24 @@ public class DatabaseAccess extends SQLiteOpenHelper {
         cursor.moveToFirst();
 
         if (cursor.getInt(cursor.getColumnIndex("terminado")) == 1) {
+            cursor.close();
+            db.close();
             return true;
         } else {
+            cursor.close();
+            db.close();
             return false;
         }
-
-
     }
+
     public String getPista(int idL,int secuencia){
         String myPath = DB_PATH + DB_NAME;
         db = SQLiteDatabase.openDatabase(myPath, null, SQLiteDatabase.OPEN_READWRITE);
         db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery("SELECT pista FROM puntos where secuencia="+secuencia+" And idLugar="+idL, null);
         cursor.moveToFirst();
+        cursor.close();
+        db.close();
         return cursor.getString(cursor.getColumnIndex("pista"));
     }
 
@@ -273,6 +287,7 @@ public class DatabaseAccess extends SQLiteOpenHelper {
         db = SQLiteDatabase.openDatabase(myPath, null, SQLiteDatabase.OPEN_READWRITE);
         db = this.getWritableDatabase();
         db.execSQL("UPDATE puntos SET rango="+x+" WHERE idPunto="+id);
+        db.close();
     }
     //############################################################################################## TABLA LUGARES
     public Object getLugares(){
@@ -297,6 +312,7 @@ public class DatabaseAccess extends SQLiteOpenHelper {
             cursor.moveToNext();
         }
         cursor.close();
+        db.close();
         return datosLugares;
     }
     public String getImajen(int Lugar){
@@ -307,6 +323,7 @@ public class DatabaseAccess extends SQLiteOpenHelper {
         cursor.moveToFirst();
         String imagen= cursor.getString(cursor.getColumnIndex("imagen"));
         cursor.close();
+        db.close();
         return imagen;
 
     }
@@ -315,6 +332,19 @@ public class DatabaseAccess extends SQLiteOpenHelper {
         return "no";
     }
     //############################################################################################## TABLA AJUSTES
+    public String getnombrejuego(int idpunto){
+        String myPath = DB_PATH + DB_NAME;
+        db = SQLiteDatabase.openDatabase(myPath, null, SQLiteDatabase.OPEN_READWRITE);
+        db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery("SELECT juego FROM puntos where idPunto="+idpunto, null);
+        cursor.moveToFirst();
+        String nombrejuego= cursor.getString(cursor.getColumnIndex("juego"));
+        cursor.close();
+        db.close();
+        Log.d("mytag", "devolucion juego"+ nombrejuego);
+
+        return nombrejuego;
+    }
     public String getAjustes(String opcion){
         int idAjuste=1;
         int sonido=0;
@@ -340,6 +370,7 @@ public class DatabaseAccess extends SQLiteOpenHelper {
             cursor.moveToNext();
         }
         cursor.close();
+        db.close();
         //return datosAjustes;
 
         switch (opcion) {

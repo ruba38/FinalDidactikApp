@@ -29,9 +29,9 @@
     <string name="ajustesTextoTituloE">EZARPENAK</string>
     <string name="ajustesTextoOpcionSonido">Musika</string>
     <string name="ajustesTextoOpcionSonidoE">Musika</string>
-    <string name="ajustesTextoOpcionIdioma">hizkuntza</string>
-    <string name="ajustesTextoOpcionIdiomaE">hizkuntza</string>
-    <string name="ajustesTextoTitulo2">Aukerak</string>
+    <string name="ajustesTextoOpcionIdioma">Hizkuntza</string>
+    <string name="ajustesTextoOpcionIdiomaE">Hizkuntza</string>
+    <string name="ajustesTextoTitulo2">AUKERAK</string>
     <string name="ajustesBotonCerrarApp">Irten</string>
     <string name="ajustesBotonCerrarAppE">IRTEN</string>
     //MAPA

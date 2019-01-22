@@ -406,17 +406,12 @@ MapaActivity extends AppCompatActivity implements PermissionsListener, OnMapRead
                                 //OCULTAR EL POPUP
                                 puntoPopup.dismiss();
                                 //COJER EL NOMBRE DEL JUEGO Y COMBERTIRLO EN LA CLASE DEL JUEGO Q NECESITAMOS ABRIR
-                                String nombreJuego = "com.example.ik_2dm3.proyectoupv." + juego;
-                                nombreJuego = nombreJuego.replace(" ", "");
                                 Intent i = null;
                                 //7try {
                                    // i = new Intent(getBaseContext(), Class.forName(nombreJuego));
                                     i = new Intent(getBaseContext(), Presentaciones.class);
 
                                     i.putExtra("idPuntoJuego",idPunto);
-                                    i.putExtra("NombreJuego",nombreJuego);
-                                Log.d("Juego", nombreJuego);
-
                                 Log.d("mapa", "Punto 4");
 
                                 //} catch (ClassNotFoundException e) {
