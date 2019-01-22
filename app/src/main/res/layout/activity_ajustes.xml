@@ -7,6 +7,38 @@
     android:layout_height="match_parent"
     tools:context=".AjustesActivity">
 
+    <CheckBox
+        android:id="@+id/ChekBoxAdminMod"
+        android:layout_width="31dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="96dp"
+        android:layout_marginBottom="300dp"
+        app:layout_constraintBottom_toBottomOf="@+id/idBtnAjustesCerrar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.937"
+        app:layout_constraintStart_toEndOf="@+id/TextAdmin"
+        app:layout_constraintTop_toBottomOf="@+id/checkBoxAudio"
+        app:layout_constraintVertical_bias="0.098" />
+
+    <TextView
+        android:id="@+id/TextAdmin"
+        android:layout_width="85dp"
+        android:layout_height="31dp"
+        android:layout_marginStart="100dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="304dp"
+        android:gravity="center_vertical"
+        android:text="Admin.Mod."
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView7"
+        app:layout_constraintVertical_bias="0.17" />
+
     <Button
         android:id="@+id/idBtnAjustesCerrar"
         android:layout_width="30dp"
@@ -31,37 +63,6 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textView"
-        android:layout_width="55dp"
-        android:layout_height="30dp"
-        android:layout_marginStart="100dp"
-        android:layout_marginTop="22dp"
-        android:gravity="center_vertical"
-        android:text="Soinua"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView7" />
-
-    <TextView
-        android:id="@+id/textView8"
-        android:layout_width="72dp"
-        android:layout_height="24dp"
-        android:layout_marginStart="100dp"
-        android:layout_marginTop="22dp"
-        android:text="@string/ajustesTextoOpcionIdioma"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
-
-    <Button
-        android:id="@+id/button"
-        android:layout_width="34dp"
-        android:layout_height="24dp"
-        android:layout_marginTop="22dp"
-        android:layout_marginEnd="98dp"
-        android:background="@drawable/eus"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/checkBoxSonido" />
-
-    <TextView
         android:id="@+id/textView9"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -80,12 +81,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="280dp"
+        android:layout_marginTop="216dp"
         android:layout_marginEnd="8dp"
         android:text="@string/ajustesTextoTitulo2"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -98,9 +100,10 @@
         android:text="@string/mainBotonCreadores"
         app:layout_constraintBottom_toTopOf="@+id/idBtnAjustesSalir"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView10"
-        app:layout_constraintVertical_bias="0.571" />
+        app:layout_constraintVertical_bias="0.42" />
 
     <Button
         android:id="@+id/idBtnAjustesSalir"
@@ -114,7 +117,8 @@
         app:layout_constraintBottom_toTopOf="@+id/idBtnAjustesCerrar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView10" />
+        app:layout_constraintTop_toBottomOf="@+id/textView10"
+        app:layout_constraintVertical_bias="0.763" />
 
     <android.support.constraint.Guideline
         android:id="@+id/guideline"
@@ -131,14 +135,5 @@
         android:layout_marginEnd="100dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <CheckBox
-        android:id="@+id/checkBoxSonido"
-        android:layout_width="wrap_content"
-        android:layout_height="30dp"
-        android:layout_marginTop="22dp"
-        android:layout_marginEnd="100dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/checkBoxAudio" />
 
 </android.support.constraint.ConstraintLayout>

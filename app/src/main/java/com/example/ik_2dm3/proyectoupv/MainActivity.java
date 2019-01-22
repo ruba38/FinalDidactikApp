@@ -40,15 +40,6 @@ public class MainActivity extends AppCompatActivity {
         getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_HIDE_NAVIGATION);
         inicioPopup = new Dialog(this);
 
-        // borrar
-        pruebas = (Button) findViewById(R.id.button2);
-        pruebas.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(getBaseContext(), Actividad_71_Puzzle.class);
-                startActivity(i);
-            }
-        });
 
 
         objetoAjustes = new ajustes(getBaseContext());
@@ -290,8 +281,8 @@ public class MainActivity extends AppCompatActivity {
         if (requestCode == 1 || requestCode == 2 || requestCode == 3) {
             if (resultCode == RESULT_OK) {
                 finish();
-            }
 
+            }
         }
     }
 }

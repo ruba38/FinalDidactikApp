@@ -28,9 +28,6 @@ public class Actividad_10_Udaletxea extends AppCompatActivity {
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         idPuntoJuego = getIntent().getIntExtra("idPuntoJuego", 0);
-        //Audio
-        final MediaPlayer oihaltxo = MediaPlayer.create(Actividad_10_Udaletxea.this, raw.klipdontello);
-        oihaltxo.start();
         //boton camara
         botoncamara = findViewById(R.id.Botoncamara);
         botoncamara.setOnClickListener(new View.OnClickListener() {

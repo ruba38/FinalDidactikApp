@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -23,7 +24,7 @@ public class Actividad_32_Precios extends AppCompatActivity {
     public static TextView IndabaZelda;
     public static TextView TxorizoZelda;
     public static TextView Total;
-    public static ImageView BotonCamara;
+    public static Button BotonCamara;
     public static double TotalN;
     public static double KipulaN;
     public static double AzenarioN;
@@ -58,7 +59,7 @@ public class Actividad_32_Precios extends AppCompatActivity {
 
             //Boton Camara
 
-            BotonCamara = findViewById(R.id.BottonCamaraPrecios);
+            BotonCamara = findViewById(R.id.IdBotonAurrera32);
         BotonCamara.setVisibility(View.INVISIBLE);
 
         BotonCamara.setOnClickListener(new View.OnClickListener() {

@@ -18,6 +18,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -68,7 +69,7 @@ MapaActivity extends AppCompatActivity implements PermissionsListener, OnMapRead
     // Variables de datos
     private ArrayList<MarkerPuntos> PuntosInteres = new ArrayList<MarkerPuntos>();
 
-    private boolean admin = false;
+    private boolean admin ;
     private int idPunto,secuencia;
     private String juego,titulo,imagen,pista;
     private double latitud,longitud;
@@ -79,6 +80,7 @@ MapaActivity extends AppCompatActivity implements PermissionsListener, OnMapRead
     private int contPuntos=0;
     private double distancia2=0.0;
     private int id_bd;
+    public int JUEGO_TERMINADO = 10;
     private int secuencia2;
     private String metrica;
     private double textoDistancia;
@@ -106,7 +108,8 @@ MapaActivity extends AppCompatActivity implements PermissionsListener, OnMapRead
 
 
         Log.d("mapa", "Punto 0");
-
+        //Recojer admin
+        admin= getIntent().getBooleanExtra("Admin",false);
         //QUITAR TITULO DEL LAYOUT
         getSupportActionBar().hide();
         // SE CREA LA INSTANCIA DEL MAPA CON LA CLAVE DE ACCESO
@@ -127,7 +130,10 @@ MapaActivity extends AppCompatActivity implements PermissionsListener, OnMapRead
 
         //CARGA LOS ESTILOS PERSONALIZADOS
         mapView.setStyleUrl("mapbox://styles/mariusinfo/cjosikqh33suu2smegbr6z3gv");
-
+        //OCULTAR BARRA SUPERIOR
+        getSupportActionBar().hide();
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         // ASIGNACION DE OBJETOS
         // BOTONES
@@ -185,7 +191,10 @@ MapaActivity extends AppCompatActivity implements PermissionsListener, OnMapRead
             @Override
             public void onClick(View v) {
                 //ABRE LA VENTANA DE AJUSTES
-                Intent i = new Intent(getBaseContext(), AjustesActivity.class);
+               Intent i = new Intent(getBaseContext(), AjustesActivity.class);
+               // i.putExtra("admin",admin);
+              //  i.putExtra("idLugar",Lugar);
+              //  finish();
                 startActivity(i);}
         });
         //BOTON CAMARA
@@ -455,7 +464,6 @@ MapaActivity extends AppCompatActivity implements PermissionsListener, OnMapRead
                     @Override
                     public void onClick(View v) {
                         //AL CERRARLO PONDRA EL PUNTO COMO FINALIZADO
-                        //PuntoTerminado(idPunto);
                         //OCULTAR POPUP
                         puntoPopup.dismiss();
                     }
@@ -654,6 +662,12 @@ MapaActivity extends AppCompatActivity implements PermissionsListener, OnMapRead
             Log.d("Mapa","result");
             LimpiarPuntos();
             CrearPuntos();
+            PuntoTerminado(idPunto);
+        }
+        if (requestCode == JUEGO_TERMINADO){
+
+
+
         }
     }
 

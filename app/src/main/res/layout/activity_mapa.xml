@@ -43,9 +43,9 @@
         android:layout_alignStart="@+id/mapView"
         android:layout_alignTop="@+id/mapView"
         android:layout_alignParentEnd="true"
-        android:layout_marginStart="299dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="15dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="485dp"
+        android:layout_marginEnd="290dp"
         mapbox:srcCompat="@drawable/camaraverdepnj" />
 
     <ImageView
