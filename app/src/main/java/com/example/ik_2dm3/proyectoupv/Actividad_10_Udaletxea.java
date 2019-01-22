@@ -23,7 +23,6 @@ public class Actividad_10_Udaletxea extends AppCompatActivity {
         setContentView(layout.activity_actividad_1__udaletxea);
         getSupportActionBar().hide();
         //ocultar barras extras
-        getSupportActionBar().hide();
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
 

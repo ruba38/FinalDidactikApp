@@ -6,6 +6,7 @@ import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.WindowManager;
 
 public class Agurra extends AppCompatActivity {
     private ConstraintLayout idLayoutAgurra;
@@ -14,8 +15,10 @@ public class Agurra extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_agurra);
+//ocultar barras extras
         getSupportActionBar().hide();
-
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
         agurra = MediaPlayer.create(Agurra.this, R.raw.clipagurra);
         if(agurra==null) {
             agurra.start();

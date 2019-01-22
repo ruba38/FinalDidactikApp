@@ -64,6 +64,7 @@ public class Actividad_71_Puzzle extends AppCompatActivity {
             @Override
             public void onClick(View v) {
             back.dismiss();
+            setResult(RESULT_OK);
             finish();
             }
         });
