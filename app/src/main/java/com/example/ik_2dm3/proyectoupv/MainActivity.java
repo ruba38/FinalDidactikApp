@@ -41,12 +41,12 @@ public class MainActivity extends AppCompatActivity {
         inicioPopup = new Dialog(this);
 
 
-
         objetoAjustes = new ajustes(getBaseContext());
         Log.d("ajustes","sonido= "+objetoAjustes.sonido+" // musica= "+objetoAjustes.musica+" // mapa="+objetoAjustes.mapa+" // idioma="+objetoAjustes.idioma);
         idBtnMainAjustes = (Button) findViewById(R.id.idBtnMainAjustes);
         idBtnDerecha = (Button) findViewById(R.id.idBtnDerecha);
         idBtnInicio = (Button) findViewById(R.id.idBtnInicio);
+        pruebas =findViewById(R.id.PRUEBAS);
 
 
         DatabaseAccess databaseAccess = new DatabaseAccess(getBaseContext());
@@ -61,6 +61,14 @@ public class MainActivity extends AppCompatActivity {
         Lugar = arrayLugares.get(posicionArray).getIdLugar();
         mostrarProgreso(Lugar);
 
+        //Boton Pruebas
+        pruebas.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getBaseContext(),Presentaciones.class);
+                startActivityForResult(i,4);
+            }
+        });
 
         //BOTON AJUSTES
 
@@ -68,6 +76,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(getBaseContext(), AjustesActivity.class);
+                finish();
                 startActivity(i);
             }
         });
@@ -281,8 +290,8 @@ public class MainActivity extends AppCompatActivity {
         if (requestCode == 1 || requestCode == 2 || requestCode == 3) {
             if (resultCode == RESULT_OK) {
                 finish();
-
             }
+
         }
     }
 }
