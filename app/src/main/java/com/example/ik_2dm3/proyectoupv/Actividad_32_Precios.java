@@ -27,7 +27,7 @@ public class Actividad_32_Precios extends AppCompatActivity {
     public static TextView IndabaZelda;
     public static TextView TxorizoZelda;
     public static TextView Total;
-    public static ImageView BotonCamara;
+    public static Button BotonCamara;
     private Dialog back;
     private Button atras, salir;
 
@@ -57,7 +57,7 @@ public class Actividad_32_Precios extends AppCompatActivity {
         TxorizoZelda = findViewById(R.id.TxorizoPrezio);
         Total = findViewById(R.id.Total);
         Total.setText(String.valueOf(TotalN));
-        //Se agregan al changedListener las celdas
+       // Se agregan al changedListener las celdas
         KipulaZelda.addTextChangedListener(new TextWatcherUsoMercado(KipulaZelda));
         AzenarioZelda.addTextChangedListener(new TextWatcherUsoMercado(AzenarioZelda));
         IndabaZelda.addTextChangedListener(new TextWatcherUsoMercado(IndabaZelda));
@@ -88,7 +88,7 @@ public class Actividad_32_Precios extends AppCompatActivity {
         });
             //Boton Camara
 
-            BotonCamara = findViewById(R.id.BottonCamaraPrecios);
+            BotonCamara = findViewById(R.id.IdBotonAurrera32);
         BotonCamara.setVisibility(View.INVISIBLE);
 
         BotonCamara.setOnClickListener(new View.OnClickListener() {
@@ -105,21 +105,26 @@ public class Actividad_32_Precios extends AppCompatActivity {
         });
     }
     public static void CambiarTotal(){
-        try {
-            //Se leeran los textos y seran convertidos a Double
-            KipulaN = Double.valueOf(String.valueOf(KipulaZelda.getText()));
-            AzenarioN = Double.valueOf(String.valueOf(AzenarioZelda.getText()));
-            IndabakN = Double.valueOf(String.valueOf(IndabaZelda.getText()));
-            TxorizoN = Double.valueOf(String.valueOf(TxorizoZelda.getText()));
-            //Se calculara el cosete deacuerdo a la cantidad en gramos por el precio de alimento en por kilos
-            TotalN = KipulaN*(0.4) + AzenarioN*(0.08) + IndabakN*(0.4) + TxorizoN*(0.1);
-        }catch (Exception e){
-            Log.d("Error","Error");
-        }
-        Total.setText("Prezio Totala:"+String.format("%.2f",TotalN));
-                BotonCamara.setVisibility(View.VISIBLE);
+            try {
+                //Se leeran los textos y seran convertidos a Double
+                KipulaN = Double.valueOf(String.valueOf(KipulaZelda.getText()));
+                AzenarioN = Double.valueOf(String.valueOf(AzenarioZelda.getText()));
+                IndabakN = Double.valueOf(String.valueOf(IndabaZelda.getText()));
+                TxorizoN = Double.valueOf(String.valueOf(TxorizoZelda.getText()));
+                if(KipulaN>0 && AzenarioN>0 &&IndabakN>0 && TxorizoN>0) {
 
-    }
+                    //Se calculara el cosete deacuerdo a la cantidad en gramos por el precio de alimento en por kilos
+                    TotalN = KipulaN * (0.4) + AzenarioN * (0.08) + IndabakN * (0.4) + TxorizoN * (0.1);
+                    Total.setText("Prezio Totala:" + String.format("%.2f", TotalN));
+                    BotonCamara.setVisibility(View.VISIBLE);
+                }
+
+            } catch (Exception e) {
+                Log.d("Error", "Error");
+            }
+
+        }
+
 
     protected void onActivityResult(int requestCode,
                                     int resultCode, Intent data) {

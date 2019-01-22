@@ -214,8 +214,9 @@ public class Presentaciones extends AppCompatActivity {
     //Metodo al Emprezar la Activity Para reporduccior Audios y  Camiar los textos
     public void Ejecuccion(int idPunto) {
         BotonAtras.setOnClickListener(new View.OnClickListener() {
-            @Override
+
             public void onClick(View v) {
+                Sonido.release();
                 finish();
             }
         });
@@ -249,27 +250,19 @@ public class Presentaciones extends AppCompatActivity {
             Contador =0;
             Textos.setText(TodoText.get(Contador));
             while(Contador  < Tiempos.size()){
-            CambiarTexto.postDelayed(new Runnable() {
+                Log.d("Tiempos",Tiempos.get(Contador)+"Entra en admin cheked///////////////////////////////////////////////////////");
+                CambiarTexto.postDelayed(new Runnable() {
 
                 public void run() {
                     Textos.setText(TodoText.get(Contador-1));
 
-                    if(Contador==Tiempos.size()){
-                       AbilitaraBotones.postDelayed(new Runnable() {
-                           @Override
-                           public void run() {
-
-                               BotonRepetir.setVisibility(View.VISIBLE);
-                               BotonaAlante.setVisibility(View.VISIBLE);
-
-                           }
-                       },1) ;
-                    }
                 }
         }, Tiempos.get(Contador));
             Contador++;
-        }
 
+            }
+            BotonRepetir.setVisibility(View.VISIBLE);
+            BotonaAlante.setVisibility(View.VISIBLE);
         }
 
 

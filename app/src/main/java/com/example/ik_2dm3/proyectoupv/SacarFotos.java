@@ -135,7 +135,7 @@ public class SacarFotos extends AppCompatActivity {
         values.put(MediaStore.Images.Media.TITLE, "tiritirti");
         values.put(MediaStore.Images.Media.DESCRIPTION,"Descripcion de la imajen");
         values.put(MediaStore.Images.Media.DATA,getExternalStorageDirectory()+"/Pictures/Dia"+Comgerfecha()+"Hora"+Calendar.getInstance().get(Calendar.HOUR_OF_DAY)+":"+Calendar.getInstance().get(Calendar.MINUTE)+":"+Calendar.getInstance().get(Calendar.SECOND)+".jpg");
-        image_uri= getContentResolver().insert(MediaStore.Images.Media.INTERNAL_CONTENT_URI,values);
+        image_uri= getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI,values);
         Intent cameraIntent=new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT,image_uri);
 

@@ -69,13 +69,12 @@ MapaActivity extends AppCompatActivity implements PermissionsListener, OnMapRead
     // Variables de datos
     private ArrayList<MarkerPuntos> PuntosInteres = new ArrayList<MarkerPuntos>();
 
-    private boolean admin = false;
+    private boolean admin ;
     private int idPunto,secuencia;
     private String juego,titulo,imagen,pista;
     private double latitud,longitud;
     private double RangoGeneral=10.0;
     private int Lugar=1;
-    private String LugarSeleccionado = "";
     // Objetos/Variables de depuracion
     private TextView coordenadas,idTextViewDistancia,idTextViewProgreso,idTextViewMapaProgresoPuntos;
     private int contPuntos=0;
@@ -97,12 +96,19 @@ MapaActivity extends AppCompatActivity implements PermissionsListener, OnMapRead
 
 
     // Limite de la camara de la zona sleccionada
-    LatLngBounds coordsLimite;
+    private static final LatLngBounds coordsLimite = new LatLngBounds.Builder()
+            .include(new LatLng(43.258316, -2.903066))
+            .include(new LatLng(43.256749, -2.908320))
+            .build();
     //SE EJECUTA NADA MAS ABRIRSE EL MAPA
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+
+        Log.d("mapa", "Punto 0");
+        //Recojer admin
+        admin= getIntent().getBooleanExtra("Admin",false);
         //QUITAR TITULO DEL LAYOUT
 //ocultar barras extras
         getSupportActionBar().hide();
@@ -139,7 +145,10 @@ MapaActivity extends AppCompatActivity implements PermissionsListener, OnMapRead
 
         //CARGA LOS ESTILOS PERSONALIZADOS
         mapView.setStyleUrl("mapbox://styles/mariusinfo/cjosikqh33suu2smegbr6z3gv");
-
+        //OCULTAR BARRA SUPERIOR
+        getSupportActionBar().hide();
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         // ASIGNACION DE OBJETOS
         // BOTONES
@@ -197,7 +206,10 @@ MapaActivity extends AppCompatActivity implements PermissionsListener, OnMapRead
             @Override
             public void onClick(View v) {
                 //ABRE LA VENTANA DE AJUSTES
-                Intent i = new Intent(getBaseContext(), AjustesActivity.class);
+               Intent i = new Intent(getBaseContext(), AjustesActivity.class);
+               // i.putExtra("admin",admin);
+              //  i.putExtra("idLugar",Lugar);
+              //  finish();
                 startActivity(i);}
         });
         //BOTON CAMARA
@@ -218,7 +230,6 @@ MapaActivity extends AppCompatActivity implements PermissionsListener, OnMapRead
 
         localizarDistancia(location);
     }
-
     public void localizarDistancia (Location location) {
         // ACCEDE A LA BASE DE DATOS
         DatabaseAccess databaseAccess =new DatabaseAccess(this);
@@ -317,6 +328,8 @@ MapaActivity extends AppCompatActivity implements PermissionsListener, OnMapRead
     public void onMapReady(MapboxMap mapboxMap) {
 
 
+        Log.d("mapa", "Punto 1");
+
         // ASIGNAR OBJETO A LA INSTANCIA MAPA
         MapaActivity.this.map = mapboxMap;
 
@@ -327,9 +340,10 @@ MapaActivity extends AppCompatActivity implements PermissionsListener, OnMapRead
         enableLocation();
 
         // ZOOM MAXIMO Y MINIMO DEL MAPA Y DELIMITAR MAPA
-        map.setMinZoomPreference(16);
-        map.setMaxZoomPreference(19.50);
-        mapboxMap.setLatLngBoundsForCameraTarget(coordsLimite);
+        //TODO :DESCOMENTAR EN UN FUTURO
+       /* map.setMinZoomPreference(16);
+        map.setMaxZoomPreference(17.5);
+        mapboxMap.setLatLngBoundsForCameraTarget(coordsLimite);*/
 
       //  coordsLimite.contains(originLocation.getLatitude(), originLocation.getAltitude());
         // RELLENA EL ARRAYLIST CON LOS DATOS DE LOS PUNTOS
@@ -461,7 +475,6 @@ MapaActivity extends AppCompatActivity implements PermissionsListener, OnMapRead
                     @Override
                     public void onClick(View v) {
                         //AL CERRARLO PONDRA EL PUNTO COMO FINALIZADO
-                        //PuntoTerminado(idPunto);
                         //OCULTAR POPUP
                         puntoPopup.dismiss();
                     }
@@ -661,7 +674,9 @@ MapaActivity extends AppCompatActivity implements PermissionsListener, OnMapRead
             LimpiarPuntos();
             System.gc();
             CrearPuntos();
+            mostrarPista(idTextViewPista );
         }
+
     }
 
     //METODOS NO UTILIZADOS PERO NECESARIOS PARA EL FUNCIONAMIENTO CORECTO DE LA APLICACION

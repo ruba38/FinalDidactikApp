@@ -38,14 +38,16 @@
 
     <ImageView
         android:id="@+id/CamaraMapa"
-        android:layout_width="70dp"
-        android:layout_height="61dp"
+        android:layout_width="52dp"
+        android:layout_height="37dp"
         android:layout_alignStart="@+id/mapView"
         android:layout_alignTop="@+id/mapView"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="299dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="15dp"
+        android:layout_alignEnd="@+id/mapView"
+        android:layout_alignBottom="@+id/mapView"
+        android:layout_marginStart="119dp"
+        android:layout_marginTop="14dp"
+        android:layout_marginEnd="213dp"
+        android:layout_marginBottom="516dp"
         mapbox:srcCompat="@drawable/camaraverdepnj" />
 
     <ImageView
