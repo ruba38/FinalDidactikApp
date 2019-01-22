@@ -41,10 +41,6 @@
             android:label="@string/title_activity_creadores"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".Actividad_20_PresentacionAndraMari"
-            android:label="Andramari_elisa"
-            android:screenOrientation="portrait" />
-        <activity
             android:name=".Actividad_21_EncontrarIglesia"
             android:label="Andramari_elisa"
             android:screenOrientation="landscape" />
@@ -74,7 +70,6 @@
             android:name=".Actividad_32_Precios"
             android:label="@string/title_activity_actividad_32__prese_aurkez"
             android:screenOrientation="portrait" />
-        <activity android:name=".Actividad_40_Presentacion" />
         <activity android:name=".Actividad_41_astrazaharra" />
         <activity android:name=".Actividad_42_astraberria" />
         <activity android:name=".horidata" />
@@ -90,9 +85,6 @@
         <activity android:name=".Actividad_60_Presentacion" />
         <activity android:name=".Actividad_61_GernikaArbola" />
         <activity
-            android:name=".Actividad_50_PresentacionBotaketa"
-            android:label="@string/title_activity_actividad_5__presentacion_botaketa" />
-        <activity
             android:name=".Actividad_51_Botaketa"
             android:label="@string/title_activity_actividad_51__botaketa" />
         <activity
@@ -103,8 +95,10 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".Presentaciones"
-            android:screenOrientation="portrait"></activity>
-        
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Actividad_52_Resultados"
+            android:label="@string/title_activity_actividad_52__resultados"></activity>
     </application>
 
 </manifest>

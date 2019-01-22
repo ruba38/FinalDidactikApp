@@ -48,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
         pruebas.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(getBaseContext(), Actividad_71_Puzzle.class);
+                Intent i = new Intent(getBaseContext(), Actividad_51_Botaketa.class);
                 startActivity(i);
             }
         });*/

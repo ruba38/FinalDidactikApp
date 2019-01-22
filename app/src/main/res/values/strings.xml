@@ -59,7 +59,8 @@
     <string name="user_location_permission_not_granted">You didn\'t grant location permissions.</string>
     <string name="coords">Latitud: 00.00 | Longitud: 00.00</string>
     <!--Textp Intro ariketa 1-->
-    <string name="Texto101">Orain dela 650 urte gutxi gora behera, Don Tello izeneko kondeak Gernikako hiribildua sortu zuen. Zuen aurrean duzuen gizona da Don Tello. Hiribildua sortzeko “herriaren gutuna”</string>>
+    <string name="Texto101">Orain dela 650 urte gutxi gora behera, Don Tello izeneko kondeak Gernikako hiribildua sortu zuen. Zuen aurrean duzuen gizona da Don Tello. Hiribildua sortzeko “herriaren gutuna”</string>
+    >
     <string name="Texto102">idatzi behar izan zuen. Ikus al dezakezue non daukan herriaren gutuna? Horrela bada, atera ezazue selfie bat Don Tello egiten ari den keinua imitatuz paper eta guzti.</string>
     <!--texto Intro ariketa 2-->
     <string name="Texto201">Hara! Heldu zarete Andra Mari elizara. Ikus dezakezuenez erdigunetik oso gertu dago! Erreparatu zein handia den eleiza! 100 urte baino gehiago behar izan zituzten eraikin hau </string>
@@ -128,5 +129,6 @@
     <string name="Maider">Maider</string>
     <string name="Geanina">Geanina</string>
     <string name="OrdescariarenIzena">Ordescariaren Izena</string>
+    <string name="title_activity_actividad_52__resultados">Actividad_52_Resultados</string>
 
 </resources>
