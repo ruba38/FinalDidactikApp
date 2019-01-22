@@ -1,20 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@mipmap/herriafondoa"
-    tools:context=".Actividad_21_EncontrarIglesia">
+    tools:context=".Actividad_21_EncontrarIglesia"
+    android:id="@+id/layout1">
+
+
+    <Button
+        android:id="@+id/btnComprobar2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="160dp"
+        android:layout_marginBottom="14dp"
+        android:background="@drawable/boton_inicio"
+        android:text="Baieztatu" />
 
     <TextView
         android:id="@+id/MarkinaElizaAurkitu"
-        android:layout_width="128dp"
-        android:layout_height="246dp"
-        android:layout_marginStart="8dp"
+        android:layout_width="258dp"
+        android:layout_height="72dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="80dp"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="9dp"
+        android:layout_marginBottom="314dp"
         android:text="@string/Markina_aurkitu"
         android:textAlignment="center"
         android:textAllCaps="true"
@@ -29,15 +44,31 @@
         tools:text="@string/Markina_aurkitu" />
 
     <ImageView
-        android:id="@+id/imageView11"
-        android:layout_width="404dp"
-        android:layout_height="363dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
+        android:id="@+id/juegoMap1"
+        android:layout_width="442dp"
+        android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginEnd="289dp"
+        android:layout_marginBottom="0dp"
         android:src="@mipmap/markinaplanoa"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@+id/MarkinaElizaAurkitu"
         app:layout_constraintTop_toTopOf="parent" />
-</android.support.constraint.ConstraintLayout>
+
+    <Button
+        android:id="@+id/btnCamara"
+        android:layout_width="70dp"
+        android:layout_height="54dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/camaraverdepnj" />
+</RelativeLayout>
