@@ -75,6 +75,7 @@ MapaActivity extends AppCompatActivity implements PermissionsListener, OnMapRead
     private double latitud,longitud;
     private double RangoGeneral=10.0;
     private int Lugar=1;
+    private String LugarSeleccionado = "";
     // Objetos/Variables de depuracion
     private TextView coordenadas,idTextViewDistancia,idTextViewProgreso,idTextViewMapaProgresoPuntos;
     private int contPuntos=0;
@@ -96,17 +97,11 @@ MapaActivity extends AppCompatActivity implements PermissionsListener, OnMapRead
 
 
     // Limite de la camara de la zona sleccionada
-    private static final LatLngBounds coordsLimite = new LatLngBounds.Builder()
-            .include(new LatLng(43.258316, -2.903066))
-            .include(new LatLng(43.256749, -2.908320))
-            .build();
+    LatLngBounds coordsLimite;
     //SE EJECUTA NADA MAS ABRIRSE EL MAPA
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-
-        Log.d("mapa", "Punto 0");
 
         //QUITAR TITULO DEL LAYOUT
 //ocultar barras extras
@@ -118,6 +113,20 @@ MapaActivity extends AppCompatActivity implements PermissionsListener, OnMapRead
         setContentView(R.layout.activity_mapa);
         //RECOJE EL ID DEL LUGAR SELECIONADO AL PRINCIPIO DE LA APP (MAIN)
         Lugar=getIntent().getIntExtra("idLugar",0);
+
+        if(Lugar == 1) {
+            coordsLimite = new LatLngBounds.Builder()
+                    .include(new LatLng(43.258316, -2.903066))
+                    .include(new LatLng(43.256749, -2.908320))
+                    .build();
+        } else if (Lugar == 2) {
+            coordsLimite = new LatLngBounds.Builder()
+                    .include(new LatLng(43.258316, -2.903066))
+                    .include(new LatLng(43.256749, -2.908320))
+                    .build();
+        }
+
+
 
         // INSTANCIA EL OBJETO POPUP
         puntoPopup = new Dialog(this);
@@ -209,6 +218,7 @@ MapaActivity extends AppCompatActivity implements PermissionsListener, OnMapRead
 
         localizarDistancia(location);
     }
+
     public void localizarDistancia (Location location) {
         // ACCEDE A LA BASE DE DATOS
         DatabaseAccess databaseAccess =new DatabaseAccess(this);
@@ -307,8 +317,6 @@ MapaActivity extends AppCompatActivity implements PermissionsListener, OnMapRead
     public void onMapReady(MapboxMap mapboxMap) {
 
 
-        Log.d("mapa", "Punto 1");
-
         // ASIGNAR OBJETO A LA INSTANCIA MAPA
         MapaActivity.this.map = mapboxMap;
 
@@ -319,11 +327,11 @@ MapaActivity extends AppCompatActivity implements PermissionsListener, OnMapRead
         enableLocation();
 
         // ZOOM MAXIMO Y MINIMO DEL MAPA Y DELIMITAR MAPA
-        //TODO :DESCOMENTAR EN UN FUTURO
-       /* map.setMinZoomPreference(16);
-        map.setMaxZoomPreference(17.5);
-        mapboxMap.setLatLngBoundsForCameraTarget(coordsLimite);*/
+        map.setMinZoomPreference(16);
+        map.setMaxZoomPreference(19.50);
+        mapboxMap.setLatLngBoundsForCameraTarget(coordsLimite);
 
+      //  coordsLimite.contains(originLocation.getLatitude(), originLocation.getAltitude());
         // RELLENA EL ARRAYLIST CON LOS DATOS DE LOS PUNTOS
         CrearPuntos();
 
