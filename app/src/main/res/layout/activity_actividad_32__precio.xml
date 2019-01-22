@@ -19,9 +19,10 @@
         android:src="@drawable/boton_inicio"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.884"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.47" />
+        app:layout_constraintVertical_bias="1.0" />
 
     <ImageView
         android:id="@+id/Indabak"
@@ -159,20 +160,20 @@
 
     <TextView
         android:id="@+id/Total"
-        android:layout_width="137dp"
-        android:layout_height="68dp"
+        android:layout_width="119dp"
+        android:layout_height="60dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
-        android:background="@mipmap/pagoa"
-        android:backgroundTint="@color/VerdeChungo"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:background="@drawable/cuadradodetexto"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toBottomOf="@+id/FondoNaraja"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.8"
+        app:layout_constraintHorizontal_bias="0.735"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/TxorizoPrezio"
-        app:layout_constraintVertical_bias="0.733" />
+        app:layout_constraintVertical_bias="0.714" />
 
     <TextView
         android:id="@+id/textView12"

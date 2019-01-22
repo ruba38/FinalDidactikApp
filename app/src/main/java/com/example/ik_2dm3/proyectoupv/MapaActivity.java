@@ -111,8 +111,10 @@ MapaActivity extends AppCompatActivity implements PermissionsListener, OnMapRead
         //Recojer admin
         admin= getIntent().getBooleanExtra("Admin",false);
         //QUITAR TITULO DEL LAYOUT
+//ocultar barras extras
         getSupportActionBar().hide();
-        // SE CREA LA INSTANCIA DEL MAPA CON LA CLAVE DE ACCESO
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);        // SE CREA LA INSTANCIA DEL MAPA CON LA CLAVE DE ACCESO
         Mapbox.getInstance(this, getString(R.string.access_token));
 
         setContentView(R.layout.activity_mapa);
@@ -661,14 +663,11 @@ MapaActivity extends AppCompatActivity implements PermissionsListener, OnMapRead
             hiloJuego.interrupt();
             Log.d("Mapa","result");
             LimpiarPuntos();
+            System.gc();
             CrearPuntos();
-            PuntoTerminado(idPunto);
+            mostrarPista(idTextViewPista );
         }
-        if (requestCode == JUEGO_TERMINADO){
 
-
-
-        }
     }
 
     //METODOS NO UTILIZADOS PERO NECESARIOS PARA EL FUNCIONAMIENTO CORECTO DE LA APLICACION

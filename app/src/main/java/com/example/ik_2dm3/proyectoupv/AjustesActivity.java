@@ -27,7 +27,7 @@ public class AjustesActivity extends AppCompatActivity {
         //Sonido
 
         //Admin.Mod
-        Admin = findViewById(R.id.ChekBoxAdminMod);
+        //Admin = findViewById(R.id.ChekBoxAdminMod);
         //CERRAR
         idBtnAjustesCerrar = (Button) findViewById(R.id.idBtnAjustesCerrar);
         idBtnAjustesCerrar.setOnClickListener(new View.OnClickListener() {
