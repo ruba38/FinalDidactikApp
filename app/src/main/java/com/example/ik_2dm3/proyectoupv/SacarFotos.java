@@ -21,9 +21,11 @@ import android.renderscript.Sampler;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AppCompatActivity;
 import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Switch;
@@ -38,7 +40,7 @@ import java.util.Date;
 
 import static android.os.Environment.getExternalStorageDirectory;
 
-public class SacarFotos extends Activity {
+public class SacarFotos extends AppCompatActivity {
     public ImageView bottonCamara;
     public Button bottonOk;
     public ImageView Imagenes;
@@ -59,6 +61,11 @@ public class SacarFotos extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sacar_fotos);
+
+        getSupportActionBar().hide();
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
         idPuntoJuego=getIntent().getIntExtra("idPuntoJuego",0);
         Imagenes = findViewById(R.id.Imajenes);
         bottonOk = findViewById(R.id.buttonOk);
@@ -103,7 +110,7 @@ public class SacarFotos extends Activity {
         values.put(MediaStore.Images.Media.TITLE, "tiritirti");
         values.put(MediaStore.Images.Media.DESCRIPTION,"Descripcion de la imajen");
         values.put(MediaStore.Images.Media.DATA,getExternalStorageDirectory()+"/Pictures/Dia"+Comgerfecha()+"Hora"+Calendar.getInstance().get(Calendar.HOUR_OF_DAY)+":"+Calendar.getInstance().get(Calendar.MINUTE)+":"+Calendar.getInstance().get(Calendar.SECOND)+".jpg");
-        image_uri= getContentResolver().insert(MediaStore.Images.Media.INTERNAL_CONTENT_URI,values);
+        image_uri= getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI,values);
         Intent cameraIntent=new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT,image_uri);
 
@@ -115,13 +122,14 @@ public class SacarFotos extends Activity {
             Imagenes.setImageURI(image_uri);
         }
         if(requestCode==120){
-
-            finish();
-
-
-                }
-
+            if(resultCode==RESULT_OK) {
+                setResult(RESULT_OK);
+                finish();
+            }else{
+                finish();
             }
+        }
+    }
     
 
     protected void OnRequestCode() {

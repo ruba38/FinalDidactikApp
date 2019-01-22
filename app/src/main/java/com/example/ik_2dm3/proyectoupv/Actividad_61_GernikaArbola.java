@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.ImageView;
 
 import static java.lang.Thread.sleep;
@@ -21,6 +22,12 @@ public class Actividad_61_GernikaArbola extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_actividad_61__gernika_arbola);
+
+        //ocultar barras extras
+        getSupportActionBar().hide();
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
         idPuntoJuego = getIntent().getIntExtra("idPuntoJuego", 0);
         pikondoa = (ImageView) findViewById(R.id.pikondoai);
         haritza = (ImageView) findViewById(R.id.haritzai);
@@ -32,8 +39,8 @@ public class Actividad_61_GernikaArbola extends AppCompatActivity {
         popuparbolb.setContentView(R.layout.popup_arbolb);
         popuparbolm.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         popuparbolb.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        popupfondob = (ImageView) popuparbolb.findViewById(R.id.popupfondob);
-        popupfondom = (ImageView) popuparbolm.findViewById(R.id.popupfondob);
+        popupfondob = (ImageView) popuparbolb.findViewById(R.id.fondoback);
+        popupfondom = (ImageView) popuparbolm.findViewById(R.id.fondoback);
     }
     protected void onStart(){
         super.onStart();
@@ -78,6 +85,7 @@ public class Actividad_61_GernikaArbola extends AppCompatActivity {
         popupfondob.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
+                popuparbolm.dismiss();
                 Intent i = new Intent(getBaseContext(), SacarFotos.class);
                 i.putExtra("idPuntoJuego",idPuntoJuego);
                 startActivityForResult(i, 10);

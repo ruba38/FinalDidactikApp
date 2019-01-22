@@ -65,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
         pruebas.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(getBaseContext(),Actividad_21_EncontrarIglesia.class);
+                Intent i = new Intent(getBaseContext(),Presentaciones.class);
                 startActivityForResult(i,4);
             }
         });

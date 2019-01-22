@@ -10,6 +10,7 @@ import android.text.Layout;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -17,7 +18,8 @@ import java.util.ArrayList;
 
 public class Presentaciones extends AppCompatActivity {
     private MediaPlayer Sonido;
-    private ImageView FondoTexto, BotonRepetir, BotonAtras, BotonaAlante ,Fondo;
+    private ImageView FondoTexto, BotonRepetir, BotonAtras ,Fondo;
+    private Button BotonaAlante;
     private TextView Textos;
     private int IdMusica, idPuntoJuego,Contador;
     private String idJuego;
@@ -185,7 +187,6 @@ public class Presentaciones extends AppCompatActivity {
                     Sonido = MediaPlayer.create(getApplicationContext(), R.raw.klipdontello);
 
                     //Actividad
-                    //Actividad = Class.forName("class.cPresentaciones");
                     //Textos
 
                     T1 = getString(R.string.Texto101);
@@ -211,8 +212,9 @@ public class Presentaciones extends AppCompatActivity {
     //Metodo al Emprezar la Activity Para reporduccior Audios y  Camiar los textos
     public void Ejecuccion(int idPunto) {
         BotonAtras.setOnClickListener(new View.OnClickListener() {
-            @Override
+
             public void onClick(View v) {
+                Sonido.release();
                 finish();
             }
         });
@@ -234,7 +236,8 @@ public class Presentaciones extends AppCompatActivity {
                   } catch (ClassNotFoundException e) {
                     e.printStackTrace();
                       }
-                startActivityForResult(i,1);
+                      Sonido.stop();
+                  startActivityForResult(i,1);
             }
         });
         if (!Sonido.isPlaying()) {
@@ -244,25 +247,19 @@ public class Presentaciones extends AppCompatActivity {
             Contador =0;
             Textos.setText(TodoText.get(Contador));
             while(Contador  < Tiempos.size()){
-            CambiarTexto.postDelayed(new Runnable() {
+                Log.d("Tiempos",Tiempos.get(Contador)+"Entra en admin cheked///////////////////////////////////////////////////////");
+                CambiarTexto.postDelayed(new Runnable() {
 
                 public void run() {
                     Textos.setText(TodoText.get(Contador-1));
-                    if(Contador==Tiempos.size()){
-                       AbilitaraBotones.postDelayed(new Runnable() {
-                           @Override
-                           public void run() {
-                               BotonRepetir.setVisibility(View.VISIBLE);
-                               BotonaAlante.setVisibility(View.VISIBLE);
 
-                           }
-                       },1) ;
-                    }
                 }
         }, Tiempos.get(Contador));
             Contador++;
-        }
 
+            }
+            BotonRepetir.setVisibility(View.VISIBLE);
+            BotonaAlante.setVisibility(View.VISIBLE);
         }
 
 
@@ -271,7 +268,11 @@ public class Presentaciones extends AppCompatActivity {
                                     int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 1){
-           finish();
+            /*if (resultCode==RESULT_OK) {
+                finish();
+            }else {*/
+                finish();
+            /*}*/
 
         }
     }

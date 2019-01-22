@@ -7,7 +7,7 @@
     android:layout_height="match_parent">
 
     <ImageView
-        android:id="@+id/popupfondob"
+        android:id="@+id/fondoback"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:cropToPadding="true"
@@ -24,11 +24,11 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="152dp"
         android:layout_marginEnd="8dp"
-        android:text="Hau ez da horri egokia, zahiatu berriro."
+        android:text="Hau ez da horri egokia, saiatu berriro."
         android:textAlignment="center"
         android:textSize="30sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/popupfondob" />
+        app:layout_constraintTop_toTopOf="@+id/fondoback" />
 </android.support.constraint.ConstraintLayout>

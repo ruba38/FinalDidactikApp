@@ -299,6 +299,17 @@ public class DatabaseAccess extends SQLiteOpenHelper {
         cursor.close();
         return datosLugares;
     }
+    public String getImajen(int Lugar){
+        String myPath = DB_PATH + DB_NAME;
+        db = SQLiteDatabase.openDatabase(myPath, null, SQLiteDatabase.OPEN_READWRITE);
+        db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery("SELECT imagen FROM puntos where idPunto="+Lugar, null);
+        cursor.moveToFirst();
+        String imagen= cursor.getString(cursor.getColumnIndex("imagen"));
+        cursor.close();
+        return imagen;
+
+    }
 
     public String getmierda() {
         return "no";
