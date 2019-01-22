@@ -7,6 +7,7 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -28,7 +29,10 @@ public class Actividad_40_Presentacion extends AppCompatActivity {
         setContentView(R.layout.activity_actividad_40__presentacion);
         idPuntoJuego=getIntent().getIntExtra("idPuntoJuego",0);
         //declarar Contenido
+//ocultar barras extras
         getSupportActionBar().hide();
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
         Fondo40 = findViewById(R.id.Fondo40);
         Texto401 = findViewById(R.id.Texto401);
         Splash = findViewById(R.id.SplasNaranja);

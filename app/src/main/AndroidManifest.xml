@@ -98,10 +98,11 @@
         <activity
             android:name=".Actividad_71_Puzzle"
             android:screenOrientation="portrait" />
-        <activity android:name=".Actividad_70_Puzzle" />
+        <activity
+            android:name=".Actividad_72_galderak"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".Presentaciones"
-            android:label="@string/title_activity_presentaciones"
             android:screenOrientation="portrait"></activity>
         
     </application>

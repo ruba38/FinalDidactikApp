@@ -6,6 +6,7 @@ import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -28,8 +29,10 @@ public class Actividad_60_Presentacion extends AppCompatActivity {
 
         idPuntoJuego=getIntent().getIntExtra("idPuntoJuego",0);
         //declarar Contenido
+//ocultar barras extras
         getSupportActionBar().hide();
-        Fondo60 = findViewById(R.id.Fondo60);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);        Fondo60 = findViewById(R.id.Fondo60);
         Texto601 = findViewById(R.id.Texto601);
         Texto602 = findViewById(R.id.Texto602);
         Splash = findViewById(R.id.SplasNaranja);

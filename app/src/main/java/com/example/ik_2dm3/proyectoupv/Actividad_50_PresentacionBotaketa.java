@@ -45,8 +45,6 @@ public class Actividad_50_PresentacionBotaketa extends AppCompatActivity {
 
         Ta5.postDelayed(new Runnable() {
             public void run() {
-                Intent intent= new Intent(getApplicationContext(),Actividad_70_Puzzle.class);
-                startActivityForResult(intent,2000);
 
             }
         }, 25500);

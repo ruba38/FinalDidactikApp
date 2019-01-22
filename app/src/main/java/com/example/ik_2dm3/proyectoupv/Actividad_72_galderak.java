@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -26,6 +27,10 @@ public class Actividad_72_galderak extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_actividad_72_galderak);
+        //ocultar barras extras
+        getSupportActionBar().hide();
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
         idPuntoJuego = getIntent().getIntExtra("idPuntoJuego", 0);
         gal1= new Dialog(this);
         gal2= new Dialog(this);
@@ -40,8 +45,9 @@ public class Actividad_72_galderak extends AppCompatActivity {
         erantzuna = (EditText) gal1.findViewById(R.id.erantzuna);
         bot1= (Button) gal1.findViewById(R.id.gal1button);
         bot2 = (Button) gal2.findViewById(R.id.jarraitu);
-        toast = Toast.makeText(getBaseContext(), "hori ez da erantzun egokia", Toast.LENGTH_SHORT);
-        piccaso="Piccaso";
+        toast = Toast.makeText(getBaseContext(), "Hori ez da erantzun egokia, ondo idatzu duzue izen abizenak maiuskulak ta guzti?", Toast.LENGTH_SHORT);
+        piccaso="Pablo Piccaso";
+
     }
     protected void onStart(){
         super.onStart();
@@ -56,7 +62,6 @@ public class Actividad_72_galderak extends AppCompatActivity {
                     ondo.show();
                     setResult(Activity.RESULT_OK);
                 }else{
-                    toast.setText(erantzuna.getText().toString());
                     toast.show();
                 }
             }
@@ -68,7 +73,6 @@ public class Actividad_72_galderak extends AppCompatActivity {
                 gal2.show();
                 setResult(Activity.RESULT_CANCELED);
                 return true;
-
             }
         });
 

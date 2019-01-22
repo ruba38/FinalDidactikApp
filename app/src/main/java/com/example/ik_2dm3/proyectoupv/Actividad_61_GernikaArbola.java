@@ -78,6 +78,7 @@ public class Actividad_61_GernikaArbola extends AppCompatActivity {
         popupfondom.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
+                popuparbolm.dismiss();
                 return false;
             }
         });

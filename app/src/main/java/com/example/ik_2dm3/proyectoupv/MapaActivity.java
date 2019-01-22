@@ -18,6 +18,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -108,8 +109,10 @@ MapaActivity extends AppCompatActivity implements PermissionsListener, OnMapRead
         Log.d("mapa", "Punto 0");
 
         //QUITAR TITULO DEL LAYOUT
+//ocultar barras extras
         getSupportActionBar().hide();
-        // SE CREA LA INSTANCIA DEL MAPA CON LA CLAVE DE ACCESO
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);        // SE CREA LA INSTANCIA DEL MAPA CON LA CLAVE DE ACCESO
         Mapbox.getInstance(this, getString(R.string.access_token));
 
         setContentView(R.layout.activity_mapa);
@@ -653,6 +656,7 @@ MapaActivity extends AppCompatActivity implements PermissionsListener, OnMapRead
             hiloJuego.interrupt();
             Log.d("Mapa","result");
             LimpiarPuntos();
+            System.gc();
             CrearPuntos();
         }
     }

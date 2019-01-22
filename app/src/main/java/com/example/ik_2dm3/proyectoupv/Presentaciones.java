@@ -275,7 +275,11 @@ public class Presentaciones extends AppCompatActivity {
                                     int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 1){
-           finish();
+            /*if (resultCode==RESULT_OK) {
+                finish();
+            }else {*/
+                finish();
+            /*}*/
 
         }
     }
