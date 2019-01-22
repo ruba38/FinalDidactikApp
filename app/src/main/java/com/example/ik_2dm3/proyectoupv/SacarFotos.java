@@ -122,13 +122,14 @@ public class SacarFotos extends AppCompatActivity {
             Imagenes.setImageURI(image_uri);
         }
         if(requestCode==120){
-
-            finish();
-
-
-                }
-
+            if(resultCode==RESULT_OK) {
+                setResult(RESULT_OK);
+                finish();
+            }else{
+                finish();
             }
+        }
+    }
     
 
     protected void OnRequestCode() {

@@ -50,7 +50,8 @@
         android:layout_marginBottom="8dp"
         android:background="@color/c4"
         android:ems="10"
-        android:inputType="textPersonName"
+        android:includeFontPadding="false"
+        android:inputType="none|text"
         android:selectAllOnFocus="true"
         android:singleLine="false"
         android:text="@string/OrdescariarenIzena"
@@ -62,7 +63,7 @@
         app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.05" />
+        app:layout_constraintVertical_bias="0.058" />
 
     <TextView
         android:id="@+id/textView20"
@@ -76,5 +77,18 @@
         app:layout_constraintEnd_toEndOf="@+id/Carta"
         app:layout_constraintStart_toStartOf="@+id/Carta"
         app:layout_constraintTop_toTopOf="@+id/Carta" />
+
+    <Button
+        android:id="@+id/btnResultados"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:text="Resultados"
+        android:background="@drawable/boton_inicio"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textView20" />
 
 </android.support.constraint.ConstraintLayout>

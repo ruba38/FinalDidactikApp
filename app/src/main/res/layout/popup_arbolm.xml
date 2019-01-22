@@ -24,7 +24,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="152dp"
         android:layout_marginEnd="8dp"
-        android:text="Hau ez da horri egokia, zahiatu berriro."
+        android:text="Hau ez da horri egokia, saiatu berriro."
         android:textAlignment="center"
         android:textSize="30sp"
         android:textStyle="bold"
