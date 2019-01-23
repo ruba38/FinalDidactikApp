@@ -104,7 +104,7 @@ MapaActivity extends AppCompatActivity implements PermissionsListener, OnMapRead
 
 
     // Limite de la camara de la zona sleccionada
-    LatLngBounds coordsLimite;
+    //LatLngBounds coordsLimite;
     //SE EJECUTA NADA MAS ABRIRSE EL MAPA
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -158,7 +158,7 @@ MapaActivity extends AppCompatActivity implements PermissionsListener, OnMapRead
 
 
         // Cargamos el area de la zona seleccionada
-        coordsLimite = databaseAccess.getLimiteZona(Lugar);
+       // coordsLimite = databaseAccess.getLimiteZona(Lugar);
 
         // BOTON MODO ADMINISTRADOR
         idBtnMapaAdmin.setOnClickListener(new View.OnClickListener() {
@@ -220,16 +220,18 @@ MapaActivity extends AppCompatActivity implements PermissionsListener, OnMapRead
         localizarDistancia(location);
 
         // Obtenemos la posicion de la persona
-        LatLng pos = new LatLng(location.getAltitude(),location.getLongitude());
+        Log.d("long",location.getAltitude()+"cdadadadada"+location.getLongitude()+"falos?????????????????????????????????????????????????????????????????????????????????????????????????????????????????????");
+
+       // LatLng pos = new LatLng(location.getAltitude(),location.getLongitude());
 
         // Si estan fuera de la zona delimitada
-        if(!coordsLimite.contains(pos)) {
+        //if(!coordsLimite.contains(pos)) {
 
             // Pasamos el area a coordenadas y calculamos la distancia
-            LatLng dist = new LatLng(coordsLimite.getNorthEast().getLatitude(), coordsLimite.getSouthWest().getLongitude());
-            distanciaArea = pos.distanceTo(dist);
+            //LatLng dist = new LatLng(coordsLimite.getNorthEast().getLatitude(), coordsLimite.getSouthWest().getLongitude());
+            //distanciaArea = pos.distanceTo(dist);
 
-        }
+       // }
     }
 
     public void localizarDistancia (Location location) {

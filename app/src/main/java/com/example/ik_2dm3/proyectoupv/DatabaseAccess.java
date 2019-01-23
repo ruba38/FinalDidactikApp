@@ -224,9 +224,11 @@ public class DatabaseAccess extends SQLiteOpenHelper {
         db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery("SELECT pista FROM puntos where secuencia="+secuencia+" And idLugar="+idL, null);
         cursor.moveToFirst();
+        String Returneriona = cursor.getString(cursor.getColumnIndex("pista"));
         cursor.close();
         db.close();
-        return cursor.getString(cursor.getColumnIndex("pista"));
+        return Returneriona;
+
     }
 
     //PONE TODOS LOS PUNTOS EN VISIBLE
@@ -400,7 +402,7 @@ public class DatabaseAccess extends SQLiteOpenHelper {
         String myPath = DB_PATH + DB_NAME;
         db = SQLiteDatabase.openDatabase(myPath, null, SQLiteDatabase.OPEN_READWRITE);
         db = this.getWritableDatabase();
-        Cursor cursor = db.rawQuery("SELECT * FROM lugares WHERE idLugar = id", null);
+        Cursor cursor = db.rawQuery("SELECT * FROM lugares WHERE idLugar = "+id, null);
         cursor.moveToFirst();
 
         for(int i=0;!cursor.isAfterLast();i++) {
