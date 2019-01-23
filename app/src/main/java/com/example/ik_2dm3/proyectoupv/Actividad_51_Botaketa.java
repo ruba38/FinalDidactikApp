@@ -32,7 +32,6 @@ public class Actividad_51_Botaketa extends AppCompatActivity {
     private String Fallo ="@string/OrdescariarenIzena";
     private Button btnResultados;
     private boolean votado = false;
-
     private ArrayList<JuegoPuzzleParticipantes> nombres = new ArrayList<JuegoPuzzleParticipantes>();
     private ArrayList<JuegoPuzzleParticipantes> nomRepetidos = new ArrayList<JuegoPuzzleParticipantes>();
     @Override
@@ -44,6 +43,7 @@ public class Actividad_51_Botaketa extends AppCompatActivity {
         getSupportActionBar().hide();
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        idPuntoJuego = getIntent().getIntExtra("idPuntoJuego", 0);
 
         EgindakoBotoak = findViewById(R.id.TexEgindakobotoak);
         EgindakoBotoak.setText("Egindako Botoak : 0");
@@ -140,6 +140,7 @@ public class Actividad_51_Botaketa extends AppCompatActivity {
                 Intent i = new Intent(getBaseContext(), Actividad_52_Resultados.class);
                 i.putExtra("nombre", ganador.getNombre());
                 i.putExtra("votos", ganador.getNumVotos());
+                i.putExtra("idPuntoJuego",idPuntoJuego);
                 startActivityForResult(i, 1);
             }
         });
