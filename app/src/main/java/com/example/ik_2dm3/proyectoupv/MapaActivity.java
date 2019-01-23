@@ -70,7 +70,7 @@ MapaActivity extends AppCompatActivity implements PermissionsListener, OnMapRead
     private ArrayList<MarkerPuntos> PuntosInteres = new ArrayList<MarkerPuntos>();
 
     private boolean admin ;
-    private int idPunto,secuencia;
+    private int idPunto,secuencia,newPista=1;
     private String juego,titulo,imagen,pista;
     private double latitud,longitud;
     private double RangoGeneral=10.0;
@@ -674,11 +674,20 @@ MapaActivity extends AppCompatActivity implements PermissionsListener, OnMapRead
             LimpiarPuntos();
             System.gc();
             CrearPuntos();
-            mostrarPista(idTextViewPista );
+            newpista();
+
+
         }
 
     }
+    public void newpista(){
+        DatabaseAccess databaseAccess = new DatabaseAccess(this);
 
+        int comp= databaseAccess.newpista();
+        if(newPista<comp){
+            newPista++;
+        mostrarPista(idTextViewPista);}
+    }
     //METODOS NO UTILIZADOS PERO NECESARIOS PARA EL FUNCIONAMIENTO CORECTO DE LA APLICACION
     @Override
     public void onMapClick(@NonNull LatLng point) {

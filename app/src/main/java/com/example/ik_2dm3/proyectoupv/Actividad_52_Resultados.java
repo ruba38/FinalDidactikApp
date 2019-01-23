@@ -34,6 +34,7 @@ public class Actividad_52_Resultados extends AppCompatActivity {
 
         sacarFoto = (Button)findViewById(R.id.btnCamara);
         textoGanador = (TextView) findViewById(R.id.textoGanador);
+        idPuntoJuego = getIntent().getIntExtra("idPuntoJuego", 0);
 
         String nombre = getIntent().getStringExtra("nombre");
         int numVotos = getIntent().getIntExtra("votos", 0);
@@ -71,6 +72,7 @@ public class Actividad_52_Resultados extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(getBaseContext(), SacarFotos.class);
+                i.putExtra("idPuntoJuego",idPuntoJuego);
                 startActivityForResult(i, 1);
             }
         });

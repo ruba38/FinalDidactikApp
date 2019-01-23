@@ -2,10 +2,13 @@ package com.example.ik_2dm3.proyectoupv;
 
 import android.annotation.SuppressLint;
 import android.app.ActionBar;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.app.Activity;
 import android.support.v7.app.AppCompatActivity;
@@ -26,11 +29,18 @@ public class Actividad_21_EncontrarIglesia extends AppCompatActivity {
     RelativeLayout layout1;
     boolean encontrado = false;
     Button btnComprobar,btnCamara;
+    private Dialog back;
+    private Button atras, salir;
+    private int idPuntoJuego;
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_actividad_21__encontrar_iglesia);
+        idPuntoJuego = getIntent().getIntExtra("idPuntoJuego", 0);
 
         //ocultar barras extras
         getSupportActionBar().hide();
@@ -45,6 +55,30 @@ public class Actividad_21_EncontrarIglesia extends AppCompatActivity {
         btnCamara = (Button) findViewById(R.id.btnCamara);
         btnCamara.setVisibility(View.INVISIBLE);
         btnComprobar = (Button) findViewById(R.id.btnComprobar2);
+        back = new Dialog(this);
+        back.setContentView(R.layout.atras);
+        back.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        atras= (Button) back.findViewById(R.id.botreniciar);
+        salir= (Button) back.findViewById(R.id.botsalir);
+        atras.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                back.dismiss();
+                Intent i = new Intent(getBaseContext(), Presentaciones.class );
+                i.putExtra("idPuntoJuego",idPuntoJuego);
+                startActivityForResult(i, 10);
+                finish();
+            }
+        });
+        salir.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                back.dismiss();
+
+                finish();
+            }
+        });
+
         btnComprobar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -88,6 +122,7 @@ public class Actividad_21_EncontrarIglesia extends AppCompatActivity {
                     Intent SacarFonto= new Intent(getBaseContext(), SacarFotos.class);
                     //SacarFonto.putExtra("idPuntoJuego",idPuntoJuego);
                     //Camara
+                    SacarFonto.putExtra("idPuntoJuego",idPuntoJuego);
                     startActivityForResult(SacarFonto, 31);
                     finish();
 
@@ -174,5 +209,13 @@ boolean primeravez=false;
     }
 
 
-}}
+}
+
+    @Override
+    public void onBackPressed() {
+        //your code when back button pressed
+        back.show();
+    }
+
+}
 

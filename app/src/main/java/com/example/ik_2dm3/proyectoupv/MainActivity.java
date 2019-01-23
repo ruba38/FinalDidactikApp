@@ -46,7 +46,6 @@ public class MainActivity extends AppCompatActivity {
         idBtnMainAjustes = (Button) findViewById(R.id.idBtnMainAjustes);
         idBtnDerecha = (Button) findViewById(R.id.idBtnDerecha);
         idBtnInicio = (Button) findViewById(R.id.idBtnInicio);
-        pruebas =findViewById(R.id.PRUEBAS);
 
 
         DatabaseAccess databaseAccess = new DatabaseAccess(getBaseContext());
@@ -62,13 +61,13 @@ public class MainActivity extends AppCompatActivity {
         mostrarProgreso(Lugar);
 
         //Boton Pruebas
-        pruebas.setOnClickListener(new View.OnClickListener() {
+       /* pruebas.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(getBaseContext(),Presentaciones.class);
                 startActivityForResult(i,4);
             }
-        });
+        });*/
 
         //BOTON AJUSTES
 
