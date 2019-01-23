@@ -74,6 +74,7 @@ MapaActivity extends AppCompatActivity implements PermissionsListener, OnMapRead
     // Variables de datos
     private ArrayList<MarkerPuntos> PuntosInteres = new ArrayList<MarkerPuntos>();
 
+    private int idPunto,secuencia,newPista=1;
     private boolean admin = false;
     private int idPunto,secuencia;
     private String juego,titulo,imagen,pista;
@@ -428,17 +429,12 @@ MapaActivity extends AppCompatActivity implements PermissionsListener, OnMapRead
                                 //OCULTAR EL POPUP
                                 puntoPopup.dismiss();
                                 //COJER EL NOMBRE DEL JUEGO Y COMBERTIRLO EN LA CLASE DEL JUEGO Q NECESITAMOS ABRIR
-                                String nombreJuego = "com.example.ik_2dm3.proyectoupv." + juego;
-                                nombreJuego = nombreJuego.replace(" ", "");
                                 Intent i = null;
                                 //7try {
                                    // i = new Intent(getBaseContext(), Class.forName(nombreJuego));
                                     i = new Intent(getBaseContext(), Presentaciones.class);
 
                                     i.putExtra("idPuntoJuego",idPunto);
-                                    i.putExtra("NombreJuego",nombreJuego);
-                                Log.d("Juego", nombreJuego);
-
                                 Log.d("mapa", "Punto 4");
 
                                 //} catch (ClassNotFoundException e) {
@@ -515,7 +511,6 @@ MapaActivity extends AppCompatActivity implements PermissionsListener, OnMapRead
             enableLocation();
         }
     }
-
     //LOCALIZARNOS A NOSOTROS MISMOS
     @SuppressLint("MissingPermission")
     private void initializeLocationEngine() {
@@ -681,11 +676,20 @@ MapaActivity extends AppCompatActivity implements PermissionsListener, OnMapRead
             LimpiarPuntos();
             System.gc();
             CrearPuntos();
-            mostrarPista(idTextViewPista );
+            newpista();
+
+
         }
 
     }
+    public void newpista(){
+        DatabaseAccess databaseAccess = new DatabaseAccess(this);
 
+        int comp= databaseAccess.newpista();
+        if(newPista<comp){
+            newPista++;
+        mostrarPista(idTextViewPista);}
+    }
     //METODOS NO UTILIZADOS PERO NECESARIOS PARA EL FUNCIONAMIENTO CORECTO DE LA APLICACION
     @Override
     public void onMapClick(@NonNull LatLng point) {
