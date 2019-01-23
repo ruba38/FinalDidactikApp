@@ -415,7 +415,7 @@ public class DatabaseAccess extends SQLiteOpenHelper {
         String myPath = DB_PATH + DB_NAME;
         db = SQLiteDatabase.openDatabase(myPath, null, SQLiteDatabase.OPEN_READWRITE);
         db = this.getWritableDatabase();
-        Cursor cursor = db.rawQuery("SELECT * FROM lugares WHERE idLugar = id", null);
+        Cursor cursor = db.rawQuery("SELECT * FROM lugares WHERE idLugar ="+id, null);
         cursor.moveToFirst();
 
         for(int i=0;!cursor.isAfterLast();i++) {

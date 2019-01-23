@@ -76,7 +76,6 @@ MapaActivity extends AppCompatActivity implements PermissionsListener, OnMapRead
 
     private int idPunto,secuencia,newPista=1;
     private boolean admin = false;
-    private int idPunto,secuencia;
     private String juego,titulo,imagen,pista;
     private double latitud,longitud;
     private double RangoGeneral=10.0;
@@ -218,7 +217,7 @@ MapaActivity extends AppCompatActivity implements PermissionsListener, OnMapRead
     @Override
     public void onLocationChanged(Location location) {
 
-        localizarDistancia(location);
+        /*localizarDistancia(location);
 
         // Obtenemos la posicion de la persona
         LatLng pos = new LatLng(location.getAltitude(),location.getLongitude());
@@ -230,7 +229,7 @@ MapaActivity extends AppCompatActivity implements PermissionsListener, OnMapRead
             LatLng dist = new LatLng(coordsLimite.getNorthEast().getLatitude(), coordsLimite.getSouthWest().getLongitude());
             distanciaArea = pos.distanceTo(dist);
 
-        }
+        }*/
     }
 
     public void localizarDistancia (Location location) {
@@ -685,7 +684,7 @@ MapaActivity extends AppCompatActivity implements PermissionsListener, OnMapRead
 
         int comp= databaseAccess.newpista();
         if(newPista<comp){
-            newPista++;
+            newPista=comp;
         mostrarPista(idTextViewPista);}
     }
     //METODOS NO UTILIZADOS PERO NECESARIOS PARA EL FUNCIONAMIENTO CORECTO DE LA APLICACION
