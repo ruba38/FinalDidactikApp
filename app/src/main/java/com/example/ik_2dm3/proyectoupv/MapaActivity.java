@@ -34,6 +34,8 @@ import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.annotations.Icon;
 import com.mapbox.mapboxsdk.annotations.IconFactory;
 import com.mapbox.mapboxsdk.annotations.Marker;
+import com.mapbox.mapboxsdk.annotations.PolygonOptions;
+import com.mapbox.mapboxsdk.geometry.ILatLng;
 import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.geometry.LatLngBounds;
 import com.mapbox.mapboxsdk.location.modes.RenderMode;
@@ -46,6 +48,8 @@ import com.mapbox.mapboxsdk.plugins.locationlayer.modes.CameraMode;
 import java.util.ArrayList;
 import java.util.List;
 
+import static android.icu.lang.UCharacter.GraphemeClusterBreak.L;
+
 public class
 MapaActivity extends AppCompatActivity implements PermissionsListener, OnMapReadyCallback, LocationEngineListener, MapboxMap.OnMapClickListener {
 
@@ -56,6 +60,7 @@ MapaActivity extends AppCompatActivity implements PermissionsListener, OnMapRead
     private LocationEngine locationEngine;
     private LocationLayerPlugin locationLayerPlugin;
     private Location originLocation;
+    private Location lastlocation;
 
     // Creacion de objetos
     private Button idBtnMapaAdmin,idBtnMapaAjustes;
@@ -69,12 +74,14 @@ MapaActivity extends AppCompatActivity implements PermissionsListener, OnMapRead
     // Variables de datos
     private ArrayList<MarkerPuntos> PuntosInteres = new ArrayList<MarkerPuntos>();
 
-    private boolean admin ;
     private int idPunto,secuencia,newPista=1;
+    private boolean admin = false;
+    private int idPunto,secuencia;
     private String juego,titulo,imagen,pista;
     private double latitud,longitud;
     private double RangoGeneral=10.0;
     private int Lugar=1;
+    private String LugarSeleccionado = "";
     // Objetos/Variables de depuracion
     private TextView coordenadas,idTextViewDistancia,idTextViewProgreso,idTextViewMapaProgresoPuntos;
     private int contPuntos=0;
@@ -93,13 +100,12 @@ MapaActivity extends AppCompatActivity implements PermissionsListener, OnMapRead
     private Thread hiloJuego;
     //Imajen PopUp
     private String ImagenPoP;
+    private double distanciaArea = 0.0;
+    private LatLngBounds coordsLimite;
 
 
     // Limite de la camara de la zona sleccionada
-    private static final LatLngBounds coordsLimite = new LatLngBounds.Builder()
-            .include(new LatLng(43.258316, -2.903066))
-            .include(new LatLng(43.256749, -2.908320))
-            .build();
+    //LatLngBounds coordsLimite;
     //SE EJECUTA NADA MAS ABRIRSE EL MAPA
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -110,7 +116,7 @@ MapaActivity extends AppCompatActivity implements PermissionsListener, OnMapRead
         //Recojer admin
         admin= getIntent().getBooleanExtra("Admin",false);
         //QUITAR TITULO DEL LAYOUT
-//ocultar barras extras
+        //ocultar barras extras
         getSupportActionBar().hide();
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);        // SE CREA LA INSTANCIA DEL MAPA CON LA CLAVE DE ACCESO
@@ -119,20 +125,6 @@ MapaActivity extends AppCompatActivity implements PermissionsListener, OnMapRead
         setContentView(R.layout.activity_mapa);
         //RECOJE EL ID DEL LUGAR SELECIONADO AL PRINCIPIO DE LA APP (MAIN)
         Lugar=getIntent().getIntExtra("idLugar",0);
-
-        /*if(Lugar == 1) {
-            coordsLimite = new LatLngBounds.Builder()
-                    .include(new LatLng(43.258316, -2.903066))
-                    .include(new LatLng(43.256749, -2.908320))
-                    .build();
-        } else if (Lugar == 2) {
-            coordsLimite = new LatLngBounds.Builder()
-                    .include(new LatLng(43.258316, -2.903066))
-                    .include(new LatLng(43.256749, -2.908320))
-                    .build();
-        }
-*/
-
 
         // INSTANCIA EL OBJETO POPUP
         puntoPopup = new Dialog(this);
@@ -145,10 +137,7 @@ MapaActivity extends AppCompatActivity implements PermissionsListener, OnMapRead
 
         //CARGA LOS ESTILOS PERSONALIZADOS
         mapView.setStyleUrl("mapbox://styles/mariusinfo/cjosikqh33suu2smegbr6z3gv");
-        //OCULTAR BARRA SUPERIOR
-        getSupportActionBar().hide();
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-                WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
 
         // ASIGNACION DE OBJETOS
         // BOTONES
@@ -168,6 +157,9 @@ MapaActivity extends AppCompatActivity implements PermissionsListener, OnMapRead
         //CON EL LUGAR INDICADO MIRAMOS SI HAY ALGUN PUNTO VISIBLE SI NO LO HAY PONE EL PRIMERO VISIBLE
         databaseAccess.iniciarApp(Lugar);
 
+
+        // Cargamos el area de la zona seleccionada
+        coordsLimite = databaseAccess.getLimiteZona(Lugar);
 
         // BOTON MODO ADMINISTRADOR
         idBtnMapaAdmin.setOnClickListener(new View.OnClickListener() {
@@ -206,10 +198,7 @@ MapaActivity extends AppCompatActivity implements PermissionsListener, OnMapRead
             @Override
             public void onClick(View v) {
                 //ABRE LA VENTANA DE AJUSTES
-               Intent i = new Intent(getBaseContext(), AjustesActivity.class);
-               // i.putExtra("admin",admin);
-              //  i.putExtra("idLugar",Lugar);
-              //  finish();
+                Intent i = new Intent(getBaseContext(), AjustesActivity.class);
                 startActivity(i);}
         });
         //BOTON CAMARA
@@ -222,6 +211,7 @@ MapaActivity extends AppCompatActivity implements PermissionsListener, OnMapRead
         });
 
     }
+
     //*****************************FUNCIONES INDIBIDUALES*******************************************
 
     //SE EJECUTA CUANDO EL DISPOSITIVO DETECTA QUE AS CAMBIADO TU LOCALIZAZION
@@ -229,7 +219,20 @@ MapaActivity extends AppCompatActivity implements PermissionsListener, OnMapRead
     public void onLocationChanged(Location location) {
 
         localizarDistancia(location);
+
+        // Obtenemos la posicion de la persona
+        LatLng pos = new LatLng(location.getAltitude(),location.getLongitude());
+
+        // Si estan fuera de la zona delimitada
+        if(!coordsLimite.contains(pos)) {
+
+            // Pasamos el area a coordenadas y calculamos la distancia
+            LatLng dist = new LatLng(coordsLimite.getNorthEast().getLatitude(), coordsLimite.getSouthWest().getLongitude());
+            distanciaArea = pos.distanceTo(dist);
+
+        }
     }
+
     public void localizarDistancia (Location location) {
         // ACCEDE A LA BASE DE DATOS
         DatabaseAccess databaseAccess =new DatabaseAccess(this);
@@ -328,8 +331,6 @@ MapaActivity extends AppCompatActivity implements PermissionsListener, OnMapRead
     public void onMapReady(MapboxMap mapboxMap) {
 
 
-        Log.d("mapa", "Punto 1");
-
         // ASIGNAR OBJETO A LA INSTANCIA MAPA
         MapaActivity.this.map = mapboxMap;
 
@@ -340,12 +341,10 @@ MapaActivity extends AppCompatActivity implements PermissionsListener, OnMapRead
         enableLocation();
 
         // ZOOM MAXIMO Y MINIMO DEL MAPA Y DELIMITAR MAPA
-        //TODO :DESCOMENTAR EN UN FUTURO
-       /* map.setMinZoomPreference(16);
-        map.setMaxZoomPreference(17.5);
-        mapboxMap.setLatLngBoundsForCameraTarget(coordsLimite);*/
+        map.setMinZoomPreference(16);
+        map.setMaxZoomPreference(19.50);
+        mapboxMap.setLatLngBoundsForCameraTarget(coordsLimite);
 
-      //  coordsLimite.contains(originLocation.getLatitude(), originLocation.getAltitude());
         // RELLENA EL ARRAYLIST CON LOS DATOS DE LOS PUNTOS
         CrearPuntos();
 
@@ -475,6 +474,7 @@ MapaActivity extends AppCompatActivity implements PermissionsListener, OnMapRead
                     @Override
                     public void onClick(View v) {
                         //AL CERRARLO PONDRA EL PUNTO COMO FINALIZADO
+                        //PuntoTerminado(idPunto);
                         //OCULTAR POPUP
                         puntoPopup.dismiss();
                     }
@@ -522,7 +522,7 @@ MapaActivity extends AppCompatActivity implements PermissionsListener, OnMapRead
         locationEngine.activate();
 
         // Obtenemos la ultima ubicacion y comprobamos que sea distinto de null
-        Location lastlocation = locationEngine.getLastLocation();
+        lastlocation = locationEngine.getLastLocation();
         if(lastlocation != null) {
             // Si es distntio, ubicamos la camara en la ubicacion actual
             originLocation = lastlocation;
@@ -531,6 +531,7 @@ MapaActivity extends AppCompatActivity implements PermissionsListener, OnMapRead
             locationEngine.addLocationEngineListener(this);
         }
     }
+
     //ESTILOS DE NUSTRA PROPIA LOCALIZAZION
     @SuppressLint("WrongConstant")
     private void initializeLocationLayer() {
@@ -665,8 +666,7 @@ MapaActivity extends AppCompatActivity implements PermissionsListener, OnMapRead
         pistaPopup.show();
     }
 
-    protected void onActivityResult(int requestCode,
-                                    int resultCode, Intent data) {
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 666){
             hiloJuego.interrupt();
