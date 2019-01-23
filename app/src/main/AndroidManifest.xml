@@ -23,7 +23,9 @@
         android:roundIcon="@mipmap/oihaltzo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name=".MainActivity"
+            android:screenOrientation="portrait"
+            >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -32,10 +34,14 @@
         </activity>
         <activity
             android:name=".Kaixo"
-            android:label="" />
+            android:label=""
+            android:screenOrientation="portrait"
+            />
         <activity
             android:name=".Agurra"
-            android:label="" />
+            android:label=""
+            android:screenOrientation="portrait"
+            />
         <activity
             android:name=".Actividad_10_Udaletxea"
             android:label="@string/title_activity_creadores"
@@ -50,15 +56,15 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".AjustesActivity"
-            android:label="@string/ajustesTextoTituloE" />
+            android:label="@string/ajustesTextoTituloE"
+            android:screenOrientation="portrait"
+            />
         <activity
             android:name=".MapaActivity"
             android:configChanges="orientation|screenSize"
             android:label="@string/title_activity_mapa"
             android:screenOrientation="portrait" />
-        <activity
-            android:name=".JuegoPuzzleActivity"
-            android:label="@string/title_activity_juego_puzzle" />
+
         <activity
             android:name=".Galeria"
             android:label="@string/title_activity_galeria" />
@@ -70,8 +76,12 @@
             android:name=".Actividad_32_Precios"
             android:label="@string/title_activity_actividad_32__prese_aurkez"
             android:screenOrientation="portrait" />
-        <activity android:name=".Actividad_41_astrazaharra" />
-        <activity android:name=".Actividad_42_astraberria" />
+        <activity android:name=".Actividad_41_astrazaharra"
+            android:screenOrientation="portrait"
+            />
+        <activity android:name=".Actividad_42_astraberria"
+            android:screenOrientation="portrait"
+            />
         <activity android:name=".horidata" />
         <activity
             android:name=".SacarFotos"
@@ -82,23 +92,20 @@
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
 
-        <activity android:name=".Actividad_60_Presentacion" />
         <activity android:name=".Actividad_61_GernikaArbola" />
+
         <activity
             android:name=".Actividad_51_Botaketa"
-            android:label="@string/title_activity_actividad_51__botaketa" />
+            android:label="@string/title_activity_actividad_51__botaketa"
+            android:screenOrientation="portrait"
+            />
         <activity
             android:name=".Actividad_71_Puzzle"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".Actividad_72_galderak"
-            android:screenOrientation="portrait" />
-        <activity
             android:name=".Presentaciones"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".Actividad_52_Resultados"
-            android:label="@string/title_activity_actividad_52__resultados"></activity>
+            android:screenOrientation="portrait"></activity>
+        
     </application>
 
 </manifest>

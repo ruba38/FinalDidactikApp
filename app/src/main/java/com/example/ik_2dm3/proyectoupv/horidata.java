@@ -34,8 +34,11 @@ public class horidata extends AppCompatActivity {
             public void run() {
                 horidata.this.finish();
             }
-        }, 5000);
+        }, 4000);
 
     }
-
+    @Override
+    public void onBackPressed() {
+        //your code when back button pressed
+    }
 }

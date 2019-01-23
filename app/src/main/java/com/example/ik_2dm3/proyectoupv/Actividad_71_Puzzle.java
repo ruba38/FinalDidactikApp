@@ -57,6 +57,9 @@ public class Actividad_71_Puzzle extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 back.dismiss();
+                Intent i = new Intent(getBaseContext(), Presentaciones.class );
+                i.putExtra("idPuntoJuego",idPuntoJuego);
+                startActivityForResult(i, 10);
                 finish();
             }
         });
@@ -64,7 +67,7 @@ public class Actividad_71_Puzzle extends AppCompatActivity {
             @Override
             public void onClick(View v) {
             back.dismiss();
-            setResult(RESULT_OK);
+
             finish();
             }
         });

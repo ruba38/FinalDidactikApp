@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.ImageView;
 
 import static java.lang.Thread.sleep;
@@ -18,6 +19,10 @@ public class Actividad_61_GernikaArbola extends AppCompatActivity {
     int idPuntoJuego;
     public ImageView pikondoa, pagoa, pinua, haritza, popupfondob, popupfondom;
     public Dialog popuparbolm, popuparbolb;
+    private Dialog back;
+    private Button atras, salir;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,6 +46,29 @@ public class Actividad_61_GernikaArbola extends AppCompatActivity {
         popuparbolb.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         popupfondob = (ImageView) popuparbolb.findViewById(R.id.fondoback);
         popupfondom = (ImageView) popuparbolm.findViewById(R.id.fondoback);
+        back = new Dialog(this);
+        back.setContentView(R.layout.atras);
+        back.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        atras= (Button) back.findViewById(R.id.botreniciar);
+        salir= (Button) back.findViewById(R.id.botsalir);
+        atras.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                back.dismiss();
+                Intent i = new Intent(getBaseContext(), Presentaciones.class );
+                i.putExtra("idPuntoJuego",idPuntoJuego);
+                startActivityForResult(i, 10);
+                finish();
+            }
+        });
+        salir.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                back.dismiss();
+
+                finish();
+            }
+        });
     }
     protected void onStart(){
         super.onStart();
@@ -102,5 +130,10 @@ public class Actividad_61_GernikaArbola extends AppCompatActivity {
             Actividad_61_GernikaArbola.this.finish();
 
         }
+    }
+    @Override
+    public void onBackPressed() {
+        //your code when back button pressed
+        back.show();
     }
 }

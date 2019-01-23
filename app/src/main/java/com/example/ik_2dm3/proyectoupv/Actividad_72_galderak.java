@@ -17,6 +17,8 @@ import android.widget.Toast;
 
 public class Actividad_72_galderak extends AppCompatActivity {
     public Dialog gal1, gal2, ondo;
+    private Dialog back;
+    private Button atras, salir;
     public ImageView galderafondoa1, galderafondoa2, osoondofondoa;
     int idPuntoJuego;
     public Button bot1, bot2;
@@ -47,7 +49,29 @@ public class Actividad_72_galderak extends AppCompatActivity {
         bot2 = (Button) gal2.findViewById(R.id.jarraitu);
         toast = Toast.makeText(getBaseContext(), "Hori ez da erantzun egokia, ondo idatzu duzue izen abizenak maiuskulak ta guzti?", Toast.LENGTH_SHORT);
         piccaso="Pablo Piccaso";
+        back = new Dialog(this);
+        back.setContentView(R.layout.atras);
+        back.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        atras= (Button) back.findViewById(R.id.botreniciar);
+        salir= (Button) back.findViewById(R.id.botsalir);
+        atras.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                back.dismiss();
+                Intent i = new Intent(getBaseContext(), Presentaciones.class );
+                i.putExtra("idPuntoJuego",idPuntoJuego);
+                startActivityForResult(i, 10);
+                finish();
+            }
+        });
+        salir.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                back.dismiss();
 
+                finish();
+            }
+        });
     }
     protected void onStart(){
         super.onStart();
@@ -88,5 +112,10 @@ public class Actividad_72_galderak extends AppCompatActivity {
                 finish();
             }
         });
+    }
+    @Override
+    public void onBackPressed() {
+        //your code when back button pressed
+        back.show();
     }
 }

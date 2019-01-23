@@ -102,11 +102,18 @@ MapaActivity extends AppCompatActivity implements PermissionsListener, OnMapRead
     private double distanciaArea = 0.0;
     private LatLngBounds coordsLimite;
 
+
+    // Limite de la camara de la zona sleccionada
+    LatLngBounds coordsLimite;
     //SE EJECUTA NADA MAS ABRIRSE EL MAPA
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+
+        Log.d("mapa", "Punto 0");
+        //Recojer admin
+        admin= getIntent().getBooleanExtra("Admin",false);
         //QUITAR TITULO DEL LAYOUT
         //ocultar barras extras
         getSupportActionBar().hide();
@@ -305,10 +312,23 @@ MapaActivity extends AppCompatActivity implements PermissionsListener, OnMapRead
             }
         }
     }
+    //TODO: IMG ....
+    public void toImg(String byteArray){
+
+        /*decodedString = Base64.decode(byteArray, Base64.DEFAULT);
+        decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+
+        //Convert bitmap to drawable
+        drawable = new BitmapDrawable(getResources(), decodedByte);
+        Log.d("mitag","toImg drawable =>"+drawable);*/
+
+    }
+
 
     //CARGAR MAPA
     @Override
     public void onMapReady(MapboxMap mapboxMap) {
+
 
         // ASIGNAR OBJETO A LA INSTANCIA MAPA
         MapaActivity.this.map = mapboxMap;
@@ -659,7 +679,9 @@ MapaActivity extends AppCompatActivity implements PermissionsListener, OnMapRead
             LimpiarPuntos();
             System.gc();
             CrearPuntos();
+            mostrarPista(idTextViewPista );
         }
+
     }
 
     //METODOS NO UTILIZADOS PERO NECESARIOS PARA EL FUNCIONAMIENTO CORECTO DE LA APLICACION

@@ -20,7 +20,8 @@ public class TextWatcherUsoMercado implements TextWatcher {
 
     @Override
     public void onTextChanged(CharSequence s, int start, int before, int count) {
-        Actividad_32_Precios.CambiarTotal();
+
+            Actividad_32_Precios.CambiarTotal();
 
     }
 

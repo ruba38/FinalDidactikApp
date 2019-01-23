@@ -1,6 +1,9 @@
 package com.example.ik_2dm3.proyectoupv;
 
+import android.app.Dialog;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.app.Activity;
 import android.os.Debug;
@@ -21,7 +24,10 @@ import java.util.ArrayList;
 public class Actividad_51_Botaketa extends AppCompatActivity {
     private TextView EgindakoBotoak;
     private ImageView BotatuEman;
-    private int ContadorVotos;
+    private int ContadorVotos,idPuntoJuego;
+    private Dialog back;
+    private Button atras, salir;
+
     private EditText AgregarNombre;
     private String Fallo ="@string/OrdescariarenIzena";
     private Button btnResultados;
@@ -45,6 +51,29 @@ public class Actividad_51_Botaketa extends AppCompatActivity {
         AgregarNombre = findViewById(R.id.Agregartexto);
         btnResultados = findViewById(R.id.btnResultados);
 
+        back = new Dialog(this);
+        back.setContentView(R.layout.atras);
+        back.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        atras= (Button) back.findViewById(R.id.botreniciar);
+        salir= (Button) back.findViewById(R.id.botsalir);
+        atras.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                back.dismiss();
+                Intent i = new Intent(getBaseContext(), Presentaciones.class );
+                i.putExtra("idPuntoJuego",idPuntoJuego);
+                startActivityForResult(i, 10);
+                finish();
+            }
+        });
+        salir.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                back.dismiss();
+
+                finish();
+            }
+        });
         AgregarNombre.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -121,6 +150,11 @@ public class Actividad_51_Botaketa extends AppCompatActivity {
     public void startActivityForResult(Intent intent, int requestCode) {
         super.startActivityForResult(intent, requestCode);
         finish();
+    }
+    @Override
+    public void onBackPressed() {
+        //your code when back button pressed
+        back.show();
     }
 }
 

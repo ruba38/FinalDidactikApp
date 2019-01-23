@@ -42,6 +42,8 @@ import static android.os.Environment.getExternalStorageDirectory;
 
 public class SacarFotos extends AppCompatActivity {
     public ImageView bottonCamara;
+    private Dialog back;
+    private Button atras, salir;
     public Button bottonOk;
     public ImageView Imagenes;
     public Uri image_uri;
@@ -70,6 +72,29 @@ public class SacarFotos extends AppCompatActivity {
         Imagenes = findViewById(R.id.Imajenes);
         bottonOk = findViewById(R.id.buttonOk);
         bottonOk.setVisibility(View.VISIBLE);
+        back = new Dialog(this);
+        back.setContentView(R.layout.atras);
+        back.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        atras= (Button) back.findViewById(R.id.botreniciar);
+        salir= (Button) back.findViewById(R.id.botsalir);
+        atras.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                back.dismiss();
+                Intent i = new Intent(getBaseContext(), Presentaciones.class );
+                i.putExtra("idPuntoJuego",idPuntoJuego);
+                startActivityForResult(i, 10);
+                finish();
+            }
+        });
+        salir.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                back.dismiss();
+
+                finish();
+            }
+        });
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (checkSelfPermission(Manifest.permission.CAMERA) ==
                     PackageManager.PERMISSION_DENIED ||
@@ -110,7 +135,7 @@ public class SacarFotos extends AppCompatActivity {
         values.put(MediaStore.Images.Media.TITLE, "tiritirti");
         values.put(MediaStore.Images.Media.DESCRIPTION,"Descripcion de la imajen");
         values.put(MediaStore.Images.Media.DATA,getExternalStorageDirectory()+"/Pictures/Dia"+Comgerfecha()+"Hora"+Calendar.getInstance().get(Calendar.HOUR_OF_DAY)+":"+Calendar.getInstance().get(Calendar.MINUTE)+":"+Calendar.getInstance().get(Calendar.SECOND)+".jpg");
-        image_uri= getContentResolver().insert(MediaStore.Images.Media.INTERNAL_CONTENT_URI,values);
+        image_uri= getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI,values);
         Intent cameraIntent=new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT,image_uri);
 
@@ -158,6 +183,11 @@ public String Comgerfecha() {
     SimpleDateFormat df = new SimpleDateFormat("dddMMMyyyy");
     String formattedDate = df.format(c);
     return formattedDate;
+    }
+    @Override
+    public void onBackPressed() {
+        //your code when back button pressed
+        back.show();
     }
     }
 

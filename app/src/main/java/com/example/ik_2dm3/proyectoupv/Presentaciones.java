@@ -24,6 +24,7 @@ public class Presentaciones extends AppCompatActivity {
     private int IdMusica, idPuntoJuego,Contador;
     private String idJuego;
     private String T1, T2, T3, T4, T5, T6;
+    private DatabaseAccess databaseaccess;
    // private Activity Actividad;
     private ArrayList<String> TodoText = new ArrayList<String>();
     private ArrayList<Integer>  Tiempos = new ArrayList<Integer>();
@@ -32,14 +33,15 @@ public class Presentaciones extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_presentaciones);
-
+        databaseaccess = new DatabaseAccess(this);
         //ocultar barras extras
         getSupportActionBar().hide();
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         idPuntoJuego = getIntent().getIntExtra("idPuntoJuego", 1);
-        idJuego =  getIntent().getStringExtra("NombreJuego");
+        Log.d("mytag","idpuntojuego: "+ idPuntoJuego);
+        idJuego =  "com.example.ik_2dm3.proyectoupv." + databaseaccess.getnombrejuego(idPuntoJuego);
 
 
         //declarar objetos de la interfaz
@@ -212,8 +214,9 @@ public class Presentaciones extends AppCompatActivity {
     //Metodo al Emprezar la Activity Para reporduccior Audios y  Camiar los textos
     public void Ejecuccion(int idPunto) {
         BotonAtras.setOnClickListener(new View.OnClickListener() {
-            @Override
+
             public void onClick(View v) {
+                Sonido.release();
                 finish();
             }
         });
@@ -232,6 +235,7 @@ public class Presentaciones extends AppCompatActivity {
                 Log.d("Juego", idJuego);
                   try {
                       i = new Intent(getBaseContext(), Class.forName(idJuego));
+                      i.putExtra("idPuntoJuego",idPuntoJuego);
                   } catch (ClassNotFoundException e) {
                     e.printStackTrace();
                       }
@@ -246,27 +250,19 @@ public class Presentaciones extends AppCompatActivity {
             Contador =0;
             Textos.setText(TodoText.get(Contador));
             while(Contador  < Tiempos.size()){
-            CambiarTexto.postDelayed(new Runnable() {
+                Log.d("Tiempos",Tiempos.get(Contador)+"Entra en admin cheked///////////////////////////////////////////////////////");
+                CambiarTexto.postDelayed(new Runnable() {
 
                 public void run() {
                     Textos.setText(TodoText.get(Contador-1));
 
-                    if(Contador==Tiempos.size()){
-                       AbilitaraBotones.postDelayed(new Runnable() {
-                           @Override
-                           public void run() {
-
-                               BotonRepetir.setVisibility(View.VISIBLE);
-                               BotonaAlante.setVisibility(View.VISIBLE);
-
-                           }
-                       },1) ;
-                    }
                 }
         }, Tiempos.get(Contador));
             Contador++;
-        }
 
+            }
+            BotonRepetir.setVisibility(View.VISIBLE);
+            BotonaAlante.setVisibility(View.VISIBLE);
         }
 
 

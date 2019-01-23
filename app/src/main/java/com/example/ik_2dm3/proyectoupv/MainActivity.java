@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -37,21 +36,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        //ocultar barras extras
         getSupportActionBar().hide();
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-                WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_HIDE_NAVIGATION);
         inicioPopup = new Dialog(this);
-
-        // borrar
-        /*pruebas = (Button) findViewById(R.id.button2);
-        pruebas.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(getBaseContext(), Actividad_51_Botaketa.class);
-                startActivity(i);
-            }
-        });*/
 
 
         objetoAjustes = new ajustes(getBaseContext());
@@ -59,6 +46,7 @@ public class MainActivity extends AppCompatActivity {
         idBtnMainAjustes = (Button) findViewById(R.id.idBtnMainAjustes);
         idBtnDerecha = (Button) findViewById(R.id.idBtnDerecha);
         idBtnInicio = (Button) findViewById(R.id.idBtnInicio);
+        pruebas =findViewById(R.id.PRUEBAS);
 
 
         DatabaseAccess databaseAccess = new DatabaseAccess(getBaseContext());
@@ -73,6 +61,14 @@ public class MainActivity extends AppCompatActivity {
         Lugar = arrayLugares.get(posicionArray).getIdLugar();
         mostrarProgreso(Lugar);
 
+        //Boton Pruebas
+        pruebas.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getBaseContext(),Presentaciones.class);
+                startActivityForResult(i,4);
+            }
+        });
 
         //BOTON AJUSTES
 
@@ -80,6 +76,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(getBaseContext(), AjustesActivity.class);
+                finish();
                 startActivity(i);
             }
         });
