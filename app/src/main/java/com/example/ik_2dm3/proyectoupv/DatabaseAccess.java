@@ -7,6 +7,9 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Debug;
 import android.util.Log;
 
+import com.mapbox.mapboxsdk.geometry.LatLng;
+import com.mapbox.mapboxsdk.geometry.LatLngBounds;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -138,6 +141,7 @@ public class DatabaseAccess extends SQLiteOpenHelper {
         cursor.close();
         return datoslista;
     }
+
     //VUELVE VISIBLE EL SIGIENTE PUNTO Y MARCA COMO TERMINADO EL ACTUAL
     public void setVisible(int x){
         String myPath = DB_PATH + DB_NAME;
@@ -299,6 +303,7 @@ public class DatabaseAccess extends SQLiteOpenHelper {
         cursor.close();
         return datosLugares;
     }
+
     public String getImajen(int Lugar){
         String myPath = DB_PATH + DB_NAME;
         db = SQLiteDatabase.openDatabase(myPath, null, SQLiteDatabase.OPEN_READWRITE);
@@ -311,9 +316,6 @@ public class DatabaseAccess extends SQLiteOpenHelper {
 
     }
 
-    public String getmierda() {
-        return "no";
-    }
     //############################################################################################## TABLA AJUSTES
     public String getAjustes(String opcion){
         int idAjuste=1;
@@ -359,4 +361,34 @@ public class DatabaseAccess extends SQLiteOpenHelper {
 
         }
     }
+
+    // Obtiene las coordenadas de la zona
+    public LatLngBounds getLimiteZona(int id) {
+
+        LatLngBounds zona;
+        String myPath = DB_PATH + DB_NAME;
+        db = SQLiteDatabase.openDatabase(myPath, null, SQLiteDatabase.OPEN_READWRITE);
+        db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM lugares WHERE idLugar = id", null);
+        cursor.moveToFirst();
+
+        for(int i=0;!cursor.isAfterLast();i++) {
+            int idLugar= cursor.getInt(cursor.getColumnIndex("idLugar"));
+            String nombre= cursor.getString(cursor.getColumnIndex("nombre"));
+            double coordenadaLimite1Lat = cursor.getDouble(cursor.getColumnIndex("coordenadaLimite1Lat"));
+            double coordenadaLimite1Lon = cursor.getDouble(cursor.getColumnIndex("coordenadaLimite1Lon"));
+            double coordenadaLimite2Lat = cursor.getDouble(cursor.getColumnIndex("coordenadaLimite2Lat"));
+            double coordenadaLimite2Lon = cursor.getDouble(cursor.getColumnIndex("coordenadaLimite2Lon"));
+            zona  = new LatLngBounds.Builder()
+                    .include(new LatLng(coordenadaLimite1Lat, coordenadaLimite1Lon))
+                    .include(new LatLng(coordenadaLimite2Lat, coordenadaLimite2Lon))
+                    .build();
+            cursor.close();
+            return zona;
+        }
+
+        return null;
+    }
+
+
 }
