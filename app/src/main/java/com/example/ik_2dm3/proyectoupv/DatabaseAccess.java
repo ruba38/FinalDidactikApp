@@ -152,12 +152,26 @@ public class DatabaseAccess extends SQLiteOpenHelper {
         db.close();
     }
     public void setTerminado(int x){
+
         String myPath = DB_PATH + DB_NAME;
         db = SQLiteDatabase.openDatabase(myPath, null, SQLiteDatabase.OPEN_READWRITE);
         db = this.getWritableDatabase();
         db.execSQL("UPDATE puntos SET terminado=1 WHERE idPunto="+x);
         db.close();
 
+    }
+    public int newpista(){
+        String myPath = DB_PATH + DB_NAME;
+        db = SQLiteDatabase.openDatabase(myPath, null, SQLiteDatabase.OPEN_READWRITE);
+        db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery("SELECT secuencia, terminado FROM puntos where idLugar=1", null);
+        cursor.moveToFirst();
+        while(cursor.getInt(cursor.getColumnIndex("terminado"))==1&&!cursor.isAfterLast())
+            cursor.moveToNext();
+        int i=cursor.getInt(cursor.getColumnIndex("secuencia"));
+        cursor.close();
+        db.close();
+        return i;
     }
     public int getVisible(int x){
         String myPath = DB_PATH + DB_NAME;
@@ -224,9 +238,10 @@ public class DatabaseAccess extends SQLiteOpenHelper {
         db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery("SELECT pista FROM puntos where secuencia="+secuencia+" And idLugar="+idL, null);
         cursor.moveToFirst();
+        String pista = cursor.getString(cursor.getColumnIndex("pista"));
         cursor.close();
         db.close();
-        return cursor.getString(cursor.getColumnIndex("pista"));
+        return pista;
     }
 
     //PONE TODOS LOS PUNTOS EN VISIBLE
@@ -400,7 +415,7 @@ public class DatabaseAccess extends SQLiteOpenHelper {
         String myPath = DB_PATH + DB_NAME;
         db = SQLiteDatabase.openDatabase(myPath, null, SQLiteDatabase.OPEN_READWRITE);
         db = this.getWritableDatabase();
-        Cursor cursor = db.rawQuery("SELECT * FROM lugares WHERE idLugar = "+id, null);
+        Cursor cursor = db.rawQuery("SELECT * FROM lugares WHERE idLugar ="+id, null);
         cursor.moveToFirst();
 
         for(int i=0;!cursor.isAfterLast();i++) {
