@@ -18,12 +18,12 @@ public class MainActivity extends AppCompatActivity {
 
     public Button pruebas;
     public boolean admin = false;
-    private Button  idBtnMainAjustes,idBtnIzquierda, idBtnDerecha, idBtnContinuar, idBtnInicio, idBtnReiniciar;
-    private Button btnPopupInicioSi,btnPopupInicioNo,btnPopupInicioContinuar,btnPopupInicioReiniciar;
-    private TextView idTextViewLugar, idTextViewProgreso,idTextViewInicioMensaje;
-    private int posicionArray=0;
+    private Button idBtnMainAjustes, idBtnIzquierda, idBtnDerecha, idBtnContinuar, idBtnInicio, idBtnReiniciar;
+    private Button btnPopupInicioSi, btnPopupInicioNo, btnPopupInicioContinuar, btnPopupInicioReiniciar;
+    private TextView idTextViewLugar, idTextViewProgreso, idTextViewInicioMensaje;
+    private int posicionArray = 0;
     private int Lugar;
-    int contador = 0;
+    private int contador = 0;
     private ArrayList<lugares> arrayLugares = new ArrayList<lugares>();
     private ArrayList<puntos> arrayPuntos = new ArrayList<puntos>();
     private static final int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 100;
@@ -42,11 +42,9 @@ public class MainActivity extends AppCompatActivity {
 
 
         objetoAjustes = new ajustes(getBaseContext());
-        Log.d("ajustes","sonido= "+objetoAjustes.sonido+" // musica= "+objetoAjustes.musica+" // mapa="+objetoAjustes.mapa+" // idioma="+objetoAjustes.idioma);
+        Log.d("ajustes", "sonido= " + objetoAjustes.sonido + " // musica= " + objetoAjustes.musica + " // mapa=" + objetoAjustes.mapa + " // idioma=" + objetoAjustes.idioma);
         idBtnMainAjustes = (Button) findViewById(R.id.idBtnMainAjustes);
         idBtnDerecha = (Button) findViewById(R.id.idBtnDerecha);
-        idBtnInicio = (Button) findViewById(R.id.idBtnInicio);
-        pruebas =findViewById(R.id.PRUEBAS);
 
 
         DatabaseAccess databaseAccess = new DatabaseAccess(getBaseContext());
@@ -54,7 +52,6 @@ public class MainActivity extends AppCompatActivity {
 
         idTextViewLugar = (TextView) findViewById(R.id.idTextViewLugar);
         idTextViewProgreso = (TextView) findViewById(R.id.idTextViewProgreso);
-
 
 
         idTextViewLugar.setText(arrayLugares.get(posicionArray).getNombre());
@@ -65,8 +62,8 @@ public class MainActivity extends AppCompatActivity {
         pruebas.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(getBaseContext(),Presentaciones.class);
-                startActivityForResult(i,4);
+                Intent i = new Intent(getBaseContext(), Presentaciones.class);
+                startActivityForResult(i, 4);
             }
         });
 
@@ -87,16 +84,16 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                posicionArray=posicionArray-1;
+                posicionArray = posicionArray - 1;
 
-                if(posicionArray<0){
-                    posicionArray=arrayLugares.size()-1;
+                if (posicionArray < 0) {
+                    posicionArray = arrayLugares.size() - 1;
                     idTextViewLugar.setText(arrayLugares.get(posicionArray).getNombre());
-                }else {
+                } else {
                     idTextViewLugar.setText(arrayLugares.get(posicionArray).getNombre());
                 }
 
-                Lugar=arrayLugares.get(posicionArray).getIdLugar();
+                Lugar = arrayLugares.get(posicionArray).getIdLugar();
                 mostrarProgreso(Lugar);
 
             }
@@ -107,16 +104,16 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                posicionArray=posicionArray+1;
+                posicionArray = posicionArray + 1;
 
-                if(posicionArray>arrayLugares.size()-1){
-                    posicionArray=0
+                if (posicionArray > arrayLugares.size() - 1) {
+                    posicionArray = 0
                     ;
                     idTextViewLugar.setText(arrayLugares.get(posicionArray).getNombre());
-                }else {
+                } else {
                     idTextViewLugar.setText(arrayLugares.get(posicionArray).getNombre());
                 }
-                Lugar=arrayLugares.get(posicionArray).getIdLugar();
+                Lugar = arrayLugares.get(posicionArray).getIdLugar();
                 mostrarProgreso(Lugar);
 
             }
@@ -127,10 +124,10 @@ public class MainActivity extends AppCompatActivity {
         idBtnInicio.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String NombreLugar=arrayLugares.get(posicionArray).getNombre();
+                String NombreLugar = arrayLugares.get(posicionArray).getNombre();
                 //AL CLICKAR SOBRE EL PUNTO SE ABRIRA EL POPUP DEL PUNTO
-                String mensajeContinuar="PARTIDA BAT DAGO HASITA "+NombreLugar.toUpperCase()+"N, JARRAITU NAHI DUZU?";
-                String mensajeReiniciar="ZEGURU ZAUDE BERRABIARAZI NAHI DUZULA?";
+                String mensajeContinuar = "PARTIDA BAT DAGO HASITA " + NombreLugar.toUpperCase() + "N, JARRAITU NAHI DUZU?";
+                String mensajeReiniciar = "ZEGURU ZAUDE BERRABIARAZI NAHI DUZULA?";
                 inicioPopup.setContentView(R.layout.popup_inicio);//abrir layout que contiene el popup
 
                 btnPopupInicioSi = (Button) inicioPopup.findViewById(R.id.btnPopupInicioSi);
@@ -149,9 +146,9 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
                         Intent i = new Intent(getBaseContext(), MapaActivity.class);
-                        i.putExtra("idLugar",Lugar);
+                        i.putExtra("idLugar", Lugar);
                         inicioPopup.dismiss();
-                        startActivityForResult(i,1);
+                        startActivityForResult(i, 1);
                     }
                 });
                 //REINICIAR
@@ -171,9 +168,9 @@ public class MainActivity extends AppCompatActivity {
                     public void onClick(View v) {
                         databaseAccess.resetApp(Lugar);
                         Intent i = new Intent(getBaseContext(), Kaixo.class);
-                        i.putExtra("idLugar",Lugar);
+                        i.putExtra("idLugar", Lugar);
                         inicioPopup.dismiss();
-                        startActivityForResult(i,2);
+                        startActivityForResult(i, 2);
 
                     }
                 });
@@ -194,19 +191,17 @@ public class MainActivity extends AppCompatActivity {
                 //NO PERMITIR QUE AL TOCAR FUERA DEL MISMO SE CIERRE
                 inicioPopup.setCanceledOnTouchOutside(false);
                 //MOSTRAR POPUP
-                if(getProgreso(Lugar)>0) {
+                if (getProgreso(Lugar) > 0) {
                     inicioPopup.show();
-                }else{
+                } else {
                     Intent i = new Intent(getBaseContext(), Kaixo.class);
-                    i.putExtra("idLugar",Lugar);
-                    startActivityForResult(i,3);
+                    i.putExtra("idLugar", Lugar);
+                    startActivityForResult(i, 3);
                 }
             }
         });
 
-
-
-        if(arrayLugares.size()==1){
+        if (arrayLugares.size() == 1) {
             idBtnIzquierda.setVisibility(View.GONE);
             idBtnDerecha.setVisibility(View.GONE);
         }
@@ -243,10 +238,10 @@ public class MainActivity extends AppCompatActivity {
 
             }
     }*/
-}
+    }
 
     @Override
-    public void onWindowFocusChanged(boolean hasFocus){
+    public void onWindowFocusChanged(boolean hasFocus) {
         super.onWindowFocusChanged(hasFocus);
         getWindow().getDecorView().setSystemUiVisibility(
                 View.SYSTEM_UI_FLAG_LAYOUT_STABLE
@@ -257,27 +252,27 @@ public class MainActivity extends AppCompatActivity {
                         | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
     }
 
-    private void mostrarProgreso(int x){
-        ContVisibles=0;
+    private void mostrarProgreso(int x) {
+        ContVisibles = 0;
         DatabaseAccess databaseAccess = new DatabaseAccess(getBaseContext());
         arrayPuntos.clear();
         List<puntos> arrayPuntos = (List<puntos>) databaseAccess.getPuntos(x);
-        for (int i=0;i<arrayPuntos.size();i++){
-            if(arrayPuntos.get(i).getvisible()==1) {
+        for (int i = 0; i < arrayPuntos.size(); i++) {
+            if (arrayPuntos.get(i).getvisible() == 1) {
                 ContVisibles = ContVisibles + 1;
             }
         }
-        idTextViewProgreso.setText(ContVisibles+" / "+(arrayPuntos.size()));
+        idTextViewProgreso.setText(ContVisibles + " / " + (arrayPuntos.size()));
 
     }
 
-    private int getProgreso(int x){
-        ContVisibles=0;
+    private int getProgreso(int x) {
+        ContVisibles = 0;
         DatabaseAccess databaseAccess = new DatabaseAccess(getBaseContext());
         arrayPuntos.clear();
         List<puntos> arrayPuntos = (List<puntos>) databaseAccess.getPuntos(x);
-        for (int i=0;i<arrayPuntos.size();i++){
-            if(arrayPuntos.get(i).getvisible()==1) {
+        for (int i = 0; i < arrayPuntos.size(); i++) {
+            if (arrayPuntos.get(i).getvisible() == 1) {
                 ContVisibles = ContVisibles + 1;
             }
         }
@@ -285,8 +280,8 @@ public class MainActivity extends AppCompatActivity {
         return ContVisibles;
 
     }
-    protected void onActivityResult(int requestCode,
-                                    int resultCode, Intent data) {
+
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == 1 || requestCode == 2 || requestCode == 3) {
             if (resultCode == RESULT_OK) {
                 finish();
