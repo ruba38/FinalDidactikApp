@@ -25,9 +25,11 @@ public class horidata extends AppCompatActivity {
 
         DatabaseAccess databaseAccess=new DatabaseAccess(getBaseContext());
         databaseAccess.setTerminado(idPuntoJuego);
-        oihaltxo = MediaPlayer.create(getBaseContext(), R.raw.horidata);
-        oihaltxo.start();
-
+        int sonido= databaseAccess.getSonido();
+        if(sonido==1) {
+            oihaltxo = MediaPlayer.create(getBaseContext(), R.raw.horidata);
+            oihaltxo.start();
+        }
         Handler amaitu= new Handler();
         amaitu.postDelayed(new Runnable(){
             @Override
