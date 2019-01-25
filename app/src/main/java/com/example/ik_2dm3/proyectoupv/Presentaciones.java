@@ -278,5 +278,10 @@ public class Presentaciones extends AppCompatActivity {
 
         }
     }
+    public void onBackPressed() {
+        //your code when back button pressed
+        Sonido.release();
+        finish();
+    }
 
 }

@@ -46,7 +46,6 @@ public class MainActivity extends AppCompatActivity {
         idBtnMainAjustes = (Button) findViewById(R.id.idBtnMainAjustes);
         idBtnDerecha = (Button) findViewById(R.id.idBtnDerecha);
         idBtnInicio = (Button) findViewById(R.id.idBtnInicio);
-        pruebas =findViewById(R.id.PRUEBAS);
 
 
         DatabaseAccess databaseAccess = new DatabaseAccess(getBaseContext());
