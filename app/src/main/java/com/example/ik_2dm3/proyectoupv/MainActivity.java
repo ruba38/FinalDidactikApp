@@ -45,9 +45,13 @@ public class MainActivity extends AppCompatActivity {
         Log.d("ajustes", "sonido= " + objetoAjustes.sonido + " // musica= " + objetoAjustes.musica + " // mapa=" + objetoAjustes.mapa + " // idioma=" + objetoAjustes.idioma);
         idBtnMainAjustes = (Button) findViewById(R.id.idBtnMainAjustes);
         idBtnDerecha = (Button) findViewById(R.id.idBtnDerecha);
-
+        idBtnInicio = (Button) findViewById(R.id.idBtnInicio);
 
         DatabaseAccess databaseAccess = new DatabaseAccess(getBaseContext());
+        // COMPRUEBA SE LA BASE DE DATOS EXISTSTE EN EL DISPOSITIBO , CREA UNA COPIA EN EL DISPOSITIBO
+       // databaseAccess.startdb(getBaseContext());
+
+
         List<lugares> arrayLugares = (List<lugares>) databaseAccess.getLugares();
 
         idTextViewLugar = (TextView) findViewById(R.id.idTextViewLugar);
@@ -59,13 +63,13 @@ public class MainActivity extends AppCompatActivity {
         mostrarProgreso(Lugar);
 
         //Boton Pruebas
-        pruebas.setOnClickListener(new View.OnClickListener() {
+       /* pruebas.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(getBaseContext(), Presentaciones.class);
                 startActivityForResult(i, 4);
             }
-        });
+        });*/
 
         //BOTON AJUSTES
 
@@ -73,8 +77,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(getBaseContext(), AjustesActivity.class);
-                finish();
-                startActivity(i);
+                startActivityForResult(i,11);
+
             }
         });
 
@@ -148,6 +152,7 @@ public class MainActivity extends AppCompatActivity {
                         Intent i = new Intent(getBaseContext(), MapaActivity.class);
                         i.putExtra("idLugar", Lugar);
                         inicioPopup.dismiss();
+                        databaseAccess.setLugar(Lugar);
                         startActivityForResult(i, 1);
                     }
                 });
@@ -167,6 +172,7 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
                         databaseAccess.resetApp(Lugar);
+                        databaseAccess.setAdmin(0);
                         Intent i = new Intent(getBaseContext(), Kaixo.class);
                         i.putExtra("idLugar", Lugar);
                         inicioPopup.dismiss();

@@ -101,6 +101,7 @@ MapaActivity extends AppCompatActivity implements PermissionsListener, OnMapRead
     private String ImagenPoP;
     private double distanciaArea = 0.0;
     private LatLngBounds coordsLimite;
+    private int adminEstate;
 
 
     // Limite de la camara de la zona sleccionada
@@ -110,10 +111,14 @@ MapaActivity extends AppCompatActivity implements PermissionsListener, OnMapRead
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-
+        // INSTANCIAR OBJETOS DE BASE DE DATOS
+        DatabaseAccess databaseAccess = new DatabaseAccess(this);
+        // COMPRUEBA SE LA BASE DE DATOS EXISTSTE EN EL DISPOSITIBO , CREA UNA COPIA EN EL DISPOSITIBO
+        databaseAccess.startdb(getBaseContext());
         Log.d("mapa", "Punto 0");
         //Recojer admin
         admin= getIntent().getBooleanExtra("Admin",false);
+        adminEstate= databaseAccess.getAdmin();
         //QUITAR TITULO DEL LAYOUT
         //ocultar barras extras
         getSupportActionBar().hide();
@@ -149,10 +154,7 @@ MapaActivity extends AppCompatActivity implements PermissionsListener, OnMapRead
         idBtnMapaAjustes = findViewById(R.id.idBtnMapaAjustes);
 
 
-        // INSTANCIAR OBJETOS DE BASE DE DATOS
-        DatabaseAccess databaseAccess = new DatabaseAccess(this);
-        // COMPRUEBA SE LA BASE DE DATOS EXISTSTE EN EL DISPOSITIBO , CREA UNA COPIA EN EL DISPOSITIBO
-        databaseAccess.startdb(getBaseContext());
+
         //CON EL LUGAR INDICADO MIRAMOS SI HAY ALGUN PUNTO VISIBLE SI NO LO HAY PONE EL PRIMERO VISIBLE
         databaseAccess.iniciarApp(Lugar);
 
@@ -161,6 +163,12 @@ MapaActivity extends AppCompatActivity implements PermissionsListener, OnMapRead
         coordsLimite = databaseAccess.getLimiteZona(Lugar);
 
         // BOTON MODO ADMINISTRADOR
+        if(adminEstate==0){
+            idBtnMapaAdmin.setVisibility(mapView.INVISIBLE);
+        }else{
+            idBtnMapaAdmin.setVisibility(mapView.VISIBLE);
+        }
+
         idBtnMapaAdmin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -168,14 +176,14 @@ MapaActivity extends AppCompatActivity implements PermissionsListener, OnMapRead
                 if (admin==false) {
 
                     // Cambia a Visible = true, todos los puntos
-                    databaseAccess.setAllVisible(Lugar);
+                    databaseAccess.setAllVisible();
                     admin=true;
                     idBtnMapaAdmin.setBackground(getDrawable(R.drawable.adminverde));
                 }
                 //SI ESTA ACTIVADO SE DESACTIVA Y OCULTA TODOS LOS PUNTOS MENOS LOS TERMINADOS SI NO HAY TERMINADOS MUESTRA SOLO EL PRIMERO
                 else{
 
-                    databaseAccess.reverseAllVisible(Lugar);
+                    databaseAccess.reverseAllVisible();
                     admin=false;
                     idBtnMapaAdmin.setBackground(getDrawable(R.drawable.adminrojo));
                 }
@@ -198,7 +206,7 @@ MapaActivity extends AppCompatActivity implements PermissionsListener, OnMapRead
             public void onClick(View v) {
                 //ABRE LA VENTANA DE AJUSTES
                 Intent i = new Intent(getBaseContext(), AjustesActivity.class);
-                startActivity(i);}
+                startActivityForResult(i,7);}
         });
         //BOTON CAMARA
         BotonCamara.setOnClickListener(new View.OnClickListener() {
@@ -676,6 +684,26 @@ MapaActivity extends AppCompatActivity implements PermissionsListener, OnMapRead
             newpista();
 
 
+        }
+        if (requestCode==7){
+            DatabaseAccess databaseAccess = new DatabaseAccess(this);
+            adminEstate=databaseAccess.getAdmin();
+            if(adminEstate==0){
+                idBtnMapaAdmin.setVisibility(mapView.INVISIBLE);
+                databaseAccess.reverseAllVisible();
+                admin=false;
+                idBtnMapaAdmin.setBackground(getDrawable(R.drawable.adminrojo));
+                // VACIA EL ARRAYLIST QUE CONTIENE LOS DATOS DE LOS PUNTOS
+                LimpiarPuntos();
+
+                // RELLENA EL ARRAYLIST CON LOS DATOS DE LOS PUNTOS
+                CrearPuntos();
+                //CAMBIAR TEXTO DE PUNTOS
+                @SuppressLint("MissingPermission") Location ubicacionUsuario = locationEngine.getLastLocation();
+                localizarDistancia(ubicacionUsuario);
+            }else{
+                idBtnMapaAdmin.setVisibility(mapView.VISIBLE);
+            }
         }
 
     }

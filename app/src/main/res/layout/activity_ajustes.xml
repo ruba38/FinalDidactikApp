@@ -46,7 +46,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/switch1" />
+        app:layout_constraintTop_toBottomOf="@+id/sound" />
 
     <Button
         android:id="@+id/idBtnAjustesCreadores"
@@ -84,13 +84,14 @@
         app:layout_constraintGuide_percent="0.46" />
 
     <Switch
-        android:id="@+id/switch1"
-        android:layout_width="98dp"
+        android:id="@+id/sound"
+        android:layout_width="125dp"
         android:layout_height="40dp"
         android:layout_marginStart="8dp"
 
         android:layout_marginTop="64dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginEnd="6dp"
+        android:checked="false"
         android:fontFamily="sans-serif"
         android:scaleX="1.5"
         android:scaleY="1.5"
@@ -102,5 +103,13 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView9" />
+
+    <ImageView
+        android:id="@+id/logotx"
+        android:layout_width="wrap_content"
+        android:layout_height="160dp"
+        android:src="@drawable/logotxurditrans"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </android.support.constraint.ConstraintLayout>
