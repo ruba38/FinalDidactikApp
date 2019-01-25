@@ -103,6 +103,10 @@ MapaActivity extends AppCompatActivity implements PermissionsListener, OnMapRead
     private LatLngBounds coordsLimite;
     private int adminEstate;
 
+    private Dialog PopDistancia;
+    private TextView MensajeDistancia;
+    private Button FondoEstasLejos;
+    private String DistanciaMetros;
 
     // Limite de la camara de la zona sleccionada
     //LatLngBounds coordsLimite;
@@ -116,9 +120,26 @@ MapaActivity extends AppCompatActivity implements PermissionsListener, OnMapRead
         // COMPRUEBA SE LA BASE DE DATOS EXISTSTE EN EL DISPOSITIBO , CREA UNA COPIA EN EL DISPOSITIBO
         databaseAccess.startdb(getBaseContext());
         Log.d("mapa", "Punto 0");
+
+        //PopUpdistancia
+
+
+        PopDistancia = new Dialog(this);
+        PopDistancia.setContentView(R.layout.fueradelarea);
+        PopDistancia.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        MensajeDistancia= (TextView) PopDistancia.findViewById(R.id.MensajeDistancia);
+        FondoEstasLejos=  PopDistancia.findViewById(R.id.BotonDistanciaAtras);
+        FondoEstasLejos.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
         //Recojer admin
         admin= getIntent().getBooleanExtra("Admin",false);
         adminEstate= databaseAccess.getAdmin();
+
+
         //QUITAR TITULO DEL LAYOUT
         //ocultar barras extras
         getSupportActionBar().hide();
@@ -155,12 +176,18 @@ MapaActivity extends AppCompatActivity implements PermissionsListener, OnMapRead
 
 
 
+        idBtnMapaAdmin.setVisibility(View.GONE);
+
+        // INSTANCIAR OBJETOS DE BASE DE DATOS
+        DatabaseAccess databaseAccess = new DatabaseAccess(this);
+        // COMPRUEBA SE LA BASE DE DATOS EXISTSTE EN EL DISPOSITIBO , CREA UNA COPIA EN EL DISPOSITIBO
+        databaseAccess.startdb(getBaseContext());
         //CON EL LUGAR INDICADO MIRAMOS SI HAY ALGUN PUNTO VISIBLE SI NO LO HAY PONE EL PRIMERO VISIBLE
         databaseAccess.iniciarApp(Lugar);
 
-
         // Cargamos el area de la zona seleccionada
         coordsLimite = databaseAccess.getLimiteZona(Lugar);
+
 
         // BOTON MODO ADMINISTRADOR
         if(adminEstate==0){
@@ -199,7 +226,6 @@ MapaActivity extends AppCompatActivity implements PermissionsListener, OnMapRead
             }
         });
 
-
         //BOTON AJUSTES
         idBtnMapaAjustes.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -217,6 +243,8 @@ MapaActivity extends AppCompatActivity implements PermissionsListener, OnMapRead
             }
         });
 
+        databaseAccess.close();
+
     }
 
     //*****************************FUNCIONES INDIBIDUALES*******************************************
@@ -225,10 +253,11 @@ MapaActivity extends AppCompatActivity implements PermissionsListener, OnMapRead
     @Override
     public void onLocationChanged(Location location) {
 
-        /*localizarDistancia(location);
+        localizarDistancia(location);
 
         // Obtenemos la posicion de la persona
-        LatLng pos = new LatLng(location.getAltitude(),location.getLongitude());
+
+       LatLng pos = new LatLng(location.getLatitude(),location.getLongitude());
 
         // Si estan fuera de la zona delimitada
         if(!coordsLimite.contains(pos)) {
@@ -236,8 +265,14 @@ MapaActivity extends AppCompatActivity implements PermissionsListener, OnMapRead
             // Pasamos el area a coordenadas y calculamos la distancia
             LatLng dist = new LatLng(coordsLimite.getNorthEast().getLatitude(), coordsLimite.getSouthWest().getLongitude());
             distanciaArea = pos.distanceTo(dist);
+            PopDistancia.setCanceledOnTouchOutside(false);
+            DistanciaMetros = String.format("%.2f",distanciaArea)+" Metrora";
 
-        }*/
+            MensajeDistancia.setText("Hurrunegi zaude "+DistanciaMetros+ " hurbil zaitez ");
+            PopDistancia.show();
+
+
+        }
     }
 
     public void localizarDistancia (Location location) {
@@ -293,6 +328,7 @@ MapaActivity extends AppCompatActivity implements PermissionsListener, OnMapRead
             //PINTAS EL PROGRESO DE LOS PUNTOS ENCONTRADOS
             idTextViewProgreso.setText(contPuntos+"/"+PuntosInteres.size());
         }
+        databaseAccess.close();
     }
 
     //COMO HAY QUE ESTAR CERCA DEL PUNTO PARA JUGAR ESTA COMPRUEBA SI EL PUNTO ESTA DENTRO DEL RANGO INDICADO
@@ -346,6 +382,9 @@ MapaActivity extends AppCompatActivity implements PermissionsListener, OnMapRead
 
         // HABILITAMOS LA LOCALIZAZION DEL USUARIO
         enableLocation();
+
+        // Hacemos el boton del admin visible
+        idBtnMapaAdmin.setVisibility(View.VISIBLE);
 
         // ZOOM MAXIMO Y MINIMO DEL MAPA Y DELIMITAR MAPA
         map.setMinZoomPreference(16);
@@ -561,6 +600,8 @@ MapaActivity extends AppCompatActivity implements PermissionsListener, OnMapRead
         DatabaseAccess databaseAccess =new DatabaseAccess(this);
         // CAMBIAMOS AL PUNTO ESE LA OPCION COMO TERMINADO
         databaseAccess.setTerminado(idPunto);
+        databaseAccess.close();
+
         // VACIA EL ARRAYLIST QUE CONTIENE LOS DATOS DE LOS PUNTOS
         LimpiarPuntos();
 
@@ -671,6 +712,7 @@ MapaActivity extends AppCompatActivity implements PermissionsListener, OnMapRead
         //NO PERMITIR QUE AL TOCAR FUERA DEL MISMO SE CIERRE
         pistaPopup.setCanceledOnTouchOutside(false);
         pistaPopup.show();
+        databaseAccess.close();
     }
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -704,6 +746,7 @@ MapaActivity extends AppCompatActivity implements PermissionsListener, OnMapRead
             }else{
                 idBtnMapaAdmin.setVisibility(mapView.VISIBLE);
             }
+            databaseAccess.close();
         }
 
     }
@@ -714,6 +757,7 @@ MapaActivity extends AppCompatActivity implements PermissionsListener, OnMapRead
         if(newPista<comp){
             newPista=comp;
         mostrarPista(idTextViewPista);}
+        databaseAccess.close();
     }
     //METODOS NO UTILIZADOS PERO NECESARIOS PARA EL FUNCIONAMIENTO CORECTO DE LA APLICACION
     @Override

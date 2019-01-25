@@ -45,14 +45,13 @@ public class MainActivity extends AppCompatActivity {
         Log.d("ajustes", "sonido= " + objetoAjustes.sonido + " // musica= " + objetoAjustes.musica + " // mapa=" + objetoAjustes.mapa + " // idioma=" + objetoAjustes.idioma);
         idBtnMainAjustes = (Button) findViewById(R.id.idBtnMainAjustes);
         idBtnDerecha = (Button) findViewById(R.id.idBtnDerecha);
+        pruebas = (Button) findViewById(R.id.button2);
         idBtnInicio = (Button) findViewById(R.id.idBtnInicio);
 
+
         DatabaseAccess databaseAccess = new DatabaseAccess(getBaseContext());
-        // COMPRUEBA SE LA BASE DE DATOS EXISTSTE EN EL DISPOSITIBO , CREA UNA COPIA EN EL DISPOSITIBO
-       // databaseAccess.startdb(getBaseContext());
-
-
         List<lugares> arrayLugares = (List<lugares>) databaseAccess.getLugares();
+        databaseAccess.close();
 
         idTextViewLugar = (TextView) findViewById(R.id.idTextViewLugar);
         idTextViewProgreso = (TextView) findViewById(R.id.idTextViewProgreso);
@@ -177,6 +176,7 @@ public class MainActivity extends AppCompatActivity {
                         i.putExtra("idLugar", Lugar);
                         inicioPopup.dismiss();
                         startActivityForResult(i, 2);
+                        databaseAccess.close();
 
                     }
                 });
@@ -268,6 +268,7 @@ public class MainActivity extends AppCompatActivity {
                 ContVisibles = ContVisibles + 1;
             }
         }
+        databaseAccess.close();
         idTextViewProgreso.setText(ContVisibles + " / " + (arrayPuntos.size()));
 
     }
@@ -282,7 +283,7 @@ public class MainActivity extends AppCompatActivity {
                 ContVisibles = ContVisibles + 1;
             }
         }
-
+        databaseAccess.close();
         return ContVisibles;
 
     }
