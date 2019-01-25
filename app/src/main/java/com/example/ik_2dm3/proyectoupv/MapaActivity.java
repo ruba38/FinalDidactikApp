@@ -101,7 +101,10 @@ MapaActivity extends AppCompatActivity implements PermissionsListener, OnMapRead
     private String ImagenPoP;
     private double distanciaArea = 0.0;
     private LatLngBounds coordsLimite;
-
+    private Dialog PopDistancia;
+    private TextView MensajeDistancia;
+    private Button FondoEstasLejos;
+    private String DistanciaMetros;
 
     // Limite de la camara de la zona sleccionada
     //LatLngBounds coordsLimite;
@@ -112,6 +115,21 @@ MapaActivity extends AppCompatActivity implements PermissionsListener, OnMapRead
 
 
         Log.d("mapa", "Punto 0");
+
+        //PopUpdistancia
+
+
+        PopDistancia = new Dialog(this);
+        PopDistancia.setContentView(R.layout.fueradelarea);
+        PopDistancia.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        MensajeDistancia= (TextView) PopDistancia.findViewById(R.id.MensajeDistancia);
+        FondoEstasLejos=  PopDistancia.findViewById(R.id.BotonDistanciaAtras);
+        FondoEstasLejos.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
         //Recojer admin
         admin= getIntent().getBooleanExtra("Admin",false);
 
@@ -234,6 +252,12 @@ MapaActivity extends AppCompatActivity implements PermissionsListener, OnMapRead
             // Pasamos el area a coordenadas y calculamos la distancia
             LatLng dist = new LatLng(coordsLimite.getNorthEast().getLatitude(), coordsLimite.getSouthWest().getLongitude());
             distanciaArea = pos.distanceTo(dist);
+            PopDistancia.setCanceledOnTouchOutside(false);
+            DistanciaMetros = String.format("%.2f",distanciaArea)+" Metrora";
+
+            MensajeDistancia.setText("Hurrunegi zaude "+DistanciaMetros+ " hurbil zaitez ");
+            PopDistancia.show();
+
 
         }
     }
