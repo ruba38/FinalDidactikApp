@@ -25,16 +25,16 @@ public class Actividad_60_Presentacion extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_actividad_60__presentacion);
+        //setContentView(R.layout.activity_actividad_60__presentacion);
 
         idPuntoJuego=getIntent().getIntExtra("idPuntoJuego",0);
         //declarar Contenido
 //ocultar barras extras
         getSupportActionBar().hide();
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-                WindowManager.LayoutParams.FLAG_FULLSCREEN);        Fondo60 = findViewById(R.id.Fondo60);
-        Texto601 = findViewById(R.id.Texto601);
-        Texto602 = findViewById(R.id.Texto602);
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);       // Fondo60 = findViewById(R.id.Fondo60);
+       // Texto601 = findViewById(R.id.Texto601);
+       // Texto602 = findViewById(R.id.Texto602);
         Splash = findViewById(R.id.SplasNaranja);
         Splash.setVisibility(View.INVISIBLE);
         Texto601.setVisibility(View.INVISIBLE);

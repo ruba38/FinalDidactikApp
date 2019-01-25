@@ -93,7 +93,7 @@ MapaActivity extends AppCompatActivity implements PermissionsListener, OnMapRead
     private Thread hiloJuego;
     //Imajen PopUp
     private String ImagenPoP;
-
+    Drawable drawableTop;
 
     // Limite de la camara de la zona sleccionada
     private static final LatLngBounds coordsLimite = new LatLngBounds.Builder()
@@ -403,7 +403,7 @@ MapaActivity extends AppCompatActivity implements PermissionsListener, OnMapRead
                     Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString,
                             0, decodedString.length);
 
-                    Drawable drawableTop = new BitmapDrawable(getResources(), decodedByte);
+                    drawableTop = new BitmapDrawable(getResources(), decodedByte);
                     Log.d("imagen", "imagen=" + decodedByte);
                     imagenPopup.setBackground(drawableTop);
                 }
@@ -434,6 +434,7 @@ MapaActivity extends AppCompatActivity implements PermissionsListener, OnMapRead
                                     i = new Intent(getBaseContext(), Presentaciones.class);
 
                                     i.putExtra("idPuntoJuego",idPunto);
+
                                 Log.d("mapa", "Punto 4");
 
                                 //} catch (ClassNotFoundException e) {
