@@ -161,7 +161,7 @@ MapaActivity extends AppCompatActivity implements PermissionsListener, OnMapRead
         databaseAccess.iniciarApp(Lugar);
 
         // Cargamos el area de la zona seleccionada
-       // coordsLimite = databaseAccess.getLimiteZona(Lugar);
+        coordsLimite = databaseAccess.getLimiteZona(Lugar);
 
 
         // BOTON MODO ADMINISTRADOR
@@ -222,12 +222,11 @@ MapaActivity extends AppCompatActivity implements PermissionsListener, OnMapRead
     @Override
     public void onLocationChanged(Location location) {
 
-        /*localizarDistancia(location);
+        localizarDistancia(location);
 
         // Obtenemos la posicion de la persona
-        Log.d("long",location.getLatitude()+"cdadadadada"+location.getLongitude()+"falos?????????????????????????????????????????????????????????????????????????????????????????????????????????????????????");
 
-       LatLng pos = new LatLng(location.getAltitude(),location.getLongitude());
+       LatLng pos = new LatLng(location.getLatitude(),location.getLongitude());
 
         // Si estan fuera de la zona delimitada
         if(!coordsLimite.contains(pos)) {
@@ -236,7 +235,7 @@ MapaActivity extends AppCompatActivity implements PermissionsListener, OnMapRead
             LatLng dist = new LatLng(coordsLimite.getNorthEast().getLatitude(), coordsLimite.getSouthWest().getLongitude());
             distanciaArea = pos.distanceTo(dist);
 
-        }*/
+        }
     }
 
     public void localizarDistancia (Location location) {
