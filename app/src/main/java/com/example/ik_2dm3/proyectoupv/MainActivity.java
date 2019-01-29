@@ -62,13 +62,13 @@ public class MainActivity extends AppCompatActivity {
         mostrarProgreso(Lugar);
 
         //Boton Pruebas
-        pruebas.setOnClickListener(new View.OnClickListener() {
+       /* pruebas.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(getBaseContext(), Presentaciones.class);
                 startActivityForResult(i, 4);
             }
-        });
+        });*/
 
         //BOTON AJUSTES
 
@@ -76,8 +76,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(getBaseContext(), AjustesActivity.class);
-                finish();
-                startActivity(i);
+                startActivityForResult(i,11);
+
             }
         });
 
@@ -151,6 +151,7 @@ public class MainActivity extends AppCompatActivity {
                         Intent i = new Intent(getBaseContext(), MapaActivity.class);
                         i.putExtra("idLugar", Lugar);
                         inicioPopup.dismiss();
+                        databaseAccess.setLugar(Lugar);
                         startActivityForResult(i, 1);
                     }
                 });
@@ -170,6 +171,7 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
                         databaseAccess.resetApp(Lugar);
+                        databaseAccess.setAdmin(0);
                         Intent i = new Intent(getBaseContext(), Kaixo.class);
                         i.putExtra("idLugar", Lugar);
                         inicioPopup.dismiss();

@@ -5,44 +5,84 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.ImageView;
+import android.widget.Switch;
+import android.widget.Toast;
 
 public class AjustesActivity extends AppCompatActivity {
     private Button idBtnAjustesCerrar,idBtnAjustesCreadores,idBtnAjustesSalir;
     private CheckBox Admin;
+    private Switch sound;
     int opcionAdmin;
+    private DatabaseAccess databaseAccess;
+    private ImageView logotxur;
+    private int contador=0,adminEstate;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ajustes);
+        databaseAccess = new DatabaseAccess(this);
+        Toast toast1 = Toast.makeText(getApplicationContext(), "", Toast.LENGTH_SHORT);
+
+        adminEstate=databaseAccess.getAdmin();
 
         //ocultar barras extras
         getSupportActionBar().hide();
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
-
+        logotxur= (ImageView) findViewById(R.id.logotx);
         //Sonido
-
+        sound = (Switch) findViewById(R.id.sound);
+        if(databaseAccess.getSonido()==1)
+            sound.setChecked(true);
+        else
+            sound.setChecked(false);
+        sound.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                databaseAccess.sonido(sound.isChecked());
+                Log.d("mytag","sonido: " + sound.isChecked());
+            }
+        });
         //Admin.Mod
         //Admin = findViewById(R.id.ChekBoxAdminMod);
+        logotxur.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if(contador>=5&&adminEstate==0){
+                    databaseAccess.setAdmin(adminEstate+1);
+                    toast1.setText("Modo admin activado");
+                    toast1.show();
+                    adminEstate=1;
+
+                }else if(adminEstate==1){
+                    databaseAccess.setAdmin(adminEstate-1);
+                    toast1.setText("Modo admin desactivado");
+                    toast1.show();
+                    adminEstate=0;
+
+                }else{
+                    contador++;
+                }
+
+                return false;
+            }
+        });
+
+
+
+
         //CERRAR
         idBtnAjustesCerrar = (Button) findViewById(R.id.idBtnAjustesCerrar);
         idBtnAjustesCerrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(Admin.isChecked()){
-                    opcionAdmin = 1;
-                   // Log.d("ajustes","Entra en admin cheked///////////////////////////////////////////////////////");
-
-                }
-              //  Intent i = new Intent(getBaseContext(),MapaActivity.class);
-              //  Log.d("ajustes2","Entra en admin ///////////////////////////////////////////////////////");
-              //  int idLugar = getIntent().getIntExtra("idLugar",1);
-               // i.putExtra("Admin",opcionAdmin);
-               // startActivityForResult(i,1);
                finish();
             }
         });

@@ -243,27 +243,62 @@ public class DatabaseAccess extends SQLiteOpenHelper {
         db.close();
         return pista;
     }
-
-    //PONE TODOS LOS PUNTOS EN VISIBLE
-    public void setAllVisible(int x){
+    public void setLugar(int x){
         Log.d("mytag", "entra setallvisible");
 
         String myPath = DB_PATH + DB_NAME;
         db = SQLiteDatabase.openDatabase(myPath, null, SQLiteDatabase.OPEN_READWRITE);
         db = this.getWritableDatabase();
-        db.execSQL("UPDATE puntos SET visible=1 Where idLugar="+x);
+        db.execSQL("UPDATE ajustes SET lugar="+x);
+        db.close();
+    }
+    public void setAdmin(int x){
+        String myPath = DB_PATH + DB_NAME;
+        db = SQLiteDatabase.openDatabase(myPath, null, SQLiteDatabase.OPEN_READWRITE);
+        db = this.getWritableDatabase();
+        db.execSQL("UPDATE ajustes SET admin="+x);
+        db.close();
+    }
+    public int getAdmin(){
+        String myPath = DB_PATH + DB_NAME;
+        db = SQLiteDatabase.openDatabase(myPath, null, SQLiteDatabase.OPEN_READWRITE);
+        db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery("SELECT admin FROM ajustes", null);
+        cursor.moveToFirst();
+        int x =cursor.getInt(cursor.getColumnIndex("admin"));
+        cursor.close();
+        db.close();
+        return x;
+    }
+
+    //PONE TODOS LOS PUNTOS EN VISIBLE
+    public void setAllVisible(){
+        Log.d("mytag", "entra setallvisible");
+
+        String myPath = DB_PATH + DB_NAME;
+        db = SQLiteDatabase.openDatabase(myPath, null, SQLiteDatabase.OPEN_READWRITE);
+        db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery("SELECT lugar FROM ajustes", null);
+        cursor.moveToFirst();
+        int x =cursor.getInt(cursor.getColumnIndex("lugar"));
+        cursor.close();
+        db.execSQL("UPDATE puntos SET visible="+x);
         Log.d("mytag", "termina setallvisible");
         db.close();
     }
 
     //DEVUELVE TODOS LOS PUNTO A SU ESTADO ANTERIOR***
-    public void reverseAllVisible(int x){
+    public void reverseAllVisible(){
         Log.d("mytag", "termina reverse");
 
         String myPath = DB_PATH + DB_NAME;
         db = SQLiteDatabase.openDatabase(myPath, null, SQLiteDatabase.OPEN_READWRITE);
         db = this.getWritableDatabase();
-        Cursor cursor = db.rawQuery("SELECT * FROM puntos where idLugar="+x, null);
+        Cursor cursor = db.rawQuery("SELECT lugar FROM ajustes", null);
+        cursor.moveToFirst();
+
+        int x =cursor.getInt(cursor.getColumnIndex("lugar"));
+        cursor = db.rawQuery("SELECT * FROM puntos where idLugar="+x, null);
         Log.d("mytag", "pre do recerse");
         cursor.moveToFirst();
         do{
@@ -392,7 +427,6 @@ public class DatabaseAccess extends SQLiteOpenHelper {
 
         switch (opcion) {
             case "idAjuste" :
-
                 return String.valueOf(idAjuste);
             case "sonido" :
                 return String.valueOf(sonido);
@@ -407,7 +441,27 @@ public class DatabaseAccess extends SQLiteOpenHelper {
 
         }
     }
-
+    public void sonido(boolean s){
+        String myPath = DB_PATH + DB_NAME;
+        db = SQLiteDatabase.openDatabase(myPath, null, SQLiteDatabase.OPEN_READWRITE);
+        db = this.getWritableDatabase();
+        if(s)
+             db.execSQL("Update ajustes set sonido=1");
+        else
+              db.execSQL("Update ajustes set sonido=0");
+        db.close();
+    }
+    public int getSonido(){
+        String myPath = DB_PATH + DB_NAME;
+        db = SQLiteDatabase.openDatabase(myPath, null, SQLiteDatabase.OPEN_READWRITE);
+        db = this.getWritableDatabase();
+        Cursor cursor= db.rawQuery("SELECT sonido FROM ajustes",null);
+        cursor.moveToFirst();
+        int s = cursor.getInt(cursor.getColumnIndex("sonido"));
+        cursor.close();
+        db.close();
+        return s;
+    }
     // Obtiene las coordenadas de la zona
     public LatLngBounds getLimiteZona(int id) {
 
