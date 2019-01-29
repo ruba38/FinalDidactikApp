@@ -127,6 +127,7 @@ MapaActivity extends AppCompatActivity implements PermissionsListener, OnMapRead
         FondoEstasLejos.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                PopDistancia.dismiss();
                 finish();
             }
         });
@@ -252,11 +253,10 @@ MapaActivity extends AppCompatActivity implements PermissionsListener, OnMapRead
             // Pasamos el area a coordenadas y calculamos la distancia
             LatLng dist = new LatLng(coordsLimite.getNorthEast().getLatitude(), coordsLimite.getSouthWest().getLongitude());
             distanciaArea = pos.distanceTo(dist);
+            PopDistancia.show();
             PopDistancia.setCanceledOnTouchOutside(false);
             DistanciaMetros = String.format("%.2f",distanciaArea)+" Metrora";
-
             MensajeDistancia.setText("Hurrunegi zaude "+DistanciaMetros+ " hurbil zaitez ");
-            PopDistancia.show();
 
 
         }

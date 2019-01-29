@@ -32,7 +32,7 @@ public class Actividad_10_Udaletxea extends AppCompatActivity {
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         idPuntoJuego = getIntent().getIntExtra("idPuntoJuego", 0);
-
+        //DIALGO BOTON ATRAS
         back = new Dialog(this);
         back.setContentView(R.layout.atras);
         back.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
