@@ -57,7 +57,7 @@ public class Actividad_61_GernikaArbola extends AppCompatActivity {
                     i.putExtra("idPuntoJuego",idPuntoJuego);
                     startActivityForResult(i, 11);
                     popupgeneral.dismiss();
-
+                    finish();
 
                 }else{
                     popupgeneral.dismiss();
