@@ -707,10 +707,11 @@ MapaActivity extends AppCompatActivity implements PermissionsListener, OnMapRead
                 Log.d("pista", "entrea if terminado=>" + cont);
             }
         }
-        if (cont != PuntosInteres.size()) {
+        if (cont != PuntosInteres.size()+1) {
             textoPista = databaseAccess.getPista(Lugar, cont);
         } else {
             textoPista = "Amaituta";
+
         }
 
         pistaPopup.setContentView(R.layout.popup_pista);//abrir layout que contiene el popup
