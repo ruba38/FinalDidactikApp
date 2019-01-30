@@ -85,6 +85,9 @@ public class Actividad_10_Udaletxea extends AppCompatActivity {
                 startActivityForResult(horidata,102);
                 finish();
             }
+            if(requestCode== 31){
+                finish();
+            }
         }
     @Override
     public void onBackPressed() {
