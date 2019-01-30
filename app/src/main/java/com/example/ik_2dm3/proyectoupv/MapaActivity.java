@@ -108,6 +108,10 @@ MapaActivity extends AppCompatActivity implements PermissionsListener, OnMapRead
     private Button FondoEstasLejos;
     private String DistanciaMetros;
 
+
+
+
+
     // Limite de la camara de la zona sleccionada
     //LatLngBounds coordsLimite;
     //SE EJECUTA NADA MAS ABRIRSE EL MAPA
@@ -135,9 +139,7 @@ MapaActivity extends AppCompatActivity implements PermissionsListener, OnMapRead
                 finish();
             }
         });
-        //Recojer admin
-        admin= getIntent().getBooleanExtra("Admin",false);
-        adminEstate= databaseAccess.getAdmin();
+
 
 
         //QUITAR TITULO DEL LAYOUT
@@ -174,12 +176,9 @@ MapaActivity extends AppCompatActivity implements PermissionsListener, OnMapRead
         idBtnMapaAdmin = findViewById(R.id.idBtnMapaAdmin);
         idBtnMapaAjustes = findViewById(R.id.idBtnMapaAjustes);
 
-
-
         idBtnMapaAdmin.setVisibility(View.GONE);
 
         // INSTANCIAR OBJETOS DE BASE DE DATOS
-        DatabaseAccess databaseAccess = new DatabaseAccess(this);
         // COMPRUEBA SE LA BASE DE DATOS EXISTSTE EN EL DISPOSITIBO , CREA UNA COPIA EN EL DISPOSITIBO
         databaseAccess.startdb(getBaseContext());
         //CON EL LUGAR INDICADO MIRAMOS SI HAY ALGUN PUNTO VISIBLE SI NO LO HAY PONE EL PRIMERO VISIBLE
@@ -190,11 +189,8 @@ MapaActivity extends AppCompatActivity implements PermissionsListener, OnMapRead
 
 
         // BOTON MODO ADMINISTRADOR
-        if(adminEstate==0){
-            idBtnMapaAdmin.setVisibility(mapView.INVISIBLE);
-        }else{
-            idBtnMapaAdmin.setVisibility(mapView.VISIBLE);
-        }
+
+
 
         idBtnMapaAdmin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -225,7 +221,16 @@ MapaActivity extends AppCompatActivity implements PermissionsListener, OnMapRead
                 localizarDistancia(ubicacionUsuario);
             }
         });
+        //Recojer admin
+        adminEstate= databaseAccess.getAdmin();
+        if(adminEstate==0){
+            idBtnMapaAdmin.setVisibility(mapView.INVISIBLE);
+            Log.d("mytag","entra invi"+adminEstate);
 
+        }else{
+            idBtnMapaAdmin.setVisibility(mapView.VISIBLE);
+            Log.d("mytag","entra visi"+adminEstate);
+        }
         //BOTON AJUSTES
         idBtnMapaAjustes.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -383,8 +388,6 @@ MapaActivity extends AppCompatActivity implements PermissionsListener, OnMapRead
         // HABILITAMOS LA LOCALIZAZION DEL USUARIO
         enableLocation();
 
-        // Hacemos el boton del admin visible
-        idBtnMapaAdmin.setVisibility(View.VISIBLE);
 
         // ZOOM MAXIMO Y MINIMO DEL MAPA Y DELIMITAR MAPA
         map.setMinZoomPreference(16);
@@ -503,7 +506,7 @@ MapaActivity extends AppCompatActivity implements PermissionsListener, OnMapRead
                             //SI NO ESTAS EN RFANGO TE MUESTRA UN TOAST INDICANDO QUE NO ESTAS EN RANGO
                             else{
                                 Context context = getApplicationContext();
-                                CharSequence text = "NO ESTAS EN RANGO";
+                                CharSequence text = "oso urrun zaude";
                                 int duration = Toast.LENGTH_LONG;
 
                                 Toast toastRango = Toast.makeText(context, text, duration);
@@ -627,6 +630,10 @@ MapaActivity extends AppCompatActivity implements PermissionsListener, OnMapRead
         databaseAccess.close();
         // Creamos el objeto del punto
         MarkerPuntos marca;
+        if(arrayPuntos.get(arrayPuntos.size()-1).getterminado()==1){
+            terminaMapa();
+            return;
+        }
 
         for (int i = 0; i < arrayPuntos.size(); i++) {
 
@@ -675,20 +682,24 @@ MapaActivity extends AppCompatActivity implements PermissionsListener, OnMapRead
         // Limpiamos el ArrayList para cuando se vuelvan a crear los puntos
         PuntosInteres.clear();
     }
-
+    private void terminaMapa(){
+        Intent i = new Intent(getBaseContext(), Agurra.class);
+        startActivity(i);
+        finish();
+    }
     //TODO:mostrarPista...
     public void mostrarPista(View v){
         String textoPista;
         DatabaseAccess databaseAccess = new DatabaseAccess(getBaseContext());
         int cont=1;
-        for(int i = 0; i < PuntosInteres.size()-1; i++) {
+        for(int i = 0; i < PuntosInteres.size(); i++) {
             Log.d("pista","entrea if terminado=>"+i+""+PuntosInteres.get(i).isTerminado());
            if(PuntosInteres.get(i).isTerminado()){
                cont=cont+1;
                Log.d("pista","entrea if terminado=>"+cont);
            }
         }
-        if(cont!=PuntosInteres.size()) {
+        if(cont<=PuntosInteres.size()) {
             textoPista = databaseAccess.getPista(Lugar, cont);
         }else{
             textoPista ="Amaituta";

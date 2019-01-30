@@ -100,7 +100,15 @@
             android:screenOrientation="portrait"
             />
         <activity
-            android:name=".Actividad_71_Puzzle"
+            android:name=".Actividad_52_Resultados"
+            android:label="@string/title_activity_actividad_51__botaketa"
+            android:screenOrientation="portrait"
+            />
+        <activity
+        android:name=".Actividad_71_Puzzle"
+        android:screenOrientation="portrait" />
+        <activity
+            android:name=".Actividad_72_galderak"
             android:screenOrientation="portrait" />
         <activity
             android:name=".Presentaciones"
