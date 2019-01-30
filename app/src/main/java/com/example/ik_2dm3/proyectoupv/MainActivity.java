@@ -49,7 +49,6 @@ public class MainActivity extends AppCompatActivity {
         idBtnInicio = (Button) findViewById(R.id.idBtnInicio);
 
 
-
         DatabaseAccess databaseAccess = new DatabaseAccess(getBaseContext());
         List<lugares> arrayLugares = (List<lugares>) databaseAccess.getLugares();
         databaseAccess.close();
@@ -77,8 +76,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(getBaseContext(), AjustesActivity.class);
-                finish();
-                startActivity(i);
+                startActivityForResult(i,11);
+
             }
         });
 
@@ -152,6 +151,7 @@ public class MainActivity extends AppCompatActivity {
                         Intent i = new Intent(getBaseContext(), MapaActivity.class);
                         i.putExtra("idLugar", Lugar);
                         inicioPopup.dismiss();
+                        databaseAccess.setLugar(Lugar);
                         startActivityForResult(i, 1);
                     }
                 });
@@ -171,6 +171,7 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
                         databaseAccess.resetApp(Lugar);
+                        databaseAccess.setAdmin(0);
                         Intent i = new Intent(getBaseContext(), Kaixo.class);
                         i.putExtra("idLugar", Lugar);
                         inicioPopup.dismiss();

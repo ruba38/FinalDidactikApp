@@ -76,7 +76,7 @@ public class Actividad_41_astrazaharra extends AppCompatActivity {
         sir4.setVisibility(View.INVISIBLE);
         sir5.setVisibility(View.INVISIBLE);
 
-
+//Definir cordenadas de las diferencias
         c1x1 = 40.5;
         c1x2 = 48.4;
         c1y1 = 67.6;

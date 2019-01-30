@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Camera;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ColorDrawable;
@@ -35,6 +36,7 @@ import com.mapbox.mapboxsdk.annotations.Icon;
 import com.mapbox.mapboxsdk.annotations.IconFactory;
 import com.mapbox.mapboxsdk.annotations.Marker;
 import com.mapbox.mapboxsdk.annotations.PolygonOptions;
+import com.mapbox.mapboxsdk.camera.CameraPosition;
 import com.mapbox.mapboxsdk.geometry.ILatLng;
 import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.geometry.LatLngBounds;
@@ -63,8 +65,8 @@ MapaActivity extends AppCompatActivity implements PermissionsListener, OnMapRead
     private Location lastlocation;
 
     // Creacion de objetos
-    private Button idBtnMapaAdmin,idBtnMapaAjustes;
-    private Dialog puntoPopup,pistaPopup;
+    private Button idBtnMapaAdmin, idBtnMapaAjustes;
+    private Dialog puntoPopup, pistaPopup;
     private ImageView BotonCamara;
     //creacion de imagen
     /*private byte[] decodedString;
@@ -74,38 +76,39 @@ MapaActivity extends AppCompatActivity implements PermissionsListener, OnMapRead
     // Variables de datos
     private ArrayList<MarkerPuntos> PuntosInteres = new ArrayList<MarkerPuntos>();
 
-    private int idPunto,secuencia,newPista=1;
+    private int idPunto, secuencia, newPista = 1;
     private boolean admin = false;
-    private String juego,titulo,imagen,pista;
-    private double latitud,longitud;
-    private double RangoGeneral=10.0;
-    private int Lugar=1;
+    private String juego, titulo, imagen, pista;
+    private double latitud, longitud;
+    private double RangoGeneral = 10.0;
+    private int Lugar = 1;
     private String LugarSeleccionado = "";
     // Objetos/Variables de depuracion
-    private TextView coordenadas,idTextViewDistancia,idTextViewProgreso,idTextViewMapaProgresoPuntos;
-    private int contPuntos=0;
-    private double distancia2=0.0;
+    private TextView coordenadas, idTextViewDistancia, idTextViewProgreso, idTextViewMapaProgresoPuntos;
+    private int contPuntos = 0;
+    private double distancia2 = 0.0;
     private int id_bd;
     private int secuencia2;
     private String metrica;
     private double textoDistancia;
     //DECLARARCIONES
-    private Button idBtnPopupCerrar,idBtnPopupJugar;
+    private Button idBtnPopupCerrar, idBtnPopupJugar;
     private TextView idTextViewPopupTitulo;
     private ImageView imagenPopup;
 
     private TextView idTextViewPista;
-    private Button idBtnCerrarPista;
+    private Button idBtnCerrarPista, CentrarCamara;
     private Thread hiloJuego;
     //Imajen PopUp
     private String ImagenPoP;
-
-    Drawable drawableTop;
-
     private double distanciaArea = 0.0;
     private LatLngBounds coordsLimite;
+    private int adminEstate;
 
-
+    private Dialog PopDistancia;
+    private TextView MensajeDistancia;
+    private Button FondoEstasLejos;
+    private String DistanciaMetros;
 
     // Limite de la camara de la zona sleccionada
     //LatLngBounds coordsLimite;
@@ -116,6 +119,22 @@ MapaActivity extends AppCompatActivity implements PermissionsListener, OnMapRead
 
 
         Log.d("mapa", "Punto 0");
+
+        //PopUpdistancia
+
+
+        PopDistancia = new Dialog(this);
+        PopDistancia.setContentView(R.layout.fueradelarea);
+        PopDistancia.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        MensajeDistancia = (TextView) PopDistancia.findViewById(R.id.MensajeDistancia);
+        FondoEstasLejos = PopDistancia.findViewById(R.id.BotonDistanciaAtras);
+        FondoEstasLejos.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                PopDistancia.dismiss();
+                finish();
+            }
+        });
         //Recojer admin
         admin= getIntent().getBooleanExtra("Admin",false);
 
@@ -129,7 +148,7 @@ MapaActivity extends AppCompatActivity implements PermissionsListener, OnMapRead
 
         setContentView(R.layout.activity_mapa);
         //RECOJE EL ID DEL LUGAR SELECIONADO AL PRINCIPIO DE LA APP (MAIN)
-        Lugar=getIntent().getIntExtra("idLugar",0);
+        Lugar = getIntent().getIntExtra("idLugar", 0);
 
         // INSTANCIA EL OBJETO POPUP
         puntoPopup = new Dialog(this);
@@ -150,6 +169,8 @@ MapaActivity extends AppCompatActivity implements PermissionsListener, OnMapRead
         idTextViewDistancia = findViewById(R.id.idTextViewDistancia);
         idTextViewProgreso = findViewById(R.id.idTextViewProgreso);
         BotonCamara = findViewById(R.id.CamaraMapa);
+        CentrarCamara = findViewById(R.id.CentrarCamara);
+
         //TEXT VIEW
         idBtnMapaAdmin = findViewById(R.id.idBtnMapaAdmin);
         idBtnMapaAjustes = findViewById(R.id.idBtnMapaAjustes);
@@ -169,22 +190,28 @@ MapaActivity extends AppCompatActivity implements PermissionsListener, OnMapRead
 
 
         // BOTON MODO ADMINISTRADOR
+        if (adminEstate == 0) {
+            idBtnMapaAdmin.setVisibility(mapView.INVISIBLE);
+        } else {
+            idBtnMapaAdmin.setVisibility(mapView.VISIBLE);
+        }
+
         idBtnMapaAdmin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //SI ESTA DESACTIVADO SE ACTIVA Y MUESTRA TODOS LOS PUNTOS RESPECTO AL LUGAR SELECIONADO
-                if (admin==false) {
+                if (admin == false) {
 
                     // Cambia a Visible = true, todos los puntos
-                    databaseAccess.setAllVisible(Lugar);
-                    admin=true;
+                    databaseAccess.setAllVisible();
+                    admin = true;
                     idBtnMapaAdmin.setBackground(getDrawable(R.drawable.adminverde));
                 }
                 //SI ESTA ACTIVADO SE DESACTIVA Y OCULTA TODOS LOS PUNTOS MENOS LOS TERMINADOS SI NO HAY TERMINADOS MUESTRA SOLO EL PRIMERO
-                else{
+                else {
 
-                    databaseAccess.reverseAllVisible(Lugar);
-                    admin=false;
+                    databaseAccess.reverseAllVisible();
+                    admin = false;
                     idBtnMapaAdmin.setBackground(getDrawable(R.drawable.adminrojo));
                 }
 
@@ -205,7 +232,8 @@ MapaActivity extends AppCompatActivity implements PermissionsListener, OnMapRead
             public void onClick(View v) {
                 //ABRE LA VENTANA DE AJUSTES
                 Intent i = new Intent(getBaseContext(), AjustesActivity.class);
-                startActivity(i);}
+                startActivityForResult(i, 7);
+            }
         });
         //BOTON CAMARA
         BotonCamara.setOnClickListener(new View.OnClickListener() {
@@ -215,7 +243,16 @@ MapaActivity extends AppCompatActivity implements PermissionsListener, OnMapRead
                 startActivityForResult(c,10);
             }
         });
+        //BOTON CENTRAR
+        CentrarCamara.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
+                Location ubicacionUsuario = new Location("");
+                centrarMapa();
+
+            }
+        });
         databaseAccess.close();
 
     }
@@ -238,6 +275,11 @@ MapaActivity extends AppCompatActivity implements PermissionsListener, OnMapRead
             // Pasamos el area a coordenadas y calculamos la distancia
             LatLng dist = new LatLng(coordsLimite.getNorthEast().getLatitude(), coordsLimite.getSouthWest().getLongitude());
             distanciaArea = pos.distanceTo(dist);
+            //PopDistancia.show();
+            PopDistancia.setCanceledOnTouchOutside(false);
+            DistanciaMetros = String.format("%.2f", distanciaArea) + " Metrora";
+            MensajeDistancia.setText("Hurrunegi zaude " + DistanciaMetros + " hurbil zaitez ");
+
 
         }
     }
@@ -415,7 +457,7 @@ MapaActivity extends AppCompatActivity implements PermissionsListener, OnMapRead
                     Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString,
                             0, decodedString.length);
 
-                    drawableTop = new BitmapDrawable(getResources(), decodedByte);
+                    Drawable drawableTop = new BitmapDrawable(getResources(), decodedByte);
                     Log.d("imagen", "imagen=" + decodedByte);
                     imagenPopup.setBackground(drawableTop);
                 }
@@ -446,7 +488,6 @@ MapaActivity extends AppCompatActivity implements PermissionsListener, OnMapRead
                                     i = new Intent(getBaseContext(), Presentaciones.class);
 
                                     i.putExtra("idPuntoJuego",idPunto);
-
                                 Log.d("mapa", "Punto 4");
 
                                 //} catch (ClassNotFoundException e) {
@@ -695,6 +736,27 @@ MapaActivity extends AppCompatActivity implements PermissionsListener, OnMapRead
 
 
         }
+        if (requestCode == 7) {
+            DatabaseAccess databaseAccess = new DatabaseAccess(this);
+            adminEstate = databaseAccess.getAdmin();
+            if (adminEstate == 0) {
+                idBtnMapaAdmin.setVisibility(mapView.INVISIBLE);
+                databaseAccess.reverseAllVisible();
+                admin = false;
+                idBtnMapaAdmin.setBackground(getDrawable(R.drawable.adminrojo));
+                // VACIA EL ARRAYLIST QUE CONTIENE LOS DATOS DE LOS PUNTOS
+                LimpiarPuntos();
+
+                // RELLENA EL ARRAYLIST CON LOS DATOS DE LOS PUNTOS
+                CrearPuntos();
+                //CAMBIAR TEXTO DE PUNTOS
+                @SuppressLint("MissingPermission") Location ubicacionUsuario = locationEngine.getLastLocation();
+                localizarDistancia(ubicacionUsuario);
+            } else {
+                idBtnMapaAdmin.setVisibility(mapView.VISIBLE);
+            }
+            databaseAccess.close();
+        }
 
     }
     public void newpista(){
@@ -768,4 +830,16 @@ MapaActivity extends AppCompatActivity implements PermissionsListener, OnMapRead
         permissionsManager.onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
 
+    public void centrarMapa() {
+        @SuppressLint("MissingPermission") Location ubicacionUsuario = locationEngine.getLastLocation();
+        localizarDistancia(ubicacionUsuario);
+        LatLng adada= new LatLng(ubicacionUsuario.getLatitude(),ubicacionUsuario.getLongitude());
+
+        CameraPosition position = new CameraPosition.Builder()
+                .target(new LatLng(ubicacionUsuario.getLatitude(),ubicacionUsuario.getLongitude()))
+                .zoom(10)
+                .tilt(20)
+                .build();
+        map.setCameraPosition(position);
+    }
 }

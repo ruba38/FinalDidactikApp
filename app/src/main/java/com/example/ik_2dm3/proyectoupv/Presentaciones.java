@@ -32,6 +32,7 @@ public class Presentaciones extends AppCompatActivity {
     private String idJuego;
     private String T1, T2, T3, T4, T5, T6;
     private DatabaseAccess databaseaccess;
+    private int unmuted;
    // private Activity Actividad;
     private ArrayList<String> TodoText = new ArrayList<String>();
     private ArrayList<Integer>  Tiempos = new ArrayList<Integer>();
@@ -42,6 +43,7 @@ public class Presentaciones extends AppCompatActivity {
         setContentView(R.layout.activity_presentaciones);
 
         databaseaccess = new DatabaseAccess(this);
+        unmuted=databaseaccess.getSonido();
         //ocultar barras extras
         getSupportActionBar().hide();
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
@@ -96,7 +98,10 @@ public class Presentaciones extends AppCompatActivity {
         switch (idPuntoJuego) {
             case 8:
                 Sonido = MediaPlayer.create(getApplicationContext(), R.raw.klipdontello);
-
+                if(unmuted==1)
+                    Sonido.setVolume(1,1);
+                else
+                    Sonido.setVolume(0,0);
 
                 //Textos
 
@@ -115,6 +120,10 @@ public class Presentaciones extends AppCompatActivity {
             case 9:
 
                 Sonido = MediaPlayer.create(getApplicationContext(), R.raw.klipandramari);
+                if(unmuted==1)
+                    Sonido.setVolume(1,1);
+                else
+                    Sonido.setVolume(0,0);
                 //Textos
 
                 T1 = getString(R.string.Texto201);
@@ -130,6 +139,10 @@ public class Presentaciones extends AppCompatActivity {
             case 10:
 
                 Sonido = MediaPlayer.create(getApplicationContext(), R.raw.azoka);
+                if(unmuted==1)
+                    Sonido.setVolume(1,1);
+                else
+                    Sonido.setVolume(0,0);
                 //Textos
 
                 T1 = getString(R.string.Texto301);
@@ -146,6 +159,10 @@ public class Presentaciones extends AppCompatActivity {
             case 11:
 
                 Sonido = MediaPlayer.create(getApplicationContext(), R.raw.klipastra);
+                if(unmuted==1)
+                    Sonido.setVolume(1,1);
+                else
+                    Sonido.setVolume(0,0);
                 //Textos
 
                 T1 = getString(R.string.Texto401);
@@ -161,6 +178,10 @@ public class Presentaciones extends AppCompatActivity {
             case 12:
 
                 Sonido = MediaPlayer.create(getApplicationContext(), R.raw.juntetxe);
+                if(unmuted==1)
+                    Sonido.setVolume(1,1);
+                else
+                    Sonido.setVolume(0,0);
                 //Textos
 
                 T1 = getString(R.string.Texto501);
@@ -179,6 +200,10 @@ public class Presentaciones extends AppCompatActivity {
             case 13:
 
                 Sonido = MediaPlayer.create(getApplicationContext(), R.raw.arbola);
+                if(unmuted==1)
+                    Sonido.setVolume(1,1);
+                else
+                    Sonido.setVolume(0,0);
                 //Textos
 
                 T1 = getString(R.string.Texto601);
@@ -194,6 +219,10 @@ public class Presentaciones extends AppCompatActivity {
                 break;
             case 14:
                 Sonido = MediaPlayer.create(getApplicationContext(), R.raw.picasso);
+                if(unmuted==1)
+                    Sonido.setVolume(1,1);
+                else
+                    Sonido.setVolume(0,0);
                 //Textos
                 T1 = getString(R.string.Texto701);
                 T2 = getString(R.string.Texto702);
@@ -217,6 +246,10 @@ public class Presentaciones extends AppCompatActivity {
                 break;
                 default:
                     Sonido = MediaPlayer.create(getApplicationContext(), R.raw.klipdontello);
+                    if(unmuted==1)
+                        Sonido.setVolume(1,1);
+                    else
+                        Sonido.setVolume(0,0);
 
                     //Actividad
                     //Textos
