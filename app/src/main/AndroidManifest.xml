@@ -92,7 +92,9 @@
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
 
-        <activity android:name=".Actividad_61_GernikaArbola" />
+        <activity android:name=".Actividad_61_GernikaArbola"
+            android:screenOrientation="portrait" />
+
 
         <activity
             android:name=".Actividad_51_Botaketa"
@@ -110,6 +112,11 @@
         <activity
             android:name=".Actividad_72_galderak"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".Actividad_72_galderak"
+            android:screenOrientation="portrait" />
+        <activity android:name=".Actividad_52_Resultados"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".Presentaciones"
             android:screenOrientation="portrait"></activity>

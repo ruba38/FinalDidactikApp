@@ -6,11 +6,13 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import static java.lang.Thread.sleep;
 
@@ -18,11 +20,12 @@ public class Actividad_61_GernikaArbola extends AppCompatActivity {
 
     int idPuntoJuego;
     public ImageView pikondoa, pagoa, pinua, haritza, popupfondob, popupfondom;
-    public Dialog popuparbolm, popuparbolb;
+    public Dialog popuparbolm, popuparbolb,popupgeneral;
     private Dialog back;
     private Button atras, salir;
-
-
+    boolean hoja=false;
+    private TextView textoPopupGeneral;
+   // private ImageView imagenclic;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,14 +41,30 @@ public class Actividad_61_GernikaArbola extends AppCompatActivity {
         haritza = (ImageView) findViewById(R.id.haritzai);
         pinua = (ImageView) findViewById(R.id.pinuai);
         pagoa = (ImageView) findViewById(R.id.pagoai);
-        popuparbolm= new Dialog(this);
-        popuparbolb= new Dialog(this);
-        popuparbolm.setContentView(R.layout.popup_arbolm);
-        popuparbolb.setContentView(R.layout.popup_arbolb);
-        popuparbolm.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        popuparbolb.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        popupfondob = (ImageView) popuparbolb.findViewById(R.id.fondoback);
-        popupfondom = (ImageView) popuparbolm.findViewById(R.id.fondoback);
+
+
+        popupgeneral= new Dialog(this);
+        popupgeneral.setContentView(R.layout.popup_general);
+        textoPopupGeneral= popupgeneral.findViewById(R.id.textoPopupGeneral);
+
+        popupgeneral.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        textoPopupGeneral.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                popupgeneral.dismiss();
+                if (hoja){
+                    Intent i = new Intent(getBaseContext(), SacarFotos.class );
+                    i.putExtra("idPuntoJuego",idPuntoJuego);
+                    startActivityForResult(i, 11);
+                    popupgeneral.dismiss();
+
+
+                }else{
+                    popupgeneral.dismiss();
+                }
+            }
+        });
+
         back = new Dialog(this);
         back.setContentView(R.layout.atras);
         back.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
@@ -66,6 +85,7 @@ public class Actividad_61_GernikaArbola extends AppCompatActivity {
             public void onClick(View v) {
                 back.dismiss();
 
+
                 finish();
             }
         });
@@ -73,18 +93,22 @@ public class Actividad_61_GernikaArbola extends AppCompatActivity {
     protected void onStart(){
         super.onStart();
 
+
         pikondoa.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                popuparbolm.show();
+                popupgeneral.show();
+                    hoja=false;
+                    comprobar(hoja);
                 return true;
             }
         });
         haritza.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                popuparbolb.show();
-
+                popupgeneral.show();
+                 hoja=true;
+                comprobar(hoja);
 
                 return true;
             }
@@ -92,35 +116,55 @@ public class Actividad_61_GernikaArbola extends AppCompatActivity {
         pinua.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                popuparbolm.show();
+                popupgeneral.show();
+                 hoja=false;
+                comprobar(hoja);
                 return true;
             }
         });
         pagoa.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                popuparbolm.show();
+                popupgeneral.show();
+                 hoja=false;
+                comprobar(hoja);
                 return true;
             }
         });
-        popupfondom.setOnTouchListener(new View.OnTouchListener() {
+
+       /*popupfondom.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                popuparbolm.dismiss();
+                popupgeneral.dismiss();
                 return false;
             }
-        });
-        popupfondob.setOnTouchListener(new View.OnTouchListener() {
+        });*/
+
+
+
+
+        /*popupgeneral.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                popuparbolm.dismiss();
+                popupgeneral.dismiss();
                 Intent i = new Intent(getBaseContext(), SacarFotos.class);
                 i.putExtra("idPuntoJuego",idPuntoJuego);
                 startActivityForResult(i, 10);
                 finish();
                 return false;
             }
-        });
+        });*/
+    }
+    protected void comprobar(boolean hoja){
+
+        if (hoja){
+            textoPopupGeneral.setText("OSO ONDO");
+            textoPopupGeneral.setTextColor(getColor(R.color.vc));
+
+        }else{
+            textoPopupGeneral.setText("ZAIATU BERRIRO");
+            textoPopupGeneral.setTextColor(getColor(R.color.rc));
+        }
     }
     protected void onActivityResult(int requestCode,
                                     int resultCode, Intent data) {

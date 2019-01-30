@@ -1,12 +1,19 @@
 package com.example.ik_2dm3.proyectoupv;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Color;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.app.Activity;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Layout;
+import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
@@ -34,6 +41,7 @@ public class Presentaciones extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_presentaciones);
+
         databaseaccess = new DatabaseAccess(this);
         unmuted=databaseaccess.getSonido();
         //ocultar barras extras
@@ -50,9 +58,33 @@ public class Presentaciones extends AppCompatActivity {
         Textos = findViewById(R.id.Textos);
         BotonAtras = findViewById(R.id.BotonAtras);
         BotonRepetir = findViewById(R.id.BotonRepetir);
-        FondoTexto = findViewById(R.id.FondoDelTexto);
+
+        BotonRepetir.setVisibility(View.VISIBLE);
+        //FondoTexto = findViewById(R.id.FondoDelTexto);
+        BotonaAlante = findViewById(R.id.BotonAlante);
+        BotonaAlante.setVisibility(View.VISIBLE);
+//imagen fondo
+       /*DatabaseAccess databaseAccess = new DatabaseAccess(getBaseContext());
+        String prueba2 = databaseAccess.getImajen(idPuntoJuego);
+        databaseAccess.close();
+        Log.d("imagen","IMAGEN PRUEBA 22222222222222222222222222222=>"+prueba2);
+        byte[] decodedString = Base64.decode(prueba2, Base64.DEFAULT);
+        if (prueba2 == null){
+            Log.d("mytag", "RUBEN LELE");
+        }
+        else {
+            Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString,
+                    0, decodedString.length);
+
+            Drawable drawableTop = new BitmapDrawable(getResources(), decodedByte);
+            Log.d("imagen", "imagen=" + decodedByte);
+            this.getWindow().setBackgroundDrawable(drawableTop);
+
+        //FondoTexto = findViewById(R.id.FondoDelTexto);
         BotonaAlante = findViewById(R.id.BotonAlante);
 
+
+        }*/
         // el fondo no es una imajen Fondo = findViewById(R.id.Fondo);
         //Boton Atras
 
