@@ -99,13 +99,13 @@ MapaActivity extends AppCompatActivity implements PermissionsListener, OnMapRead
     private Thread hiloJuego;
     //Imajen PopUp
     private String ImagenPoP;
-<<<<<<< HEAD
+
     Drawable drawableTop;
-=======
+
     private double distanciaArea = 0.0;
     private LatLngBounds coordsLimite;
 
->>>>>>> origin/master
+
 
     // Limite de la camara de la zona sleccionada
     //LatLngBounds coordsLimite;

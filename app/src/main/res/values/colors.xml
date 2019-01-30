@@ -16,5 +16,15 @@
     <color name="Verde">#28b463</color>
     <color name="Desabilitado">#A399A6</color>
     <color name="fondoAjustes">#e0e0d1</color>
-    <color name="Naranjafondos">#ffa200</color>>
+    <color name="Naranjafondos">#ffa200</color>
+
+
+    <color name="vc">#138213</color>
+    <color name="vo">#0B6A0B</color>
+    <color name="rc">#D12B14</color>
+    <color name="ro">#9D2110</color>
+    <color name="gc">#565151</color>
+    <color name="go">#151414</color>
+    <color name="mc">#693660</color>
+    <color name="mo">#660455</color>
 </resources>

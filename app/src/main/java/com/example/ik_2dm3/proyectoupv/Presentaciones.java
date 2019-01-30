@@ -56,13 +56,13 @@ public class Presentaciones extends AppCompatActivity {
         Textos = findViewById(R.id.Textos);
         BotonAtras = findViewById(R.id.BotonAtras);
         BotonRepetir = findViewById(R.id.BotonRepetir);
-<<<<<<< HEAD
-        BotonRepetir.setVisibility(View.INVISIBLE);
+
+        BotonRepetir.setVisibility(View.VISIBLE);
         //FondoTexto = findViewById(R.id.FondoDelTexto);
         BotonaAlante = findViewById(R.id.BotonAlante);
-        BotonaAlante.setVisibility(View.INVISIBLE);
+        BotonaAlante.setVisibility(View.VISIBLE);
 //imagen fondo
-       /* DatabaseAccess databaseAccess = new DatabaseAccess(getBaseContext());
+       /*DatabaseAccess databaseAccess = new DatabaseAccess(getBaseContext());
         String prueba2 = databaseAccess.getImajen(idPuntoJuego);
         databaseAccess.close();
         Log.d("imagen","IMAGEN PRUEBA 22222222222222222222222222222=>"+prueba2);
@@ -77,10 +77,10 @@ public class Presentaciones extends AppCompatActivity {
             Drawable drawableTop = new BitmapDrawable(getResources(), decodedByte);
             Log.d("imagen", "imagen=" + decodedByte);
             this.getWindow().setBackgroundDrawable(drawableTop);
-=======
-        FondoTexto = findViewById(R.id.FondoDelTexto);
+
+        //FondoTexto = findViewById(R.id.FondoDelTexto);
         BotonaAlante = findViewById(R.id.BotonAlante);
->>>>>>> origin/master
+
 
         }*/
         // el fondo no es una imajen Fondo = findViewById(R.id.Fondo);

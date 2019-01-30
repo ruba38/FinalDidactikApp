@@ -47,10 +47,7 @@ public class MainActivity extends AppCompatActivity {
         idBtnDerecha = (Button) findViewById(R.id.idBtnDerecha);
         pruebas = (Button) findViewById(R.id.button2);
         idBtnInicio = (Button) findViewById(R.id.idBtnInicio);
-<<<<<<< HEAD
-        
-=======
->>>>>>> origin/master
+
 
 
         DatabaseAccess databaseAccess = new DatabaseAccess(getBaseContext());
