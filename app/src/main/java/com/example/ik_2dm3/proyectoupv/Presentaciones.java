@@ -56,6 +56,7 @@ public class Presentaciones extends AppCompatActivity {
         Textos = findViewById(R.id.Textos);
         BotonAtras = findViewById(R.id.BotonAtras);
         BotonRepetir = findViewById(R.id.BotonRepetir);
+<<<<<<< HEAD
         BotonRepetir.setVisibility(View.INVISIBLE);
         //FondoTexto = findViewById(R.id.FondoDelTexto);
         BotonaAlante = findViewById(R.id.BotonAlante);
@@ -76,6 +77,10 @@ public class Presentaciones extends AppCompatActivity {
             Drawable drawableTop = new BitmapDrawable(getResources(), decodedByte);
             Log.d("imagen", "imagen=" + decodedByte);
             this.getWindow().setBackgroundDrawable(drawableTop);
+=======
+        FondoTexto = findViewById(R.id.FondoDelTexto);
+        BotonaAlante = findViewById(R.id.BotonAlante);
+>>>>>>> origin/master
 
         }*/
         // el fondo no es una imajen Fondo = findViewById(R.id.Fondo);
@@ -238,21 +243,42 @@ public class Presentaciones extends AppCompatActivity {
 
     //Metodo al Emprezar la Activity Para reporduccior Audios y  Camiar los textos
     public void Ejecuccion(int idPunto) {
+
+        if (!Sonido.isPlaying()) {
+            Sonido.start();
+            Handler CambiarTexto = new Handler();
+            Handler AbilitaraBotones = new Handler();
+            Contador =0;
+            Textos.setText(TodoText.get(Contador));
+            while(Contador  < Tiempos.size()){
+                Log.d("Tiempos",Tiempos.get(Contador)+"Entra en admin cheked///////////////////////////////////////////////////////");
+                CambiarTexto.postDelayed(new Runnable() {
+
+                    public void run() {
+                        Textos.setText(TodoText.get(Contador-1));
+
+                    }
+                }, Tiempos.get(Contador));
+                Contador++;
+
+            }
+
+        }
         BotonAtras.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
                 Sonido.release();
                 finish();
             }
+
         });
-        BotonRepetir.setVisibility(View.INVISIBLE);
         BotonRepetir.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Ejecuccion(idPunto);
             }
         });
-        BotonaAlante.setVisibility(View.INVISIBLE);
+
         BotonaAlante.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -264,31 +290,11 @@ public class Presentaciones extends AppCompatActivity {
                   } catch (ClassNotFoundException e) {
                     e.printStackTrace();
                       }
-                      Sonido.stop();
+                      Sonido.release();
                   startActivityForResult(i,1);
             }
         });
-        if (!Sonido.isPlaying()) {
-            Sonido.start();
-           Handler CambiarTexto = new Handler();
-           Handler AbilitaraBotones = new Handler();
-            Contador =0;
-            Textos.setText(TodoText.get(Contador));
-            while(Contador  < Tiempos.size()){
-                Log.d("Tiempos",Tiempos.get(Contador)+"Entra en admin cheked///////////////////////////////////////////////////////");
-                CambiarTexto.postDelayed(new Runnable() {
 
-                public void run() {
-                    Textos.setText(TodoText.get(Contador-1));
-
-                }
-        }, Tiempos.get(Contador));
-            Contador++;
-
-            }
-            BotonRepetir.setVisibility(View.VISIBLE);
-            BotonaAlante.setVisibility(View.VISIBLE);
-        }
 
 
     }
@@ -303,6 +309,11 @@ public class Presentaciones extends AppCompatActivity {
             /*}*/
 
         }
+    }
+    public void onBackPressed() {
+        //your code when back button pressed
+        Sonido.release();
+        finish();
     }
 
 }
