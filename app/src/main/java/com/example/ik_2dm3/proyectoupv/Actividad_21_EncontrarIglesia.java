@@ -8,11 +8,13 @@ import android.content.Intent;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Point;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.app.Activity;
 import android.support.v7.app.AppCompatActivity;
 import android.util.AttributeSet;
+import android.view.Display;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
@@ -21,6 +23,7 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class Actividad_21_EncontrarIglesia extends AppCompatActivity {
@@ -32,7 +35,6 @@ public class Actividad_21_EncontrarIglesia extends AppCompatActivity {
     private Dialog back;
     private Button atras, salir;
     private int idPuntoJuego;
-
 
 
 
@@ -78,11 +80,36 @@ public class Actividad_21_EncontrarIglesia extends AppCompatActivity {
                 finish();
             }
         });
+        he=fondo.getHeight();
+        wi=fondo.getWidth();
+
+
+
+        /*fondo.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+
+
+                return false;
+            }
+        });*/
+
+        double x1=13.7;
+        double x2=18.9;
+        double y1=29.2;
+        double y2=42;
+
+        Display display = getWindowManager().getDefaultDisplay();
+        Point size = new Point();
+        display.getSize(size);
+        int width = size.x;
+        int height = size.y;
+
 
         btnComprobar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (wi>=220 && wi<=500 && he>=210 && he<=400){
+                if (wi>=(width*(x1/100)) && wi<=(width*(x2/100)) && he>=(height*(y1/100)) && he<=(height*(y2/100))){
                     encontrado=true;
                 }else{encontrado=false;}
                 // pr.setText(String.valueOf(event.getX()) + "x" + String.valueOf(event.getY())+"tamaño:"+wi+"/"+he+"cord:"+wi*(c1x1/100)+"-"+wi*(c1x2/100)+"/"+he*(c1y1/100)+"-"+he*(c1y2/100));
@@ -129,7 +156,24 @@ public class Actividad_21_EncontrarIglesia extends AppCompatActivity {
             }
         });
 }
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        // MotionEvent object holds X-Y values
+        if(event.getAction() == MotionEvent.ACTION_DOWN) {
+            String text = "You click at x = " + event.getX() + " and y = " + event.getY();
+            Toast.makeText(this, text, Toast.LENGTH_LONG).show();Display display = getWindowManager().getDefaultDisplay();
+            Point size = new Point();
+            display.getSize(size);
+            int width =size.x;
+            int height = size.y;
+            int eventx=Math.round(event.getX());
+            int eventy=Math.round(event.getY());
 
+        }
+
+
+        return super.onTouchEvent(event);
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -175,6 +219,7 @@ public class Actividad_21_EncontrarIglesia extends AppCompatActivity {
     public void repintar(){
         layout1.removeView(fondo);
         layout1.addView(fondo);
+
     }
 class Lienzo extends View {
 
