@@ -13,6 +13,7 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.Switch;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class AjustesActivity extends AppCompatActivity {
@@ -23,6 +24,7 @@ public class AjustesActivity extends AppCompatActivity {
     private DatabaseAccess databaseAccess;
     private ImageView logotxur;
     private int contador=0,adminEstate;
+    private TextView textView10;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,7 +38,7 @@ public class AjustesActivity extends AppCompatActivity {
         getSupportActionBar().hide();
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        logotxur= (ImageView) findViewById(R.id.logotx);
+        textView10= (TextView) findViewById(R.id.textView10);
         //Sonido
         sound = (Switch) findViewById(R.id.sound);
         if(databaseAccess.getSonido()==1)
@@ -52,7 +54,7 @@ public class AjustesActivity extends AppCompatActivity {
         });
         //Admin.Mod
         //Admin = findViewById(R.id.ChekBoxAdminMod);
-        logotxur.setOnTouchListener(new View.OnTouchListener() {
+        textView10.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 if(contador>=5&&adminEstate==0){

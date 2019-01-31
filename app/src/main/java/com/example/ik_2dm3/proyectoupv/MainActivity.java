@@ -62,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
         mostrarProgreso(Lugar);
 
         //Boton Pruebas
-       /* pruebas.setOnClickListener(new View.OnClickListener() {
+        /*pruebas.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(getBaseContext(), Presentaciones.class);
@@ -150,6 +150,7 @@ public class MainActivity extends AppCompatActivity {
                     public void onClick(View v) {
                         Intent i = new Intent(getBaseContext(), MapaActivity.class);
                         i.putExtra("idLugar", Lugar);
+
                         inicioPopup.dismiss();
                         databaseAccess.setLugar(Lugar);
                         startActivityForResult(i, 1);
@@ -172,6 +173,7 @@ public class MainActivity extends AppCompatActivity {
                     public void onClick(View v) {
                         databaseAccess.resetApp(Lugar);
                         databaseAccess.setAdmin(0);
+
                         Intent i = new Intent(getBaseContext(), Kaixo.class);
                         i.putExtra("idLugar", Lugar);
                         inicioPopup.dismiss();

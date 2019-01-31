@@ -104,12 +104,4 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView9" />
 
-    <ImageView
-        android:id="@+id/logotx"
-        android:layout_width="wrap_content"
-        android:layout_height="160dp"
-        android:src="@drawable/logotxurditrans"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
 </android.support.constraint.ConstraintLayout>
