@@ -35,7 +35,7 @@ public class Actividad_21_EncontrarIglesia extends AppCompatActivity {
     private Dialog back;
     private Button atras, salir;
     private int idPuntoJuego;
-
+    private TextView textoPopupGeneral;
 
 
     @Override
@@ -57,6 +57,34 @@ public class Actividad_21_EncontrarIglesia extends AppCompatActivity {
         btnCamara = (Button) findViewById(R.id.btnCamara);
         btnCamara.setVisibility(View.INVISIBLE);
         btnComprobar = (Button) findViewById(R.id.btnComprobar2);
+
+        Dialog popupgeneral= new Dialog(this);
+        WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
+
+        lp.copyFrom(popupgeneral.getWindow().getAttributes());
+        lp.width = WindowManager.LayoutParams.MATCH_PARENT;
+        popupgeneral.getWindow().setAttributes(lp);
+        popupgeneral.setContentView(R.layout.popup_general);
+        textoPopupGeneral= popupgeneral.findViewById(R.id.textoPopupGeneral);
+
+        popupgeneral.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        textoPopupGeneral.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                popupgeneral.dismiss();
+                if (encontrado){
+                    Intent i = new Intent(getBaseContext(), SacarFotos.class );
+                    i.putExtra("idPuntoJuego",idPuntoJuego);
+                    startActivityForResult(i, 11);
+                    popupgeneral.dismiss();
+
+
+                }else{
+                    popupgeneral.dismiss();
+                }
+            }
+        });
+
         back = new Dialog(this);
         back.setContentView(R.layout.atras);
         back.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
@@ -76,6 +104,7 @@ public class Actividad_21_EncontrarIglesia extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 back.dismiss();
+
 
                 finish();
             }
@@ -111,7 +140,13 @@ public class Actividad_21_EncontrarIglesia extends AppCompatActivity {
             public void onClick(View v) {
                 if (wi>=(width*(x1/100)) && wi<=(width*(x2/100)) && he>=(height*(y1/100)) && he<=(height*(y2/100))){
                     encontrado=true;
-                }else{encontrado=false;}
+                    popupgeneral.show();
+                    comprobar(encontrado);
+                }else{
+                    encontrado=false;
+                    popupgeneral.show();
+                    comprobar(encontrado);
+                }
                 // pr.setText(String.valueOf(event.getX()) + "x" + String.valueOf(event.getY())+"tamaño:"+wi+"/"+he+"cord:"+wi*(c1x1/100)+"-"+wi*(c1x2/100)+"/"+he*(c1y1/100)+"-"+he*(c1y2/100));
                 /*Context context = getApplicationContext();
                 CharSequence text = "w" + wi + " / h" + he +"----"+encontrado;
@@ -261,6 +296,16 @@ boolean primeravez=false;
         //your code when back button pressed
         back.show();
     }
+    protected void comprobar(boolean encontrado){
 
+        if (encontrado){
+            textoPopupGeneral.setText("OSO ONDO");
+            textoPopupGeneral.setTextColor(getColor(R.color.vc));
+
+        }else{
+            textoPopupGeneral.setText("ZAIATU BERRIRO");
+            textoPopupGeneral.setTextColor(getColor(R.color.rc));
+        }
+    }
 }
 

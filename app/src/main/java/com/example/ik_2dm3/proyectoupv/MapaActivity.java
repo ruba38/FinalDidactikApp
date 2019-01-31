@@ -762,6 +762,7 @@ MapaActivity extends AppCompatActivity implements PermissionsListener, OnMapRead
                 LimpiarPuntos();
 
                 // RELLENA EL ARRAYLIST CON LOS DATOS DE LOS PUNTOS
+
                 CrearPuntos();
                 //CAMBIAR TEXTO DE PUNTOS
                 @SuppressLint("MissingPermission") Location ubicacionUsuario = locationEngine.getLastLocation();
