@@ -40,6 +40,9 @@ public class Actividad_32_Precios extends AppCompatActivity {
     public int FotoCatch;
     int idPuntoJuego;
 
+    private Dialog Esplic;
+    private Button Segi;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,6 +53,8 @@ public class Actividad_32_Precios extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
+
+        //FIND BIEEWS
         idPuntoJuego=getIntent().getIntExtra("idPuntoJuego",0);
         KipulaZelda = findViewById(R.id.KipulapPrezio);
         AzenarioZelda = findViewById(R.id.AzenarioPrezio);
@@ -101,6 +106,18 @@ public class Actividad_32_Precios extends AppCompatActivity {
                 finish();
 
 
+            }
+        });
+        //Mostrar esplicacion
+        Esplic = new Dialog(this);
+        Esplic.setContentView(R.layout.popup_esplicancion32);
+        Esplic.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        Esplic.show();
+        Segi = Esplic.findViewById(R.id.Seguibutton);
+        Segi.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Esplic.dismiss();
             }
         });
     }

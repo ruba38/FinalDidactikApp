@@ -48,7 +48,7 @@
         app:layout_constraintTop_toBottomOf="@+id/galdera1" />
 
     <Button
-        android:id="@+id/gal1button"
+        android:id="@+id/Seguibutton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"

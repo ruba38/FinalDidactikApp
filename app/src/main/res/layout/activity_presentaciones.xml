@@ -14,7 +14,7 @@
         android:layout_height="53dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="8dp"
-        android:src="@mipmap/rewind2"
+        android:src="@drawable/felchaizq"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -71,7 +71,7 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
-        android:background="@drawable/fastforward"
+        android:background="@drawable/flechaderch"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.946"
