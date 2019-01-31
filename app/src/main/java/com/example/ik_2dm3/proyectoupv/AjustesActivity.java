@@ -68,6 +68,7 @@ public class AjustesActivity extends AppCompatActivity {
                     toast1.setText("Modo admin desactivado");
                     toast1.show();
                     adminEstate=0;
+                    contador=5;
 
                 }else{
                     contador++;

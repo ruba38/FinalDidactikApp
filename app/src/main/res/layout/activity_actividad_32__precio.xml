@@ -10,13 +10,13 @@
 
     <ImageView
         android:id="@+id/FondoNaraja"
-        android:layout_width="342dp"
-        android:layout_height="529dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="13dp"
-        android:src="@drawable/boton_inicio"
+        android:src="@drawable/correcto"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.884"
@@ -33,64 +33,64 @@
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         android:src="@mipmap/indabak"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.078"
+        app:layout_constraintBottom_toTopOf="@+id/kipula"
+        app:layout_constraintEnd_toStartOf="@+id/IndabakPrezio"
+        app:layout_constraintHorizontal_bias="0.333"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/FondoNaraja"
-        app:layout_constraintVertical_bias="0.034" />
+        app:layout_constraintVertical_bias="0.515" />
 
     <ImageView
         android:id="@+id/kipula"
         android:layout_width="107dp"
         android:layout_height="101dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginBottom="324dp"
         android:src="@mipmap/kipulamorea"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.088"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/FondoNaraja"
-        app:layout_constraintVertical_bias="0.304" />
+        app:layout_constraintEnd_toStartOf="@+id/KipulapPrezio"
+        app:layout_constraintHorizontal_bias="0.301"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <ImageView
         android:id="@+id/Txorizo"
         android:layout_width="117dp"
         android:layout_height="128dp"
         android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="56dp"
         android:src="@mipmap/txorizoa"
         app:layout_constraintBottom_toBottomOf="@+id/FondoNaraja"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.031"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintEnd_toStartOf="@+id/TxorizoPrezio"
+        app:layout_constraintHorizontal_bias="0.275"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/kipula"
+        app:layout_constraintVertical_bias="0.864" />
 
     <ImageView
         android:id="@+id/Azenario"
-        android:layout_width="119dp"
-        android:layout_height="98dp"
+        android:layout_width="104dp"
+        android:layout_height="89dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         android:src="@mipmap/azenarioa"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.032"
+        app:layout_constraintBottom_toTopOf="@+id/Txorizo"
+        app:layout_constraintEnd_toStartOf="@+id/AzenarioPrezio"
+        app:layout_constraintHorizontal_bias="0.294"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/FondoNaraja"
-        app:layout_constraintVertical_bias="0.538" />
+        app:layout_constraintTop_toBottomOf="@+id/kipula"
+        app:layout_constraintVertical_bias="1.0" />
 
     <EditText
         android:id="@+id/KipulapPrezio"
         android:layout_width="120dp"
         android:layout_height="44dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="68dp"
         android:background="@drawable/boton"
         android:ems="10"
         android:inputType="number|numberDecimal"
@@ -98,17 +98,15 @@
         android:textStyle="bold|italic"
         app:layout_constraintBottom_toBottomOf="@+id/FondoNaraja"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.747"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/FondoNaraja"
-        app:layout_constraintVertical_bias="0.382" />
+        app:layout_constraintTop_toBottomOf="@+id/IndabakPrezio"
+        app:layout_constraintVertical_bias="0.175" />
 
     <EditText
         android:id="@+id/AzenarioPrezio"
         android:layout_width="110dp"
         android:layout_height="41dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="76dp"
         android:background="@drawable/boton"
         android:ems="10"
         android:inputType="number|numberDecimal"
@@ -116,16 +114,15 @@
         android:textStyle="bold|italic"
         app:layout_constraintBottom_toBottomOf="@+id/FondoNaraja"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.747"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/FondoNaraja"
-        app:layout_constraintVertical_bias="0.643" />
+        app:layout_constraintTop_toBottomOf="@+id/KipulapPrezio"
+        app:layout_constraintVertical_bias="0.217" />
 
     <EditText
         android:id="@+id/TxorizoPrezio"
         android:layout_width="118dp"
         android:layout_height="36dp"
         android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:background="@drawable/boton"
         android:ems="10"
@@ -134,10 +131,10 @@
         android:textStyle="bold|italic"
         app:layout_constraintBottom_toBottomOf="@+id/FondoNaraja"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.747"
+        app:layout_constraintHorizontal_bias="0.776"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/FondoNaraja"
-        app:layout_constraintVertical_bias="0.81" />
+        app:layout_constraintTop_toBottomOf="@+id/AzenarioPrezio"
+        app:layout_constraintVertical_bias="0.347" />
 
     <EditText
         android:id="@+id/IndabakPrezio"
@@ -160,48 +157,50 @@
 
     <TextView
         android:id="@+id/Total"
-        android:layout_width="119dp"
-        android:layout_height="60dp"
+        android:layout_width="137dp"
+        android:layout_height="34dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
-        android:background="@drawable/cuadradodetexto"
+        android:background="@drawable/boton_inicio"
         android:textAlignment="center"
+        app:autoSizeTextType="uniform"
         app:layout_constraintBottom_toBottomOf="@+id/FondoNaraja"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.735"
+        app:layout_constraintHorizontal_bias="0.822"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/TxorizoPrezio"
-        app:layout_constraintVertical_bias="0.714" />
+        app:layout_constraintVertical_bias="0.735" />
 
     <TextView
         android:id="@+id/textView12"
-        android:layout_width="161dp"
+        android:layout_width="209dp"
         android:layout_height="34dp"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         android:text="PREZIO /KILOKO"
-        android:textColor="@color/Verde"
-        android:textSize="20sp"
+        android:textAlignment="center"
+        android:textColor="@color/Naranjafondos"
+        android:textSize="24sp"
+        android:textStyle="bold|italic"
         app:layout_constraintBottom_toBottomOf="@+id/FondoNaraja"
         app:layout_constraintEnd_toEndOf="@+id/FondoNaraja"
-        app:layout_constraintHorizontal_bias="0.782"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="@+id/Azenario"
         app:layout_constraintTop_toTopOf="@+id/FondoNaraja"
-        app:layout_constraintVertical_bias="0.03" />
+        app:layout_constraintVertical_bias="0.048" />
 
     <Button
         android:id="@+id/IdBotonAurrera32"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/boton_inicio"
-        android:text="Aurrera"
+        android:layout_width="65dp"
+        android:layout_height="54dp"
+        android:background="@drawable/camaraverdepnj"
         app:layout_constraintBottom_toBottomOf="@+id/FondoNaraja"
         app:layout_constraintEnd_toEndOf="@+id/FondoNaraja"
-        app:layout_constraintHorizontal_bias="0.094"
+        app:layout_constraintHorizontal_bias="0.15"
         app:layout_constraintStart_toStartOf="@+id/FondoNaraja"
         app:layout_constraintTop_toTopOf="@+id/FondoNaraja"
-        app:layout_constraintVertical_bias="0.989" />
+        app:layout_constraintVertical_bias="0.967" />
 
 </android.support.constraint.ConstraintLayout>

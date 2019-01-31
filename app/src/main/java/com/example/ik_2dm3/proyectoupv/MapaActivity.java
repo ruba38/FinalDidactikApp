@@ -110,10 +110,6 @@ MapaActivity extends AppCompatActivity implements PermissionsListener, OnMapRead
     private Button FondoEstasLejos;
     private String DistanciaMetros;
 
-
-
-
-
     // Limite de la camara de la zona sleccionada
     //LatLngBounds coordsLimite;
     //SE EJECUTA NADA MAS ABRIRSE EL MAPA
@@ -140,6 +136,7 @@ MapaActivity extends AppCompatActivity implements PermissionsListener, OnMapRead
             }
         });
 
+        //Recojer admin
 
 
         //QUITAR TITULO DEL LAYOUT
@@ -177,8 +174,6 @@ MapaActivity extends AppCompatActivity implements PermissionsListener, OnMapRead
         //TEXT VIEW
         idBtnMapaAdmin = findViewById(R.id.idBtnMapaAdmin);
         idBtnMapaAjustes = findViewById(R.id.idBtnMapaAjustes);
-
-
         idBtnMapaAdmin.setVisibility(View.GONE);
 
         // INSTANCIAR OBJETOS DE BASE DE DATOS
@@ -192,8 +187,6 @@ MapaActivity extends AppCompatActivity implements PermissionsListener, OnMapRead
         coordsLimite = databaseAccess.getLimiteZona(Lugar);
 
 
-        // BOTON MODO ADMINISTRADOR
-
 
 
         idBtnMapaAdmin.setOnClickListener(new View.OnClickListener() {
@@ -201,18 +194,17 @@ MapaActivity extends AppCompatActivity implements PermissionsListener, OnMapRead
             public void onClick(View v) {
                 //SI ESTA DESACTIVADO SE ACTIVA Y MUESTRA TODOS LOS PUNTOS RESPECTO AL LUGAR SELECIONADO
                 if (admin == false) {
-
+                    admin=true;
                     // Cambia a Visible = true, todos los puntos
                     databaseAccess.setAllVisible();
-                    admin = true;
                     idBtnMapaAdmin.setBackground(getDrawable(R.drawable.adminverde));
                 }
                 //SI ESTA ACTIVADO SE DESACTIVA Y OCULTA TODOS LOS PUNTOS MENOS LOS TERMINADOS SI NO HAY TERMINADOS MUESTRA SOLO EL PRIMERO
                 else {
-
+                    admin=false;
                     databaseAccess.reverseAllVisible();
-                    admin = false;
                     idBtnMapaAdmin.setBackground(getDrawable(R.drawable.adminrojo));
+
                 }
 
                 // VACIA EL ARRAYLIST QUE CONTIENE LOS DATOS DE LOS PUNTOS
@@ -222,7 +214,9 @@ MapaActivity extends AppCompatActivity implements PermissionsListener, OnMapRead
                 CrearPuntos();
                 //CAMBIAR TEXTO DE PUNTOS
                 @SuppressLint("MissingPermission") Location ubicacionUsuario = locationEngine.getLastLocation();
+                LatLng dada = new LatLng(ubicacionUsuario.getLatitude(),ubicacionUsuario.getLongitude());
                 localizarDistancia(ubicacionUsuario);
+
             }
         });
         //Recojer admin
@@ -234,6 +228,8 @@ MapaActivity extends AppCompatActivity implements PermissionsListener, OnMapRead
         }else{
             idBtnMapaAdmin.setVisibility(mapView.VISIBLE);
             Log.d("mytag","entra visi"+adminEstate);
+            databaseAccess.reverseAllVisible();
+
         }
         //BOTON AJUSTES
         idBtnMapaAjustes.setOnClickListener(new View.OnClickListener() {
@@ -312,7 +308,7 @@ MapaActivity extends AppCompatActivity implements PermissionsListener, OnMapRead
             ubicacionPunto.setLatitude(PuntosInteres.get(i).getLatitude());
             ubicacionPunto.setLongitude(PuntosInteres.get(i).getLongitude());
 
-            if (PuntosInteres.get(i).isVisible() == true) {
+            if (PuntosInteres.get(i).isTerminado() == true) {
 
                 contPuntos = contPuntos + 1;
             }
@@ -344,7 +340,8 @@ MapaActivity extends AppCompatActivity implements PermissionsListener, OnMapRead
             //PINTAS LA DISTANCIA CON 2 DECIMALES
             idTextViewDistancia.setText(String.format("%.2f",textoDistancia)+""+metrica);
             //PINTAS EL PROGRESO DE LOS PUNTOS ENCONTRADOS
-            idTextViewProgreso.setText(contPuntos+"/"+PuntosInteres.size());
+
+            idTextViewProgreso.setText((contPuntos+1)+"/"+PuntosInteres.size());
         }
         databaseAccess.close();
     }
@@ -374,6 +371,7 @@ MapaActivity extends AppCompatActivity implements PermissionsListener, OnMapRead
             }
         }
     }
+
     //TODO: IMG ....
     public void toImg(String byteArray){
 
@@ -401,6 +399,8 @@ MapaActivity extends AppCompatActivity implements PermissionsListener, OnMapRead
         // HABILITAMOS LA LOCALIZAZION DEL USUARIO
         enableLocation();
 
+        // Hacemos el boton del admin visible
+        idBtnMapaAdmin.setVisibility(View.VISIBLE);
 
         // ZOOM MAXIMO Y MINIMO DEL MAPA Y DELIMITAR MAPA
         map.setMinZoomPreference(16);
@@ -409,7 +409,7 @@ MapaActivity extends AppCompatActivity implements PermissionsListener, OnMapRead
 
         // RELLENA EL ARRAYLIST CON LOS DATOS DE LOS PUNTOS
         CrearPuntos();
-
+        mostrarPista(idTextViewPista);
         //CLICKAR SOBRE UNO DE LOS PUNTOS
         mapboxMap.setOnMarkerClickListener(new MapboxMap.OnMarkerClickListener() {
 
@@ -519,7 +519,7 @@ MapaActivity extends AppCompatActivity implements PermissionsListener, OnMapRead
                             //SI NO ESTAS EN RFANGO TE MUESTRA UN TOAST INDICANDO QUE NO ESTAS EN RANGO
                             else{
                                 Context context = getApplicationContext();
-                                CharSequence text = "oso urrun zaude";
+                                CharSequence text = "Oso urrun zaude";
                                 int duration = Toast.LENGTH_LONG;
 
                                 Toast toastRango = Toast.makeText(context, text, duration);
@@ -563,6 +563,7 @@ MapaActivity extends AppCompatActivity implements PermissionsListener, OnMapRead
             permissionsManager.requestLocationPermissions(this);
         }
     }
+
     //SI EL USUARIO ACEPTA DAR PERMISOS DE UBICACION
     @Override
     public void onPermissionResult(boolean granted) {
@@ -571,6 +572,7 @@ MapaActivity extends AppCompatActivity implements PermissionsListener, OnMapRead
             enableLocation();
         }
     }
+
     //LOCALIZARNOS A NOSOTROS MISMOS
     @SuppressLint("MissingPermission")
     private void initializeLocationEngine() {
@@ -585,7 +587,7 @@ MapaActivity extends AppCompatActivity implements PermissionsListener, OnMapRead
 
         // Obtenemos la ultima ubicacion y comprobamos que sea distinto de null
         lastlocation = locationEngine.getLastLocation();
-        if(lastlocation != null) {
+        if (lastlocation != null) {
             // Si es distntio, ubicamos la camara en la ubicacion actual
             originLocation = lastlocation;
         } else {
@@ -721,6 +723,7 @@ MapaActivity extends AppCompatActivity implements PermissionsListener, OnMapRead
         pistaPopup.setContentView(R.layout.popup_pista);//abrir layout que contiene el popup
         //INTRODUCIMOS TEXTO
         idTextViewPista = pistaPopup.findViewById(R.id.idTextViewPista);
+        textoPista = textoPista.replace("\\n", "\n");
         idTextViewPista.setText(textoPista);
         //CERRAR POPUP AL DAR A LA X
         idBtnCerrarPista = (Button) pistaPopup.findViewById(R.id.idBtnCerrarPista);
@@ -737,6 +740,7 @@ MapaActivity extends AppCompatActivity implements PermissionsListener, OnMapRead
         pistaPopup.setCanceledOnTouchOutside(false);
         pistaPopup.show();
         databaseAccess.close();
+
     }
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -763,6 +767,7 @@ MapaActivity extends AppCompatActivity implements PermissionsListener, OnMapRead
                 LimpiarPuntos();
 
                 // RELLENA EL ARRAYLIST CON LOS DATOS DE LOS PUNTOS
+
                 CrearPuntos();
                 //CAMBIAR TEXTO DE PUNTOS
                 @SuppressLint("MissingPermission") Location ubicacionUsuario = locationEngine.getLastLocation();
@@ -783,6 +788,7 @@ MapaActivity extends AppCompatActivity implements PermissionsListener, OnMapRead
         mostrarPista(idTextViewPista);}
         databaseAccess.close();
     }
+
     //METODOS NO UTILIZADOS PERO NECESARIOS PARA EL FUNCIONAMIENTO CORECTO DE LA APLICACION
     @Override
     public void onMapClick(@NonNull LatLng point) {

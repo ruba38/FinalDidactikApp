@@ -8,11 +8,13 @@ import android.content.Intent;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Point;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.app.Activity;
 import android.support.v7.app.AppCompatActivity;
 import android.util.AttributeSet;
+import android.view.Display;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
@@ -21,6 +23,7 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class Actividad_21_EncontrarIglesia extends AppCompatActivity {
@@ -32,8 +35,7 @@ public class Actividad_21_EncontrarIglesia extends AppCompatActivity {
     private Dialog back;
     private Button atras, salir;
     private int idPuntoJuego;
-
-
+    private TextView textoPopupGeneral;
 
 
     @Override
@@ -55,6 +57,34 @@ public class Actividad_21_EncontrarIglesia extends AppCompatActivity {
         btnCamara = (Button) findViewById(R.id.btnCamara);
         btnCamara.setVisibility(View.INVISIBLE);
         btnComprobar = (Button) findViewById(R.id.btnComprobar2);
+
+        Dialog popupgeneral= new Dialog(this);
+        WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
+
+        lp.copyFrom(popupgeneral.getWindow().getAttributes());
+        lp.width = WindowManager.LayoutParams.MATCH_PARENT;
+        popupgeneral.getWindow().setAttributes(lp);
+        popupgeneral.setContentView(R.layout.popup_general);
+        textoPopupGeneral= popupgeneral.findViewById(R.id.textoPopupGeneral);
+
+        popupgeneral.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        textoPopupGeneral.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                popupgeneral.dismiss();
+                if (encontrado){
+                    Intent i = new Intent(getBaseContext(), SacarFotos.class );
+                    i.putExtra("idPuntoJuego",idPuntoJuego);
+                    startActivityForResult(i, 11);
+                    popupgeneral.dismiss();
+
+
+                }else{
+                    popupgeneral.dismiss();
+                }
+            }
+        });
+
         back = new Dialog(this);
         back.setContentView(R.layout.atras);
         back.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
@@ -75,16 +105,48 @@ public class Actividad_21_EncontrarIglesia extends AppCompatActivity {
             public void onClick(View v) {
                 back.dismiss();
 
+
                 finish();
             }
         });
+        he=fondo.getHeight();
+        wi=fondo.getWidth();
+
+
+
+        /*fondo.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+
+
+                return false;
+            }
+        });*/
+
+        double x1=13.7;
+        double x2=18.9;
+        double y1=29.2;
+        double y2=42;
+
+        Display display = getWindowManager().getDefaultDisplay();
+        Point size = new Point();
+        display.getSize(size);
+        int width = size.x;
+        int height = size.y;
+
 
         btnComprobar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (wi>=220 && wi<=500 && he>=210 && he<=400){
+                if (wi>=(width*(x1/100)) && wi<=(width*(x2/100)) && he>=(height*(y1/100)) && he<=(height*(y2/100))){
                     encontrado=true;
-                }else{encontrado=false;}
+                    popupgeneral.show();
+                    comprobar(encontrado);
+                }else{
+                    encontrado=false;
+                    popupgeneral.show();
+                    comprobar(encontrado);
+                }
                 // pr.setText(String.valueOf(event.getX()) + "x" + String.valueOf(event.getY())+"tamaño:"+wi+"/"+he+"cord:"+wi*(c1x1/100)+"-"+wi*(c1x2/100)+"/"+he*(c1y1/100)+"-"+he*(c1y2/100));
                 /*Context context = getApplicationContext();
                 CharSequence text = "w" + wi + " / h" + he +"----"+encontrado;
@@ -129,7 +191,24 @@ public class Actividad_21_EncontrarIglesia extends AppCompatActivity {
             }
         });
 }
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        // MotionEvent object holds X-Y values
+        if(event.getAction() == MotionEvent.ACTION_DOWN) {
+            String text = "You click at x = " + event.getX() + " and y = " + event.getY();
+            Toast.makeText(this, text, Toast.LENGTH_LONG).show();Display display = getWindowManager().getDefaultDisplay();
+            Point size = new Point();
+            display.getSize(size);
+            int width =size.x;
+            int height = size.y;
+            int eventx=Math.round(event.getX());
+            int eventy=Math.round(event.getY());
 
+        }
+
+
+        return super.onTouchEvent(event);
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -175,6 +254,7 @@ public class Actividad_21_EncontrarIglesia extends AppCompatActivity {
     public void repintar(){
         layout1.removeView(fondo);
         layout1.addView(fondo);
+
     }
 class Lienzo extends View {
 
@@ -216,6 +296,16 @@ boolean primeravez=false;
         //your code when back button pressed
         back.show();
     }
+    protected void comprobar(boolean encontrado){
 
+        if (encontrado){
+            textoPopupGeneral.setText("OSO ONDO");
+            textoPopupGeneral.setTextColor(getColor(R.color.vc));
+
+        }else{
+            textoPopupGeneral.setText("ZAIATU BERRIRO");
+            textoPopupGeneral.setTextColor(getColor(R.color.rc));
+        }
+    }
 }
 
