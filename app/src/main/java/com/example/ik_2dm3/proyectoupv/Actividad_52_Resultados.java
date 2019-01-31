@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 public class Actividad_52_Resultados extends AppCompatActivity {
@@ -19,7 +20,7 @@ public class Actividad_52_Resultados extends AppCompatActivity {
     private Dialog back;
     private Button atras, salir;
     private int idPuntoJuego;
-
+    private ImageView laureles;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +35,7 @@ public class Actividad_52_Resultados extends AppCompatActivity {
 
         sacarFoto = (Button)findViewById(R.id.btnCamara);
         textoGanador = (TextView) findViewById(R.id.textoGanador);
+        laureles = findViewById(R.id.Laureles);
         idPuntoJuego = getIntent().getIntExtra("idPuntoJuego", 0);
 
         String nombre = getIntent().getStringExtra("nombre");
@@ -63,7 +65,7 @@ public class Actividad_52_Resultados extends AppCompatActivity {
             }
         });
 
-        textoGanador.setText("El ganador es\n"+nombre);
+        textoGanador.setText("Irabaslea\n"+nombre+"\nda");
 
         Log.d("resultados", "ER: "+nombre);
         Log.d("resultados", "RR: "+numVotos);

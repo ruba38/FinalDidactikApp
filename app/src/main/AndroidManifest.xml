@@ -112,6 +112,7 @@
         <activity
             android:name=".Actividad_72_galderak"
             android:screenOrientation="portrait" />
+
         <activity
             android:name=".Presentaciones"
             android:screenOrientation="portrait"></activity>

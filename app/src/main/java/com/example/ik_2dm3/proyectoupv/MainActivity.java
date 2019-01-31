@@ -16,7 +16,7 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    public Button pruebas;
+
     public boolean admin = false;
     private Button idBtnMainAjustes, idBtnIzquierda, idBtnDerecha, idBtnContinuar, idBtnInicio, idBtnReiniciar;
     private Button btnPopupInicioSi, btnPopupInicioNo, btnPopupInicioContinuar, btnPopupInicioReiniciar;
@@ -45,7 +45,6 @@ public class MainActivity extends AppCompatActivity {
         Log.d("ajustes", "sonido= " + objetoAjustes.sonido + " // musica= " + objetoAjustes.musica + " // mapa=" + objetoAjustes.mapa + " // idioma=" + objetoAjustes.idioma);
         idBtnMainAjustes = (Button) findViewById(R.id.idBtnMainAjustes);
         idBtnDerecha = (Button) findViewById(R.id.idBtnDerecha);
-        pruebas = (Button) findViewById(R.id.button2);
         idBtnInicio = (Button) findViewById(R.id.idBtnInicio);
 
 

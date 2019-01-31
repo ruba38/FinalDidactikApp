@@ -174,8 +174,6 @@ MapaActivity extends AppCompatActivity implements PermissionsListener, OnMapRead
         //TEXT VIEW
         idBtnMapaAdmin = findViewById(R.id.idBtnMapaAdmin);
         idBtnMapaAjustes = findViewById(R.id.idBtnMapaAjustes);
-
-
         idBtnMapaAdmin.setVisibility(View.GONE);
 
         // INSTANCIAR OBJETOS DE BASE DE DATOS
@@ -216,7 +214,9 @@ MapaActivity extends AppCompatActivity implements PermissionsListener, OnMapRead
                 CrearPuntos();
                 //CAMBIAR TEXTO DE PUNTOS
                 @SuppressLint("MissingPermission") Location ubicacionUsuario = locationEngine.getLastLocation();
+                LatLng dada = new LatLng(ubicacionUsuario.getLatitude(),ubicacionUsuario.getLongitude());
                 localizarDistancia(ubicacionUsuario);
+
             }
         });
         //Recojer admin
@@ -371,6 +371,7 @@ MapaActivity extends AppCompatActivity implements PermissionsListener, OnMapRead
             }
         }
     }
+
     //TODO: IMG ....
     public void toImg(String byteArray){
 
@@ -398,6 +399,8 @@ MapaActivity extends AppCompatActivity implements PermissionsListener, OnMapRead
         // HABILITAMOS LA LOCALIZAZION DEL USUARIO
         enableLocation();
 
+        // Hacemos el boton del admin visible
+        idBtnMapaAdmin.setVisibility(View.VISIBLE);
 
         // ZOOM MAXIMO Y MINIMO DEL MAPA Y DELIMITAR MAPA
         map.setMinZoomPreference(16);
@@ -560,6 +563,7 @@ MapaActivity extends AppCompatActivity implements PermissionsListener, OnMapRead
             permissionsManager.requestLocationPermissions(this);
         }
     }
+
     //SI EL USUARIO ACEPTA DAR PERMISOS DE UBICACION
     @Override
     public void onPermissionResult(boolean granted) {
@@ -568,6 +572,7 @@ MapaActivity extends AppCompatActivity implements PermissionsListener, OnMapRead
             enableLocation();
         }
     }
+
     //LOCALIZARNOS A NOSOTROS MISMOS
     @SuppressLint("MissingPermission")
     private void initializeLocationEngine() {
@@ -582,7 +587,7 @@ MapaActivity extends AppCompatActivity implements PermissionsListener, OnMapRead
 
         // Obtenemos la ultima ubicacion y comprobamos que sea distinto de null
         lastlocation = locationEngine.getLastLocation();
-        if(lastlocation != null) {
+        if (lastlocation != null) {
             // Si es distntio, ubicamos la camara en la ubicacion actual
             originLocation = lastlocation;
         } else {
@@ -783,6 +788,7 @@ MapaActivity extends AppCompatActivity implements PermissionsListener, OnMapRead
         mostrarPista(idTextViewPista);}
         databaseAccess.close();
     }
+
     //METODOS NO UTILIZADOS PERO NECESARIOS PARA EL FUNCIONAMIENTO CORECTO DE LA APLICACION
     @Override
     public void onMapClick(@NonNull LatLng point) {

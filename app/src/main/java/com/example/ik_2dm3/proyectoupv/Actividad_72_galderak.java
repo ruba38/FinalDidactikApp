@@ -45,7 +45,7 @@ public class Actividad_72_galderak extends AppCompatActivity {
         ondo.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         osoondofondoa = (ImageView) ondo.findViewById(R.id.osoondofondoa);
         erantzuna = (EditText) gal1.findViewById(R.id.erantzuna);
-        bot1= (Button) gal1.findViewById(R.id.gal1button);
+        bot1= (Button) gal1.findViewById(R.id.Seguibutton);
         bot2 = (Button) gal2.findViewById(R.id.jarraitu);
         toast = Toast.makeText(getBaseContext(), "Hori ez da erantzun egokia, ondo idatzu duzue izen abizenak maiuskulak ta guzti?", Toast.LENGTH_SHORT);
         piccaso="Pablo Piccaso";
