@@ -174,7 +174,7 @@ public class MainActivity extends AppCompatActivity {
                     public void onClick(View v) {
                         databaseAccess.resetApp(Lugar);
                         databaseAccess.setAdmin(0);
-
+                        databaseAccess.setFinal(0);
                         Intent i = new Intent(getBaseContext(), Kaixo.class);
                         i.putExtra("idLugar", Lugar);
                         inicioPopup.dismiss();

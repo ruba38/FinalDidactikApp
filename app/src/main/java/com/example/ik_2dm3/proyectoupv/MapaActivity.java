@@ -709,8 +709,11 @@ MapaActivity extends AppCompatActivity implements PermissionsListener, OnMapRead
 
         Log.d("mapa", "Tamano: "+arrayPuntos.size()+ " ---- "+Lugar);
         if(arrayPuntos.get(arrayPuntos.size()-1).getterminado()==1){
-            terminaMapa();
-            return;
+            DatabaseAccess databaseacces = new DatabaseAccess(this);
+            int terminado = databaseacces.getFinal();
+            if(terminado==0)
+                terminaMapa();
+            databaseacces.close();
         }
 
         for (int i = 0; i < arrayPuntos.size(); i++) {
@@ -761,8 +764,14 @@ MapaActivity extends AppCompatActivity implements PermissionsListener, OnMapRead
         PuntosInteres.clear();
     }
     private void terminaMapa(){
+        DatabaseAccess databaseacces = new DatabaseAccess(this);
+        int terminado = databaseacces.getFinal();
+        if(terminado==1)
+            return;
         Intent i = new Intent(getBaseContext(), Agurra.class);
+        databaseacces.setFinal(1);
         startActivity(i);
+        databaseacces.close();
         finish();
     }
     //TODO:mostrarPista...
@@ -815,6 +824,8 @@ MapaActivity extends AppCompatActivity implements PermissionsListener, OnMapRead
             System.gc();
             CrearPuntos();
             newpista();
+            @SuppressLint("MissingPermission") Location ubicacionUsuario = locationEngine.getLastLocation();
+            localizarDistancia(ubicacionUsuario);
 
 
         }
