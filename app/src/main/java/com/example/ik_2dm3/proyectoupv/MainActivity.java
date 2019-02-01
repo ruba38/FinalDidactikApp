@@ -149,10 +149,12 @@ public class MainActivity extends AppCompatActivity {
                     public void onClick(View v) {
                         Intent i = new Intent(getBaseContext(), MapaActivity.class);
                         i.putExtra("idLugar", Lugar);
+                        i.putExtra("Descargar", false);
 
                         inicioPopup.dismiss();
                         databaseAccess.setLugar(Lugar);
                         startActivityForResult(i, 1);
+                        databaseAccess.close();
                     }
                 });
                 //REINICIAR
