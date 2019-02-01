@@ -271,6 +271,24 @@ public class DatabaseAccess extends SQLiteOpenHelper {
         return x;
     }
 
+    public void setFinal(int x){
+        String myPath = DB_PATH + DB_NAME;
+        db = SQLiteDatabase.openDatabase(myPath, null, SQLiteDatabase.OPEN_READWRITE);
+        db = this.getWritableDatabase();
+        db.execSQL("UPDATE ajustes SET final="+x);
+        db.close();
+    }
+    public int getFinal(){
+        String myPath = DB_PATH + DB_NAME;
+        db = SQLiteDatabase.openDatabase(myPath, null, SQLiteDatabase.OPEN_READWRITE);
+        db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery("SELECT final FROM ajustes", null);
+        cursor.moveToFirst();
+        int x =cursor.getInt(cursor.getColumnIndex("final"));
+        cursor.close();
+        db.close();
+        return x;
+    }
     //PONE TODOS LOS PUNTOS EN VISIBLE
     public void setAllVisible(){
         Log.d("mytag", "entra setallvisible");
