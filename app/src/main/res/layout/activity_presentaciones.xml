@@ -63,7 +63,7 @@
     <Button
         android:id="@+id/BotonAlante"
         android:layout_width="78dp"
-        android:layout_height="54dp"
+        android:layout_height="53dp"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="208dp"
