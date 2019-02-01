@@ -380,7 +380,8 @@ MapaActivity extends AppCompatActivity implements PermissionsListener, OnMapRead
             //PINTAS LA DISTANCIA CON 2 DECIMALES
             idTextViewDistancia.setText(String.format("%.2f",textoDistancia)+""+metrica);
             //PINTAS EL PROGRESO DE LOS PUNTOS ENCONTRADOS
-
+            if(contPuntos==7)
+                contPuntos--;
             idTextViewProgreso.setText((contPuntos+1)+"/"+PuntosInteres.size());
         }
         databaseAccess.close();
@@ -455,9 +456,7 @@ MapaActivity extends AppCompatActivity implements PermissionsListener, OnMapRead
             layoutbarra.setVisibility(View.GONE);
         }
 
-        if(!DescargaMapa) {
-            // Hacemos el boton del admin visible
-            idBtnMapaAdmin.setVisibility(View.VISIBLE);
+
 
             // ZOOM MAXIMO Y MINIMO DEL MAPA Y DELIMITAR MAPA
             map.setMinZoomPreference(15);
