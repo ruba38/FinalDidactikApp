@@ -450,7 +450,6 @@ MapaActivity extends AppCompatActivity implements PermissionsListener, OnMapRead
                     .tilt(20)
                     .build();
             map.setCameraPosition(position);
-
             CargarBarra();
         } else {
             layoutmapa.setVisibility(View.VISIBLE);
@@ -458,14 +457,17 @@ MapaActivity extends AppCompatActivity implements PermissionsListener, OnMapRead
         }
 
 
-        // ZOOM MAXIMO Y MINIMO DEL MAPA Y DELIMITAR MAPA
-        map.setMinZoomPreference(15);
-        map.setMaxZoomPreference(19.50);
-        mapboxMap.setLatLngBoundsForCameraTarget(coordsLimite);
 
-        // RELLENA EL ARRAYLIST CON LOS DATOS DE LOS PUNTOS
-        CrearPuntos();
-        mostrarPista(idTextViewPista);
+            // ZOOM MAXIMO Y MINIMO DEL MAPA Y DELIMITAR MAPA
+            map.setMinZoomPreference(15);
+            map.setMaxZoomPreference(19.50);
+            mapboxMap.setLatLngBoundsForCameraTarget(coordsLimite);
+
+            // RELLENA EL ARRAYLIST CON LOS DATOS DE LOS PUNTOS
+            CrearPuntos();
+            mostrarPista(idTextViewPista);
+        }
+
         //CLICKAR SOBRE UNO DE LOS PUNTOS
         mapboxMap.setOnMarkerClickListener(new MapboxMap.OnMarkerClickListener() {
 
@@ -688,13 +690,15 @@ MapaActivity extends AppCompatActivity implements PermissionsListener, OnMapRead
     private void CrearPuntos() {
 
         if(!PuntosInteres.isEmpty()) { PuntosInteres.clear(); }
+
+        if(DescargaMapa) { return; }
         // Creamos los iconos
         Icon icon1 = IconFactory.getInstance(MapaActivity.this).fromResource(R.drawable.exclamatin2);
         Icon icon2 = IconFactory.getInstance(MapaActivity.this).fromResource(R.drawable.completado2);
 
         // Cargamos los puntos de la base de datos en un array
         DatabaseAccess databaseAccess = new DatabaseAccess(getBaseContext());
-        ArrayList<puntos> arrayPuntos = new ArrayList((ArrayList<puntos>) databaseAccess.getPuntos(Lugar));
+        ArrayList<puntos> arrayPuntos = new ArrayList((ArrayList<puntos>) databaseAccess.getPuntos(1));
 
 
 
@@ -702,7 +706,7 @@ MapaActivity extends AppCompatActivity implements PermissionsListener, OnMapRead
         // Creamos el objeto del punto
         MarkerPuntos marca;
 
-        Log.d("mapa", "Tamano: "+arrayPuntos.size());
+        Log.d("mapa", "Tamano: "+arrayPuntos.size()+ " ---- "+Lugar);
         if(arrayPuntos.get(arrayPuntos.size()-1).getterminado()==1){
             DatabaseAccess databaseacces = new DatabaseAccess(this);
             int terminado = databaseacces.getFinal();

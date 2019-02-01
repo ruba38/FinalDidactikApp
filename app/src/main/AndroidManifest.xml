@@ -23,7 +23,7 @@
         android:roundIcon="@mipmap/oihaltzo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity"
+        <activity android:name=".MapaActivity"
             android:screenOrientation="portrait"
             >
             <intent-filter>
@@ -60,7 +60,7 @@
             android:screenOrientation="portrait"
             />
         <activity
-            android:name=".MapaActivity"
+            android:name=".MainActivity"
             android:configChanges="orientation|screenSize"
             android:label="@string/title_activity_mapa"
             android:screenOrientation="portrait" />
