@@ -158,6 +158,7 @@ public class Actividad_61_GernikaArbola extends AppCompatActivity {
     protected void comprobar(boolean hoja){
 
         if (hoja){
+            popupgeneral.setCanceledOnTouchOutside(false);
             textoPopupGeneral.setText("OSO ONDO");
             textoPopupGeneral.setTextColor(getColor(R.color.vc));
 
