@@ -52,7 +52,16 @@ public class Actividad_61_GernikaArbola extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 popupgeneral.dismiss();
+                if (hoja){
+                    Intent i = new Intent(getBaseContext(), SacarFotos.class );
+                    i.putExtra("idPuntoJuego",idPuntoJuego);
+                    startActivityForResult(i, 11);
+                    popupgeneral.dismiss();
+                    finish();
 
+                }else{
+                    popupgeneral.dismiss();
+                }
             }
         });
 
@@ -75,6 +84,7 @@ public class Actividad_61_GernikaArbola extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 back.dismiss();
+
 
                 finish();
             }
@@ -159,8 +169,8 @@ public class Actividad_61_GernikaArbola extends AppCompatActivity {
     protected void onActivityResult(int requestCode,
                                     int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 10){
-
+        if (requestCode == 11){
+            finish();
             Actividad_61_GernikaArbola.this.finish();
 
         }

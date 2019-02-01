@@ -61,6 +61,7 @@
             android:configChanges="orientation|screenSize"
             android:label="@string/title_activity_mapa"
             android:screenOrientation="portrait" />
+
         <activity
             android:name=".Galeria"
             android:label="@string/title_activity_galeria" />
@@ -89,16 +90,28 @@
             android:resource="@array/preloaded_fonts" />
 
         <activity android:name=".Actividad_61_GernikaArbola" />
+        <activity android:name=".Actividad_61_GernikaArbola"
+            android:screenOrientation="portrait" />
+
+
         <activity
             android:name=".Actividad_51_Botaketa"
             android:label="@string/title_activity_actividad_51__botaketa"
             android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            />
         <activity
-            android:name=".Actividad_71_Puzzle"
-            android:screenOrientation="portrait" />
+            android:name=".Actividad_52_Resultados"
+            android:label="@string/title_activity_actividad_51__botaketa"
+            android:screenOrientation="portrait"
+            />
+        <activity
+        android:name=".Actividad_71_Puzzle"
+        android:screenOrientation="portrait" />
         <activity
             android:name=".Actividad_72_galderak"
             android:screenOrientation="portrait" />
+
         <activity
             android:name=".Presentaciones"
             android:screenOrientation="portrait" />

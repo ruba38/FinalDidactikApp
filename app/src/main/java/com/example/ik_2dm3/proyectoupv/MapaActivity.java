@@ -141,8 +141,8 @@ MapaActivity extends AppCompatActivity implements PermissionsListener, OnMapRead
                 finish();
             }
         });
+
         //Recojer admin
-        admin= getIntent().getBooleanExtra("Admin",false);
 
 
         //QUITAR TITULO DEL LAYOUT
@@ -210,30 +210,24 @@ MapaActivity extends AppCompatActivity implements PermissionsListener, OnMapRead
 
         Log.d("mapa", "Valores: "+coordsLimite.getNorthEast()+" | "+coordsLimite.getSouthWest());
 
-        // BOTON MODO ADMINISTRADOR
-        if (adminEstate == 0) {
-            idBtnMapaAdmin.setVisibility(mapView.INVISIBLE);
-        } else {
-            idBtnMapaAdmin.setVisibility(mapView.VISIBLE);
-        }
+
 
         idBtnMapaAdmin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //SI ESTA DESACTIVADO SE ACTIVA Y MUESTRA TODOS LOS PUNTOS RESPECTO AL LUGAR SELECIONADO
                 if (admin == false) {
-
+                    admin=true;
                     // Cambia a Visible = true, todos los puntos
                     databaseAccess.setAllVisible();
-                    admin = true;
                     idBtnMapaAdmin.setBackground(getDrawable(R.drawable.adminverde));
                 }
                 //SI ESTA ACTIVADO SE DESACTIVA Y OCULTA TODOS LOS PUNTOS MENOS LOS TERMINADOS SI NO HAY TERMINADOS MUESTRA SOLO EL PRIMERO
                 else {
-
+                    admin=false;
                     databaseAccess.reverseAllVisible();
-                    admin = false;
                     idBtnMapaAdmin.setBackground(getDrawable(R.drawable.adminrojo));
+
                 }
 
                 // VACIA EL ARRAYLIST QUE CONTIENE LOS DATOS DE LOS PUNTOS
@@ -243,10 +237,23 @@ MapaActivity extends AppCompatActivity implements PermissionsListener, OnMapRead
                 CrearPuntos();
                 //CAMBIAR TEXTO DE PUNTOS
                 @SuppressLint("MissingPermission") Location ubicacionUsuario = locationEngine.getLastLocation();
+                LatLng dada = new LatLng(ubicacionUsuario.getLatitude(),ubicacionUsuario.getLongitude());
                 localizarDistancia(ubicacionUsuario);
+
             }
         });
+        //Recojer admin
+        adminEstate= databaseAccess.getAdmin();
+        if(adminEstate==0){
+            idBtnMapaAdmin.setVisibility(mapView.INVISIBLE);
+            Log.d("mytag","entra invi"+adminEstate);
 
+        }else{
+            idBtnMapaAdmin.setVisibility(mapView.VISIBLE);
+            Log.d("mytag","entra visi"+adminEstate);
+            databaseAccess.reverseAllVisible();
+
+        }
         //BOTON AJUSTES
         idBtnMapaAjustes.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -341,7 +348,7 @@ MapaActivity extends AppCompatActivity implements PermissionsListener, OnMapRead
             ubicacionPunto.setLatitude(PuntosInteres.get(i).getLatitude());
             ubicacionPunto.setLongitude(PuntosInteres.get(i).getLongitude());
 
-            if (PuntosInteres.get(i).isVisible() == true) {
+            if (PuntosInteres.get(i).isTerminado() == true) {
 
                 contPuntos = contPuntos + 1;
             }
@@ -373,7 +380,8 @@ MapaActivity extends AppCompatActivity implements PermissionsListener, OnMapRead
             //PINTAS LA DISTANCIA CON 2 DECIMALES
             idTextViewDistancia.setText(String.format("%.2f",textoDistancia)+""+metrica);
             //PINTAS EL PROGRESO DE LOS PUNTOS ENCONTRADOS
-            idTextViewProgreso.setText(contPuntos+"/"+PuntosInteres.size());
+
+            idTextViewProgreso.setText((contPuntos+1)+"/"+PuntosInteres.size());
         }
         databaseAccess.close();
     }
@@ -403,6 +411,7 @@ MapaActivity extends AppCompatActivity implements PermissionsListener, OnMapRead
             }
         }
     }
+
     //TODO: IMG ....
     public void toImg(String byteArray){
 
@@ -457,7 +466,7 @@ MapaActivity extends AppCompatActivity implements PermissionsListener, OnMapRead
 
         // RELLENA EL ARRAYLIST CON LOS DATOS DE LOS PUNTOS
         CrearPuntos();
-
+        mostrarPista(idTextViewPista);
         //CLICKAR SOBRE UNO DE LOS PUNTOS
         mapboxMap.setOnMarkerClickListener(new MapboxMap.OnMarkerClickListener() {
 
@@ -567,7 +576,7 @@ MapaActivity extends AppCompatActivity implements PermissionsListener, OnMapRead
                             //SI NO ESTAS EN RFANGO TE MUESTRA UN TOAST INDICANDO QUE NO ESTAS EN RANGO
                             else{
                                 Context context = getApplicationContext();
-                                CharSequence text = "NO ESTAS EN RANGO";
+                                CharSequence text = "Oso urrun zaude";
                                 int duration = Toast.LENGTH_LONG;
 
                                 Toast toastRango = Toast.makeText(context, text, duration);
@@ -611,6 +620,7 @@ MapaActivity extends AppCompatActivity implements PermissionsListener, OnMapRead
             permissionsManager.requestLocationPermissions(this);
         }
     }
+
     //SI EL USUARIO ACEPTA DAR PERMISOS DE UBICACION
     @Override
     public void onPermissionResult(boolean granted) {
@@ -619,6 +629,7 @@ MapaActivity extends AppCompatActivity implements PermissionsListener, OnMapRead
             enableLocation();
         }
     }
+
     //LOCALIZARNOS A NOSOTROS MISMOS
     @SuppressLint("MissingPermission")
     private void initializeLocationEngine() {
@@ -633,7 +644,7 @@ MapaActivity extends AppCompatActivity implements PermissionsListener, OnMapRead
 
         // Obtenemos la ultima ubicacion y comprobamos que sea distinto de null
         lastlocation = locationEngine.getLastLocation();
-        if(lastlocation != null) {
+        if (lastlocation != null) {
             // Si es distntio, ubicamos la camara en la ubicacion actual
             originLocation = lastlocation;
         } else {
@@ -691,6 +702,10 @@ MapaActivity extends AppCompatActivity implements PermissionsListener, OnMapRead
         databaseAccess.close();
         // Creamos el objeto del punto
         MarkerPuntos marca;
+        if(arrayPuntos.get(arrayPuntos.size()-1).getterminado()==1){
+            terminaMapa();
+            return;
+        }
 
         for (int i = 0; i < arrayPuntos.size(); i++) {
 
@@ -739,20 +754,24 @@ MapaActivity extends AppCompatActivity implements PermissionsListener, OnMapRead
         // Limpiamos el ArrayList para cuando se vuelvan a crear los puntos
         PuntosInteres.clear();
     }
-
+    private void terminaMapa(){
+        Intent i = new Intent(getBaseContext(), Agurra.class);
+        startActivity(i);
+        finish();
+    }
     //TODO:mostrarPista...
     public void mostrarPista(View v){
         String textoPista;
         DatabaseAccess databaseAccess = new DatabaseAccess(getBaseContext());
         int cont=1;
-        for(int i = 0; i < PuntosInteres.size()-1; i++) {
+        for(int i = 0; i < PuntosInteres.size(); i++) {
             Log.d("pista","entrea if terminado=>"+i+""+PuntosInteres.get(i).isTerminado());
            if(PuntosInteres.get(i).isTerminado()){
                cont=cont+1;
                Log.d("pista","entrea if terminado=>"+cont);
            }
         }
-        if(cont!=PuntosInteres.size()) {
+        if(cont<=PuntosInteres.size()) {
             textoPista = databaseAccess.getPista(Lugar, cont);
         }else{
             textoPista ="Amaituta";
@@ -761,6 +780,7 @@ MapaActivity extends AppCompatActivity implements PermissionsListener, OnMapRead
         pistaPopup.setContentView(R.layout.popup_pista);//abrir layout que contiene el popup
         //INTRODUCIMOS TEXTO
         idTextViewPista = pistaPopup.findViewById(R.id.idTextViewPista);
+        textoPista = textoPista.replace("\\n", "\n");
         idTextViewPista.setText(textoPista);
         //CERRAR POPUP AL DAR A LA X
         idBtnCerrarPista = (Button) pistaPopup.findViewById(R.id.idBtnCerrarPista);
@@ -777,6 +797,7 @@ MapaActivity extends AppCompatActivity implements PermissionsListener, OnMapRead
         pistaPopup.setCanceledOnTouchOutside(false);
         pistaPopup.show();
         databaseAccess.close();
+
     }
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -803,6 +824,7 @@ MapaActivity extends AppCompatActivity implements PermissionsListener, OnMapRead
                 LimpiarPuntos();
 
                 // RELLENA EL ARRAYLIST CON LOS DATOS DE LOS PUNTOS
+
                 CrearPuntos();
                 //CAMBIAR TEXTO DE PUNTOS
                 @SuppressLint("MissingPermission") Location ubicacionUsuario = locationEngine.getLastLocation();
@@ -823,6 +845,7 @@ MapaActivity extends AppCompatActivity implements PermissionsListener, OnMapRead
         mostrarPista(idTextViewPista);}
         databaseAccess.close();
     }
+
     //METODOS NO UTILIZADOS PERO NECESARIOS PARA EL FUNCIONAMIENTO CORECTO DE LA APLICACION
     @Override
     public void onMapClick(@NonNull LatLng point) {

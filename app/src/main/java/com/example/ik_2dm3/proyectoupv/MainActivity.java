@@ -16,7 +16,7 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    public Button pruebas;
+
     public boolean admin = false;
     private Button idBtnMainAjustes, idBtnIzquierda, idBtnDerecha, idBtnContinuar, idBtnInicio, idBtnReiniciar;
     private Button btnPopupInicioSi, btnPopupInicioNo, btnPopupInicioContinuar, btnPopupInicioReiniciar;
@@ -45,7 +45,6 @@ public class MainActivity extends AppCompatActivity {
         Log.d("ajustes", "sonido= " + objetoAjustes.sonido + " // musica= " + objetoAjustes.musica + " // mapa=" + objetoAjustes.mapa + " // idioma=" + objetoAjustes.idioma);
         idBtnMainAjustes = (Button) findViewById(R.id.idBtnMainAjustes);
         idBtnDerecha = (Button) findViewById(R.id.idBtnDerecha);
-        pruebas = (Button) findViewById(R.id.button2);
         idBtnInicio = (Button) findViewById(R.id.idBtnInicio);
 
 
@@ -151,6 +150,7 @@ public class MainActivity extends AppCompatActivity {
                         Intent i = new Intent(getBaseContext(), MapaActivity.class);
                         i.putExtra("idLugar", Lugar);
                         i.putExtra("Descargar", false);
+
                         inicioPopup.dismiss();
                         databaseAccess.setLugar(Lugar);
                         startActivityForResult(i, 1);
@@ -174,6 +174,7 @@ public class MainActivity extends AppCompatActivity {
                     public void onClick(View v) {
                         databaseAccess.resetApp(Lugar);
                         databaseAccess.setAdmin(0);
+
                         Intent i = new Intent(getBaseContext(), Kaixo.class);
                         i.putExtra("idLugar", Lugar);
                         inicioPopup.dismiss();

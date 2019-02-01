@@ -319,7 +319,9 @@ public class DatabaseAccess extends SQLiteOpenHelper {
             cursor.moveToNext();
         }while(!cursor.isAfterLast());
         cursor.moveToFirst();
-        do{
+        int id = cursor.getInt(cursor.getColumnIndex("idPunto"));
+        db.execSQL("UPDATE puntos SET visible=1 WHERE idPunto="+id);
+        /*do{
             Log.d("mytag", "entra do 2");
 
             if(cursor.getInt(cursor.getColumnIndex("terminado"))==0){
@@ -331,7 +333,7 @@ public class DatabaseAccess extends SQLiteOpenHelper {
                 break;
             }
             cursor.moveToNext();
-        }while(!cursor.isAfterLast());
+        }while(!cursor.isAfterLast());*/
         cursor.close();
         db.close();
 
