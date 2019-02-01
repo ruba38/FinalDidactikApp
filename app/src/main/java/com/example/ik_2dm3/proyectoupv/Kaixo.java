@@ -36,6 +36,7 @@ public class Kaixo extends AppCompatActivity {
                 Intent i =new Intent (getBaseContext(),MapaActivity.class);
                 i.putExtra("idLugar",Lugar);
                 kaixo.stop();
+                i.putExtra("Descargar", false);
                 startActivityForResult(i,103);}
 
                 }

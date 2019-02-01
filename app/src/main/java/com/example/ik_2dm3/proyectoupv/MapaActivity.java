@@ -13,7 +13,10 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.location.Location;
+import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Base64;
@@ -22,6 +25,8 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -49,6 +54,7 @@ import com.mapbox.mapboxsdk.plugins.locationlayer.modes.CameraMode;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import static android.icu.lang.UCharacter.GraphemeClusterBreak.L;
 
@@ -109,6 +115,12 @@ MapaActivity extends AppCompatActivity implements PermissionsListener, OnMapRead
     private TextView MensajeDistancia;
     private Button FondoEstasLejos;
     private String DistanciaMetros;
+    private boolean DescargaMapa;
+
+    private RelativeLayout layoutmapa;
+    private RelativeLayout layoutbarra;
+    private ProgressBar progressBar;
+    private TextView porcentaje;
 
     // Limite de la camara de la zona sleccionada
     //LatLngBounds coordsLimite;
@@ -116,12 +128,6 @@ MapaActivity extends AppCompatActivity implements PermissionsListener, OnMapRead
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-
-        Log.d("mapa", "Punto 0");
-
-        //PopUpdistancia
-
 
         PopDistancia = new Dialog(this);
         PopDistancia.setContentView(R.layout.fueradelarea);
@@ -175,6 +181,17 @@ MapaActivity extends AppCompatActivity implements PermissionsListener, OnMapRead
         idBtnMapaAdmin = findViewById(R.id.idBtnMapaAdmin);
         idBtnMapaAjustes = findViewById(R.id.idBtnMapaAjustes);
 
+        // Capas
+        layoutmapa = findViewById(R.id.layoutmapa);
+        layoutbarra = findViewById(R.id.layoutbarra);
+
+        progressBar = findViewById(R.id.progressbar);
+        porcentaje = (TextView) findViewById(R.id.porcentaje);
+        progressBar.setBackgroundColor(Color.WHITE);
+
+        progressBar.setVisibility(View.GONE);
+
+
 
         idBtnMapaAdmin.setVisibility(View.GONE);
 
@@ -185,9 +202,13 @@ MapaActivity extends AppCompatActivity implements PermissionsListener, OnMapRead
         //CON EL LUGAR INDICADO MIRAMOS SI HAY ALGUN PUNTO VISIBLE SI NO LO HAY PONE EL PRIMERO VISIBLE
         databaseAccess.iniciarApp(Lugar);
 
-        // Cargamos el area de la zona seleccionada
-        coordsLimite = databaseAccess.getLimiteZona(Lugar);
+        // Asignamos el area de gernika
+        coordsLimite = new LatLngBounds.Builder()
+                .include(new LatLng(43.316972, -2.676278)) // Northeast
+                .include(new LatLng(43.311711, -2.681043)) // Southwest
+                .build();
 
+        Log.d("mapa", "Valores: "+coordsLimite.getNorthEast()+" | "+coordsLimite.getSouthWest());
 
         // BOTON MODO ADMINISTRADOR
         if (adminEstate == 0) {
@@ -255,9 +276,25 @@ MapaActivity extends AppCompatActivity implements PermissionsListener, OnMapRead
         });
         databaseAccess.close();
 
+        // Comprobamos si viene desde MainActivity o se abre por primera vez
+        DescargaMapa = getIntent().getBooleanExtra("Descargar", true);
+
+        Log.d("mapa", "Valor descargar: "+DescargaMapa);
+
+        // Primero cargamos el mapa y luego el MainActivity
+
     }
 
     //*****************************FUNCIONES INDIBIDUALES*******************************************
+
+
+    public void CargarBarra() {
+
+        Intent i = new Intent(getBaseContext(), MainActivity.class);
+        startActivity(i);
+        finish();
+
+    }
 
     //SE EJECUTA CUANDO EL DISPOSITIVO DETECTA QUE AS CAMBIADO TU LOCALIZAZION
     @Override
@@ -269,8 +306,9 @@ MapaActivity extends AppCompatActivity implements PermissionsListener, OnMapRead
 
        LatLng pos = new LatLng(location.getLatitude(),location.getLongitude());
 
-        // Si estan fuera de la zona delimitada
-        if(!coordsLimite.contains(pos)) {
+        // Si estan fuera de la zona
+        Log.d("mapa", "Valor descarga: "+DescargaMapa+" | Valor limite: "+coordsLimite.contains(pos));
+        if(!DescargaMapa && !coordsLimite.contains(pos)) {
 
             // Pasamos el area a coordenadas y calculamos la distancia
             LatLng dist = new LatLng(coordsLimite.getNorthEast().getLatitude(), coordsLimite.getSouthWest().getLongitude());
@@ -392,11 +430,28 @@ MapaActivity extends AppCompatActivity implements PermissionsListener, OnMapRead
         // HABILITAMOS LA LOCALIZAZION DEL USUARIO
         enableLocation();
 
+        if(DescargaMapa) {
+
+            layoutmapa.setVisibility(View.VISIBLE);
+            layoutmapa.setVisibility(View.VISIBLE);
+            CameraPosition position = new CameraPosition.Builder()
+                    .target(new LatLng(43.313754,-2.678132))
+                    .zoom(16)
+                    .tilt(20)
+                    .build();
+            map.setCameraPosition(position);
+
+            CargarBarra();
+        } else {
+            layoutmapa.setVisibility(View.VISIBLE);
+            layoutbarra.setVisibility(View.GONE);
+        }
+
         // Hacemos el boton del admin visible
         idBtnMapaAdmin.setVisibility(View.VISIBLE);
 
         // ZOOM MAXIMO Y MINIMO DEL MAPA Y DELIMITAR MAPA
-        map.setMinZoomPreference(16);
+        map.setMinZoomPreference(15);
         map.setMaxZoomPreference(19.50);
         mapboxMap.setLatLngBoundsForCameraTarget(coordsLimite);
 
