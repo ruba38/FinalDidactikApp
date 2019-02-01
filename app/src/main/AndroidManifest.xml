@@ -82,7 +82,9 @@
         <activity android:name=".Actividad_42_astraberria"
             android:screenOrientation="portrait"
             />
-        <activity android:name=".horidata" />
+        <activity android:name=".horidata" 
+        android:screenOrientation="portrait"/>
+
         <activity
             android:name=".SacarFotos"
             android:label="@string/title_activity_sacar_fotos"

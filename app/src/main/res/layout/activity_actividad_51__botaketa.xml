@@ -10,8 +10,8 @@
 
     <ImageView
         android:id="@+id/Carta"
-        android:layout_width="110dp"
-        android:layout_height="41dp"
+        android:layout_width="238dp"
+        android:layout_height="121dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
@@ -19,25 +19,28 @@
         android:src="@drawable/sobrebueno"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.472"
+        app:layout_constraintHorizontal_bias="0.492"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.447" />
+        app:layout_constraintVertical_bias="0.548" />
 
     <TextView
         android:id="@+id/TexEgindakobotoak"
-        android:layout_width="wrap_content"
-        android:layout_height="15dp"
+        android:layout_width="137dp"
+        android:layout_height="19dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="364dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
+        android:background="@drawable/boton_inicio"
         android:text="TextView"
-        app:layout_constraintBottom_toTopOf="@+id/Carta"
+        app:autoSizeTextType="uniform"
+        app:layout_constraintBottom_toTopOf="@+id/btnResultados"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.971" />
+        app:layout_constraintVertical_bias="0.652" />
 
     <EditText
         android:id="@+id/Agregartexto"
@@ -45,10 +48,10 @@
         android:layout_width="237dp"
         android:layout_height="57dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="128dp"
+        android:layout_marginTop="28dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
-        android:background="@color/c4"
+        android:background="@drawable/boton_inicio"
         android:ems="10"
         android:includeFontPadding="false"
         android:inputType="none|text"
@@ -56,27 +59,29 @@
         android:singleLine="false"
         android:text="@string/OrdescariarenIzena"
         android:textAlignment="center"
-        android:textColor="@color/c5"
+        android:textColor="@color/c3"
         android:textColorLink="@color/c5"
-        app:layout_constraintBottom_toTopOf="@+id/TexEgindakobotoak"
+        app:layout_constraintBottom_toTopOf="@+id/Carta"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.214" />
+        app:layout_constraintVertical_bias="0.589" />
 
     <TextView
         android:id="@+id/textView20"
-        android:layout_width="wrap_content"
+        android:layout_width="108dp"
         android:layout_height="35dp"
-        android:text="Botoa  \n eman"
+        android:text="Botoa  eman"
         android:textAllCaps="true"
-        android:textColor="@color/Black"
+        android:textColor="@color/colorPrimary"
         android:textStyle="bold"
+        app:autoSizeTextType="uniform"
         app:layout_constraintBottom_toBottomOf="@+id/Carta"
         app:layout_constraintEnd_toEndOf="@+id/Carta"
         app:layout_constraintStart_toStartOf="@+id/Carta"
-        app:layout_constraintTop_toTopOf="@+id/Carta" />
+        app:layout_constraintTop_toTopOf="@+id/Carta"
+        app:layout_constraintVertical_bias="1.0" />
 
     <Button
         android:id="@+id/btnResultados"
@@ -90,8 +95,9 @@
         android:text="Amaitu  \n botaketa"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.943"
+        app:layout_constraintHorizontal_bias="0.957"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView20" />
+        app:layout_constraintTop_toBottomOf="@+id/textView20"
+        app:layout_constraintVertical_bias="0.463" />
 
 </android.support.constraint.ConstraintLayout>
