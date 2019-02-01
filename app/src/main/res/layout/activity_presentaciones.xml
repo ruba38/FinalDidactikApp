@@ -14,7 +14,7 @@
         android:layout_height="53dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="8dp"
-        android:src="@drawable/felchaizq"
+        android:src="@mipmap/rewind2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -22,14 +22,11 @@
         android:id="@+id/botonAtras"
         android:layout_width="245dp"
         android:layout_height="248dp"
-        android:layout_marginTop="356dp"
-        android:layout_marginEnd="208dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="212dp"
+        android:layout_marginBottom="132dp"
         android:src="@drawable/oihaltzoaiconver2i"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <ImageView
         android:id="@+id/BotonRepetir"
@@ -66,17 +63,14 @@
     <Button
         android:id="@+id/BotonAlante"
         android:layout_width="78dp"
-        android:layout_height="54dp"
+        android:layout_height="53dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        android:background="@drawable/flechaderch"
+        android:layout_marginBottom="208dp"
+        android:background="@drawable/fastforward"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.946"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.709" />
+        app:layout_constraintHorizontal_bias="0.974"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </android.support.constraint.ConstraintLayout>
