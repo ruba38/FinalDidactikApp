@@ -695,13 +695,15 @@ MapaActivity extends AppCompatActivity implements PermissionsListener, OnMapRead
 
         // Cargamos los puntos de la base de datos en un array
         DatabaseAccess databaseAccess = new DatabaseAccess(getBaseContext());
-        List<puntos> arrayPuntos = (List<puntos>) databaseAccess.getPuntos(Lugar);
+        ArrayList<puntos> arrayPuntos = new ArrayList((ArrayList<puntos>) databaseAccess.getPuntos(Lugar));
 
 
 
         databaseAccess.close();
         // Creamos el objeto del punto
         MarkerPuntos marca;
+
+        Log.d("mapa", "Tamano: "+arrayPuntos.size());
         if(arrayPuntos.get(arrayPuntos.size()-1).getterminado()==1){
             terminaMapa();
             return;
@@ -747,8 +749,8 @@ MapaActivity extends AppCompatActivity implements PermissionsListener, OnMapRead
     }
 
     private void LimpiarPuntos(){
-        // Pasamos por cada uno de los marcadores del mapa y los borramos.
-        for(int i = 0; i < PuntosInteres.size(); i++) {
+        // Pasamos pr cada uno de los marcadores del mapa y los borramos.
+             for(int i = 0; i < PuntosInteres.size(); i++) {
             map.removeMarker(PuntosInteres.get(i).getmO().getMarker());
         }
         // Limpiamos el ArrayList para cuando se vuelvan a crear los puntos

@@ -116,7 +116,7 @@ public class DatabaseAccess extends SQLiteOpenHelper {
     //############################################################################################## TABLA PUNTOS
     public Object getPuntos(int Lugar){
         //CARGA TODOS LOS DATOS DE LA TABLA LUGARES EN UN ARRAYLIST
-        ArrayList <puntos>datoslista = new ArrayList<puntos>();
+        ArrayList <puntos> datoslista = new ArrayList<>();
         String myPath = DB_PATH + DB_NAME;
         db = SQLiteDatabase.openDatabase(myPath, null, SQLiteDatabase.OPEN_READWRITE);
         db = this.getWritableDatabase();
@@ -136,10 +136,12 @@ public class DatabaseAccess extends SQLiteOpenHelper {
             String pista=cursor.getString(cursor.getColumnIndex("pista"));
             puntos d = new puntos(idPunto, nombre, latitud, longitud, imagen,juego,idLugar,visible,terminado,secuencia,pista);
             datoslista.add(d);
+            Log.d("mapa", "tamano arraylist: "+datoslista.size());
             cursor.moveToNext();
         }
         cursor.close();
         db.close();
+        Log.d("mapa", "Tamano al salir del getpuntos: "+datoslista.size());
         return datoslista;
     }
 

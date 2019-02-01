@@ -64,15 +64,6 @@
         android:layout_toEndOf="@+id/idTextViewProgreso"
         mapbox:srcCompat="@drawable/regunta" />
 
-    <ImageView
-        android:id="@+id/CamaraMapa"
-        android:layout_width="39dp"
-        android:layout_height="36dp"
-        android:layout_alignStart="@+id/mapView"
-        android:layout_alignTop="@+id/mapView"
-        android:layout_marginStart="119dp"
-        android:layout_marginTop="8dp"
-        mapbox:srcCompat="@drawable/camaraverdepnj" />
 
         <ImageView
             android:id="@+id/imageView4"
