@@ -158,20 +158,10 @@ public class Actividad_21_EncontrarIglesia extends AppCompatActivity {
                if (encontrado){
                    btnCamara.setVisibility(View.VISIBLE);
                    repintar();
-                   Context context = getApplicationContext();
-                   CharSequence text = "BAIIIII!!!";
-                   int duration = Toast.LENGTH_SHORT;
-
-                   Toast toast = Toast.makeText(context, text, duration);
-                   toast.show();
-                repintar();
+                   repintar();
                }else{
                 Context context = getApplicationContext();
-                CharSequence text = "EZ EZ EZZZZZ!!!";
-                int duration = Toast.LENGTH_SHORT;
-
-                Toast toast = Toast.makeText(context, text, duration);
-                toast.show();}
+                }
                 repintar();
             }
         });
@@ -196,9 +186,7 @@ public class Actividad_21_EncontrarIglesia extends AppCompatActivity {
         // MotionEvent object holds X-Y values
         if(event.getAction() == MotionEvent.ACTION_DOWN) {
             String text = "You click at x = " + event.getX() + " and y = " + event.getY();
-            Toast.makeText(this, text, Toast.LENGTH_LONG).show();Display display = getWindowManager().getDefaultDisplay();
             Point size = new Point();
-            display.getSize(size);
             int width =size.x;
             int height = size.y;
             int eventx=Math.round(event.getX());
